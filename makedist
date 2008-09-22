@@ -1,0 +1,73 @@
+#!/bin/sh
+
+ver="`sed -n 's/.*iv_hines_version \(.*\)/\1/p' < src/include/ivversion.h`"
+IV=iv-${ver}
+echo $IV
+
+if false ; then
+#from the cvs archive
+
+cd $HOME/tmp
+/bin/rm -r -f ${IV}
+cvs -d :ext:anonymous@www.neuron.yale.edu:/home/cvsroot export -D "now" -r iv-rel15 -d ${IV} iv
+cd ${IV}
+aclocal
+autoheader
+autoconf
+cd ..
+tar cf ${IV}.tar ${IV}
+gzip ${IV}.tar
+/bin/mv ${IV}.tar.z $HOME/nrndev/iv/${IV}.tar.gz
+
+else
+# from this working directory
+
+/bin/rm iv.zip
+zip iv.zip `find src -name \*.cpp -print`
+zip iv.zip `find src -name \*.c -print`
+zip iv.zip `find src -name \*.h -print`
+zip iv.zip `find src -name \*.bm -print`
+zip iv.zip `find src -name \*.in -print`
+zip iv.zip Makefile.in config.h.in configure.in
+
+zip iv.zip \
+src/lib/TIFF/Copyright \
+src/lib/TIFF/HOWTO \
+src/lib/TIFF/README \
+src/lib/TIFF/VERSION \
+src/lib/app-defaults/Idemo \
+src/lib/app-defaults/Doc \
+src/lib/app-defaults/InterViews \
+src/include/Dispatch/_gendefs \
+src/include/InterViews/_gendefs \
+src/include/OS/_gendefs \
+src/include/Unidraw/_gendefs \
+Copyright \
+INSTALL \
+README \
+acinclude.m4 \
+build.sh \
+chkstream.m4 \
+config.guess \
+config.sub \
+install-sh \
+ltmain.sh \
+mkinstalldirs \
+aclocal.m4 \
+iv_def.h \
+makedist \
+configure
+
+/bin/rm -r -f tmpdist
+mkdir tmpdist
+mkdir tmpdist/${IV}
+cd tmpdist/${IV}
+unzip ../../iv.zip
+cd ..
+tar cf ${IV}.tar ${IV}
+gzip ${IV}.tar
+mv ${IV}.tar.gz ..
+cd ..
+mv iv.zip ${IV}.zip
+
+fi
