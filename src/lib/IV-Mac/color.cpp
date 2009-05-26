@@ -3,7 +3,7 @@
 #endif
 // =======================================================================
 //
-//                     <IV-MAC/color.cpp>
+//                     <IV-Mac/color.cpp>
 //
 // Macintosh implementation of the InterViews Color classes.
 //
@@ -19,8 +19,8 @@
 #include <InterViews/color.h>
 #include <InterViews/session.h>
 #include <InterViews/bitmap.h>
-#include <IV-MAC/color.h>
-#include <IV-MAC/window.h>
+#include <IV-Mac/color.h>
+#include <IV-Mac/window.h>
 
 #include <string.h>
 #include <stdio.h>

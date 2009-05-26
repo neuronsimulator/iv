@@ -3,7 +3,7 @@
 #endif
 // =========================================================================
 //
-//				<IV-MAC/canvas.c>
+//				<IV-Mac/canvas.c>
 //
 // Macintosh dependent Canvas representation.  This canvas type renders
 // into an Macintosh window.  
@@ -51,13 +51,13 @@
 #include <InterViews/transformer.h>
 #include <InterViews/geometry.h>
 #include <InterViews/raster.h>
-#include <IV-MAC/bitmap.h>
-#include <IV-MAC/brush.h>
-#include <IV-MAC/color.h>
-#include <IV-MAC/canvas.h>
-#include <IV-MAC/font.h>
-#include <IV-MAC/window.h>
-#include <IV-MAC/raster.h>
+#include <IV-Mac/bitmap.h>
+#include <IV-Mac/brush.h>
+#include <IV-Mac/color.h>
+#include <IV-Mac/canvas.h>
+#include <IV-Mac/font.h>
+#include <IV-Mac/window.h>
+#include <IV-Mac/raster.h>
 
 
 #include <OS/math.h>

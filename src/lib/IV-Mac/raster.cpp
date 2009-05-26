@@ -3,7 +3,7 @@
 #endif
 // =========================================================================
 //
-//						<IV-MAC/raster.c>
+//						<IV-Mac/raster.c>
 //
 // MS-Windows implementation of the InterViews Raster class. 
 //
@@ -39,8 +39,8 @@
 #include <InterViews/raster.h>
 #include <InterViews/session.h>
 #include <InterViews/display.h>
-#include <IV-MAC/raster.h>
-#include <IV-MAC/color.h>
+#include <IV-Mac/raster.h>
+#include <IV-Mac/color.h>
 
 Raster::Raster(
 	unsigned long width, 				// width of bitmap in pixels

@@ -21,9 +21,9 @@ static Cursor mac_arrow; // before defining the InterViews Cursor
 #include <InterViews/color.h>
 #include <InterViews/cursor.h>
 #include <InterViews/session.h>
-#include <IV-MAC/cursor.h>
-#include <IV-MAC/bitmap.h>
-#include <IV-MAC/window.h>
+#include <IV-Mac/cursor.h>
+#include <IV-Mac/bitmap.h>
+#include <IV-Mac/window.h>
 
 #include <stdio.h>
 #include <stdlib.h>

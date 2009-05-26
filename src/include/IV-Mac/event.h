@@ -1,6 +1,6 @@
 // =======================================================================
 //
-//                     <IV-MAC/Event.h>
+//                     <IV-Mac/Event.h>
 //
 //  Machintosh implementation of the InterViews Event classes.  
 //

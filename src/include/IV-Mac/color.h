@@ -1,6 +1,6 @@
 // ===========================================================================
 //
-//                     <IV-MAC/color.h>
+//                     <IV-Mac/color.h>
 //
 //  Machintosh implementation of the InterViews Color classes.
 //

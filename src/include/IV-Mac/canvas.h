@@ -1,6 +1,6 @@
 // =========================================================================
 //
-//				<IV-MAC/canvas.h>
+//				<IV-Mac/canvas.h>
 // Machintosh dependent Canvas representation.  This canvas type renders
 // into an Machintosh window.  
 //

@@ -3,7 +3,7 @@
 #endif
 // =========================================================================
 //
-//                            <IV-MAC/bitmap.C>
+//                            <IV-Mac/bitmap.C>
 //
 // MS-Windows implementation of the InterViews bitmap class.  
 //
@@ -41,7 +41,7 @@
 #include <InterViews/bitmap.h>
 #include <InterViews/session.h>
 #include <InterViews/display.h>
-#include <IV-MAC/bitmap.h>
+#include <IV-Mac/bitmap.h>
 #include <OS/math.h>
 #include <OS/memory.h>
 

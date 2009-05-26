@@ -1,6 +1,6 @@
 // =======================================================================
 //
-//                     <IV-MAC/Session.h>
+//                     <IV-Mac/Session.h>
 //
 //  The Machintosh implementation of the InterViews Session class.  
 //

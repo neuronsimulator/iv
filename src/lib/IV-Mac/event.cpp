@@ -4,7 +4,7 @@
 #if !carbon
 // =======================================================================
 //
-//                     <IV-MAC/event.c>
+//                     <IV-Mac/event.c>
 //
 //  Macintosh implementation of the InterViews Event classes.  The
 //  flow of control is significantly different from MS-Windows.  Events
@@ -28,8 +28,8 @@
 #include <InterViews/canvas.h>
 #include <InterViews/display.h>
 #include <InterViews/session.h>
-#include <IV-MAC/event.h>
-#include <IV-MAC/window.h>
+#include <IV-Mac/event.h>
+#include <IV-Mac/window.h>
 #include <OS/list.h>
 
 #include <stdio.h>

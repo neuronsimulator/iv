@@ -1,6 +1,6 @@
 // =======================================================================
 //
-//                     <IV-MAC/window.h>
+//                     <IV-Mac/window.h>
 //
 //  Machintosh implimentation of the InterViews Window classes.
 //

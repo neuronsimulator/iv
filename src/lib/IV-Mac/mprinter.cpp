@@ -3,7 +3,7 @@
 #endif
 #include <stdio.h>
 #include <math.h>
-#include <Interviews/transformer.h>
+#include <InterViews/transformer.h>
 #include <InterViews/font.h>
 #include <IV-Mac/mprinter.h>
 #include <IV-Mac/font.h>

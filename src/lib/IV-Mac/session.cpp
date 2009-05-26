@@ -3,7 +3,7 @@
 #endif
 // =======================================================================
 //
-//                      <IV-MAC/session.c>
+//                      <IV-Mac/session.c>
 //
 // Session management for an application.  This class is a clearing house
 // for the control part of an application.
@@ -46,9 +46,9 @@
 #include <InterViews/cursor.h>
 #include <InterViews/display.h>
 #include <InterViews/event.h>
-#include <IV-MAC/session.h>
-#include <IV-MAC/event.h>
-#include <IV-MAC/window.h>
+#include <IV-Mac/session.h>
+#include <IV-Mac/event.h>
+#include <IV-Mac/window.h>
 #include <OS/file.h>
 #include <OS/string.h>
 
