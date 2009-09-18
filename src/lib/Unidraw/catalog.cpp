@@ -282,7 +282,7 @@ Catalog::Catalog (const char* domainName, Creator* creator, float version) {
     _curMap = nil;
     _substMap = new ObjectMap(nil, COMPONENT);
     _clipboard = new Clipboard;
-#if defined(__xlC__) || defined(__GNUG__)
+#if defined(__xlC__) || defined(__GNUG__) || defined(__PGIC__)
     _tmpfile = nil;
 #endif
 
@@ -372,7 +372,7 @@ Catalog::~Catalog () {
     _clipboard->DeleteComps();
     delete _clipboard;
 
-#if defined(__xlC__) || defined(__GNUG__)
+#if defined(__xlC__) || defined(__GNUG__) || defined(__PGIC__)
     if (_tmpfile != nil) {
         unlink(_tmpfile);
         delete _tmpfile;
@@ -674,7 +674,7 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
     ObjectMap empty_subst_map(obj, base_id);    // copies
     _substMap = &empty_subst_map;
 
-#if defined(__xlC__) || defined(__GNUG__)
+#if defined(__xlC__) || defined(__GNUG__) || defined(__PGIC__)
     filebuf obuf, ibuf;
     ObjectMap* prevMap = _curMap;
     char* prevTmp = _tmpfile;
