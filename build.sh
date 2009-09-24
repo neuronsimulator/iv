@@ -1,10 +1,17 @@
 #!/bin/sh
 # how to build from just the cvs sources
 
+ltarg="-i"
 if test -f /usr/bin/glibtoolize ; then
-	glibtoolize -c -f
+	ltver=`glibtoolize --version | sed -n '1s/.* \([0-9]\).*/\1/p'`
+	if test "${ltver}" = 1 ; then ltarg="" ; fi
+	echo "glibtoolize -c -f $ltarg"
+	glibtoolize -c -f $ltarg
 else
-	libtoolize -c -f
+	ltver=`libtoolize --version | sed -n '1s/.* \([0-9]\).*/\1/p'`
+	if test "${ltver}" = 1 ; then ltarg="" ; fi
+	echo "libtoolize -c -f $ltarg"
+	libtoolize -c -f $ltarg
 fi
     
 #fix ltmain for cygwin to allow dlls
