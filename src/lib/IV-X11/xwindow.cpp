@@ -1293,12 +1293,14 @@ void ManagedWindowRep::wm_name(Window* window) {
     String v;
     if (!s->find_attribute("name", v) && !s->find_attribute("title", v)) {
 	s->attribute("name", Session::instance()->name());
+	s->find_attribute("name", v);
     }
-    String hostname(Host::name());
+    //String hostname(Host::name());
     XChangeProperty(
-	w.dpy(), w.xwindow_, XA_WM_CLIENT_MACHINE,
+	w.dpy(), w.xwindow_, XA_WM_NAME,
 	XA_STRING, 8, PropModeReplace,
-	(unsigned char*)(hostname.string()), hostname.length()
+	//(unsigned char*)(hostname.string()), hostname.length()
+	(unsigned char*)(v.string()), v.length()
     );
 }
 
