@@ -126,13 +126,20 @@ const char* PROP_PTR_LOW = "mw_l";
 // c++ object associated with it.
 //
 // -----------------------------------------------------------------------
+
+#if defined(__SIZEOF_POINTER__) && __SIZEOF_POINTER__ > __SIZEOF_LONG__
+#define cp2int (unsigned long long)
+#else
+#define cp2int /**/
+#endif
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage,
 	WPARAM wParam, LPARAM lParam)
 {
 	// Pointer to the (C++ object that is the) window.
-	DWORD addr = ((((DWORD) GetProp(hwnd, PROP_PTR_HIGH)) << 16)
+	DWORD addr = ((((DWORD) cp2int GetProp(hwnd, PROP_PTR_HIGH)) << 16)
 		 & 0xFFFF0000L);
-	addr |= ((DWORD) GetProp(hwnd, PROP_PTR_LOW)) & 0xFFFF;
+	addr |= ((DWORD) cp2int GetProp(hwnd, PROP_PTR_LOW)) & 0xFFFF;
 	MWwindow* pWindow = (MWwindow*) addr;
 
     
@@ -1101,13 +1108,21 @@ void Window::cursor(Cursor* c)
 	if (c == nil)
 	{
                  HCURSOR hc = LoadCursor(NULL, IDC_ARROW);
+#if defined(GCLP_HCURSOR)
+                 SetClassLongPtr(rep()->msWindow(), GCLP_HCURSOR, (LONG_PTR)hc);
+#else
                  SetClassLong(rep()->msWindow(), GCL_HCURSOR, (long)hc);
+#endif
                  SetCursor(hc);
 	}
 	else
 	{
 		HCURSOR hc = c->rep()->cursorOf();
+#if defined(GCLP_HCURSOR)
+                (HCURSOR)SetClassLongPtr(rep()->msWindow(), GCLP_HCURSOR, (LONG_PTR)hc);
+#else
                 (HCURSOR)SetClassLong(rep()->msWindow(), GCL_HCURSOR, (long)hc);
+#endif
         SetCursor(hc);
 	}
 }

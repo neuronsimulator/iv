@@ -12,3 +12,15 @@ need
 /usr/i686-pc-mingw32/sys-root/mingw/bin/libstdc++-6.dll
 
 on x86_64
+
+./configure --prefix=`pwd` \
+  CC=/usr/bin/x86_64-w64-mingw32-gcc.exe \
+  CXX=/usr/bin/x86_64-w64-mingw32-g++.exe \
+  AR=/usr/x86_64-w64-mingw32/bin/ar.exe \
+  RANLIB=/usr/x86_64-w64-mingw32/bin/ranlib.exe \
+  --host=x86_64-w64-mingw32
+
+Actually,
+./configure --prefix=`pwd` --host=x86_64-w64-mingw32
+is sufficient if /usr/bin is prior to /bin in the PATH.
+

@@ -74,6 +74,12 @@ Cursor* noCursor;
  * Define the builtin cursors.
  */
 
+#if defined(__SIZEOF_POINTER__) && __SIZEOF_POINTER__ > __SIZEOF_LONG__
+#define cp2int (int)(unsigned long long)
+#else
+#define cp2int (int)
+#endif
+
 void Cursor::init() 
 {
 	//
@@ -81,15 +87,15 @@ void Cursor::init()
 	// is not the integer that it really is (which we expect as a constructor
 	// argument.  Therefore, we cast the IDC_XXX values to an int.
 	//
-	 arrow = new Cursor((int) IDC_ARROW);
-	crosshairs = new Cursor((int) IDC_CROSS);
+	 arrow = new Cursor(cp2int IDC_ARROW);
+	crosshairs = new Cursor(cp2int IDC_CROSS);
 	 ltextCursor = new Cursor(4, 8, textPat, textMask);
     rtextCursor = new Cursor(0, 8, textPat, textMask);
-    hourglass = new Cursor((int) IDC_WAIT);
-    upperleft = new Cursor((int) IDC_SIZENWSE);
-    upperright = new Cursor((int) IDC_SIZENESW);
-	lowerleft = new Cursor((int) IDC_SIZENESW);
-    lowerright = new Cursor((int) IDC_SIZENWSE);
+    hourglass = new Cursor(cp2int IDC_WAIT);
+    upperleft = new Cursor(cp2int IDC_SIZENWSE);
+    upperright = new Cursor(cp2int IDC_SIZENESW);
+	lowerleft = new Cursor(cp2int IDC_SIZENESW);
+    lowerright = new Cursor(cp2int IDC_SIZENWSE);
     noCursor = new Cursor(0, 0, noPat, noPat);
     defaultCursor = arrow;
 }

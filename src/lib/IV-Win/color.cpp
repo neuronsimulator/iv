@@ -193,7 +193,7 @@ ColorRep::~ColorRep()
 // ------------------------------------------------------------------
 // oreilly: just put the entire thing in here so installation is easy -- no
 // dependency on app defaults or other install location files at all
-static struct { char* name; char* value; } cc[] = {
+static struct { const char* name; const char* value; } cc[] = {
   {"snow", "#fffafa"},  {"ghost white", "#f8f8ff"},  {"GhostWhite", "#f8f8ff"},
   {"white smoke", "#f5f5f5"},  {"WhiteSmoke", "#f5f5f5"},  {"gainsboro", "#dcdcdc"},
   {"floral white", "#fffaf0"},  {"FloralWhite", "#fffaf0"},  {"old lace", "#fdf5e6"},

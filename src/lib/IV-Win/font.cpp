@@ -212,7 +212,7 @@ boolean FontRep::AssociateWith(
 
 	// ---- make this font active for check ----
 	if ((hfont_ != nil) &&
-		(boolean) (old_fnt = (HFONT) SelectObject(hdc, hfont_)))
+		((old_fnt = (HFONT) SelectObject(hdc, hfont_))!=0))
 	{
 		status = true;
 
