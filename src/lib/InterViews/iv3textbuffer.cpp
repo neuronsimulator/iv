@@ -73,7 +73,7 @@
 
 static const char NEWLINE = '\012';
 
-TextBuffer::TextBuffer (char* t, int l, int s) 
+TextBuffer::TextBuffer (const char* t, int l, int s) 
 {
 	text = new char[s+1];
 	Memory::zero(text,s+1);

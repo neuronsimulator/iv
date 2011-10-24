@@ -79,7 +79,7 @@ class Regexp;
 class TextBuffer 
 {
 public:
-    TextBuffer(char* buffer, int length, int size);
+    TextBuffer(const char* buffer, int length, int size);
     virtual ~TextBuffer();
 
     int Search(Regexp* regexp, int index, int range, int stop);
