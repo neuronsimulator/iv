@@ -53,10 +53,12 @@ RANLIB = @RANLIB@
 
 
 INCLUDES = -I../../include $(X_CFLAGS)
-@CARBON_FALSE@@CYGWIN_FALSE@IVLIBS = ../../lib/libUnidrawhines.la ../../lib/libIVhines.la $(X_LIBS) 
+@CARBON_FALSE@@CYGWIN_FALSE@@MINGW__FALSE@IVLIBS = ../../lib/libUnidrawhines.la ../../lib/libIVhines.la $(X_LIBS) 
 @CYGWIN_FALSE@CYG =
 @CYGWIN_TRUE@IVLIBS = ../../lib/libIVhines.la 
 @CYGWIN_TRUE@CYG = -mwindows -e _mainCRTStartup
+@MINGW_TRUE@IVLIBS = ../../lib/libIVhines.la 
+@MINGW_TRUE@CYG =
 @CARBON_TRUE@IVLIBS = ../../lib/libIVhines.la 
 
 #

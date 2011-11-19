@@ -53,8 +53,9 @@ RANLIB = @RANLIB@
 
 
 INCLUDES = -I../include $(X_CFLAGS)
-@CARBON_FALSE@@CYGWIN_FALSE@KIT_DEFINES = -Dmotif_kit -Dsgi_motif_kit -Dopenlook_kit -Dbw_kit -Ddefault_kit=SMFKit
+@CARBON_FALSE@@CYGWIN_FALSE@@MINGW_FALSE@KIT_DEFINES = -Dmotif_kit -Dsgi_motif_kit -Dopenlook_kit -Dbw_kit -Ddefault_kit=SMFKit
 @CYGWIN_TRUE@KIT_DEFINES = -Dmotif_kit -Dsgi_motif_kit
+@MINGW_TRUE@KIT_DEFINES = -Dmotif_kit -Dsgi_motif_kit
 @CARBON_TRUE@KIT_DEFINES = -Dmotif_kit -Dsgi_motif_kit -Dbw_kit -Ddefault_kit=SMFKit
 TIFF_DEFINES = -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DHAVE_IEEEFP=1 -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DUSE_CONST=1
 TIFF_INCLUDES = -I../include/TIFF
@@ -64,8 +65,9 @@ TIFF_INCLUDES = -I../include/TIFF
 libIV = libIVhines.la
 libUnidraw = libUnidrawhines.la
 
-@CARBON_FALSE@@CYGWIN_FALSE@lib_LTLIBRARIES = $(libIV) $(libUnidraw)
+@CARBON_FALSE@@CYGWIN_FALSE@@MINGW_FALSE@lib_LTLIBRARIES = $(libIV) $(libUnidraw)
 @CYGWIN_TRUE@lib_LTLIBRARIES = $(libIV)
+@MINGW_TRUE@lib_LTLIBRARIES = $(libIV)
 @CARBON_TRUE@lib_LTLIBRARIES = $(libIV)
 
 libIV_la_LDFLAGS = -version-info 3:3:0 $(X_LDFLAGS)
@@ -130,6 +132,9 @@ iv26 = \
 	IV-2_6/xpainter.lo \
 	IV-2_6/xpattern.lo
 
+@MINGW_FALSE@interviews_extra = InterViews/ol_kit.lo InterViews/tiff.lo
+@MINGW_TRUE@interviews_extra = 
+
 interviews = \
 	InterViews/dialogs.lo \
 	InterViews/action.lo \
@@ -170,7 +175,6 @@ interviews = \
 	InterViews/monoglyph.lo \
 	InterViews/observe.lo \
 	InterViews/ol_dialogs.lo \
-	InterViews/ol_kit.lo \
 	InterViews/page.lo \
 	InterViews/patch.lo \
 	InterViews/place.lo \
@@ -195,11 +199,11 @@ interviews = \
 	InterViews/iv3text.lo \
 	InterViews/iv3textbuffer.lo \
 	InterViews/tformsetter.lo \
-	InterViews/tiff.lo \
 	InterViews/tile.lo \
 	InterViews/transformer.lo \
 	InterViews/winbmp.lo \
-	InterViews/xymarker.lo
+	InterViews/xymarker.lo \
+	$(interviews_extra)
 
 ivx11 = \
 	IV-X11/session.lo \
@@ -291,8 +295,9 @@ ivmac = \
 	IV-Mac/session.lo \
 	IV-Mac/window.lo
 
-@CARBON_FALSE@@CYGWIN_FALSE@libIV_la_OBJECTS = $(dispatch) $(iv26) $(ivx11) $(interviews) $(os) $(tiff)
+@CARBON_FALSE@@CYGWIN_FALSE@@MINGW_FALSE@libIV_la_OBJECTS = $(dispatch) $(iv26) $(ivx11) $(interviews) $(os) $(tiff)
 @CYGWIN_TRUE@libIV_la_OBJECTS = $(dispatch) $(ivwin) $(interviews) $(os) $(tiff)
+@MINGW_TRUE@libIV_la_OBJECTS = $(ivwin) $(interviews) $(os)
 @CARBON_TRUE@libIV_la_OBJECTS = $(dispatch) $(ivmac) $(interviews) $(os)
 
 libUnidraw_la_OBJECTS = \
@@ -399,6 +404,8 @@ CONFIG_CLEAN_FILES =
 LTLIBRARIES =  $(lib_LTLIBRARIES)
 
 
+MINGW_LIBS = @MINGW_LIBS@
+
 DEFS = @DEFS@ -I. -I$(srcdir)
 CPPFLAGS = @CPPFLAGS@
 @CARBON_FALSE@LDFLAGS = @LDFLAGS@
@@ -463,7 +470,7 @@ uninstall:
 	done
 
 $(libIV): $(libIV_la_OBJECTS) $(libIV_la_DEPENDENCIES)
-	$(CXXLINK) -rpath $(libdir) $(libIV_la_LDFLAGS) $(libIV_la_OBJECTS) $(libIV_la_LIBADD) $(LIBS)
+	$(CXXLINK) -rpath $(libdir) $(libIV_la_LDFLAGS) $(libIV_la_OBJECTS) $(libIV_la_LIBADD) $(MINGW_LIBS) $(LIBS)
 
 $(libUnidraw): $(libUnidraw_la_OBJECTS) $(libUnidraw_la_DEPENDENCIES)
 	$(CXXLINK) -rpath $(libdir) $(libUnidraw_la_LDFLAGS) $(libUnidraw_la_OBJECTS) $(libUnidraw_la_LIBADD) $(LIBS)

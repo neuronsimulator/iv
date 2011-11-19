@@ -44,29 +44,24 @@ exit 1
 
 fi
 
-AC_TRY_RUN([
+AC_TRY_LINK([
 #${ystmt}
 #include "src/include/ivstrm.h"
 #if defined(HAVE_NAMESPACES)
 using namespace std;
 #endif
-int main() {
+],[
 	filebuf obuf;
 	obuf.open("name", IOS_OUT);
-	return 0;
-}
 ],[
-echo "We are able to run a c++ program that uses streams"
+echo "We are able to link a c++ program that uses streams"
 ],[
-echo "The attempt to run a program with the statment"
+echo "The attempt to link a program with the statment"
 echo "	obuf.open("name", IOS_OUT);"
 echo "failed. (Although it compiled in an earlier test)."
 echo 'Perhaps you need to add another library. eg setenv LIBS "-lstdc++".'
 echo " Fix LIBS or src/include/ivstream.h.in in such a way that configure"
 echo " does not stop here."
-exit 1
-],[
-echo "cross compiling not allowed"
 exit 1
 ])
 

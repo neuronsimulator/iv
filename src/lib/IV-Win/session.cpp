@@ -286,7 +286,7 @@ void SessionRep::missing_colon(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	 sprintf("Missing colon in property: %s", property);
+	 sprintf(buff, "Missing colon in property: %s", property);
 	WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -295,7 +295,7 @@ void SessionRep::bad_property_name(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	sprintf("Bad property name: %s", property);
+	sprintf(buff, "Bad property name: %s", property);
 	WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -304,7 +304,7 @@ void SessionRep::bad_property_value(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	sprintf("Bad property value: %s", property);
+	sprintf(buff, "Bad property value: %s", property);
 	WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -340,7 +340,7 @@ String* SessionRep::find_name()
 // -----------------------------------------------------------------------
 void SessionRep::init_display()
 {
-#ifdef CYGWIN
+#if defined(CYGWIN) || defined(MINGW)
   bad_install_ok = true;	// we're going to be ok with this!
 #endif
 	set_style(nil);

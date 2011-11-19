@@ -34,8 +34,14 @@
 #ifndef nt_dir_h
 #define nt_dir_h
 
+#if defined(MINGW)
 #include <io.h>
-#if defined(WIN32) && defined(__MWERKS__)
+#include <dirent.h>
+#include <dir.h>
+#include <stdlib.h>
+#else
+#include <io.h>
+#if (defined(WIN32) && defined(__MWERKS__))
 #define ffblk _finddata_t
 #define findfirst(a,b,c) _findfirst(a,b)
 #define findnext _findnext
@@ -53,7 +59,6 @@ struct dirent
     int d_namlen;					// length of d_name 
     char d_name[MAXNAMLEN + 1];		// name of the directory entry
 };
-
 // The handle returned by the _findfirst function is all that is needed
 // to provide the access, but it must be swapped out to provide random
 // access, so we put it inside a structure so the clients pointer can
@@ -75,5 +80,7 @@ extern struct dirent *readdir(DIR*);
 extern void seekdir(DIR*, long);
 extern long telldir(DIR*);
 extern void closedir(DIR*);
+
+#endif // MINGW undefined
 
 #endif /* nt_dir_h */

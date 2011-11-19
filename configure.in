@@ -12,7 +12,7 @@ AH_BOTTOM([
 #include <ivstream.h>
 #endif
 
-#if defined(CYGWIN)
+#if defined(CYGWIN) || defined(MINGW)
 #define WIN32 1
 #endif
 
@@ -41,9 +41,20 @@ AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
 
 AC_CYGWIN
+
 if test "$CYGWIN" = "yes" ; then
-	echo "CYGWIN=$CYGWIN"
+	MINGW="no"
 fi
+
+case $host_os in
+	mingw*)
+		MINGW="yes"
+		CYGWIN="no"
+		;;
+esac
+
+echo "CYGWIN=$CYGWIN"
+echo "MINGW=$MINGW"
 
 if test "$enable_carbon" == 'yes' ; then
 	CARBON_FALSE='#'
@@ -56,14 +67,21 @@ AC_SUBST(CARBON_FALSE)
 AC_SUBST(CARBON_TRUE)
 
 dnl Don't bother building static libraries if we can avoid it.
+MINGW_LIBS=""
 if test "$CYGWIN" = "yes" ; then
 	AC_DISABLE_STATIC
 	AC_ENABLE_SHARED
 	LIBS="-lgdi32 -lcomdlg32"
+elif test "$MINGW" = "yes" ; then
+	AC_DISABLE_STATIC
+	AC_ENABLE_SHARED
+	MINGW_LIBS="-lgdi32 -lcomdlg32"
 else
 	AC_DISABLE_STATIC
 	AC_ENABLE_SHARED
 fi
+
+AC_SUBST(MINGW_LIBS)
 
 AC_ARG_ENABLE([UniversalMacBinary],
 	AC_HELP_STRING([--enable-UniversalMacBinary], [combined binary for ppc and i386, fake arch is called umac]),[
@@ -94,6 +112,9 @@ AC_CHECK_HEADERS(fcntl.h malloc.h sys/file.h sys/ioctl.h sys/time.h unistd.h osf
 if test "$CYGWIN" = "yes" ; then        
 	echo " CYGWIN defined so make MSWwin version"           
 	build_cygwin=yes        
+elif test "$MINGW" = "yes" ; then
+	echo " MINGW defined so make MSWwin version"           
+	build_mingw=yes        
 elif test "$enable_carbon" != "yes" ; then        
 	AC_PATH_XTRA
 	if test "$no_x" = "yes" ; then
@@ -112,6 +133,17 @@ else
 fi
 AC_SUBST(CYGWIN_FALSE)
 AC_SUBST(CYGWIN_TRUE)
+
+if test x$build_mingw = xyes ; then
+	MINGW_FALSE='#'
+	MINGW_TRUE=
+	AC_DEFINE(MINGW,,[define if using mingw])
+else
+	MINGW_FALSE=
+	MINGW_TRUE='#'
+fi
+AC_SUBST(MINGW_FALSE)
+AC_SUBST(MINGW_TRUE)
 
 SHOULD_TRUE_BE_DECLARED
 NRN_FABS

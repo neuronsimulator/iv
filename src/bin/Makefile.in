@@ -29,8 +29,9 @@ top_builddir = ../..
 
 @SET_MAKE@
 
-@CARBON_FALSE@@CYGWIN_FALSE@SUBDIRS = iclass idemo idraw 
+@CARBON_FALSE@@CYGWIN_FALSE@@MINGW_FALSE@SUBDIRS = iclass idemo idraw 
 @CYGWIN_TRUE@SUBDIRS = idemo
+@MINGW_TRUE@SUBDIRS = idemo
 @CARBON_TRUE@SUBDIRS = idemo
 
 subdir = .
