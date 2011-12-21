@@ -702,7 +702,7 @@ void Text::backspace()
 
 void Text::insertChars(const char* txt, unsigned count) 
 {
-	TextBuffer text((char*)txt, count, count);
+	TextBuffer text(txt, count, count);
 
 	// ---- insert the text info the buffer ----
 	text_->Insert(text_->LineIndex(insertion_.line_) + insertion_.column_,
