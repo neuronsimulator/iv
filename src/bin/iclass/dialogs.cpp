@@ -389,7 +389,7 @@ const char* FileDialog::FullPath (const char* relpath) {
 const char* FileDialog::FullPath (FileBrowser* fb, const char* rp) {
     const char* relpath = (rp == nil) ? fb->GetDirectory() : rp;
     char path[MAX_PATH_LENGTH];
-    getcwd(path, sizeof(path) - strlen(relpath) - 1);
+    getcwd(path, sizeof(path) - strlen(relpath) - 1) != 0;
     strcat(path, "/");
     strcat(path, relpath);
     return fb->Normalize(path);

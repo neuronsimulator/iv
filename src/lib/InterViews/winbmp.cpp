@@ -41,9 +41,9 @@ typedef long int dword;
 typedef int word;
 typedef short int byte;
 
-#define readChar(in,data)  fread(data,1,1,in)
-#define readShort(in,data) fread(data,2,1,in)
-#define readLong(in,data)  fread(data,4,1,in)
+#define readChar(in,data)  fread(data,1,1,in) == 1
+#define readShort(in,data) fread(data,2,1,in) == 1
+#define readLong(in,data)  fread(data,4,1,in) == 1
 
 
 Raster* BMPRaster::load(const char *filename)

@@ -37,6 +37,17 @@
  *
  * NB: This file is a mess.
  */
+
+/* warnings about incompatible implicit definitions*/
+#include <math.h>
+#if HAVE_STRING_H
+#include <string.h>
+#endif
+#if HAVE_STRINGS_H
+#include <strings.h> /* eg. bcopy */
+#endif
+
+
 #if (defined(__STDC__) || defined(__EXTENDED__)) && !defined(USE_PROTOTYPES)
 #define	USE_PROTOTYPES	1
 #define	USE_CONST	1

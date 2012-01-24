@@ -451,7 +451,7 @@ void Printer::character(
     } else if (c > 127) {
 #if defined(__GNUC__)
 //	out.form("\\%03o", c);
-	sprintf(g3, "\\%03o", c);
+	sprintf(g3, "\\%03lo", c);
 	out << g3;
 #else
 	out << "\\";

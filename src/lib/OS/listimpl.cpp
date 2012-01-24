@@ -55,7 +55,7 @@ void ListImpl_range_error(long i) {
 #if defined(WIN32) || MAC
 	printf("internal error: list index %d out of range\n", i);
 #else
-    fprintf(stderr, "internal error: list index %d out of range\n", i);
+    fprintf(stderr, "internal error: list index %ld out of range\n", i);
 #endif
     abort();
 }

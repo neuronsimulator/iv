@@ -71,6 +71,7 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/mkg3states.c,v 1.2 1997
  * END (from the original source)
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include "prototypes.h"
 
 #ifndef TRUE

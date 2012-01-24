@@ -179,8 +179,8 @@ GraphicComp* IdrawCatalog::ReadPostScript (istream& in) {
     in >> _buf >> _psversion;
 
     if (_psversion > PSV_LATEST) {
-        fprintf(stderr, "warning: drawing version %d ", _psversion);
-        fprintf(stderr, "newer than idraw version %d\n", PSV_LATEST);
+        fprintf(stderr, "warning: drawing version %g ", _psversion);
+        fprintf(stderr, "newer than idraw version %g\n", PSV_LATEST);
     }
 
     float xincr, yincr;
@@ -964,7 +964,7 @@ GraphicComp* IdrawCatalog::ReadRaster (istream& in) {
     Coord w, h;
     in >> w >> h;
 
-    char* sync_string = "colorimage";
+    const char* sync_string = "colorimage";
     int n = strlen(sync_string);
 
     while (GetToken(in, _buf, CHARBUFSIZE) != 0) {

@@ -56,6 +56,10 @@
 #include <stdio.h>
 #include <string.h>
 
+/* avoid 'ignoring return value' warnings */
+#undef Fgets
+#define Fgets(a,b,c) fgets(a,b,c)!=0
+
 /*****************************************************************************/
 
 static int hexmap[] = {
@@ -300,17 +304,17 @@ GraphicComp* ImportCmd::PGM_Image (const char* filename) {
     if (file != nil) {
         char line[1000];
         do {
-            fgets(line, 1000, file);
+            Fgets(line, 1000, file);
         } while (strcmp(line, "gsave\n") != 0);
 
-        fgets(line, 1000, file);                    // translate
-        fgets(line, 1000, file);                    // scale
-        fgets(line, 1000, file);                    // sizes
+        Fgets(line, 1000, file);                    // translate
+        Fgets(line, 1000, file);                    // scale
+        Fgets(line, 1000, file);                    // sizes
         int w, h, d;
         sscanf(line, "%d %d %d", &w, &h, &d);
-        fgets(line, 1000, file);                    // [ ... ]
-        fgets(line, 1000, file);                    // { ... }
-        fgets(line, 1000, file);                    // image
+        Fgets(line, 1000, file);                    // [ ... ]
+        Fgets(line, 1000, file);                    // { ... }
+        Fgets(line, 1000, file);                    // image
 
 	if (d == 1) {
 	    Bitmap* bm = new Bitmap((void*)nil, w, h);
@@ -357,19 +361,19 @@ GraphicComp* ImportCmd::PPM_Image (const char* filename) {
     if (file != nil) {
         char line[1000];
         do {
-            fgets(line, 1000, file);
+            Fgets(line, 1000, file);
         } while (strcmp(line, "gsave\n") != 0);
 
-        fgets(line, 1000, file);                    // translate
-        fgets(line, 1000, file);                    // scale
-        fgets(line, 1000, file);                    // scale
-        fgets(line, 1000, file);                    // sizes
+        Fgets(line, 1000, file);                    // translate
+        Fgets(line, 1000, file);                    // scale
+        Fgets(line, 1000, file);                    // scale
+        Fgets(line, 1000, file);                    // sizes
         int w, h, d;
         sscanf(line, "%d %d %d", &w, &h, &d);
-        fgets(line, 1000, file);                    // [ ... ]
-        fgets(line, 1000, file);                    // { ... }
-        fgets(line, 1000, file);                    // false 3
-        fgets(line, 1000, file);                    // colorimage
+        Fgets(line, 1000, file);                    // [ ... ]
+        Fgets(line, 1000, file);                    // { ... }
+        Fgets(line, 1000, file);                    // false 3
+        Fgets(line, 1000, file);                    // colorimage
 
 	if (d == 1) {
 	    Bitmap* bm = new Bitmap((void*)nil, w, h);

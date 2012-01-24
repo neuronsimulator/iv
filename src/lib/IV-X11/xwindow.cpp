@@ -1433,7 +1433,7 @@ WindowVisual* WindowVisual::find_visual(Display* d, Style* s) {
  */
 
 struct VisualTable {
-    char* class_name;
+    const char* class_name;
     int class_tag;
 };
 
