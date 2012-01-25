@@ -82,9 +82,9 @@ protected:
     void* value;		/* value associated with this button */
     ButtonState* subject;	/* set to this->value when pressed */
     ButtonList* associates;	/* enable/disable when chosen/unchosen */
-    boolean enabled;		/* can be pressed */
-    boolean chosen;		/* currently toggled on */
-    boolean hit;		/* currently being pushed */
+    bool enabled;		/* can be pressed */
+    bool chosen;		/* currently toggled on */
+    bool hit;		/* currently being pushed */
 private:
     void Init(ButtonState*, void*);
 };

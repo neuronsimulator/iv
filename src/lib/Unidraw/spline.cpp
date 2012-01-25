@@ -51,7 +51,7 @@
 
 ClassId SplineComp::GetClassId () { return SPLINE_COMP; }
 
-boolean SplineComp::IsA (ClassId id) {
+bool SplineComp::IsA (ClassId id) {
     return SPLINE_COMP == id || VerticesComp::IsA(id);
 }
 
@@ -111,11 +111,11 @@ SplineView::SplineView (SplineComp* subj) : VerticesView(subj) { }
 SplineComp* SplineView::GetSplineComp () { return (SplineComp*) GetSubject(); }
 ClassId SplineView::GetClassId () { return SPLINE_VIEW; }
 
-boolean SplineView::IsA (ClassId id) {
+bool SplineView::IsA (ClassId id) {
     return SPLINE_VIEW == id || VerticesView::IsA(id);
 }
 
-boolean SplineView::VertexChanged () { 
+bool SplineView::VertexChanged () { 
     SFH_OpenBSpline* gview = (SFH_OpenBSpline*) GetGraphic();
     SFH_OpenBSpline* gsubj = (SFH_OpenBSpline*) GetSplineComp()->GetGraphic();
 
@@ -229,7 +229,7 @@ Command* SplineView::InterpretManipulator (Manipulator* m) {
 
 ClassId PSSpline::GetClassId () { return PS_SPLINE; }
 
-boolean PSSpline::IsA (ClassId id) { 
+bool PSSpline::IsA (ClassId id) { 
     return PS_SPLINE == id || PSVertices::IsA(id);
 }
 
@@ -240,7 +240,7 @@ const char* PSSpline::Name () { return "BSpl"; }
 
 ClassId ClosedSplineComp::GetClassId () { return CLOSEDSPLINE_COMP; }
 
-boolean ClosedSplineComp::IsA (ClassId id) {
+bool ClosedSplineComp::IsA (ClassId id) {
     return CLOSEDSPLINE_COMP == id || VerticesComp::IsA(id);
 }
 
@@ -308,11 +308,11 @@ ClosedSplineComp* ClosedSplineView::GetClosedSplineComp () {
 
 ClassId ClosedSplineView::GetClassId () { return CLOSEDSPLINE_VIEW; }
 
-boolean ClosedSplineView::IsA (ClassId id) {
+bool ClosedSplineView::IsA (ClassId id) {
     return CLOSEDSPLINE_VIEW == id || VerticesView::IsA(id);
 }
 
-boolean ClosedSplineView::VertexChanged () { 
+bool ClosedSplineView::VertexChanged () { 
     SFH_ClosedBSpline* gview = (SFH_ClosedBSpline*) GetGraphic();
     SFH_ClosedBSpline* gsubj
         = (SFH_ClosedBSpline*) GetClosedSplineComp()->GetGraphic();
@@ -427,7 +427,7 @@ Command* ClosedSplineView::InterpretManipulator (Manipulator* m) {
 
 ClassId PSClosedSpline::GetClassId () { return PS_CLOSEDSPLINE; }
 
-boolean PSClosedSpline::IsA (ClassId id) { 
+bool PSClosedSpline::IsA (ClassId id) { 
     return PS_CLOSEDSPLINE == id || PSVertices::IsA(id);
 }
 

@@ -41,7 +41,7 @@ public:
     virtual ~Manipulator();
     
     virtual void Grasp(Event&);
-    virtual boolean Manipulating(Event&);
+    virtual bool Manipulating(Event&);
     virtual void Effect(Event&);
 
     virtual void SetViewer(Viewer*);

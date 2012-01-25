@@ -1,4 +1,3 @@
-#undef boolean
 #undef Bitmap
 #undef Colormap
 #undef Cursor

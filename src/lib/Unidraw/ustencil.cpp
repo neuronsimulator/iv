@@ -92,7 +92,7 @@ void UStencil::getExtent (
     tol = 0;
 }
 
-boolean UStencil::contains (PointObj& po, Graphic* gs) {
+bool UStencil::contains (PointObj& po, Graphic* gs) {
     Bitmap* bitmap = (_mask == nil) ? _image : _mask;
     PointObj pt (&po);
 
@@ -101,7 +101,7 @@ boolean UStencil::contains (PointObj& po, Graphic* gs) {
     return b.Contains(pt);
 }
 
-boolean UStencil::intersects (BoxObj& userb, Graphic* gs) {
+bool UStencil::intersects (BoxObj& userb, Graphic* gs) {
     Transformer* t = gs->GetTransformer();
     Bitmap* bitmap = (_mask == nil) ? _image : _mask;
     Coord xmax = bitmap->Width();

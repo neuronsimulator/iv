@@ -102,7 +102,7 @@ UList* GraphicComp::_patterns;
 
 ClassId GraphicComp::GetClassId () { return GRAPHIC_COMP; }
 
-boolean GraphicComp::IsA (ClassId id) {
+bool GraphicComp::IsA (ClassId id) {
     return GRAPHIC_COMP == id || Component::IsA(id);
 }
 
@@ -332,7 +332,7 @@ PSPattern* GraphicComp::ReadPattern (istream& in) {
     return unidraw->GetCatalog()->ReadPattern(in);
 }
 
-void GraphicComp::WriteBgFilled (boolean bgFilled, ostream& out) {
+void GraphicComp::WriteBgFilled (bool bgFilled, ostream& out) {
     unidraw->GetCatalog()->WriteBgFilled(bgFilled, out);
 }
 
@@ -422,7 +422,7 @@ void GraphicComp::WriteVertices (
 
 ClassId GraphicComps::GetClassId () { return GRAPHIC_COMPS; }
 
-boolean GraphicComps::IsA (ClassId id) {
+bool GraphicComps::IsA (ClassId id) {
     return GRAPHIC_COMPS == id || GraphicComp::IsA(id);
 }
 
@@ -843,7 +843,7 @@ void GraphicComps::First (Iterator& i) { i.SetValue(_comps->First()); }
 void GraphicComps::Last (Iterator& i) { i.SetValue(_comps->Last()); }
 void GraphicComps::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
 void GraphicComps::Prev (Iterator& i) { i.SetValue(Elem(i)->Prev()); }
-boolean GraphicComps::Done (Iterator i) { return Elem(i) == _comps->End(); }
+bool GraphicComps::Done (Iterator i) { return Elem(i) == _comps->End(); }
 GraphicComp* GraphicComps::Comp (UList* r) { return (GraphicComp*) (*r)(); }
 GraphicComp* GraphicComps::GetComp (Iterator i) { return Comp(Elem(i)); }
 

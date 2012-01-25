@@ -47,9 +47,9 @@ public:
     LineObj(Coord = 0, Coord = 0, Coord = 0, Coord = 0);
     LineObj(LineObj*);
 
-    boolean Contains(PointObj&);
+    bool Contains(PointObj&);
     int Same(PointObj& p1, PointObj& p2);
-    boolean Intersects(LineObj&);
+    bool Intersects(LineObj&);
 public:
     PointObj _p1, _p2;
 };
@@ -59,12 +59,12 @@ public:
     BoxObj(Coord = 0, Coord = 0, Coord = 0, Coord = 0);
     BoxObj(BoxObj*);
 
-    boolean Contains(PointObj&);
-    boolean Intersects(BoxObj&);
-    boolean Intersects(LineObj&);
+    bool Contains(PointObj&);
+    bool Intersects(BoxObj&);
+    bool Intersects(LineObj&);
     BoxObj operator-(BoxObj&);
     BoxObj operator+(BoxObj&);
-    boolean Within(BoxObj&);
+    bool Within(BoxObj&);
 public:
     Coord _left, _right;
     Coord _bottom, _top;
@@ -75,15 +75,15 @@ public:
     MultiLineObj(Coord* = nil, Coord* = nil, int = 0);
 
     void GetBox(BoxObj& b);
-    boolean Contains(PointObj&);
-    boolean Intersects(LineObj&);
-    boolean Intersects(BoxObj&);
-    boolean Within(BoxObj&);
+    bool Contains(PointObj&);
+    bool Intersects(LineObj&);
+    bool Intersects(BoxObj&);
+    bool Within(BoxObj&);
     void SplineToMultiLine(Coord* cpx, Coord* cpy, int cpcount);
     void ClosedSplineToPolygon(Coord* cpx, Coord* cpy, int cpcount);
 protected:
     void GrowBuf();
-    boolean CanApproxWithLine(
+    bool CanApproxWithLine(
 	double x0, double y0, double x2, double y2, double x3, double y3
     );
     void AddLine(double x0, double y0, double x1, double y1);
@@ -105,9 +105,9 @@ public:
     FillPolygonObj(Coord* = nil, Coord* = nil, int = 0);
     virtual ~FillPolygonObj();
 
-    boolean Contains(PointObj&);
-    boolean Intersects(LineObj&);
-    boolean Intersects(BoxObj&);
+    bool Contains(PointObj&);
+    bool Intersects(LineObj&);
+    bool Intersects(BoxObj&);
 protected:
     void Normalize();
 protected:
@@ -120,8 +120,8 @@ public:
     Extent(float = 0, float = 0, float = 0, float = 0, float = 0);
     Extent(Extent&);
 
-    boolean Undefined();
-    boolean Within(Extent& e);
+    bool Undefined();
+    bool Within(Extent& e);
     void Merge(Extent&);
 public:
     /* defines lower left and center of an object */
@@ -132,7 +132,7 @@ public:
  * inlines
  */
 
-inline boolean Extent::Undefined () { return _left == _cx && _bottom == _cy; }
+inline bool Extent::Undefined () { return _left == _cx && _bottom == _cy; }
 
 #include <IV-2_6/_leave.h>
 

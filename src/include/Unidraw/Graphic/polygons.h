@@ -40,10 +40,10 @@ protected:
     void s_getExtent(float&, float&, float&, float&, float&, Graphic*);
     void f_getExtent(float&, float&, float&, float&, float&, Graphic*);
 
-    boolean s_contains(PointObj&, Graphic*);
-    boolean f_contains(PointObj&, Graphic*);
-    boolean s_intersects(BoxObj&, Graphic*);
-    boolean f_intersects(BoxObj&, Graphic*);
+    bool s_contains(PointObj&, Graphic*);
+    bool f_contains(PointObj&, Graphic*);
+    bool s_intersects(BoxObj&, Graphic*);
+    bool f_intersects(BoxObj&, Graphic*);
 protected:
     Coord _x0, _y0, _x1, _y1;
 };
@@ -59,8 +59,8 @@ public:
     virtual Graphic* Copy();
 protected:
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     PSBrush* _br;
@@ -77,8 +77,8 @@ public:
     virtual Graphic* Copy();
 protected:
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     PSPattern* _pat;
@@ -97,8 +97,8 @@ public:
     virtual Graphic* Copy();
 protected:
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     PSBrush* _br;
@@ -109,10 +109,10 @@ class Polygon : public Vertices {
 protected:
     Polygon(Coord* x, Coord* y, int count, Graphic* gr = nil) ;
 
-    boolean s_contains(PointObj&, Graphic*);
-    boolean f_contains(PointObj&, Graphic*);
-    boolean s_intersects(BoxObj&, Graphic*);
-    boolean f_intersects(BoxObj&, Graphic*);
+    bool s_contains(PointObj&, Graphic*);
+    bool f_contains(PointObj&, Graphic*);
+    bool s_intersects(BoxObj&, Graphic*);
+    bool f_intersects(BoxObj&, Graphic*);
 };
 
 class S_Polygon : public Polygon {
@@ -126,8 +126,8 @@ public:
     virtual Graphic* Copy();
 protected:
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     PSBrush* _br;
@@ -144,8 +144,8 @@ public:
     virtual Graphic* Copy();
 protected:
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     PSPattern* _pat;
@@ -164,8 +164,8 @@ public:
     virtual Graphic* Copy();
 protected:
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     PSBrush* _br;

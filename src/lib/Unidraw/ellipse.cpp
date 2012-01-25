@@ -58,7 +58,7 @@
 
 ClassId EllipseComp::GetClassId () { return ELLIPSE_COMP; }
 
-boolean EllipseComp::IsA (ClassId id) {
+bool EllipseComp::IsA (ClassId id) {
     return ELLIPSE_COMP == id || GraphicComp::IsA(id);
 }
 
@@ -116,7 +116,7 @@ EllipseComp* EllipseView::GetEllipseComp () {
 
 ClassId EllipseView::GetClassId () { return ELLIPSE_VIEW; }
 
-boolean EllipseView::IsA (ClassId id) {
+bool EllipseView::IsA (ClassId id) {
     return ELLIPSE_VIEW == id || GraphicView::IsA(id);
 }
 
@@ -220,11 +220,11 @@ Graphic* EllipseView::GetGraphic () {
 PSEllipse::PSEllipse (EllipseComp* subj) : PostScriptView(subj) { }
 ClassId PSEllipse::GetClassId () { return PS_ELLIPSE; }
 
-boolean PSEllipse::IsA (ClassId id) { 
+bool PSEllipse::IsA (ClassId id) { 
     return PS_ELLIPSE == id || PostScriptView::IsA(id);
 }
 
-boolean PSEllipse::Definition (ostream& out) {
+bool PSEllipse::Definition (ostream& out) {
     Coord x0, y0;
     int rx, ry;
 

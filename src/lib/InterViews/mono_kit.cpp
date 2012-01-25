@@ -125,7 +125,7 @@ class MonoKitFrame : public BevelFrame {
 public:
     MonoKitFrame(
 	Glyph*, TelltaleState*, MonoKitInfo*, Coord,
-	boolean target, boolean choosable
+	bool target, bool choosable
     );
     virtual ~MonoKitFrame();
 
@@ -138,8 +138,8 @@ public:
 private:
     TelltaleState* state_;
     MonoKitInfo* info_;
-    boolean target_;
-    boolean choosable_;
+    bool target_;
+    bool choosable_;
 };
 
 const MonoKitInfo& MonoKitFrame::info() const { return *info_; }
@@ -178,7 +178,7 @@ private:
     MonoKitImpl(MonoKit*);
     ~MonoKitImpl();
 
-    boolean match(const Style&, const Style&, const char*);
+    bool match(const Style&, const Style&, const char*);
     Glyph* make_menu_item(TelltaleState*, Glyph* check, Glyph*);
     ChoiceItem* make_button(TelltaleState*, Glyph* normal, Glyph* pressed);
     ChoiceItem* make_button(
@@ -519,7 +519,7 @@ Glyph* MonoKit::right_mover_look(TelltaleState* t) const {
 
 MonoKitFrame::MonoKitFrame(
     Glyph* g, TelltaleState* t, MonoKitInfo* i, Coord thickness,
-    boolean target, boolean choosable
+    bool target, bool choosable
 ) : BevelFrame(g, thickness) {
     state_ = t;
     Resource::ref(state_);
@@ -625,11 +625,11 @@ MonoKitImpl::~MonoKitImpl() {
     }
 }
 
-boolean MonoKitImpl::match(const Style& s1, const Style& s2, const char* n) {
+bool MonoKitImpl::match(const Style& s1, const Style& s2, const char* n) {
     String name(n);
     String v1, v2;
-    boolean b1 = s1.find_attribute(n, v1);
-    boolean b2 = s2.find_attribute(n, v2);
+    bool b1 = s1.find_attribute(n, v1);
+    bool b2 = s2.find_attribute(n, v2);
     return (!b1 && !b2) || (b1 && b2 && v1 == v2);
 }
 

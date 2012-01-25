@@ -52,7 +52,7 @@
 /*****************************************************************************/
 
 ClassId UndoCmd::GetClassId () { return UNDO_CMD; }
-boolean UndoCmd::IsA (ClassId id) { return UNDO_CMD == id || Command::IsA(id);}
+bool UndoCmd::IsA (ClassId id) { return UNDO_CMD == id || Command::IsA(id);}
 
 UndoCmd::UndoCmd (ControlInfo* c) : Command(c) { }
 UndoCmd::UndoCmd (Editor* ed) : Command(ed) { }
@@ -64,12 +64,12 @@ Command* UndoCmd::Copy () {
 }
 
 void UndoCmd::Execute () { unidraw->Undo(GetEditor()->GetComponent()); }
-boolean UndoCmd::Reversible () { return false; }
+bool UndoCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId RedoCmd::GetClassId () { return REDO_CMD; }
-boolean RedoCmd::IsA (ClassId id) { return REDO_CMD == id || Command::IsA(id);}
+bool RedoCmd::IsA (ClassId id) { return REDO_CMD == id || Command::IsA(id);}
 
 RedoCmd::RedoCmd (ControlInfo* c) : Command(c) { }
 RedoCmd::RedoCmd (Editor* ed) : Command(ed) { }
@@ -81,12 +81,12 @@ Command* RedoCmd::Copy () {
 }
 
 void RedoCmd::Execute () { unidraw->Redo(GetEditor()->GetComponent()); }
-boolean RedoCmd::Reversible () { return false; }
+bool RedoCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId CutCmd::GetClassId () { return CUT_CMD; }
-boolean CutCmd::IsA (ClassId id) { return CUT_CMD == id || Command::IsA(id); }
+bool CutCmd::IsA (ClassId id) { return CUT_CMD == id || Command::IsA(id); }
 
 CutCmd::CutCmd (ControlInfo* c, Clipboard* cb) : Command(c, cb) {
     _executed = false;
@@ -121,7 +121,7 @@ void CutCmd::Unexecute () {
 /*****************************************************************************/
 
 ClassId CopyCmd::GetClassId () { return COPY_CMD; }
-boolean CopyCmd::IsA (ClassId id) { return COPY_CMD == id || Command::IsA(id);}
+bool CopyCmd::IsA (ClassId id) { return COPY_CMD == id || Command::IsA(id);}
 
 CopyCmd::CopyCmd (ControlInfo* c, Clipboard* cb) : Command(c, cb) { }
 CopyCmd::CopyCmd (Editor* ed, Clipboard* cb) : Command(ed, cb) { }
@@ -154,12 +154,12 @@ void CopyCmd::Execute () {
     }
 }
 
-boolean CopyCmd::Reversible () { return false; }
+bool CopyCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId PasteCmd::GetClassId () { return PASTE_CMD; }
-boolean PasteCmd::IsA (ClassId id) { return PASTE_CMD==id || Command::IsA(id);}
+bool PasteCmd::IsA (ClassId id) { return PASTE_CMD==id || Command::IsA(id);}
 
 PasteCmd::PasteCmd (ControlInfo* c, Clipboard* cb) : Command(c, cb) {
     _executed = false;
@@ -191,7 +191,7 @@ void PasteCmd::Unexecute () {
     _executed = false;
 }
 
-boolean PasteCmd::Reversible () {
+bool PasteCmd::Reversible () {
     Clipboard* cb = GetClipboard();
     Clipboard* globalcb = unidraw->GetCatalog()->GetClipboard();
    
@@ -202,7 +202,7 @@ boolean PasteCmd::Reversible () {
 
 ClassId ReplaceCmd::GetClassId () { return REPLACE_CMD; }
 
-boolean ReplaceCmd::IsA (ClassId id) {
+bool ReplaceCmd::IsA (ClassId id) {
     return REPLACE_CMD == id || MacroCmd::IsA(id);
 }
 
@@ -246,7 +246,7 @@ GraphicComp* ReplaceCmd::GetReplacement () {
 
 ClassId DupCmd::GetClassId () { return DUP_CMD; }
 
-boolean DupCmd::IsA (ClassId id) {
+bool DupCmd::IsA (ClassId id) {
     return DUP_CMD == id || Command::IsA(id);
 }
 
@@ -284,7 +284,7 @@ void DupCmd::Unexecute () {
 
 ClassId DeleteCmd::GetClassId () { return DELETE_CMD; }
 
-boolean DeleteCmd::IsA (ClassId id) {
+bool DeleteCmd::IsA (ClassId id) {
     return DELETE_CMD == id || Command::IsA(id);
 }
 
@@ -322,7 +322,7 @@ void DeleteCmd::Unexecute () {
 
 ClassId SlctAllCmd::GetClassId () { return SLCTALL_CMD; }
 
-boolean SlctAllCmd::IsA (ClassId id) {
+bool SlctAllCmd::IsA (ClassId id) {
     return SLCTALL_CMD == id || Command::IsA(id);
 }
 
@@ -352,13 +352,13 @@ void SlctAllCmd::Execute () {
     newSel->Update();
 }
 
-boolean SlctAllCmd::Reversible () { return false; }
+bool SlctAllCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId ConnectCmd::GetClassId () { return CONNECT_CMD; }
 
-boolean ConnectCmd::IsA (ClassId id) {
+bool ConnectCmd::IsA (ClassId id) {
     return CONNECT_CMD == id || Command::IsA(id);
 }
 
@@ -412,7 +412,7 @@ void ConnectCmd::Unexecute () {
     unidraw->Update();
 }
 
-boolean ConnectCmd::Reversible () { return true; }
+bool ConnectCmd::Reversible () { return true; }
 
 void ConnectCmd::GetConnectors (Connector*& s, Connector*& t) {
     s = _source;
@@ -439,7 +439,7 @@ void ConnectCmd::Write (ostream& out) {
 
 ClassId MobilityCmd::GetClassId () { return MOBILITY_CMD; }
 
-boolean MobilityCmd::IsA (ClassId id) {
+bool MobilityCmd::IsA (ClassId id) {
     return MOBILITY_CMD == id || Command::IsA(id);
 }
 

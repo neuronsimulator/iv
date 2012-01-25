@@ -44,21 +44,21 @@ public:
     int GetLinePattern();
     int Width();
 
-    boolean None();
+    bool None();
     const int* GetDashPattern();
     int GetDashPatternSize();
     int GetDashOffset();
 protected:
     void CalcDashPat(int);
 private:
-    boolean _none;
+    bool _none;
     int _linepat;
     int _dashpat[patternWidth];	// stores dash pattern
     int _dashpatsize;		// stores number of defined elements in dashpat
     int _dashoffset;		// stores dash pattern's offset
 };
 
-inline boolean PSBrush::None () { return _none; }
+inline bool PSBrush::None () { return _none; }
 inline int PSBrush::GetLinePattern () { return _linepat; }
 inline const int* PSBrush::GetDashPattern () { return _dashpat; }
 inline int PSBrush::GetDashPatternSize () { return _dashpatsize; }
@@ -109,18 +109,18 @@ public:
     PSPattern(int, float);
     PSPattern(const int* pattern, int);
 
-    boolean None();
+    bool None();
     float GetGrayLevel();
     const int* GetData();
     int GetSize();
 private:
-    boolean _none;
+    bool _none;
     int _data[patternHeight];
     float _graylevel;		// stores gray level for grayscale patterns
     int _size;			// stores pat's orig size (4x4, 8x8, or 16x16)
 };
 
-inline boolean PSPattern::None () { return _none; }
+inline bool PSPattern::None () { return _none; }
 inline float PSPattern::GetGrayLevel () { return _graylevel; }
 inline const int* PSPattern::GetData () { return _data; }
 inline int PSPattern::GetSize () { return _size; }

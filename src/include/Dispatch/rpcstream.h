@@ -40,17 +40,17 @@ public:
     int accept();
     void attach(int fd);
     void close();
-    void nonblocking(boolean);
-    void verbose(boolean);
+    void nonblocking(bool);
+    void verbose(bool);
 
     rpcbuf* rdbuf();
-    boolean incomplete_request();
-    void incomplete_request(boolean);
+    bool incomplete_request();
+    void incomplete_request(bool);
 protected:
     void verify(int);
 protected:
     rpcbuf _buf;		 // streambuf specialized to RPC requests
-    boolean _incomplete_request; // is the incoming request still incomplete?
+    bool _incomplete_request; // is the incoming request still incomplete?
 };
 
 // Return or set protected member variables.
@@ -59,11 +59,11 @@ inline rpcbuf* rpcstream::rdbuf() {
     return &_buf;
 }
 
-inline boolean rpcstream::incomplete_request() {
+inline bool rpcstream::incomplete_request() {
     return _incomplete_request;
 }
 
-inline void rpcstream::incomplete_request(boolean incomplete_request) {
+inline void rpcstream::incomplete_request(bool incomplete_request) {
     _incomplete_request = incomplete_request;
 }
 

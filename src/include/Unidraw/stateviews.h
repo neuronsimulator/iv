@@ -50,31 +50,31 @@ public:
     NameVarView(NameVar*, Alignment = Center, const char* sample = nil);
 protected:
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
 };
 
 class FileNameVarView : public StateVarView {
 public:
     FileNameVarView(
         NameVar*, Alignment = Center,
-        boolean relative = true, const char* sample = nil
+        bool relative = true, const char* sample = nil
     );
 protected:
     virtual void Init();
 protected:
-    boolean _relative;
+    bool _relative;
 };
 
 class CompNameVarView : public StateVarView {
 public:
     CompNameVarView(
         CompNameVar*, Alignment = Center,
-        boolean relative = true, const char* sample = nil
+        bool relative = true, const char* sample = nil
     );
 protected:
     virtual void Init();
 protected:
-    boolean _relative;
+    bool _relative;
 };
 
 class ModifStatusVarView : public StateVarView {
@@ -82,11 +82,11 @@ public:
     ModifStatusVarView(ModifStatusVar*, Alignment = Center);
 protected:
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
     virtual void Reconfig();
-    boolean WriteProtected();
+    bool WriteProtected();
 protected:
-    boolean _prevVal, _prevProt;
+    bool _prevVal, _prevProt;
 };
 
 class MagnifVarView : public StateVarView {
@@ -94,7 +94,7 @@ public:
     MagnifVarView(MagnifVar*, Alignment = Center);
 protected:
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
 protected:
     float _prevVal;
 };
@@ -104,9 +104,9 @@ public:
     GravityVarView(GravityVar*, Alignment = Center);
 protected:
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
 protected:
-    boolean _prevVal;
+    bool _prevVal;
 };
 
 class FontVarView : public StateVarView {
@@ -114,7 +114,7 @@ public:
     FontVarView(FontVar*, Alignment = Center, const char* sample = nil);
 protected:
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
 protected:
     PSFont* _prevVal;
 };
@@ -125,7 +125,7 @@ public:
     virtual ~BrushVarView();
 protected:
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
 protected:
     PSBrush* _prevVal;
     PSColor* _prevFg, *_prevBg;
@@ -138,7 +138,7 @@ public:
     virtual ~PatternVarView();
 protected:
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
 protected:
     PSPattern* _prevVal;
     PSColor* _prevFg, *_prevBg;

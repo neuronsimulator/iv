@@ -161,7 +161,7 @@ void Scene::Lower(Interactor* i) {
     }
 }
 
-void Scene::DoInsert(Interactor*, boolean, IntCoord&, IntCoord&) { }
+void Scene::DoInsert(Interactor*, bool, IntCoord&, IntCoord&) { }
 void Scene::DoChange(Interactor*) { }
 void Scene::DoRemove(Interactor*) { }
 void Scene::DoRaise(Interactor*) { }
@@ -178,7 +178,7 @@ Interactor* Scene::Wrap(Interactor* i) {
     return i;
 }
 
-void Scene::Propagate(boolean b) {
+void Scene::Propagate(bool b) {
     propagate = b;
 }
 
@@ -186,7 +186,7 @@ void Scene::Propagate(boolean b) {
  * Highlight a scene by highlighting each components.
  */
 
-void Scene::Highlight(boolean b) {
+void Scene::Highlight(bool b) {
     Interactor* children[100];
     Interactor** a;
     int n;
@@ -218,7 +218,7 @@ MonoScene::~MonoScene() {
     delete interior_;
 }
 
-void MonoScene::DoInsert(Interactor* i, boolean, IntCoord&, IntCoord&) {
+void MonoScene::DoInsert(Interactor* i, bool, IntCoord&, IntCoord&) {
     delete interior_;
     interior_ = i;
 }

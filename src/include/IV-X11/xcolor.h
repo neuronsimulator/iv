@@ -29,7 +29,7 @@
 #ifndef iv_colorrep_h
 #define iv_colorrep_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/color.h>
 #include <IV-X11/Xlib.h>
 
@@ -44,7 +44,7 @@ public:
 #endif
     WindowVisual* visual_;
     ColorOp op_;
-    boolean masking_;
+    bool masking_;
     XColor xcolor_;
     Pixmap stipple_;
 };

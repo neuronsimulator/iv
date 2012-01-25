@@ -29,7 +29,7 @@
 #ifndef iv2_6_rubband_h
 #define iv2_6_rubband_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/coord.h>
 #include <InterViews/resource.h>
 
@@ -58,7 +58,7 @@ protected:
 protected:
     Painter* output;
     Canvas* canvas;
-    boolean drawn;
+    bool drawn;
     IntCoord trackx, offx;
     IntCoord tracky, offy;
 };

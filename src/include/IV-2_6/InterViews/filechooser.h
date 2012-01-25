@@ -57,7 +57,7 @@ public:
     void SetSubtitle(const char*);
     void SelectFile();
 
-    virtual boolean Accept();
+    virtual bool Accept();
     virtual void Update();
 protected:
     FileChooser(ButtonState*, Alignment = Center);

@@ -40,7 +40,7 @@
 ScrollBox::ScrollBox(GlyphIndex size) : PolyGlyph(size) { }
 ScrollBox::~ScrollBox() { }
 
-boolean ScrollBox::shown(GlyphIndex i) const {
+bool ScrollBox::shown(GlyphIndex i) const {
     return i >= 0 && i < count();
 }
 
@@ -73,7 +73,7 @@ private:
     ScrollBox* scrollbox_;
     GlyphIndex start_;
     GlyphIndex end_;
-    boolean changed_;
+    bool changed_;
     Requisition requisition_;
     Canvas* canvas_;
     Transformer transformer_;
@@ -226,7 +226,7 @@ void TBScrollBox::modified(GlyphIndex) {
     impl_->changed_ = true;
 }
 
-boolean TBScrollBox::shown(GlyphIndex i) const {
+bool TBScrollBox::shown(GlyphIndex i) const {
     TBScrollBoxImpl& sb = impl();
     return i >= sb.start_ && i < sb.end_;
 }
@@ -372,7 +372,7 @@ void TBScrollBoxImpl::reallocate() {
     const Requirement& r = req.y_requirement();
     Coord p = allocation_.top();
     Coord bottom = allocation_.bottom();
-    boolean found_start = false;
+    bool found_start = false;
     for (GlyphIndex i = start_; i < n; i++) {
 	Glyph* g = s->component(i);
 	if (g != nil) {

@@ -48,7 +48,7 @@ public:
     virtual void allotment(GlyphIndex, DimensionName, Allotment&) const;
 private:
     GlyphIndex card_;
-    boolean changed_;
+    bool changed_;
     Requisition requisition_;
     Allocation allocation_;
 };

@@ -39,7 +39,6 @@
 #include <InterViews/textbuffer.h>
 #include <OS/types.h>
 #include <OS/leave-scope.h>
-#define boolean _lib_os(boolean)
 
 #include <ctype.h>
 #include <stdio.h>
@@ -146,7 +145,7 @@ void Classes::Clear () {
 /*****************************************************************************/
 
 ClassBuffer::ClassBuffer (
-	boolean recursive, boolean verbose, boolean CPlusPlusFiles
+	bool recursive, bool verbose, bool CPlusPlusFiles
     ) {
     _classes = new Classes;
     _recursive = recursive;
@@ -189,23 +188,23 @@ ClassInfo* ClassBuffer::Info (const char* className) {
     return _classes->Find(className);
 }    
 
-inline boolean DotOrDotDot (const char* dir) {
+inline bool DotOrDotDot (const char* dir) {
     return strcmp(dir, ".") == 0 || strcmp(dir, "..") == 0;
 }
 
-inline boolean HeaderFile (const char* file) {
+inline bool HeaderFile (const char* file) {
     int length = strlen(file);
 
     return file[length-1] == 'h' && file[length-2] == '.';
 }
 
-inline boolean CPlusPlusFile (const char* file) {
+inline bool CPlusPlusFile (const char* file) {
     int length = strlen(file);
 
     return file[length-1] == 'C' && file[length-2] == '.';
 }
 
-static boolean IsADirectory (const char* path, struct stat& filestats) {
+static bool IsADirectory (const char* path, struct stat& filestats) {
     stat(path, &filestats);
     return S_ISDIR(filestats.st_mode);
 }
@@ -342,7 +341,7 @@ void ClassBuffer::SearchTextBuffer (TextBuffer* tb, const char* path) {
     }
 }
 
-inline boolean KeyWord (const char* string) {
+inline bool KeyWord (const char* string) {
     return 
         strcmp(string, "public") == 0 ||
         strcmp(string, "protected") == 0 ||
@@ -397,7 +396,7 @@ char* ClassBuffer::FindClassDecl (TextBuffer* tb, int& beg) {
     return className;
 }
 
-inline boolean IsValidChar (char c) {
+inline bool IsValidChar (char c) {
     return isalpha(c) || c == '_' || c == '$';
 }
 

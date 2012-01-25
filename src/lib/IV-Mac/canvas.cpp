@@ -89,7 +89,7 @@ PathRenderInfo MACcanvas::path_;
 
 static const float smoothness = 10.0;
 
-static boolean straight(
+static bool straight(
     const Transformer& tx,
     Coord x0, Coord y0, Coord x1, Coord y1,
 	Coord x2, Coord y2, Coord x3, Coord y3)
@@ -518,7 +518,7 @@ void MACcanvas::initClip() {
 	ClipRect(clipping_);
 }
 
-void MACcanvas::push_clipping(boolean all)
+void MACcanvas::push_clipping(bool all)
 {
 	Rect* old_clip = clipping_;
 	Rect* new_clip = new Rect;
@@ -679,12 +679,12 @@ void MACcanvas::damage(Coord left, Coord bottom, Coord right, Coord top)
 	
 }
 
-boolean MACcanvas::damaged(const Extension& ext) const
+bool MACcanvas::damaged(const Extension& ext) const
 {
     return damaged(ext.left(), ext.bottom(), ext.right(), ext.top());
 }
 
-boolean MACcanvas::damaged(
+bool MACcanvas::damaged(
 	Coord left,
 	Coord bottom,
 	Coord right,
@@ -717,7 +717,7 @@ void MACcanvas::damage_all()
 	}
 }
 
-boolean MACcanvas::any_damage() const
+bool MACcanvas::any_damage() const
 {
 	return (!(EmptyRect(&damageArea)));
 }

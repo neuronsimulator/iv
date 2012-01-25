@@ -45,7 +45,7 @@ public:
 
     void Completions(const char* list[], int count, char = CEComplete);
 protected:
-    virtual boolean HandleChar(char);
+    virtual bool HandleChar(char);
 private:
     void Init();
     char complete_;

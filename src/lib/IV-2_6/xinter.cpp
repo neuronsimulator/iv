@@ -55,8 +55,8 @@
 #include <IV-X11/xwindow.h>
 #include <OS/math.h>
 
-boolean Interactor::ValidCanvas(Canvas* c) {
-    boolean b = false;
+bool Interactor::ValidCanvas(Canvas* c) {
+    bool b = false;
     if (c != nil) {
 	Window* w = c->window();
 	if (w != nil) {
@@ -225,7 +225,7 @@ Handler* InteractorWindow::target(const Event& e) const {
  * to an uninterested interactor.
  */
 
-static boolean grabbing;
+static bool grabbing;
 
 void Interactor::pick(Canvas*, const Allocation& a, int depth, Hit& h) {
     const Event* ep = h.event();
@@ -265,7 +265,7 @@ InteractorHandler::~InteractorHandler() { }
  * to learn to grab, but it isn't worth trying to change them.
  */
 
-boolean InteractorHandler::event(Event& e) {
+bool InteractorHandler::event(Event& e) {
     Interactor* i = interactor_;
     XEvent& xe = e.rep()->xevent_;
     switch (xe.type) {
@@ -424,7 +424,7 @@ void InteractorWindow::unbind() {
     interactor_->Orphan();
 }
 
-boolean InteractorWindow::receive(const Event& e) {
+bool InteractorWindow::receive(const Event& e) {
     int ymax = canvas()->pheight() - 1;
     int itop;
     XEvent& xe = e.rep()->xevent_;
@@ -456,7 +456,7 @@ boolean InteractorWindow::receive(const Event& e) {
 
 static void AlignPosition(Window* w, Alignment a) {
     float xalign = 0.0, yalign = 0.0;
-    boolean needs_align = true;
+    bool needs_align = true;
     switch (a) {
     case BottomRight:
     case Right:
@@ -727,7 +727,7 @@ void World::Remove(Interactor* i) {
  */
 
 void Scene::Place(
-    Interactor* i, IntCoord l, IntCoord b, IntCoord r, IntCoord t, boolean map
+    Interactor* i, IntCoord l, IntCoord b, IntCoord r, IntCoord t, bool map
 ) {
     IntCoord x = l;
     IntCoord y = ymax - t;
@@ -778,7 +778,7 @@ void Scene::Place(
     }
 }
 
-void Scene::Map(Interactor* i, boolean raised) {
+void Scene::Map(Interactor* i, bool raised) {
     if (window == nil || !window->bound() || i->window == nil) {
 	return;
     }

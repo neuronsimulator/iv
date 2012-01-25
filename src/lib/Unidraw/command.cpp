@@ -117,7 +117,7 @@ DataElem* DataCache::Find (Component* comp) {
 
 ClassId Command::GetClassId () { return COMMAND; }
 ClassId Command::GetSubstId (const char*&) { return UNDEFINED_CLASS; }
-boolean Command::IsA (ClassId id) { return COMMAND == id; }
+bool Command::IsA (ClassId id) { return COMMAND == id; }
 
 Command::Command (ControlInfo* m, Clipboard* cb) {
     Command::SetControlInfo(m);
@@ -189,7 +189,7 @@ void Command::First (Iterator&) { }
 void Command::Last (Iterator&) { }
 void Command::Next (Iterator&) { }
 void Command::Prev (Iterator&) { }
-boolean Command::Done (Iterator&) { return true; }
+bool Command::Done (Iterator&) { return true; }
 
 void Command::SetEditor (Editor* ed) { _editor = ed; }
 void Command::SetClipboard (Clipboard* cb) { _clipboard = cb; }
@@ -270,8 +270,8 @@ void Command::Unexecute () {
     }
 }
 
-boolean Command::Reversible () {
-    boolean reversible = true;
+bool Command::Reversible () {
+    bool reversible = true;
     Clipboard* cb = GetClipboard();
 
     if (cb == nil) {

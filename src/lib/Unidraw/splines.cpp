@@ -59,7 +59,7 @@ int OpenBSpline::GetOriginal (const Coord*& x, const Coord*& y) {
     return _count - 4;
 }
 
-boolean OpenBSpline::s_contains (PointObj& po, Graphic* gs) {
+bool OpenBSpline::s_contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     BoxObj b;
     getBox(b, gs);
@@ -73,7 +73,7 @@ boolean OpenBSpline::s_contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean OpenBSpline::f_contains (PointObj& po, Graphic* gs) {
+bool OpenBSpline::f_contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     BoxObj b;
     getBox(b, gs);
@@ -87,10 +87,10 @@ boolean OpenBSpline::f_contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean OpenBSpline::s_intersects (BoxObj& userb, Graphic* gs) {
+bool OpenBSpline::s_intersects (BoxObj& userb, Graphic* gs) {
     Coord* convx, *convy;
     BoxObj b;
-    boolean result = false;
+    bool result = false;
     getBox(b, gs);
 
     if (b.Intersects(userb)) {
@@ -106,10 +106,10 @@ boolean OpenBSpline::s_intersects (BoxObj& userb, Graphic* gs) {
     return result;
 }
 
-boolean OpenBSpline::f_intersects (BoxObj& userb, Graphic* gs) {
+bool OpenBSpline::f_intersects (BoxObj& userb, Graphic* gs) {
     Coord* convx, *convy;
     BoxObj b;
-    boolean result = false;
+    bool result = false;
     getBox(b, gs);
 
     if (b.Intersects(userb)) {
@@ -164,11 +164,11 @@ void S_OpenBSpline::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean S_OpenBSpline::contains (PointObj& po, Graphic* gs) {
+bool S_OpenBSpline::contains (PointObj& po, Graphic* gs) {
     return s_contains(po, gs);
 }
 
-boolean S_OpenBSpline::intersects (BoxObj& userb, Graphic* gs) {
+bool S_OpenBSpline::intersects (BoxObj& userb, Graphic* gs) {
     return s_intersects(userb, gs);
 }
 
@@ -215,11 +215,11 @@ void F_OpenBSpline::getExtent (
     f_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean F_OpenBSpline::contains (PointObj& po, Graphic* gs) {
+bool F_OpenBSpline::contains (PointObj& po, Graphic* gs) {
     return !gs->GetPattern()->None() && f_contains(po, gs);
 }
 
-boolean F_OpenBSpline::intersects (BoxObj& userb, Graphic* gs) {
+bool F_OpenBSpline::intersects (BoxObj& userb, Graphic* gs) {
     return !gs->GetPattern()->None() && f_intersects(userb, gs);
 }
 
@@ -283,13 +283,13 @@ void SF_OpenBSpline::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean SF_OpenBSpline::contains (PointObj& po, Graphic* gs) {
+bool SF_OpenBSpline::contains (PointObj& po, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_contains(po, gs)) ||
         s_contains(po, gs);
 }
 
-boolean SF_OpenBSpline::intersects (BoxObj& userb, Graphic* gs) {
+bool SF_OpenBSpline::intersects (BoxObj& userb, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_intersects(userb, gs)) ||
         s_intersects(userb, gs);
@@ -320,7 +320,7 @@ Graphic* SFH_OpenBSpline::Copy () {
     return new SFH_OpenBSpline(x, y, count, this);
 }
 
-boolean SFH_OpenBSpline::contains (PointObj& po, Graphic* gs) {
+bool SFH_OpenBSpline::contains (PointObj& po, Graphic* gs) {
     const Coord *x, *y;
     int count = GetOriginal(x, y);
     Transformer* t = gs->GetTransformer();
@@ -337,7 +337,7 @@ boolean SFH_OpenBSpline::contains (PointObj& po, Graphic* gs) {
     return SF_OpenBSpline::contains(po, gs);
 }
 
-boolean SFH_OpenBSpline::intersects (BoxObj& userb, Graphic* gs) {
+bool SFH_OpenBSpline::intersects (BoxObj& userb, Graphic* gs) {
     PointObj po;
     const Coord *x, *y;
     int count = GetOriginal(x, y);
@@ -363,7 +363,7 @@ ClosedBSpline::ClosedBSpline (
     Coord* x, Coord* y, int count, Graphic* gr
 ) : Vertices(x, y, count, gr) { }
 
-boolean ClosedBSpline::s_contains (PointObj& po, Graphic* gs) {
+bool ClosedBSpline::s_contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     BoxObj b;
     getBox(b, gs);
@@ -377,7 +377,7 @@ boolean ClosedBSpline::s_contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean ClosedBSpline::f_contains (PointObj& po, Graphic* gs) {
+bool ClosedBSpline::f_contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     BoxObj b;
     getBox(b, gs);
@@ -391,10 +391,10 @@ boolean ClosedBSpline::f_contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean ClosedBSpline::s_intersects (BoxObj& userb, Graphic* gs) {
+bool ClosedBSpline::s_intersects (BoxObj& userb, Graphic* gs) {
     Coord* convx, *convy;
     BoxObj b;
-    boolean result = false;
+    bool result = false;
     getBox(b, gs);
 
     if (b.Intersects(userb)) {
@@ -410,10 +410,10 @@ boolean ClosedBSpline::s_intersects (BoxObj& userb, Graphic* gs) {
     return result;
 }
 
-boolean ClosedBSpline::f_intersects (BoxObj& userb, Graphic* gs) {
+bool ClosedBSpline::f_intersects (BoxObj& userb, Graphic* gs) {
     Coord* convx, *convy;
     BoxObj b;
-    boolean result = false;
+    bool result = false;
     getBox(b, gs);
 
     if (b.Intersects(userb)) {
@@ -463,11 +463,11 @@ void S_ClosedBSpline::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean S_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
+bool S_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
     return s_contains(po, gs);
 }
 
-boolean S_ClosedBSpline::intersects (BoxObj& userb, Graphic* gs) {
+bool S_ClosedBSpline::intersects (BoxObj& userb, Graphic* gs) {
     return s_intersects(userb, gs);
 }
 
@@ -509,11 +509,11 @@ void F_ClosedBSpline::getExtent (
     f_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean F_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
+bool F_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
     return !gs->GetPattern()->None() && f_contains(po, gs);
 }
 
-boolean F_ClosedBSpline::intersects (BoxObj& userb, Graphic* gs) {
+bool F_ClosedBSpline::intersects (BoxObj& userb, Graphic* gs) {
     return !gs->GetPattern()->None() && f_intersects(userb, gs);
 }
 
@@ -572,13 +572,13 @@ void SF_ClosedBSpline::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean SF_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
+bool SF_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_contains(po, gs)) ||
         s_contains(po, gs);
 }
 
-boolean SF_ClosedBSpline::intersects (BoxObj& userb, Graphic* gs) {
+bool SF_ClosedBSpline::intersects (BoxObj& userb, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_intersects(userb, gs)) ||
         s_intersects(userb, gs);
@@ -609,7 +609,7 @@ Graphic* SFH_ClosedBSpline::Copy () {
     return new SFH_ClosedBSpline(x, y, count, this);
 }
 
-boolean SFH_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
+bool SFH_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
     const Coord *x, *y;
     int count = GetOriginal(x, y);
     Transformer* t = gs->GetTransformer();
@@ -626,7 +626,7 @@ boolean SFH_ClosedBSpline::contains (PointObj& po, Graphic* gs) {
     return SF_ClosedBSpline::contains(po, gs);
 }
 
-boolean SFH_ClosedBSpline::intersects (BoxObj& userb, Graphic* gs) {
+bool SFH_ClosedBSpline::intersects (BoxObj& userb, Graphic* gs) {
     PointObj po;
     const Coord *x, *y;
     int count = GetOriginal(x, y);

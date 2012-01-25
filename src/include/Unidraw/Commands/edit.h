@@ -38,11 +38,11 @@ public:
     UndoCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class RedoCmd : public Command {
@@ -51,11 +51,11 @@ public:
     RedoCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class CutCmd : public Command {
@@ -69,9 +69,9 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    boolean _executed;
+    bool _executed;
 };
 
 class CopyCmd : public Command {
@@ -81,11 +81,11 @@ public:
     virtual ~CopyCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class PasteCmd : public Command {
@@ -96,13 +96,13 @@ public:
 
     virtual void Execute();
     virtual void Unexecute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    boolean _executed;
+    bool _executed;
 };
 
 class ReplaceCmd : public MacroCmd {
@@ -114,7 +114,7 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     void Init(GraphicComp*);
 };
@@ -130,9 +130,9 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    boolean _executed;
+    bool _executed;
 };
 
 class DeleteCmd : public Command {
@@ -146,9 +146,9 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    boolean _executed;
+    bool _executed;
 };
 
 class SlctAllCmd : public Command {
@@ -157,11 +157,11 @@ public:
     SlctAllCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ConnectCmd : public Command {
@@ -171,7 +171,7 @@ public:
 
     virtual void Execute();
     virtual void Unexecute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     void GetConnectors(Connector*&, Connector*&);
 
@@ -179,7 +179,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Connector* _source, *_target;
 };
@@ -195,7 +195,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Mobility _mobility;
 };

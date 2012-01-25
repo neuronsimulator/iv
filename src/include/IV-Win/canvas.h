@@ -101,7 +101,7 @@ public:	// ---------------- InterViews interface ---------------------
     virtual void transformer(const Transformer&);
     virtual const Transformer& transformer() const;
 
-    virtual void push_clipping(boolean all = false);
+    virtual void push_clipping(bool all = false);
     virtual void pop_clipping();
 
     virtual void front_buffer();
@@ -109,12 +109,12 @@ public:	// ---------------- InterViews interface ---------------------
 
     virtual void damage(const Extension&);
     virtual void damage(Coord left, Coord bottom, Coord right, Coord top);
-    virtual boolean damaged(const Extension&) const;
-    virtual boolean damaged( 
+    virtual bool damaged(const Extension&) const;
+    virtual bool damaged( 
 		Coord left, Coord bottom, Coord right, Coord top) const;
     virtual void damage_area(Extension&);
     virtual void damage_all();
-    virtual boolean any_damage() const;
+    virtual bool any_damage() const;
     virtual void restrict_damage(const Extension&);
     virtual void restrict_damage(Coord left, Coord bottom, 
 		Coord right, Coord top);
@@ -148,7 +148,7 @@ protected:
 	Display* dpy;					// display
 	HDC drawable_;					// display context to use for drawing
 
-	boolean transformed_;
+	bool transformed_;
 	MWtransformPtrList* transformers_;
 		// Transformation matrix.  The transformed variable allows a fast
 		// test to see if we have any transformations in effect.
@@ -215,7 +215,7 @@ public:
 	virtual void transformer(const Transformer& t);
 
 private:
-	boolean pathBracketStarted;
+	bool pathBracketStarted;
 };
 
 #endif
@@ -261,7 +261,7 @@ public:
 		Coord x1, Coord y1, Coord x2, Coord y2);
 	virtual void close_path();
 
-	virtual void push_clipping(boolean all = false);
+	virtual void push_clipping(bool all = false);
 	virtual void pop_clipping();
 	virtual void clip();
 

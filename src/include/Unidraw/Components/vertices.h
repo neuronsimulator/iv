@@ -41,7 +41,7 @@ public:
     Vertices* GetVertices();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     VerticesComp(Vertices* = nil);
 };
@@ -56,22 +56,22 @@ public:
     virtual Graphic* GetGraphic();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     VerticesView(VerticesComp* = nil);
 
     virtual void CreateHandles();
-    virtual boolean VertexChanged();
+    virtual bool VertexChanged();
 protected:
     int _reshapePt;
 };
 
 class PSVertices : public PostScriptView {
 public:
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     PSVertices(VerticesComp* = nil);
 

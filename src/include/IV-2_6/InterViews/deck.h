@@ -54,7 +54,7 @@ protected:
     Card* cards;
     Interactor* top;
 
-    virtual void DoInsert(Interactor*, boolean, Coord&, Coord&);
+    virtual void DoInsert(Interactor*, bool, Coord&, Coord&);
     virtual void DoRemove(Interactor*);
     virtual void DoChange(Interactor*);
     virtual void Reconfig();

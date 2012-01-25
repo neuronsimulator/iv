@@ -40,7 +40,7 @@ public:
     PSFont(const char* psname, Coord size, const char* name, float scale);
     virtual ~PSFont();
 
-    static boolean exists(const char* psname);
+    static bool exists(const char* psname);
 
     virtual const char* name() const;
     virtual const char* encoding() const;

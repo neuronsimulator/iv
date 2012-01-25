@@ -128,11 +128,11 @@ public:
 #if MAC
     virtual void screen_update(); // normally happens in event loop when no event
 #endif
-    virtual boolean done() const;
+    virtual bool done() const;
 
-    virtual boolean pending() const;
+    virtual bool pending() const;
     virtual void read(Event&);
-    virtual boolean read(long sec, long usec, Event&);
+    virtual bool read(long sec, long usec, Event&);
     virtual void unread(Event&);
     virtual void poll(Event&);
 #if defined(WIN32) || MAC

@@ -62,7 +62,7 @@
 
 ClassId GraphicView::GetClassId () { return GRAPHIC_VIEW; }
 
-boolean GraphicView::IsA (ClassId id) {
+bool GraphicView::IsA (ClassId id) {
     return GRAPHIC_VIEW == id || ComponentView::IsA(id);
 }
 
@@ -220,8 +220,8 @@ Manipulator* GraphicView::CreateStretchManip (
 
     v->Constrain(e.x, e.y);
     GetGraphic()->GetBox(l, b, r, t);
-    boolean horizCtr = e.x > (2*l + r)/3 && e.x < (l + 2*r)/3;
-    boolean vertCtr  = e.y > (2*b + t)/3 && e.y < (b + 2*t)/3;
+    bool horizCtr = e.x > (2*l + r)/3 && e.x < (l + 2*r)/3;
+    bool vertCtr  = e.y > (2*b + t)/3 && e.y < (b + 2*t)/3;
 
     if (e.x < (l + r)/2) {
         tmp = r;
@@ -413,7 +413,7 @@ ConnectorView* GraphicView::ConnectorIntersecting (Coord,Coord,Coord,Coord) {
     return nil;
 }
 
-boolean GraphicView::Includes (GraphicView* view) {
+bool GraphicView::Includes (GraphicView* view) {
     Iterator i;
 
     for (First(i); !Done(i); Next(i)) {
@@ -488,7 +488,7 @@ GraphicViews::GraphicViews (GraphicComps* subj) : GraphicView(subj) {
 
 ClassId GraphicViews::GetClassId () { return GRAPHIC_VIEWS; }
 
-boolean GraphicViews::IsA (ClassId id) {
+bool GraphicViews::IsA (ClassId id) {
     return GRAPHIC_VIEWS == id || GraphicView::IsA(id);
 }
 
@@ -561,7 +561,7 @@ void GraphicViews::First (Iterator& i) { i.SetValue(_views->First()); }
 void GraphicViews::Last (Iterator& i) { i.SetValue(_views->Last()); }
 void GraphicViews::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
 void GraphicViews::Prev (Iterator& i) { i.SetValue(Elem(i)->Prev()); }
-boolean GraphicViews::Done (Iterator i) { return Elem(i) == _views->End(); }
+bool GraphicViews::Done (Iterator i) { return Elem(i) == _views->End(); }
 GraphicView* GraphicViews::GetView (Iterator i) { return this->View(Elem(i)); }
 
 void GraphicViews::SetView (GraphicView* gv, Iterator& i) {
@@ -746,7 +746,7 @@ void GraphicViews::DeleteView (Iterator& i) {
     delete view;
 }
 
-inline boolean ConnectorIntersects (
+inline bool ConnectorIntersects (
     Coord l, Coord b, Coord r, Coord t, ConnectorView* cv
 ) {
     BoxObj box(l, b, r, t);

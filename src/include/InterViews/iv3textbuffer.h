@@ -66,7 +66,7 @@
 #ifndef iv3TextBuffer_h
 #define iv3TextBuffer_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <OS/string.h>
 
 #undef TextBuffer
@@ -87,8 +87,8 @@ public:
     int BackwardSearch(Regexp* regexp, int index);
 
     int Match(Regexp* regexp, int index, int stop);
-    boolean ForwardMatch(Regexp* regexp, int index);
-    boolean BackwardMatch(Regexp* regexp, int index);
+    bool ForwardMatch(Regexp* regexp, int index);
+    bool BackwardMatch(Regexp* regexp, int index);
 
     virtual int Insert(int index, const char* string, int count);
     virtual int Delete(int index, int count);
@@ -133,25 +133,25 @@ public:
     int PreviousCharacter(int index) const;
     int NextCharacter(int index) const;
 
-    boolean IsBeginningOfText(int index) const;
+    bool IsBeginningOfText(int index) const;
     int BeginningOfText() const;
 
-    boolean IsEndOfText(int index) const;
+    bool IsEndOfText(int index) const;
     int EndOfText() const;
 
-    boolean IsBeginningOfLine(int index) const;
+    bool IsBeginningOfLine(int index) const;
     int BeginningOfLine(int index) const;
     int BeginningOfNextLine(int index) const;
 
-    boolean IsEndOfLine(int index) const;
+    bool IsEndOfLine(int index) const;
     int EndOfLine(int index) const;
     int EndOfPreviousLine(int index) const;
 
-    boolean IsBeginningOfWord(int index) const;
+    bool IsBeginningOfWord(int index) const;
     int BeginningOfWord(int index) const;
     int BeginningOfNextWord(int index) const;
 
-    boolean IsEndOfWord(int index) const;
+    bool IsEndOfWord(int index) const;
     int EndOfWord(int index) const;
     int EndOfPreviousWord(int index) const;
 
@@ -190,7 +190,7 @@ inline int TextBuffer::NextCharacter (int i) const
 {
     return (i>=length) ? length : i+1;
 }
-inline boolean TextBuffer::IsBeginningOfText (int i) const
+inline bool TextBuffer::IsBeginningOfText (int i) const
 {
     return i <= 0;
 }
@@ -198,7 +198,7 @@ inline int TextBuffer::BeginningOfText () const
 {
     return 0;
 }
-inline boolean TextBuffer::IsEndOfText (int i) const
+inline bool TextBuffer::IsEndOfText (int i) const
 {
     return i >= length;
 }

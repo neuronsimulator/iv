@@ -101,7 +101,7 @@ void Interactor::Sync() { GetWorld()->Sync(); }
  * Read will not block.
  */
 
-boolean Interactor::Check() {
+bool Interactor::Check() {
     Event e;
     e.display(world->display());
     e.target = nil;
@@ -170,7 +170,7 @@ void Interactor::Read(Event& e) {
     }
 }
 
-boolean Interactor::Read(long sec, long usec, Event& e) {
+bool Interactor::Read(long sec, long usec, Event& e) {
     e.display(world->display());
     e.target = nil;
     while (!world->done() && e.read(sec, usec)) {
@@ -325,8 +325,8 @@ void Interactor::Config(World* w) {
  * or reversed is true and reverseVideo:off is found.
  */
 
-void Interactor::DoConfig(boolean parentReversed) {
-    boolean reversed = parentReversed;
+void Interactor::DoConfig(bool parentReversed) {
+    bool reversed = parentReversed;
     if (parent != nil) {
 	/* cast to workaround DEC C++ compiler bug */
 	output = ((Interactor*)parent)->output;
@@ -358,7 +358,7 @@ void Interactor::DoConfig(boolean parentReversed) {
  * its parent, then just use the parent's painter.
  */
 
-void Interactor::DefaultConfig(boolean& reversed) {
+void Interactor::DefaultConfig(bool& reversed) {
     if (parent == nil) {
 	world->display()->style()->append(style);
     } else {
@@ -391,7 +391,7 @@ void Interactor::DefaultConfig(boolean& reversed) {
 	bg = c;
     }
 
-    boolean swap_colors = false;
+    bool swap_colors = false;
     String rv;
     if (style->find_attribute("reverseVideo", rv)) {
 	if (rv.case_insensitive_equal("on")) {
@@ -451,7 +451,7 @@ const char* Interactor::GetAttribute(const char* name) const {
  * Short-hand for testing if an attribute is "on" or "true".
  */
 
-boolean Interactor::AttributeIsSet(const char* name) const {
+bool Interactor::AttributeIsSet(const char* name) const {
     String v;
     return (
 	style->value_is_on(name) || (
@@ -515,7 +515,7 @@ void Interactor::Draw() {
 void Interactor::Activate() { }
 void Interactor::Deactivate() { }
 void Interactor::Handle(Event&) { }
-void Interactor::Highlight(boolean) { }
+void Interactor::Highlight(bool) { }
 void Interactor::Reconfig() { }
 void Interactor::Redraw(IntCoord, IntCoord, IntCoord, IntCoord) { }
 void Interactor::Resize() { }

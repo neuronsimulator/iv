@@ -56,7 +56,7 @@
 
 ClassId AlignCmd::GetClassId () { return ALIGN_CMD; }
 
-boolean AlignCmd::IsA (ClassId id) {
+bool AlignCmd::IsA (ClassId id) {
     return ALIGN_CMD == id || Command::IsA(id);
 }
 
@@ -111,7 +111,7 @@ void AlignCmd::Write (ostream& out) {
 
 ClassId AlignToGridCmd::GetClassId () { return ALIGNTOGRID_CMD; }
 
-boolean AlignToGridCmd::IsA (ClassId id) {
+bool AlignToGridCmd::IsA (ClassId id) {
     return ALIGNTOGRID_CMD == id || Command::IsA(id);
 }
 

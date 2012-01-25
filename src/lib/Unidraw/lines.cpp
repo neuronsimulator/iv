@@ -78,13 +78,13 @@ void Point::getExtent (
     b = cy;
 }
 
-boolean Point::contains (PointObj& po, Graphic* gs) {
+bool Point::contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     invTransform(pt._x, pt._y, gs);
     return (pt._x == _x) && (pt._y == _y);
 }
 
-boolean Point::intersects (BoxObj& b, Graphic* gs) {
+bool Point::intersects (BoxObj& b, Graphic* gs) {
     PointObj pt (_x, _y);
         
     transform(pt._x, pt._y, gs);
@@ -149,14 +149,14 @@ void Line::getExtent (
     b = min(b, t);
 }
 
-boolean Line::contains (PointObj& po, Graphic* gs) {
+bool Line::contains (PointObj& po, Graphic* gs) {
     LineObj l(_x0, _y0, _x1, _y1);
     PointObj pt (&po);
     invTransform(pt._x, pt._y, gs);
     return l.Contains(pt);
 }
 
-boolean Line::intersects (BoxObj& b, Graphic* gs) {
+bool Line::intersects (BoxObj& b, Graphic* gs) {
     LineObj l (_x0, _y0, _x1, _y1);
     transform(l._p1._x, l._p1._y, gs);
     transform(l._p2._x, l._p2._y, gs);
@@ -176,7 +176,7 @@ MultiLine::MultiLine (
     Coord* x, Coord* y, int count, Graphic* gr
 ) : Vertices(x, y, count, gr) { }
 
-boolean MultiLine::s_contains (PointObj& po, Graphic* gs) {
+bool MultiLine::s_contains (PointObj& po, Graphic* gs) {
     MultiLineObj ml (_x, _y, _count);
     PointObj pt (&po);
     BoxObj b;
@@ -189,7 +189,7 @@ boolean MultiLine::s_contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean MultiLine::f_contains (PointObj& po, Graphic* gs) {
+bool MultiLine::f_contains (PointObj& po, Graphic* gs) {
     BoxObj b;
     PointObj pt (&po);
     getBox(b, gs);
@@ -202,10 +202,10 @@ boolean MultiLine::f_contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean MultiLine::s_intersects (BoxObj& userb, Graphic* gs) {
+bool MultiLine::s_intersects (BoxObj& userb, Graphic* gs) {
     Coord* convx, *convy;
     BoxObj b;
-    boolean result = false;
+    bool result = false;
 
     getBox(b, gs);
     if (b.Intersects(userb)) {
@@ -220,10 +220,10 @@ boolean MultiLine::s_intersects (BoxObj& userb, Graphic* gs) {
     return result;
 }
 
-boolean MultiLine::f_intersects (BoxObj& userb, Graphic* gs) {
+bool MultiLine::f_intersects (BoxObj& userb, Graphic* gs) {
     Coord* convx, *convy;
     BoxObj b;
-    boolean result = false;
+    bool result = false;
     getBox(b, gs);
 
     if (b.Intersects(userb)) {
@@ -269,11 +269,11 @@ void S_MultiLine::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean S_MultiLine::contains (PointObj& po, Graphic* gs) {
+bool S_MultiLine::contains (PointObj& po, Graphic* gs) {
     return s_contains(po, gs);
 }
 
-boolean S_MultiLine::intersects (BoxObj& userb, Graphic* gs) {
+bool S_MultiLine::intersects (BoxObj& userb, Graphic* gs) {
     return s_intersects(userb, gs);
 }
 
@@ -329,13 +329,13 @@ void SF_MultiLine::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean SF_MultiLine::contains (PointObj& po, Graphic* gs) {
+bool SF_MultiLine::contains (PointObj& po, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_contains(po, gs)) ||
         s_contains(po, gs);
 }
 
-boolean SF_MultiLine::intersects (BoxObj& userb, Graphic* gs) {
+bool SF_MultiLine::intersects (BoxObj& userb, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_intersects(userb, gs)) ||
         s_intersects(userb, gs);

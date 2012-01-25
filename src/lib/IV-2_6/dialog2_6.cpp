@@ -60,10 +60,10 @@ Dialog::~Dialog() {
     Resource::unref(state);
 }
 
-boolean Dialog::Popup(Event& e, boolean placed) {
+bool Dialog::Popup(Event& e, bool placed) {
     World* w;
     IntCoord wx, wy;
-    boolean accept;
+    bool accept;
 
     e.GetAbsolute(w, wx, wy);
     if (placed) {
@@ -76,7 +76,7 @@ boolean Dialog::Popup(Event& e, boolean placed) {
     return accept;
 }
 
-boolean Dialog::Accept() {
+bool Dialog::Accept() {
     Event e;
     int v;
 

@@ -46,7 +46,7 @@ class Command {
 public:
     virtual void Execute();
     virtual void Unexecute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual void Store(Component*, Data* = nil);
     virtual Data* Recall(Component*);
@@ -64,7 +64,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator&);
+    virtual bool Done(Iterator&);
 
     virtual ~Command();
     virtual Command* Copy();
@@ -72,7 +72,7 @@ public:
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*& delim);
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Command(ControlInfo*, Clipboard* = nil);
     Command(Editor* = nil, Clipboard* = nil);

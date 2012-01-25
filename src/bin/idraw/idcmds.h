@@ -43,7 +43,7 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class PreciseMoveCmd : public Command {
@@ -53,11 +53,11 @@ public:
     virtual ~PreciseMoveCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     MoveDialog* _dialog;
 };
@@ -69,11 +69,11 @@ public:
     virtual ~PreciseScaleCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     ScaleDialog* _dialog;
 };
@@ -85,11 +85,11 @@ public:
     virtual ~PreciseRotateCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     RotateDialog* _dialog;
 };
@@ -100,32 +100,32 @@ public:
     NewViewCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ArrowCmd : public Command {
 public:
-    ArrowCmd(ControlInfo*, boolean head = false, boolean tail = false);
-    ArrowCmd(Editor* = nil, boolean head = false, boolean tail = false);
+    ArrowCmd(ControlInfo*, bool head = false, bool tail = false);
+    ArrowCmd(Editor* = nil, bool head = false, bool tail = false);
 
     virtual void Execute();
-    boolean Head();
-    boolean Tail();
+    bool Head();
+    bool Tail();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    boolean _head : 16;
-    boolean _tail : 16;
+    bool _head : 16;
+    bool _tail : 16;
 };
     
-inline boolean ArrowCmd::Head () { return _head; }
-inline boolean ArrowCmd::Tail () { return _tail; }
+inline bool ArrowCmd::Head () { return _head; }
+inline bool ArrowCmd::Tail () { return _tail; }
 
 class AboutCmd : public Command {
 public:
@@ -133,11 +133,11 @@ public:
     AboutCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class IGridSpacingCmd : public GridSpacingCmd {
@@ -149,7 +149,7 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #endif

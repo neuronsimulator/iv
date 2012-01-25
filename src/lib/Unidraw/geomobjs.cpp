@@ -63,7 +63,7 @@ LineObj::LineObj (LineObj* l) {
     _p1._x = l->_p1._x; _p1._y = l->_p1._y; 
     _p2._x = l->_p2._x; _p2._y = l->_p2._y;
 }
-boolean LineObj::Contains (PointObj& p) {
+bool LineObj::Contains (PointObj& p) {
     return
 	(p._x >= min(_p1._x, _p2._x)) && (p._x <= max(_p1._x, _p2._x)) &&
 	(p._y >= min(_p1._y, _p2._y)) && (p._y <= max(_p1._y, _p2._y)) && (
@@ -96,7 +96,7 @@ int LineObj::Same (PointObj& p1, PointObj& p2) {
     return signum(dx*dy1 - dy*dx1) * signum(dx*dy2 - dy*dx2);
 }
 
-boolean LineObj::Intersects (LineObj& l) {  // from Sedgewick, p. 313
+bool LineObj::Intersects (LineObj& l) {  // from Sedgewick, p. 313
     BoxObj b1 (_p1._x, _p1._y, _p2._x, _p2._y);
     BoxObj b2 (l._p1._x, l._p1._y, l._p2._x, l._p2._y);
     
@@ -115,26 +115,26 @@ BoxObj::BoxObj (BoxObj* b) {
     _left = b->_left; _bottom = b->_bottom; _right = b->_right; _top = b->_top;
 }
 
-boolean BoxObj::Contains (PointObj& p) {
+bool BoxObj::Contains (PointObj& p) {
     return
         (p._x >= _left) && (p._x <= _right) &&
         (p._y >= _bottom) && (p._y <= _top);
 }
 
-boolean BoxObj::Intersects (BoxObj& b) {
+bool BoxObj::Intersects (BoxObj& b) {
     return (
         (_left <= b._right) && (b._left <= _right) && 
 	(_bottom <= b._top) && (b._bottom <= _top) 
     );
 }
 
-boolean BoxObj::Intersects (LineObj& l) {
+bool BoxObj::Intersects (LineObj& l) {
     Coord x1 = min(l._p1._x, l._p2._x);
     Coord x2 = max(l._p1._x, l._p2._x);
     Coord y1 = min(l._p1._y, l._p2._y);
     Coord y2 = max(l._p1._y, l._p2._y);
     BoxObj lbox(x1, y1, x2, y2);
-    boolean intersects = false;
+    bool intersects = false;
 
     if (Intersects(lbox)) {
 	intersects = Contains(l._p1) || Contains(l._p2);
@@ -173,7 +173,7 @@ BoxObj BoxObj::operator+ (BoxObj& b) {
     return m;
 }
 
-boolean BoxObj::Within (BoxObj& b) {
+bool BoxObj::Within (BoxObj& b) {
     return (
         (_left >= b._left) && (_bottom >= b._bottom) && 
         (_right <= b._right) && (_top <= b._top) 
@@ -208,7 +208,7 @@ void MultiLineObj::GrowBuf () {
     }
 }
 
-boolean MultiLineObj::CanApproxWithLine (
+bool MultiLineObj::CanApproxWithLine (
     double x0, double y0, double x2, double y2, double x3, double y3
 ) {
     double triangleArea, sideSquared, dx, dy;
@@ -380,7 +380,7 @@ void MultiLineObj::GetBox (BoxObj& b) {
 }
 
 
-boolean MultiLineObj::Contains (PointObj& p) {
+bool MultiLineObj::Contains (PointObj& p) {
     register int i;
     BoxObj b;
     
@@ -396,7 +396,7 @@ boolean MultiLineObj::Contains (PointObj& p) {
     return false;
 }
 
-boolean MultiLineObj::Intersects (LineObj& l) {
+bool MultiLineObj::Intersects (LineObj& l) {
     register int i;
     BoxObj b;
     
@@ -413,7 +413,7 @@ boolean MultiLineObj::Intersects (LineObj& l) {
     return false;
 }
 
-boolean MultiLineObj::Intersects (BoxObj& userb) {
+bool MultiLineObj::Intersects (BoxObj& userb) {
     register int i;
     BoxObj b;
     
@@ -430,7 +430,7 @@ boolean MultiLineObj::Intersects (BoxObj& userb) {
     return false;
 }
 
-boolean MultiLineObj::Within (BoxObj& userb) {
+bool MultiLineObj::Within (BoxObj& userb) {
     BoxObj b;
     
     GetBox(b);
@@ -497,14 +497,14 @@ void FillPolygonObj::Normalize () {
     }
 }
 
-boolean FillPolygonObj::Contains (PointObj& p) { // derived from A. Glassner,
+bool FillPolygonObj::Contains (PointObj& p) { // derived from A. Glassner,
   if (_normCount == 0) {                         // "An Introduction to
       Normalize();                               // Ray Tracing", p. 53,
   }                                              // courtesy R. Cooperman
 
   int count = 0;
   PointObj p0(0, 0);
-  boolean cur_y_sign = _normy[0] >= p._y;
+  bool cur_y_sign = _normy[0] >= p._y;
 
   for (int i = 0; i < _normCount - 2; ++i) {
       LineObj l (
@@ -516,11 +516,11 @@ boolean FillPolygonObj::Contains (PointObj& p) { // derived from A. Glassner,
           return true;
       }
 
-      boolean next_y_sign = l._p2._y >= 0;
+      bool next_y_sign = l._p2._y >= 0;
 
       if (next_y_sign != cur_y_sign) {
-          boolean cur_x_sign = l._p1._x >= 0;
-          boolean next_x_sign = l._p2._x >= 0;
+          bool cur_x_sign = l._p1._x >= 0;
+          bool next_x_sign = l._p2._x >= 0;
 
           if (cur_x_sign && next_x_sign) {
               ++count;
@@ -545,9 +545,9 @@ boolean FillPolygonObj::Contains (PointObj& p) { // derived from A. Glassner,
   return count % 2 == 1;
 }
 
-boolean FillPolygonObj::Intersects (LineObj& l) {
+bool FillPolygonObj::Intersects (LineObj& l) {
     BoxObj b;
-    boolean intersects = false;
+    bool intersects = false;
     
     if (_normCount == 0) {
         Normalize();
@@ -563,7 +563,7 @@ boolean FillPolygonObj::Intersects (LineObj& l) {
     return intersects;
 }
 
-boolean FillPolygonObj::Intersects (BoxObj& ub) {
+bool FillPolygonObj::Intersects (BoxObj& ub) {
     BoxObj b;
     
     GetBox(b);
@@ -607,7 +607,7 @@ Extent::Extent (Extent& e) {
     _cx = e._cx; _cy = e._cy; _tol = e._tol;
 }
 
-boolean Extent::Within (Extent& e) {
+bool Extent::Within (Extent& e) {
     float l = _left - _tol, b = _bottom - _tol;
     float el = e._left - _tol, eb = e._bottom - _tol;
 

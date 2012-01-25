@@ -349,7 +349,7 @@ void MWwindow::registerClass(
 // unmap() will remove the window from the display (hide it).  isMapped()
 // will test whether or not the window is visible.
 // -----------------------------------------------------------------------
-boolean MWwindow::map()
+bool MWwindow::map()
 {
 	if (hwnd)
 	{
@@ -366,7 +366,7 @@ void MWwindow::unmap()
 		ShowWindow(hwnd, SW_HIDE);
 }
 
-boolean MWwindow::isMapped()
+bool MWwindow::isMapped()
 {
 	if (hwnd)
 		return IsWindowVisible(hwnd);
@@ -648,7 +648,7 @@ long WindowRep::WndProc(UINT message, WPARAM wParam, LPARAM lParam)
 					return i;
 				}
 			case WM_KEYDOWN: {
-			  //				extern boolean iv_user_keydown(long);
+			  //				extern bool iv_user_keydown(long);
 			  //				if (iv_user_keydown(wParam)){
 			  //					break;
 			  //				}
@@ -739,7 +739,7 @@ long WindowRep::WMpaint(WPARAM, LPARAM)
 			updateArea.top = Math::max(int(0), int(updateArea.top-1));
 
 			// ---- prepare canvas for painting ----
-			boolean doPaint;
+			bool doPaint;
 			HDC hdcPaint = GetDC(hwnd);
 			palette->realizeInto(hdcPaint, TRUE);
 			if (doubleBuffered)
@@ -1324,7 +1324,7 @@ void Window::unmap()
 	}
 }
 
-boolean Window::is_mapped() const
+bool Window::is_mapped() const
 {
     WindowRep& w = *rep();
 	return w.isMapped();
@@ -1350,7 +1350,7 @@ void Window::unbind()
     w.unbind();
 }
 
-boolean Window::bound() const
+bool Window::bound() const
 {
 	WindowRep& w = *rep();
 	return w.bound();
@@ -1394,7 +1394,7 @@ Handler* Window::target(const Event& e) const
 // handler for those messages not directly processed.  There will be no
 // effect on existing code since it will not be looking for a return value.
 // -----------------------------------------------------------------------
-boolean Window::receive(const Event& e)
+bool Window::receive(const Event& e)
 {
 	UINT msg = e.rep()->messageOf();
 
@@ -1581,7 +1581,7 @@ Coord ManagedWindow::height() const
 // -----------------------------------------------------------------------
 //  Handle window events.
 // -----------------------------------------------------------------------
-boolean ManagedWindow::receive(const Event& e)
+bool ManagedWindow::receive(const Event& e)
 {
 	EventRep* er = e.rep();
 	switch(er->messageOf())
@@ -1968,7 +1968,7 @@ void PopupWindow::set_attributes()
     Window::set_attributes();
 }
 
-boolean PopupWindow::receive(const Event& e)
+bool PopupWindow::receive(const Event& e)
 {
 	UINT msg = e.rep()->messageOf();
 

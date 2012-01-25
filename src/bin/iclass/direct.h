@@ -27,7 +27,7 @@
 #ifndef direct_h
 #define direct_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 
 class DirectoryRep;
 
@@ -36,7 +36,7 @@ public:
     Directory(const char* name);
     ~Directory();
 
-    boolean LoadDirectory(const char*);
+    bool LoadDirectory(const char*);
     const char* Normalize(const char*);
     const char* ValidDirectories(const char*);
 
@@ -44,7 +44,7 @@ public:
     const char* File(int index);
     int Count();
 
-    boolean IsADirectory(const char*);
+    bool IsADirectory(const char*);
 private:
     const char* Home(const char* = nil);
     const char* ElimDot(const char*);
@@ -54,7 +54,7 @@ private:
     const char* ExpandTilde(const char*, int);
     const char* RealPath(const char*);
 
-    boolean Reset(char*);
+    bool Reset(char*);
 private:
     DirectoryRep* rep_;
 };

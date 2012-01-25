@@ -63,9 +63,9 @@ public:
     void Last(Iterator&);
     void Next(Iterator&);
     void Prev(Iterator&);
-    boolean Done(Iterator);
-    boolean IsEmpty();
-    boolean Includes(GraphicView*);
+    bool Done(Iterator);
+    bool IsEmpty();
+    bool Includes(GraphicView*);
     int Number();
 
     void Sort(GraphicView*); 

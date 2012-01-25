@@ -128,7 +128,7 @@ void UHashTable::Next (Iterator& i) {
     }
 }
 
-boolean UHashTable::Done (Iterator i) {
+bool UHashTable::Done (Iterator i) {
     for (int j = _nslots - 1; j >= 0; --j) {
         if (_slot[j] != nil) {
             return UElem(i) == _slot[j]->End();
@@ -137,7 +137,7 @@ boolean UHashTable::Done (Iterator i) {
     return true;
 }
 
-boolean UHashTable::Equal (void* key1, void* key2) { return key1 == key2; }
+bool UHashTable::Equal (void* key1, void* key2) { return key1 == key2; }
 
 UHashElem* UHashTable::Find (void* key) {
     int n = Hash(key);

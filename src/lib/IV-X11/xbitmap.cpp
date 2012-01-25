@@ -208,7 +208,7 @@ Coord Bitmap::right_bearing() const { return rep()->right_; }
 Coord Bitmap::ascent() const { return rep()->top_; }
 Coord Bitmap::descent() const { return -rep()->bottom_; }
 
-void Bitmap::poke(boolean set, int x, int y) {
+void Bitmap::poke(bool set, int x, int y) {
     BitmapRep* b = rep();
     b->fill();
     unsigned long p = set ? 1 : 0;
@@ -216,7 +216,7 @@ void Bitmap::poke(boolean set, int x, int y) {
     b->modified_ = true;
 }
 
-boolean Bitmap::peek(int x, int y) const {
+bool Bitmap::peek(int x, int y) const {
     BitmapRep* b = rep();
     b->fill();
     unsigned long pixel = XGetPixel(b->image_, x, b->pheight_ - 1 - y);

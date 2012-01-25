@@ -53,7 +53,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Mobility _mobility;
 };
@@ -72,7 +72,7 @@ public:
     virtual Graphic* GetGraphic();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     PadGraphic* GetPad();
     virtual PadComp* NewSubject(PadGraphic*);
@@ -106,10 +106,10 @@ class PSPad : public PostScriptView {
 public:
     PSPad(PadComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #include <IV-2_6/_leave.h>

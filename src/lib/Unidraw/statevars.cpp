@@ -71,7 +71,7 @@ StateVar& NameVar::operator = (StateVar& var) {
 
 StateVar* NameVar::Copy () { return new NameVar(GetName()); }
 ClassId NameVar::GetClassId () { return NAME_VAR; }
-boolean NameVar::IsA (ClassId id) {return NAME_VAR == id || StateVar::IsA(id);}
+bool NameVar::IsA (ClassId id) {return NAME_VAR == id || StateVar::IsA(id);}
 
 void NameVar::Read (istream& in) {
     StateVar::Read(in);
@@ -133,7 +133,7 @@ StateVar& CompNameVar::operator = (StateVar& var) {
 StateVar* CompNameVar::Copy () { return new CompNameVar(GetComponent()); }
 ClassId CompNameVar::GetClassId () { return COMPNAME_VAR; }
 
-boolean CompNameVar::IsA (ClassId id) {
+bool CompNameVar::IsA (ClassId id) {
     return COMPNAME_VAR == id || NameVar::IsA(id);
 }
 
@@ -151,7 +151,7 @@ void CompNameVar::Write (ostream& out) {
 
 inline ModifStatusVar* var (UList* u) { return (ModifStatusVar*) (*u)(); }
 
-ModifStatusVar::ModifStatusVar (Component* c, boolean m) {
+ModifStatusVar::ModifStatusVar (Component* c, bool m) {
     _modified = m;
 
     if (_vars == nil) {
@@ -165,7 +165,7 @@ ModifStatusVar::~ModifStatusVar () {
     _vars->Delete(this);
 }
 
-void ModifStatusVar::SetModifStatus (boolean status) {
+void ModifStatusVar::SetModifStatus (bool status) {
     if (status != _modified) {
 	for (UList* v = _vars->First(); v != _vars->End(); v = v->Next()) {
 	    if (var(v)->GetComponent() == _component) {
@@ -189,7 +189,7 @@ void ModifStatusVar::SetComponent (Component* c) {
     modified(false);
 }
 
-boolean ModifStatusVar::GetModifStatus () { return _modified; }
+bool ModifStatusVar::GetModifStatus () { return _modified; }
 Component* ModifStatusVar::GetComponent () { return _component; }
 
 void ModifStatusVar::modified (int m) {
@@ -211,7 +211,7 @@ StateVar* ModifStatusVar::Copy () {
 
 ClassId ModifStatusVar::GetClassId () { return MODIFSTATUS_VAR; }
 
-boolean ModifStatusVar::IsA (ClassId id) {
+bool ModifStatusVar::IsA (ClassId id) {
     return MODIFSTATUS_VAR == id || StateVar::IsA(id);
 }
 
@@ -249,7 +249,7 @@ StateVar& MagnifVar::operator = (StateVar& var) {
 StateVar* MagnifVar::Copy () { return new MagnifVar(GetMagnif()); }
 ClassId MagnifVar::GetClassId () { return MAGNIF_VAR; }
 
-boolean MagnifVar::IsA (ClassId id) {
+bool MagnifVar::IsA (ClassId id) {
     return MAGNIF_VAR == id || StateVar::IsA(id);
 }
 
@@ -265,11 +265,11 @@ void MagnifVar::Write (ostream& out) {
 
 /*****************************************************************************/
 
-GravityVar::GravityVar (boolean active) { _active = active; }
+GravityVar::GravityVar (bool active) { _active = active; }
 
-boolean GravityVar::IsActive () { return _active; }
+bool GravityVar::IsActive () { return _active; }
 
-void GravityVar::Activate (boolean active) {
+void GravityVar::Activate (bool active) {
     if (active != _active) {
 	_active = active;
 	Notify();
@@ -287,7 +287,7 @@ StateVar& GravityVar::operator = (StateVar& var) {
 StateVar* GravityVar::Copy () { return new GravityVar(IsActive()); }
 ClassId GravityVar::GetClassId () { return GRAVITY_VAR; }
 
-boolean GravityVar::IsA (ClassId id) {
+bool GravityVar::IsA (ClassId id) {
     return GRAVITY_VAR == id || StateVar::IsA(id);
 }
 
@@ -328,7 +328,7 @@ StateVar& FontVar::operator = (StateVar& var) {
 StateVar* FontVar::Copy () { return new FontVar(GetFont()); }
 ClassId FontVar::GetClassId () { return FONT_VAR; }
 
-boolean FontVar::IsA (ClassId id) {
+bool FontVar::IsA (ClassId id) {
     return FONT_VAR == id || StateVar::IsA(id);
 }
 
@@ -369,7 +369,7 @@ StateVar& BrushVar::operator = (StateVar& var) {
 StateVar* BrushVar::Copy () { return new BrushVar(GetBrush()); }
 ClassId BrushVar::GetClassId () { return BRUSH_VAR; }
 
-boolean BrushVar::IsA (ClassId id) {
+bool BrushVar::IsA (ClassId id) {
     return BRUSH_VAR == id || StateVar::IsA(id);
 }
 
@@ -410,7 +410,7 @@ StateVar& PatternVar::operator = (StateVar& var) {
 StateVar* PatternVar::Copy () { return new PatternVar(GetPattern()); }
 ClassId PatternVar::GetClassId () { return PATTERN_VAR; }
 
-boolean PatternVar::IsA (ClassId id) {
+bool PatternVar::IsA (ClassId id) {
     return PATTERN_VAR == id || StateVar::IsA(id);
 }
 
@@ -463,7 +463,7 @@ StateVar& ColorVar::operator = (StateVar& var) {
 
 StateVar* ColorVar::Copy () { return new ColorVar(_psfgcolor, _psbgcolor); }
 ClassId ColorVar::GetClassId () { return COLOR_VAR; }
-boolean ColorVar::IsA (ClassId id) {return COLOR_VAR==id || StateVar::IsA(id);}
+bool ColorVar::IsA (ClassId id) {return COLOR_VAR==id || StateVar::IsA(id);}
 
 void ColorVar::Read (istream& in) {
     StateVar::Read(in);

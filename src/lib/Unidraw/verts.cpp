@@ -54,7 +54,7 @@ int Vertices::GetOriginal (const Coord*& x, const Coord*& y) {
     return _count;
 }
 
-boolean Vertices::operator == (const Vertices& ml) const {
+bool Vertices::operator == (const Vertices& ml) const {
     if (_count == ml._count) {
         for (int i = 0; i < _count; ++i) {
             if (_x[i] != ml._x[i] || _y[i] != ml._y[i]) {
@@ -66,9 +66,9 @@ boolean Vertices::operator == (const Vertices& ml) const {
     return false;
 }
 
-boolean Vertices::operator != (const Vertices& ml) const { return !(*this == ml); }
+bool Vertices::operator != (const Vertices& ml) const { return !(*this == ml); }
 Graphic* Vertices::Copy () { return new Vertices(_x, _y, _count, this); }
-boolean Vertices::extentCached () { return _caching && _extent != nil; }
+bool Vertices::extentCached () { return _caching && _extent != nil; }
 
 void Vertices::cacheExtent (float l, float b, float cx, float cy, float tol) {
     if (_caching) {

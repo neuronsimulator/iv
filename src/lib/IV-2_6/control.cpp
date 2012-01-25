@@ -77,7 +77,7 @@ void Control::Handle(Event& e) {
     }
 }
 
-void Control::Enable(boolean b) {
+void Control::Enable(bool b) {
     if (b != enabled_) {
 	enabled_ = b;
     }
@@ -156,7 +156,7 @@ void Control::Skip() {
  * are also considered to be grabbing.
  */
 
-boolean Control::IsGrabbing(Interactor* i) {
+bool Control::IsGrabbing(Interactor* i) {
     if (i == this) {
 	return true;
     }

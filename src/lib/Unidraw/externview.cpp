@@ -35,13 +35,13 @@
 
 ClassId ExternView::GetClassId () { return EXTERN_VIEW; }
 
-boolean ExternView::IsA (ClassId id) {
+bool ExternView::IsA (ClassId id) {
     return EXTERN_VIEW == id || ComponentView::IsA(id);
 }
 
 ExternView::ExternView (Component* subj) : ComponentView(subj) { }
-boolean ExternView::Emit (ostream& out) { return Definition(out); }
-boolean ExternView::Definition (ostream&) { return true; }
+bool ExternView::Emit (ostream& out) { return Definition(out); }
+bool ExternView::Definition (ostream&) { return true; }
 ExternView* ExternView::GetView (Iterator) { return nil; }
 void ExternView::SetView (ExternView*, Iterator&) { }
 
@@ -49,15 +49,15 @@ void ExternView::SetView (ExternView*, Iterator&) { }
 
 ClassId PreorderView::GetClassId () { return PREORDER_VIEW; }
 
-boolean PreorderView::IsA (ClassId id) {
+bool PreorderView::IsA (ClassId id) {
     return PREORDER_VIEW == id || ExternView::IsA(id);
 }
 
 PreorderView::PreorderView (Component* subj) : ExternView(subj) { }
 
-boolean PreorderView::Definition (ostream& out) {
+bool PreorderView::Definition (ostream& out) {
     Iterator i;
-    boolean ok = true;
+    bool ok = true;
 
     for (First(i); ok && !Done(i); Next(i)) {
         ok = GetView(i)->Definition(out);
@@ -69,14 +69,14 @@ boolean PreorderView::Definition (ostream& out) {
 
 ClassId InorderView::GetClassId () { return INORDER_VIEW; }
 
-boolean InorderView::IsA (ClassId id) {
+bool InorderView::IsA (ClassId id) {
     return INORDER_VIEW == id || ExternView::IsA(id);
 }
 
 InorderView::InorderView (Component* subj) : ExternView(subj) { }
 
-boolean InorderView::Definition (ostream&) {
-    boolean ok = true;
+bool InorderView::Definition (ostream&) {
+    bool ok = true;
 
     // unimplemented
 
@@ -87,15 +87,15 @@ boolean InorderView::Definition (ostream&) {
 
 ClassId PostorderView::GetClassId () { return POSTORDER_VIEW; }
 
-boolean PostorderView::IsA (ClassId id) {
+bool PostorderView::IsA (ClassId id) {
     return POSTORDER_VIEW == id || ExternView::IsA(id);
 }
 
 PostorderView::PostorderView (Component* subj) : ExternView(subj) { }
 
-boolean PostorderView::Definition (ostream& out) {
+bool PostorderView::Definition (ostream& out) {
     Iterator i;
-    boolean ok = true;
+    bool ok = true;
 
     for (Last(i); ok && !Done(i); Prev(i)) {
         ok = GetView(i)->Definition(out);

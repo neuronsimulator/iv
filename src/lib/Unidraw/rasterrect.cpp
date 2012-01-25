@@ -68,14 +68,14 @@ void RasterRect::getExtent (
     tol = 0;
 }
 
-boolean RasterRect::contains (PointObj& po, Graphic* gs) {
+bool RasterRect::contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     invTransform(pt._x, pt._y, gs);
     BoxObj b (0, 0, _raster->Width(), _raster->Height());
     return b.Contains(pt);
 }
 
-boolean RasterRect::intersects (BoxObj& userb, Graphic* gs) {
+bool RasterRect::intersects (BoxObj& userb, Graphic* gs) {
     Transformer* t = gs->GetTransformer();
     Coord xmax = _raster->Width();
     Coord ymax = _raster->Height();

@@ -83,9 +83,9 @@ public:
     virtual void window(Window*);
     virtual Window* window() const;
 
-    virtual boolean pending() const;
+    virtual bool pending() const;
     virtual void read();
-    virtual boolean read(long sec, long usec);
+    virtual bool read(long sec, long usec);
     virtual void unread();
     virtual void poll();
 
@@ -94,7 +94,7 @@ public:
     virtual void grab(Handler*) const;
     virtual void ungrab(Handler*) const;
     virtual Handler* grabber() const;
-    virtual boolean is_grabbing(Handler*) const;
+    virtual bool is_grabbing(Handler*) const;
 
     virtual EventType type() const;
     virtual unsigned long time() const;
@@ -104,13 +104,13 @@ public:
     virtual Coord pointer_root_y() const;
     virtual EventButton pointer_button() const;
     virtual unsigned int keymask() const;
-    virtual boolean control_is_down() const;
-    virtual boolean meta_is_down() const;
-    virtual boolean shift_is_down() const;
-    virtual boolean capslock_is_down() const;
-    virtual boolean left_is_down() const;
-    virtual boolean middle_is_down() const;
-    virtual boolean right_is_down() const;
+    virtual bool control_is_down() const;
+    virtual bool meta_is_down() const;
+    virtual bool shift_is_down() const;
+    virtual bool capslock_is_down() const;
+    virtual bool left_is_down() const;
+    virtual bool middle_is_down() const;
+    virtual bool right_is_down() const;
     virtual unsigned char keycode() const;
     virtual unsigned long keysym() const;
     virtual unsigned int mapkey(char*, unsigned int len) const;
@@ -131,13 +131,13 @@ public:
     unsigned long timestamp;
     EventType eventType;
     IntCoord x, y;		/* mouse position relative to target */
-    boolean control : 1;	/* true if down */
-    boolean meta : 1;
-    boolean shift : 1;
-    boolean shiftlock : 1;
-    boolean leftmouse : 1;
-    boolean middlemouse : 1;
-    boolean rightmouse : 1;
+    bool control : 1;	/* true if down */
+    bool meta : 1;
+    bool shift : 1;
+    bool shiftlock : 1;
+    bool leftmouse : 1;
+    bool middlemouse : 1;
+    bool rightmouse : 1;
     unsigned char button;	/* button pressed or released, if any */
     unsigned short len;		/* length of ASCII string */
     char* keystring;		/* ASCII interpretation of event, if any */

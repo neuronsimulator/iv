@@ -41,14 +41,14 @@ class ArrowLine : public Line {
 public:
     ArrowLine(
 	Coord x0, Coord y0, Coord x1, Coord y1,
-	boolean h, boolean t, float arrow_scale, Graphic* gr = nil
+	bool h, bool t, float arrow_scale, Graphic* gr = nil
     );
     virtual ~ArrowLine();
 
-    void SetArrows(boolean h, boolean t);
+    void SetArrows(bool h, bool t);
     void ScaleArrows(float);
-    boolean Head();
-    boolean Tail();
+    bool Head();
+    bool Tail();
     float ArrowScale();
 
     virtual void SetPattern(PSPattern*);
@@ -62,13 +62,13 @@ protected:
 	Coord,Coord,Coord,Coord, Arrowhead*, Arrowhead*, float, Graphic* = nil
     );
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     Extent& ArrowheadExtent(Arrowhead*, Graphic* gs);
-    boolean ArrowheadContains(Arrowhead*, PointObj&, Graphic* gs);
-    boolean ArrowheadIntersects(Arrowhead*, BoxObj&, Graphic* gs);
+    bool ArrowheadContains(Arrowhead*, PointObj&, Graphic* gs);
+    bool ArrowheadIntersects(Arrowhead*, BoxObj&, Graphic* gs);
     void ArrowheadDraw(Arrowhead*, Canvas*, Graphic* gs);
 private:
     PSPattern* _pat;
@@ -77,22 +77,22 @@ private:
     float _arrow_scale;
 };
 
-inline boolean ArrowLine::Head () { return _head != nil; }
-inline boolean ArrowLine::Tail () { return _tail != nil; }
+inline bool ArrowLine::Head () { return _head != nil; }
+inline bool ArrowLine::Tail () { return _tail != nil; }
 inline float ArrowLine::ArrowScale () { return _arrow_scale; }
 
 class ArrowMultiLine : public SF_MultiLine {
 public:
     ArrowMultiLine(
-        Coord* x, Coord* y, int count, boolean h, boolean t, float arrow_scale,
+        Coord* x, Coord* y, int count, bool h, bool t, float arrow_scale,
         Graphic* gr = nil
     );
     virtual ~ArrowMultiLine();
 
-    void SetArrows(boolean h, boolean t);
+    void SetArrows(bool h, bool t);
     void ScaleArrows(float);
-    boolean Head();
-    boolean Tail();
+    bool Head();
+    bool Tail();
     float ArrowScale();
 
     virtual Graphic* Copy();
@@ -103,13 +103,13 @@ protected:
 	Coord*, Coord*, int, Arrowhead*, Arrowhead*, float, Graphic* gr = nil
     );
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     Extent& ArrowheadExtent(class Arrowhead*, Graphic* gs);
-    boolean ArrowheadContains(Arrowhead*, PointObj&, Graphic* gs);
-    boolean ArrowheadIntersects(Arrowhead*, BoxObj&, Graphic* gs);
+    bool ArrowheadContains(Arrowhead*, PointObj&, Graphic* gs);
+    bool ArrowheadIntersects(Arrowhead*, BoxObj&, Graphic* gs);
     void ArrowheadDraw(Arrowhead*, Canvas*, Graphic* gs);
 private:
     Arrowhead* _head;
@@ -117,22 +117,22 @@ private:
     float _arrow_scale;
 };
 
-inline boolean ArrowMultiLine::Head () { return _head != nil; }
-inline boolean ArrowMultiLine::Tail () { return _tail != nil; }
+inline bool ArrowMultiLine::Head () { return _head != nil; }
+inline bool ArrowMultiLine::Tail () { return _tail != nil; }
 inline float ArrowMultiLine::ArrowScale () { return _arrow_scale; }
 
 class ArrowOpenBSpline : public SFH_OpenBSpline {
 public:
     ArrowOpenBSpline(
-        Coord* x, Coord* y, int count, boolean h, boolean t, float arrow_scale,
+        Coord* x, Coord* y, int count, bool h, bool t, float arrow_scale,
         Graphic* gr = nil
     );
     virtual ~ArrowOpenBSpline();
 
-    void SetArrows(boolean h, boolean t);
+    void SetArrows(bool h, bool t);
     void ScaleArrows(float);
-    boolean Head();
-    boolean Tail();
+    bool Head();
+    bool Tail();
     float ArrowScale();
 
     virtual Graphic* Copy();
@@ -143,13 +143,13 @@ protected:
 	Coord*, Coord*, int, Arrowhead*, Arrowhead*, float, Graphic* gr = nil
     );
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     Extent& ArrowheadExtent(class Arrowhead*, Graphic* gs);
-    boolean ArrowheadContains(Arrowhead*, PointObj&, Graphic* gs);
-    boolean ArrowheadIntersects(Arrowhead*, BoxObj&, Graphic* gs);
+    bool ArrowheadContains(Arrowhead*, PointObj&, Graphic* gs);
+    bool ArrowheadIntersects(Arrowhead*, BoxObj&, Graphic* gs);
     void ArrowheadDraw(Arrowhead*, Canvas*, Graphic* gs);
 private:
     Arrowhead* _head;
@@ -157,8 +157,8 @@ private:
     float _arrow_scale;
 };
 
-inline boolean ArrowOpenBSpline::Head () { return _head != nil; }
-inline boolean ArrowOpenBSpline::Tail () { return _tail != nil; }
+inline bool ArrowOpenBSpline::Head () { return _head != nil; }
+inline bool ArrowOpenBSpline::Tail () { return _tail != nil; }
 inline float ArrowOpenBSpline::ArrowScale () { return _arrow_scale; }
 
 #endif

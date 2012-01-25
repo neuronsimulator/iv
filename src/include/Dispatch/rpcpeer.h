@@ -49,15 +49,15 @@ protected:
     void stopListening();
     virtual int inputReady(int);
 
-    virtual boolean createReaderAndWriter(const char* rHost, int rPort) = 0;
+    virtual bool createReaderAndWriter(const char* rHost, int rPort) = 0;
     virtual void createReaderAndWriter(int fd) = 0;
 protected:
     const char* _lPath;		// my registration's path
     int _lPort;			// my port's address
     rpcbuf* _service;		// my network socket
-    boolean _running;		// am I running my dispatch loop?
+    bool _running;		// am I running my dispatch loop?
 
-    boolean _remote;		// am I connected to a remote RPC service?
+    bool _remote;		// am I connected to a remote RPC service?
     char* _rHost;		// dynamically allocated storage to be freed
 private:
     // deny access since unimplemented and member-wise won't work

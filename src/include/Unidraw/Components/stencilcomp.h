@@ -45,7 +45,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     char* _filename;
 };
@@ -60,17 +60,17 @@ public:
     virtual Graphic* GetGraphic();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class PSStencil : public PostScriptView {
 public:
     PSStencil(StencilComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #endif

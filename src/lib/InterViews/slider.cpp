@@ -54,9 +54,9 @@ private:
     Patch* thumb_patch_;
     Patch* old_thumb_;
     Coord min_thumb_size_;
-    boolean dragging_ : 1;
-    boolean aborted_ : 1;
-    boolean showing_old_thumb_ : 1;
+    bool dragging_ : 1;
+    bool aborted_ : 1;
+    bool showing_old_thumb_ : 1;
     Stepper* forward_;
     Stepper* backward_;
     Stepper* stepper_;

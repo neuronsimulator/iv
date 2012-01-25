@@ -133,7 +133,7 @@ void GrowingVertices::DrawHandles () {
 }
 
 void GrowingVertices::AddVertex (IntCoord vx, IntCoord vy) {
-    boolean wasDrawn = drawn;
+    bool wasDrawn = drawn;
 
     Erase();
     ++curPt;
@@ -154,7 +154,7 @@ void GrowingVertices::AddVertex (IntCoord vx, IntCoord vy) {
 }
 
 void GrowingVertices::RemoveVertex () {
-    boolean wasDrawn = drawn;
+    bool wasDrawn = drawn;
 
     Erase();
 

@@ -42,7 +42,7 @@ StateVarView::~StateVarView () {
 }
 
 void StateVarView::Init () { }
-boolean StateVarView::Stale () { return true; }
+bool StateVarView::Stale () { return true; }
 void StateVarView::SetSubject (StateVar* s) { _subject = s; }
 StateVar* StateVarView::GetSubject () { return _subject; }
 

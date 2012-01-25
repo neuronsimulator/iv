@@ -62,10 +62,10 @@ public:
     // not fix this problem except with this sledgehammer approach.
     // The WindowRep::resize will temporarily set the flag and call Glyph::request
     // when its request_on_resize_ flag is true.
-    static void full_request(boolean);
+    static void full_request(bool);
 private:
     BoxImpl* impl_;
-    static boolean full_request_;
+    static bool full_request_;
 };
 
 #include <InterViews/_leave.h>

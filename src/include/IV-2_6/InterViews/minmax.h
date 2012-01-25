@@ -25,7 +25,7 @@
 #ifndef iv2_6_minmax_h
 #define iv2_6_minmax_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 
 #define declare_2(T) \
 inline T min(T a, T b) { return a < b ? a : b; } \
@@ -57,7 +57,7 @@ declare_4(double)
 
 inline int iv26_round(double x) { return x > 0 ? int(x+0.5) : -int(-x+0.5); }
 
-inline boolean iv26_equal(float x, float y, float e) {
+inline bool iv26_equal(float x, float y, float e) {
     return x - y < e && y - x < e;
 }
 

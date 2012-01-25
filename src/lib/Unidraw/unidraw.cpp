@@ -91,7 +91,7 @@ public:
 
     void Register(Component*);
     void Unregister(Component*);
-    boolean Registered(Component*);
+    bool Registered(Component*);
 
     History* GetHistory(Component*);
     History* GetHistory(int index);
@@ -114,7 +114,7 @@ void HistoryMap::Unregister (Component* comp) {
     }
 }
 
-boolean HistoryMap::Registered (Component* comp) {
+bool HistoryMap::Registered (Component* comp) {
     return FindId((void*) comp) != nil;
 }
 
@@ -149,11 +149,11 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 ClassId DirtyCmd::GetClassId () { return DIRTY_CMD; }
-boolean DirtyCmd::IsA (ClassId id) {return DIRTY_CMD==id || Command::IsA(id);}
+bool DirtyCmd::IsA (ClassId id) {return DIRTY_CMD==id || Command::IsA(id);}
 
 DirtyCmd::DirtyCmd (ControlInfo* c) : Command(c) { }
 DirtyCmd::DirtyCmd (Editor* ed) : Command(ed) { }
@@ -286,7 +286,7 @@ void Unidraw::DoUpdate () {
     }
 }
 
-void Unidraw::Update (boolean immediate) {
+void Unidraw::Update (bool immediate) {
     if (immediate) {
         DoUpdate();
     }
@@ -336,7 +336,7 @@ void Unidraw::CloseAll () {
     }
 }
 
-boolean Unidraw::Opened (Editor* ed) {
+bool Unidraw::Opened (Editor* ed) {
     for (UList* u = _editors->First(); u != _editors->End(); u = u->Next()) {
         if (editor(u) == ed) {
             return true;
@@ -350,7 +350,7 @@ Command* Unidraw::command (UList* r) { return (Command*) (*r)(); }
 UList* Unidraw::elem (Iterator i) { return (UList*) i.GetValue(); }
 void Unidraw::First (Iterator& i) { i.SetValue(_editors->First()); }
 void Unidraw::Next (Iterator& i) { i.SetValue(elem(i)->Next()); }
-boolean Unidraw::Done (Iterator i) { return elem(i) == _editors->End(); }
+bool Unidraw::Done (Iterator i) { return elem(i) == _editors->End(); }
 Editor* Unidraw::GetEditor (Iterator i) { return editor(elem(i)); }
 
 Editor* Unidraw::Find (Component* comp) {
@@ -463,7 +463,7 @@ void Unidraw::Process () {
     /* do nothing by default */
 }
 
-boolean Unidraw::IsClean (Editor* ed) {
+bool Unidraw::IsClean (Editor* ed) {
     ModifStatusVar* mv = (ModifStatusVar*) ed->GetState("ModifStatusVar");
 
     return (mv != nil && !mv->GetModifStatus());

@@ -30,7 +30,7 @@
 #ifndef iv2_6_subject_h
 #define iv2_6_subject_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/resource.h>
 
 class Interactor;
@@ -43,7 +43,7 @@ public:
     virtual void Attach(Interactor*);
     virtual void Detach(Interactor*);
     virtual void Notify();
-    virtual boolean IsView(Interactor*);
+    virtual bool IsView(Interactor*);
 protected:
     Subject();
 private:

@@ -44,7 +44,7 @@
 
 ClassId ReshapeTool::GetClassId () { return RESHAPE_TOOL; }
 
-boolean ReshapeTool::IsA (ClassId id) {
+bool ReshapeTool::IsA (ClassId id) {
     return RESHAPE_TOOL == id || Tool::IsA(id);
 }
 

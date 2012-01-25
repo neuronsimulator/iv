@@ -48,7 +48,7 @@ public:
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*&);
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ArrowLineView : public LineView {
@@ -61,18 +61,18 @@ public:
     ArrowLineComp* GetArrowLineComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class PSArrowLine : public PSLine {
 public:
     PSArrowLine(ArrowLineComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
     virtual void Brush(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ArrowMultiLineComp : public MultiLineComp {
@@ -88,7 +88,7 @@ public:
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*&);
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ArrowMultiLineView : public MultiLineView {
@@ -101,18 +101,18 @@ public:
     ArrowMultiLineComp* GetArrowMultiLineComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class PSArrowMultiLine : public PSMultiLine {
 public:
     PSArrowMultiLine(ArrowMultiLineComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
     virtual void Brush(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ArrowSplineComp : public SplineComp {
@@ -128,7 +128,7 @@ public:
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*&);
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ArrowSplineView : public SplineView {
@@ -141,18 +141,18 @@ public:
     ArrowSplineComp* GetArrowSplineComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class PSArrowSpline : public PSSpline {
 public:
     PSArrowSpline(ArrowSplineComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
     virtual void Brush(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #endif

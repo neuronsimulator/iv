@@ -34,7 +34,7 @@ public:
     MoveDialog();
     virtual void GetValues(float& x, float& y);
 
-    virtual boolean Accept();
+    virtual bool Accept();
     virtual void Handle(Event&);
 
     void SelectMessage();
@@ -49,7 +49,7 @@ public:
     ScaleDialog();
     virtual void GetValues(float& x, float& y);
 
-    virtual boolean Accept();
+    virtual bool Accept();
     virtual void Handle(Event&);
 
     void SelectMessage();
@@ -63,7 +63,7 @@ public:
     RotateDialog();
     virtual void GetValue(float& angle);
 
-    virtual boolean Accept();
+    virtual bool Accept();
     virtual void Handle(Event&);
 
     void SelectMessage();

@@ -45,24 +45,24 @@ public:
     Dialog(Glyph*, Style*);
     virtual ~Dialog();
 
-    boolean post_for(Window*);
-    virtual boolean post_for_aligned(Window*, float xalign, float yalign);
-    boolean post_at(Coord x, Coord y);
-    virtual boolean post_at_aligned(
+    bool post_for(Window*);
+    virtual bool post_for_aligned(Window*, float xalign, float yalign);
+    bool post_at(Coord x, Coord y);
+    virtual bool post_at_aligned(
 	Coord x, Coord y, float xalign, float yalign
     );
-    virtual boolean run();
-    virtual void dismiss(boolean accept);
+    virtual bool run();
+    virtual void dismiss(bool accept);
 private:
-    boolean done_;
-    boolean accepted_;
+    bool done_;
+    bool accepted_;
 };
 
-inline boolean Dialog::post_for(Window* w) {
+inline bool Dialog::post_for(Window* w) {
     return post_for_aligned(w, 0.5, 0.5);
 }
 
-inline boolean Dialog::post_at(Coord x, Coord y) {
+inline bool Dialog::post_at(Coord x, Coord y) {
     return post_at_aligned(x, y, 0.5, 0.5);
 }
 

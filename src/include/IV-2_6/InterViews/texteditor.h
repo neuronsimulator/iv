@@ -64,7 +64,7 @@ public:
     void SetScrollAlignment(Alignment);
     Alignment GetScrollAlignment();
 
-    void ScrollToSelection(boolean always = false);
+    void ScrollToSelection(bool always = false);
     void ScrollToView(IntCoord x, IntCoord y);
     void ScrollBy(IntCoord dx, IntCoord dy);
     void GrabScroll(Event&);

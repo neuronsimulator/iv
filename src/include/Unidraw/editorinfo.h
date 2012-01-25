@@ -40,7 +40,7 @@ public:
     void Register(const char* name, const char* info = "");
     void UnregisterName(const char* name);
     void UnregisterInfo(const char* info);
-    boolean Registered(const char* name);
+    bool Registered(const char* name);
 
     const char* GetName(const char* info);
     const char* GetName(int index);

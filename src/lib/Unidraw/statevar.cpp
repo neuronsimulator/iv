@@ -70,7 +70,7 @@ StateVar& StateVar::operator = (StateVar&) { return *this; }
 StateVar* StateVar::Copy () { return nil; }
 ClassId StateVar::GetClassId () { return STATE_VAR; }
 ClassId StateVar::GetSubstId (const char*&) { return UNDEFINED_CLASS; }
-boolean StateVar::IsA (ClassId id) { return STATE_VAR == id; }
+bool StateVar::IsA (ClassId id) { return STATE_VAR == id; }
 void StateVar::SetBinding (Connector* conn) { _conn = conn; Notify(); }
 Connector* StateVar::GetBinding () { return _conn; }
 

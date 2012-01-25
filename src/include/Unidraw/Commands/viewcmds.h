@@ -38,11 +38,11 @@ public:
     NormSizeCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class RedToFitCmd : public Command {
@@ -51,11 +51,11 @@ public:
     RedToFitCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class CenterCmd : public Command {
@@ -64,11 +64,11 @@ public:
     CenterCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class GridCmd : public Command {
@@ -77,11 +77,11 @@ public:
     GridCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class GridSpacingCmd : public Command {
@@ -91,11 +91,11 @@ public:
     virtual ~GridSpacingCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     GridDialog* _dialog;
 };
@@ -106,11 +106,11 @@ public:
     GravityCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class OrientationCmd : public Command {
@@ -119,11 +119,11 @@ public:
     OrientationCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class CloseEditorCmd : public Command {
@@ -132,11 +132,11 @@ public:
     CloseEditorCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #endif

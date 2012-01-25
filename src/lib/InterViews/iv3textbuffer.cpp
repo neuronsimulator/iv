@@ -163,7 +163,7 @@ int TextBuffer::Match (Regexp* regexp, int index, int stop) {
     return regexp->Match(text, length, i);
 }
 
-boolean TextBuffer::BackwardMatch (Regexp* regexp, int index) {
+bool TextBuffer::BackwardMatch (Regexp* regexp, int index) {
     int i = limit(0, index, length);
     for (int j = i; j >= 0; --j) {
         if (regexp->Match(text, length, j) == i - j) {
@@ -173,7 +173,7 @@ boolean TextBuffer::BackwardMatch (Regexp* regexp, int index) {
     return false;
 }
 
-boolean TextBuffer::ForwardMatch (Regexp* regexp, int index) {
+bool TextBuffer::ForwardMatch (Regexp* regexp, int index) {
     int i = limit(0, index, length);
     return regexp->Match(text, length, i) >= 0;
 }
@@ -320,7 +320,7 @@ int TextBuffer::LineOffset (int index) const
     return (index<0) ? 0 : (index>length) ? 0 : index-BeginningOfLine(index);
 }
 
-boolean TextBuffer::IsBeginningOfLine (int index) const
+bool TextBuffer::IsBeginningOfLine (int index) const
 {
     const char* t = Text(index);
     return t <= text || *(t-1) == NEWLINE;
@@ -347,7 +347,7 @@ int TextBuffer::BeginningOfNextLine (int index) const
     }
 }
 
-boolean TextBuffer::IsEndOfLine (int index) const
+bool TextBuffer::IsEndOfLine (int index) const
 {
     const char* t = Text(index);
     return t >= text + length || *t == NEWLINE;
@@ -377,7 +377,7 @@ int TextBuffer::EndOfPreviousLine (int index) const
     return t - text;
 }
 
-boolean TextBuffer::IsBeginningOfWord (int index) const
+bool TextBuffer::IsBeginningOfWord (int index) const
 {
     const char* t = Text(index);
     return t <= text || !isalnum(*(t-1)) && isalnum(*t);
@@ -401,7 +401,7 @@ int TextBuffer::BeginningOfNextWord (int index) const
     return t - text;
 }
 
-boolean TextBuffer::IsEndOfWord (int index) const
+bool TextBuffer::IsEndOfWord (int index) const
 {
     const char* t = Text(index);
     return t >= text+length || isalnum(*(t-1)) && !isalnum(*t);

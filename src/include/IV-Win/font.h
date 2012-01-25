@@ -68,7 +68,7 @@ public:
 	int Height();					// return font height
 	TEXTMETRIC& Metrics();			// return font metric information
 	float CharWidth(int ch);			// return width of a character
-	boolean AssociateWith(HDC);		// associate with a device for metrics
+	bool AssociateWith(HDC);		// associate with a device for metrics
 	const char* TypefaceName();		// name of typeface 
 
 	void orientation(int);
@@ -79,7 +79,7 @@ public:
 		// needed and then destroyed.
 
 protected:
-	boolean CheckAssociation();     // makes sure metric data is available
+	bool CheckAssociation();     // makes sure metric data is available
 	HWND fontWindow();				// window to get font information
 
 protected:
@@ -123,7 +123,7 @@ public:
 	FontFamilyRep(const char* family);
 	~FontFamilyRep();
 
-	boolean font(int size, const char* style,	// translate to font name
+	bool font(int size, const char* style,	// translate to font name
 		const char*& name, float& scale);
 
 protected:

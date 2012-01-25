@@ -23,7 +23,7 @@
  */
 
 /*
- * Bitmap - a two-dimensional boolean mask
+ * Bitmap - a two-dimensional bool mask
  */
 
 #ifndef iv_bitmap_h
@@ -50,8 +50,8 @@ public:
 
     static Bitmap* open(const char* filename);
 
-    virtual void poke(boolean set, int x, int y);
-    virtual boolean peek(int x, int y) const;
+    virtual void poke(bool set, int x, int y);
+    virtual bool peek(int x, int y) const;
 
     virtual Coord width() const;
     virtual Coord height() const;
@@ -92,8 +92,8 @@ public:
     void Rotate270();
     void Invert();
 
-    boolean Peek(int x, int y) const;
-    void Poke(boolean, int x, int y);
+    bool Peek(int x, int y) const;
+    void Poke(bool, int x, int y);
 };
 
 inline BitmapRep* Bitmap::rep() const { return rep_; }
@@ -101,8 +101,8 @@ inline BitmapRep* Bitmap::rep() const { return rep_; }
 inline unsigned int Bitmap::Width() const { return pwidth(); }
 inline unsigned int Bitmap::Height() const { return pheight(); }
 
-inline boolean Bitmap::Peek(int x, int y) const { return peek(x, y); }
-inline void Bitmap::Poke(boolean bit, int x, int y) { poke(bit, x, y); }
+inline bool Bitmap::Peek(int x, int y) const { return peek(x, y); }
+inline void Bitmap::Poke(bool bit, int x, int y) { poke(bit, x, y); }
 
 #include <InterViews/_leave.h>
 

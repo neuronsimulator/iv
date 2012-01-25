@@ -348,11 +348,11 @@ const Font* Font::lookup(const char* name) {
     );
 }
 
-boolean Font::exists(Display* d, const String& name) {
+bool Font::exists(Display* d, const String& name) {
     return FontImpl::lookup(d, name, 1.0) != nil;
 }
 
-boolean Font::exists(Display* d, const char* name) {
+bool Font::exists(Display* d, const char* name) {
     return FontImpl::lookup(d, String(name), 1.0) != nil;
 }
 
@@ -451,7 +451,7 @@ Coord Font::width(const char* s, int len) const {
     return f->scale_ * f->display_->to_coord(XTextWidth(f->font_, s, len));
 }
 
-int Font::index(const char* s, int len, float offset, boolean between) const {
+int Font::index(const char* s, int len, float offset, bool between) const {
     const char* p;
     int n, w;
     int coff, cw;
@@ -505,19 +505,19 @@ int Font::Width(const char* s, int len) const {
     return impl_->default_rep()->display_->to_pixels(width(s, len));
 }
 
-int Font::Index(const char* s, int offset, boolean between) const {
+int Font::Index(const char* s, int offset, bool between) const {
     return impl_->default_rep()->display_->to_pixels(
 	index(s, strlen(s), float(offset), between)
     );
 }
 
-int Font::Index(const char* s, int len, int offset, boolean between) const {
+int Font::Index(const char* s, int len, int offset, bool between) const {
     return impl_->default_rep()->display_->to_pixels(
 	index(s, len, float(offset), between)
     );
 }
 
-boolean Font::FixedWidth() const {
+bool Font::FixedWidth() const {
     FontRep* f = impl_->default_rep();
     XFontStruct* xf = f->font_;
     return xf->min_bounds.width == xf->max_bounds.width;
@@ -539,7 +539,7 @@ private:
     FontFamilyRepList* replist;
 };
 
-static boolean contains(const char* string, const char* substring) {
+static bool contains(const char* string, const char* substring) {
     int sublength = strlen(substring);
     int length = strlen(string) - sublength;
     for (int i = 0; i <= length; ++i) {
@@ -717,11 +717,11 @@ void FontFamily::destroy(FontFamilyRep* r) {
     delete [] r->sizes_;
 }
 
-boolean FontFamily::font(int size, const char*& name, float& scale) const {
+bool FontFamily::font(int size, const char*& name, float& scale) const {
     return font(size, "", name, scale);
 }
 
-boolean FontFamily::font(
+bool FontFamily::font(
     int size, const char* style, const char*& name, float& scale
 ) const {
     int weight = name_value(style, weight_names, 5);

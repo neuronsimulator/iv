@@ -30,7 +30,7 @@
 #define iv2_6_painter_h
 
 #include <InterViews/enter-scope.h>
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/coord.h>
 #include <InterViews/resource.h>
 #include <IV-2_6/InterViews/textstyle.h>
@@ -53,8 +53,8 @@ public:
     Painter(Painter*);
     ~Painter();
 
-    void FillBg(boolean);
-    boolean BgFilled() const;
+    void FillBg(bool);
+    bool BgFilled() const;
     void SetColors(const Color* f, const Color* b);
     const Color* GetFgColor() const;
     const Color* GetBgColor() const;
@@ -81,7 +81,7 @@ public:
 	Canvas*, Coord left, Coord bottom, Coord right, Coord top
     );
     virtual void NoClip();
-    virtual void SetOverwrite(boolean);
+    virtual void SetOverwrite(bool);
     virtual void SetPlaneMask(int);
 
     virtual void Text(Canvas*, const char*);

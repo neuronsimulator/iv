@@ -46,11 +46,11 @@ public:
 
 	 virtual void resize(Coord left, Coord bottom, Coord right, Coord top);
 
-	virtual boolean get();
+	virtual bool get();
 	 virtual void prolog(const char* creator = "InterViews");
 	 void prolog(float scale);
 	 virtual void epilog();
-    virtual void setup(boolean b = true);
+    virtual void setup(bool b = true);
 
     virtual void comment(const char*);
 	 virtual void page(const char*);
@@ -59,7 +59,7 @@ public:
 	 virtual void transform(const Transformer&);
 	 virtual void pop_transform();
 
-	 virtual void push_clipping(boolean all = false);
+	 virtual void push_clipping(bool all = false);
 	 virtual void clip();
 	 virtual void pop_clipping();
 

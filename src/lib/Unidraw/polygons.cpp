@@ -72,7 +72,7 @@ void Rect::f_getExtent (
     tol = 0;
 }
 
-boolean Rect::s_contains (PointObj& po, Graphic* gs) {
+bool Rect::s_contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     invTransform(pt._x, pt._y, gs);
 
@@ -82,14 +82,14 @@ boolean Rect::s_contains (PointObj& po, Graphic* gs) {
     );
 }
 
-boolean Rect::f_contains (PointObj& po, Graphic* gs) {
+bool Rect::f_contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     invTransform(pt._x, pt._y, gs);
     BoxObj b (_x0, _y0, _x1, _y1);
     return b.Contains(pt);
 }
 
-boolean Rect::s_intersects (BoxObj& userb, Graphic* gs) {
+bool Rect::s_intersects (BoxObj& userb, Graphic* gs) {
     Coord x[4], tx[5];
     Coord y[4], ty[5];
     
@@ -105,7 +105,7 @@ boolean Rect::s_intersects (BoxObj& userb, Graphic* gs) {
     return ml.Intersects(userb) || ml.Within(userb);
 }
 
-boolean Rect::f_intersects (BoxObj& userb, Graphic* gs) {
+bool Rect::f_intersects (BoxObj& userb, Graphic* gs) {
     Transformer* t = gs->GetTransformer();
     Coord tx0, ty0, tx1, ty1;
     
@@ -166,11 +166,11 @@ void S_Rect::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean S_Rect::contains (PointObj& po, Graphic* gs) {
+bool S_Rect::contains (PointObj& po, Graphic* gs) {
     return s_contains(po, gs);
 }
 
-boolean S_Rect::intersects (BoxObj& userb, Graphic* gs) {
+bool S_Rect::intersects (BoxObj& userb, Graphic* gs) {
     return s_intersects(userb, gs);
 }
 
@@ -209,11 +209,11 @@ void F_Rect::getExtent (
     f_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean F_Rect::contains (PointObj& po, Graphic* gs) {
+bool F_Rect::contains (PointObj& po, Graphic* gs) {
     return !gs->GetPattern()->None() && f_contains(po, gs);
 }
 
-boolean F_Rect::intersects (BoxObj& userb, Graphic* gs) {
+bool F_Rect::intersects (BoxObj& userb, Graphic* gs) {
     return !gs->GetPattern()->None() && f_intersects(userb, gs);
 }
 
@@ -270,13 +270,13 @@ void SF_Rect::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean SF_Rect::contains (PointObj& po, Graphic* gs) {
+bool SF_Rect::contains (PointObj& po, Graphic* gs) {
     return 
         (!gs->GetPattern()->None() && f_contains(po, gs)) ||
         s_contains(po, gs);
 }
 
-boolean SF_Rect::intersects (BoxObj& userb, Graphic* gs) {
+bool SF_Rect::intersects (BoxObj& userb, Graphic* gs) {
     return 
         (!gs->GetPattern()->None() && f_intersects(userb, gs)) ||
         s_intersects(userb, gs);
@@ -298,7 +298,7 @@ Polygon::Polygon (
     Coord* x, Coord* y, int count, Graphic* gr
 ) : Vertices(x, y, count, gr) { }
 
-boolean Polygon::s_contains (PointObj& po, Graphic* gs) {
+bool Polygon::s_contains (PointObj& po, Graphic* gs) {
     BoxObj b;
     PointObj pt (&po);
     getBox(b, gs);
@@ -312,7 +312,7 @@ boolean Polygon::s_contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean Polygon::f_contains (PointObj& po, Graphic* gs) {
+bool Polygon::f_contains (PointObj& po, Graphic* gs) {
     BoxObj b;
     PointObj pt (&po);
     getBox(b, gs);
@@ -325,10 +325,10 @@ boolean Polygon::f_contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean Polygon::s_intersects (BoxObj& userb, Graphic* gs) {
+bool Polygon::s_intersects (BoxObj& userb, Graphic* gs) {
     Coord* convx, *convy;
     BoxObj b;
-    boolean result = false;
+    bool result = false;
     getBox(b, gs);
 
     if (b.Intersects(userb)) {
@@ -345,10 +345,10 @@ boolean Polygon::s_intersects (BoxObj& userb, Graphic* gs) {
     return result;
 }
 
-boolean Polygon::f_intersects (BoxObj& userb, Graphic* gs) {
+bool Polygon::f_intersects (BoxObj& userb, Graphic* gs) {
     Coord* convx, *convy;
     BoxObj b;
-    boolean result = false;
+    bool result = false;
     getBox(b, gs);
 
     if (b.Intersects(userb)) {
@@ -394,11 +394,11 @@ void S_Polygon::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean S_Polygon::contains (PointObj& po, Graphic* gs) {
+bool S_Polygon::contains (PointObj& po, Graphic* gs) {
     return s_contains(po, gs);
 }
 
-boolean S_Polygon::intersects (BoxObj& userb, Graphic* gs) {
+bool S_Polygon::intersects (BoxObj& userb, Graphic* gs) {
     return s_intersects(userb, gs);
 }
 
@@ -437,11 +437,11 @@ void F_Polygon::getExtent (
     f_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean F_Polygon::contains (PointObj& po, Graphic* gs) {
+bool F_Polygon::contains (PointObj& po, Graphic* gs) {
     return !gs->GetPattern()->None() && f_contains(po, gs);
 }
 
-boolean F_Polygon::intersects (BoxObj& userb, Graphic* gs) {
+bool F_Polygon::intersects (BoxObj& userb, Graphic* gs) {
     return !gs->GetPattern()->None() && f_intersects(userb, gs);
 }
 
@@ -497,13 +497,13 @@ void SF_Polygon::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean SF_Polygon::contains (PointObj& po, Graphic* gs) {
+bool SF_Polygon::contains (PointObj& po, Graphic* gs) {
     return 
         (!gs->GetPattern()->None() && f_contains(po, gs)) ||
         s_contains(po, gs);
 }
 
-boolean SF_Polygon::intersects (BoxObj& userb, Graphic* gs) {
+bool SF_Polygon::intersects (BoxObj& userb, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_intersects(userb, gs)) ||
         s_intersects(userb, gs);

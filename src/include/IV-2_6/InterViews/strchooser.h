@@ -54,7 +54,7 @@ public:
     void Message(const char*);
 
     virtual const char* Choice();
-    virtual boolean Accept();
+    virtual bool Accept();
     virtual void Handle(Event&);
 protected:
     StringChooser(ButtonState*, Alignment = Center);
@@ -62,7 +62,7 @@ protected:
     void Forward(Event&);
 
     virtual void SwitchFocus();
-    virtual boolean CanFocus(Interactor*);
+    virtual bool CanFocus(Interactor*);
     virtual void HandleFocus();
     virtual void UpdateEditor();
     virtual void UpdateBrowser();

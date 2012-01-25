@@ -36,17 +36,17 @@ class IdrawCatalog : public Catalog{
 public:
     IdrawCatalog(const char*, Creator*);
     
-    virtual boolean Save(EditorInfo*, const char*);
-    virtual boolean Save(Component*, const char*);
-    virtual boolean Save(Command*, const char*);
-    virtual boolean Save(Tool*, const char*);
+    virtual bool Save(EditorInfo*, const char*);
+    virtual bool Save(Component*, const char*);
+    virtual bool Save(Command*, const char*);
+    virtual bool Save(Tool*, const char*);
 
-    virtual boolean Retrieve(const char*, EditorInfo*&);
-    virtual boolean Retrieve(const char*, Component*&);
-    virtual boolean Retrieve(const char*, Command*&);
-    virtual boolean Retrieve(const char*, Tool*&);
+    virtual bool Retrieve(const char*, EditorInfo*&);
+    virtual bool Retrieve(const char*, Component*&);
+    virtual bool Retrieve(const char*, Command*&);
+    virtual bool Retrieve(const char*, Tool*&);
 private:
-    boolean UnidrawFormat(const char*);
+    bool UnidrawFormat(const char*);
 
     void PSReadGridSpacing(istream&, float&, float&);
     void PSReadGS(istream&, Graphic*);
@@ -84,8 +84,8 @@ private:
 private:
     static char _buf[CHARBUFSIZE]; // contains storage for reading data
     static float _psversion;       // stores version of drawing read from file
-    boolean _head, _tail;          // stores arrow state for last GS read
-    boolean _valid;
+    bool _head, _tail;          // stores arrow state for last GS read
+    bool _valid;
 };
 
 #endif

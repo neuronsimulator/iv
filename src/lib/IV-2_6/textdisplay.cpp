@@ -54,7 +54,7 @@ public:
 
     void Draw(TextDisplay*, int line, int first, int last);
 
-    int Index(TextDisplay*, IntCoord x, boolean between);
+    int Index(TextDisplay*, IntCoord x, bool between);
     IntCoord Offset(TextDisplay*, int index);
 private:
     void Size(int);
@@ -66,7 +66,7 @@ private:
     char postfix;
 };
 
-TextDisplay::TextDisplay (boolean a) {
+TextDisplay::TextDisplay (bool a) {
     painter = nil;
     canvas = nil;
     autosized = a;
@@ -222,7 +222,7 @@ void TextDisplay::Size (int first, int last) {
     lastline = last;
 }
 
-TextLine* TextDisplay::Line (int line, boolean create) {
+TextLine* TextDisplay::Line (int line, bool create) {
     if (create) {
         Size(Math::min(firstline, line), Math::max(lastline, line));
     }
@@ -518,7 +518,7 @@ int TextDisplay::LineNumber (IntCoord y) {
     }
 }
 
-int TextDisplay::LineIndex (int line, IntCoord x, boolean between) {
+int TextDisplay::LineIndex (int line, IntCoord x, bool between) {
     TextLine* l = Line(line, false);
     if (l == nil) {
         return 0;
@@ -594,7 +594,7 @@ IntCoord TextLine::Offset (TextDisplay* display, int index) {
     }
 }
 
-int TextLine::Index (TextDisplay* display, IntCoord x, boolean between) {
+int TextLine::Index (TextDisplay* display, IntCoord x, bool between) {
     if (x < 0) {
         if (!between) {
             return -1;

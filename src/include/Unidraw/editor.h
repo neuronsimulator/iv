@@ -69,7 +69,7 @@ public:
 
     virtual StateVar* GetState(const char*);
 
-    virtual boolean DependsOn(Component*);
+    virtual bool DependsOn(Component*);
 
     virtual void InsertDialog(Glyph*);
     virtual void RemoveDialog(Glyph*);

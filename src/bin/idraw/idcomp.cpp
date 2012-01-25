@@ -52,7 +52,7 @@ ClassId IdrawComp::GetSubstId (const char*& delim) {
     return GraphicComps::GetClassId();
 }
 
-boolean IdrawComp::IsA (ClassId id) {
+bool IdrawComp::IsA (ClassId id) {
     return IDRAW_COMP == id || GraphicComps::IsA(id);
 }
 
@@ -71,7 +71,7 @@ void IdrawComp::GetGridSpacing (float& xincr, float& yincr) {
 IdrawView::IdrawView (IdrawComp* subj) : GraphicViews(subj) { }
 ClassId IdrawView::GetClassId () { return IDRAW_VIEW; }
 
-boolean IdrawView::IsA (ClassId id) {
+bool IdrawView::IsA (ClassId id) {
     return IDRAW_VIEW == id || GraphicViews::IsA(id);
 }
 
@@ -80,7 +80,7 @@ boolean IdrawView::IsA (ClassId id) {
 PSIdraw::PSIdraw (IdrawComp* subj) : PostScriptViews(subj) { }
 ClassId PSIdraw::GetClassId () { return PS_IDRAW; }
 
-boolean PSIdraw::IsA (ClassId id) { 
+bool PSIdraw::IsA (ClassId id) { 
     return PS_IDRAW == id || PostScriptViews::IsA(id);
 }
 

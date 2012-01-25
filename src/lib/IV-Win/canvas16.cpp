@@ -180,7 +180,7 @@ void MWcanvas16::endPaint()
 // utility functions
 // ----------------------------------------------------------------------
 
-static boolean rectangular(
+static bool rectangular(
 	int x0,
 	int y0,
 	int x1,
@@ -196,7 +196,7 @@ static boolean rectangular(
     );
 }
 
-static boolean xrect(const POINT* p, unsigned int n)
+static bool xrect(const POINT* p, unsigned int n)
 {
     return (
 	n == 5 && p[0].x == p[4].x && p[0].y == p[4].y &&
@@ -208,7 +208,7 @@ static boolean xrect(const POINT* p, unsigned int n)
 
 static const float smoothness = 10.0;
 
-static boolean straight(
+static bool straight(
     const Transformer& tx,
     Coord x0, Coord y0, Coord x1, Coord y1,
 	Coord x2, Coord y2, Coord x3, Coord y3)
@@ -267,7 +267,7 @@ const Transformer& MWcanvas16::transformer() const
 // clipping 
 // ----------------------------------------------------------------------
 
-void MWcanvas16::push_clipping(boolean)
+void MWcanvas16::push_clipping(bool)
 {
 	flush();
 	MWcanvas::push_clipping();

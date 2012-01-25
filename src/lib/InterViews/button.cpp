@@ -73,7 +73,7 @@ void Button::action(Action* a) {
 Action* Button::action() const { return action_; }
 
 #if carbon
-extern boolean need_motion_on_deactivate_;
+extern bool need_motion_on_deactivate_;
 #define NEEDMOTION(arg) need_motion_on_deactivate_ = arg;
 #else
 #define NEEDMOTION(arg) /**/
@@ -108,8 +108,8 @@ void Button::release(const Event& e) {
 	NEEDMOTION(false)
 	s->set(TelltaleState::is_active, false);
 	if (inside(e)) {
-	    boolean chosen = s->test(TelltaleState::is_chosen);
-	    boolean act = !chosen;
+	    bool chosen = s->test(TelltaleState::is_chosen);
+	    bool act = !chosen;
 	    if (s->test(TelltaleState::is_toggle)) {
 		s->set(TelltaleState::is_chosen, act);
 		act = true;

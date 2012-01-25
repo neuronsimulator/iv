@@ -44,7 +44,7 @@ public:
     virtual void bind();
     virtual void unbind();
 
-    virtual boolean receive(const Event&);
+    virtual bool receive(const Event&);
     virtual Handler* target(const Event&) const;
 protected:
     virtual void set_attributes();

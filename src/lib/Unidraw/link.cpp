@@ -63,7 +63,7 @@
 
 ClassId LinkComp::GetClassId () { return LINK_COMP; }
 
-boolean LinkComp::IsA (ClassId id) {
+bool LinkComp::IsA (ClassId id) {
     return LINK_COMP == id || GraphicComp::IsA(id);
 }
 
@@ -181,7 +181,7 @@ void LinkComp::Write (ostream& out) {
 
 void LinkComp::First (Iterator& i) { i.SetValue(_conn1); }
 void LinkComp::Last (Iterator& i) { i.SetValue(_conn2); }
-boolean LinkComp::Done (Iterator i) { return i.GetValue() == nil; }
+bool LinkComp::Done (Iterator i) { return i.GetValue() == nil; }
 
 void LinkComp::Next (Iterator& i) { 
     void* v = i.GetValue();
@@ -264,7 +264,7 @@ LinkComp::~LinkComp () {
 LinkComp* LinkView::GetLinkComp () { return (LinkComp*) GetSubject(); }
 ClassId LinkView::GetClassId () { return LINK_VIEW; }
 
-boolean LinkView::IsA (ClassId id) {
+bool LinkView::IsA (ClassId id) {
     return LINK_VIEW == id || GraphicView::IsA(id);
 }
 
@@ -443,7 +443,7 @@ Command* LinkView::InterpretManipulator (Manipulator* m) {
 
 void LinkView::First (Iterator& i) { i.SetValue(_connView1); }
 void LinkView::Last (Iterator& i) { i.SetValue(_connView2); }
-boolean LinkView::Done (Iterator i) { return i.GetValue() == nil; }
+bool LinkView::Done (Iterator i) { return i.GetValue() == nil; }
 
 void LinkView::Next (Iterator& i) { 
     void* v = i.GetValue();
@@ -537,13 +537,13 @@ LinkView::~LinkView () {
 
 ClassId PSLink::GetClassId () { return PS_LINK; }
 
-boolean PSLink::IsA (ClassId id) { 
+bool PSLink::IsA (ClassId id) { 
     return PS_LINK == id || PostScriptView::IsA(id);
 }
 
 PSLink::PSLink (LinkComp* subj) : PostScriptView(subj) { }
 
-boolean PSLink::Definition (ostream& out) {
+bool PSLink::Definition (ostream& out) {
     LinkComp* comp = (LinkComp*) GetSubject();
     Graphic* link = comp->GetGraphic();
     Line* line = comp->GetLine();

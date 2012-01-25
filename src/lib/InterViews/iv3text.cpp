@@ -210,10 +210,10 @@ class TextHandler : public Handler
 {
 public:
   TextHandler(Text* target);
-  virtual boolean event(Event& event);
+  virtual bool event(Event& event);
 protected:
   Text* target_;
-  boolean pressed_;
+  bool pressed_;
 };
 
 TextHandler::TextHandler(Text* target) 
@@ -222,9 +222,9 @@ TextHandler::TextHandler(Text* target)
   pressed_ = false;
 }
 
-boolean TextHandler::event(Event& e) 
+bool TextHandler::event(Event& e) 
 {
-  boolean handled = true;
+  bool handled = true;
   switch (e.type()) {
     case Event::down:
       if (!pressed_) {
@@ -364,7 +364,7 @@ Coord Text::width() const
 	return width_;
 }
 
-void Text::readOnly(boolean readOnly) 
+void Text::readOnly(bool readOnly) 
 {
 	if (readOnly_ != readOnly) 
 	{
@@ -373,7 +373,7 @@ void Text::readOnly(boolean readOnly)
 	}
 }
 
-boolean Text::readOnly() const 
+bool Text::readOnly() const 
 {
 	return readOnly_;
 }
@@ -517,7 +517,7 @@ void Text::drawLine(unsigned /* i */, Coord x, Coord y,
 	}
 }
 
-boolean Text::damaged(unsigned line) const 
+bool Text::damaged(unsigned line) const 
 {
 	FontBoundingBox fbb;
 	font_->font_bbox(fbb);
@@ -587,7 +587,7 @@ void Text::draw(Canvas*, const Allocation&) const
 	canvas_->pop_clipping();
 }
  
-boolean Text::snap(
+bool Text::snap(
 	const Event& event, 
 	unsigned& line, 
 	unsigned& column) const 
@@ -917,7 +917,7 @@ void Text::keystroke(const Event& event) {
   dirty(true);
 }
 
-boolean Text::delete_selection() {
+bool Text::delete_selection() {
   	int i1 = text_->LineIndex(selection_.line1()) + selection_.column1();
   	int i2 = text_->LineIndex(selection_.line2()) + selection_.column2();
 	if (i2 > i1) {
@@ -1196,11 +1196,11 @@ void Text::modified()
 {
 }
 
-boolean Text::dirty() {
+bool Text::dirty() {
   return dirty_;
 }
 
-void Text::dirty(boolean dirty) {
+void Text::dirty(bool dirty) {
   if (dirty_ != dirty) {
     dirty_ = dirty;
     modified();
@@ -1329,10 +1329,10 @@ void Text::expose(unsigned line, unsigned column)
 	FontBoundingBox fbb;
 	font_->font_bbox(fbb);
 	Coord x = columnCoord(string, column) - allocation_->left() + curLowerX_;
-	boolean invisibleX = (x < curLowerX_) || ((x + width(' ')) > curUpperX_);
+	bool invisibleX = (x < curLowerX_) || ((x + width(' ')) > curUpperX_);
 	Coord y = line * (fbb.ascent() + fbb.descent());
 
-	boolean invisibleY = (y < curLowerY_) || ((y + fbb.ascent() +
+	bool invisibleY = (y < curLowerY_) || ((y + fbb.ascent() +
 		fbb.descent()) > curUpperY_);
 	if (invisibleX) 
 	{
@@ -1498,7 +1498,7 @@ void TextLineAdjuster::update(Observable*)
 
 	updating_ = true;
 
-	boolean need = needButtons();
+	bool need = needButtons();
 	if (need != have_) 
 	{
 		if (need)
@@ -1512,7 +1512,7 @@ void TextLineAdjuster::update(Observable*)
 	updating_ = false;
 }
 
-boolean TextLineAdjuster::needButtons() 
+bool TextLineAdjuster::needButtons() 
 {
 	return allocation().allotment(Dimension_X).span() <
 		adjustable_->length(Dimension_X);

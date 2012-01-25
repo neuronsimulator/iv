@@ -42,7 +42,7 @@
 
 ClassId Component::GetClassId () { return COMPONENT; }
 ClassId Component::GetSubstId (const char*&) { return UNDEFINED_CLASS; }
-boolean Component::IsA (ClassId id) { return COMPONENT == id; }
+bool Component::IsA (ClassId id) { return COMPONENT == id; }
 Component::Component () { _views = new UList; }
 Component* Component::Copy () { return nil; }
 void Component::Read (istream&) { }
@@ -98,7 +98,7 @@ void Component::First (Iterator&) { }
 void Component::Last (Iterator&) { }
 void Component::Next (Iterator&) { }
 void Component::Prev (Iterator&) { }
-boolean Component::Done (Iterator) { return true; }
+bool Component::Done (Iterator) { return true; }
 
 Component* Component::GetRoot () {
     Component* cur, *parent = this;

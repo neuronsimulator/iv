@@ -72,7 +72,7 @@ public:
 		// to the x dimension to provide backward compatibility (although
 		// potentially incorrect behavior).
 
-    virtual boolean defaults(String&) const;
+    virtual bool defaults(String&) const;
     virtual void style(Style*);
     virtual Style* style() const;
 
@@ -82,18 +82,18 @@ public:
     virtual void flush();
     virtual void sync();
 
-    virtual boolean get(Event&);
+    virtual bool get(Event&);
     virtual void put(const Event&);
-    virtual boolean closed();
+    virtual bool closed();
 
     virtual void grab(Window*, Handler*);
-    virtual void ungrab(Handler*, boolean all = false);
+    virtual void ungrab(Handler*, bool all = false);
     virtual Handler* grabber() const;
-    virtual boolean is_grabbing(Handler*) const;
+    virtual bool is_grabbing(Handler*) const;
 
     virtual void ring_bell(int);
     virtual void set_key_click(int);
-    virtual void set_auto_repeat(boolean);
+    virtual void set_auto_repeat(bool);
     virtual void set_pointer_feedback(int thresh, int scale);
     virtual void move_pointer(Coord x, Coord y);
 

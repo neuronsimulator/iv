@@ -45,7 +45,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class LineView : public GraphicView {
@@ -63,7 +63,7 @@ public:
     virtual Graphic* GetGraphic();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual void CreateHandles();
 };
@@ -72,10 +72,10 @@ class PSLine : public PostScriptView {
 public:
     PSLine(LineComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class MultiLineComp : public VerticesComp {
@@ -88,7 +88,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class MultiLineView : public VerticesView {
@@ -100,9 +100,9 @@ public:
     MultiLineComp* GetMultiLineComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    virtual boolean VertexChanged();
+    virtual bool VertexChanged();
 };
 
 class PSMultiLine : public PSVertices {
@@ -110,7 +110,7 @@ public:
     PSMultiLine(MultiLineComp* = nil);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual const char* Name();
 };

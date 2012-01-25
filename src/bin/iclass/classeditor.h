@@ -47,9 +47,9 @@ public:
     void ScrollBy(int lines);
     virtual void Handle(Event&);
 private:
-    boolean HandleDownEvent(Event&);
-    boolean HandleKeyEvent(Event&);
-    boolean HandleChar(char);
+    bool HandleDownEvent(Event&);
+    bool HandleKeyEvent(Event&);
+    bool HandleChar(char);
 private:
     void Init(ButtonState*, const char*);
 private:

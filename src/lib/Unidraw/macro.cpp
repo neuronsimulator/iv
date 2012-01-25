@@ -41,7 +41,7 @@
 
 ClassId MacroCmd::GetClassId () { return MACRO_CMD; }
 
-boolean MacroCmd::IsA (ClassId id) {
+bool MacroCmd::IsA (ClassId id) {
     return MACRO_CMD == id || Command::IsA(id);
 }
 
@@ -97,7 +97,7 @@ void MacroCmd::SetEditor (Editor* ed) {
     }
 }
 
-boolean MacroCmd::Reversible () {
+bool MacroCmd::Reversible () {
     Iterator i;
     
     for (First(i); !Done(i); Next(i)) {
@@ -113,7 +113,7 @@ void MacroCmd::First (Iterator& i) { i.SetValue(_cmds->First()); }
 void MacroCmd::Last (Iterator& i) { i.SetValue(_cmds->Last()); }
 void MacroCmd::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
 void MacroCmd::Prev (Iterator& i) { i.SetValue(Elem(i)->Prev()); }
-boolean MacroCmd::Done (Iterator& i) { return Elem(i) == _cmds->End(); }
+bool MacroCmd::Done (Iterator& i) { return Elem(i) == _cmds->End(); }
 Command* MacroCmd::GetCommand (Iterator& i) { return Cmd(Elem(i)); }
 
 void MacroCmd::SetCommand (Command* cmd, Iterator& i) {

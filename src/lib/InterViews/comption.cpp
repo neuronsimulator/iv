@@ -52,11 +52,11 @@ class Break {
 public:
     Break();
 
-    boolean viewed() const;
-    void viewed(boolean);
+    bool viewed() const;
+    void viewed(bool);
 
-    boolean valid() const;
-    void valid(boolean);
+    bool valid() const;
+    void valid(bool);
 
     Patch* patch_;
     int status_;
@@ -70,11 +70,11 @@ Break::Break() {
     status_ = 0;
 }
 
-inline boolean Break::viewed() const {
+inline bool Break::viewed() const {
     return (status_ & BreakViewed) != 0;
 }
 
-inline void Break::viewed(boolean v) {
+inline void Break::viewed(bool v) {
     if (v) {
         status_ |= BreakViewed;
     } else {
@@ -82,11 +82,11 @@ inline void Break::viewed(boolean v) {
     }
 }
 
-inline boolean Break::valid() const {
+inline bool Break::valid() const {
     return (status_ & BreakValid) != 0;
 }
 
-inline void Break::valid(boolean v) {
+inline void Break::valid(bool v) {
     if (v) {
         status_ |= BreakValid;
     } else {
@@ -276,7 +276,7 @@ void Composition::damage(GlyphIndex first, GlyphIndex last) {
     }
 }
 
-boolean Composition::repair() {
+bool Composition::repair() {
     if (damaged_) {
         GlyphIndex component_count = component_->count();
         CompositorIndex break_count = breaks_->count();
@@ -347,7 +347,7 @@ void Composition::do_repair(
         }
         b.first_ = first_component + ((i == 0) ? 0 : breaks[i-1] + 1);
         b.last_ = first_component + (breaks[i] - 1);
-	boolean re_break = (break_index == breaks_->count());
+	bool re_break = (break_index == breaks_->count());
 	if (!re_break) {
 	    const Break& br = breaks_->item_ref(break_index);
 	    re_break = (
@@ -665,7 +665,7 @@ void Composition::pick(
     }
 }
 
-Glyph* Composition::make_item(Break& nb, boolean created) {
+Glyph* Composition::make_item(Break& nb, bool created) {
     LayoutKit* layout = LayoutKit::instance();
     nb.valid(true);
     nb.viewed(created);

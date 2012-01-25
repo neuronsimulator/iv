@@ -296,7 +296,7 @@ Coord Display::a_height() const {
 	return d.height_;
 }
 
-boolean Display::defaults(String&) const
+bool Display::defaults(String&) const
 {
 	return false;
 }
@@ -345,7 +345,7 @@ void Display::set_key_click(int)
 {
 }
 
-void Display::set_auto_repeat(boolean)
+void Display::set_auto_repeat(bool)
 {
 }
 
@@ -399,7 +399,7 @@ SelectionManager* Display::find_selection(const String&)
  * the main window has been unmapped.  We must ignore such events.
  */
 
-boolean Display::get(Event&)
+bool Display::get(Event&)
 {
 	MWassert(0);
 	return false;
@@ -414,7 +414,7 @@ void Display::put(const Event&)
  * Check to see if the display connection just shut down.
  */
 
-boolean Display::closed()
+bool Display::closed()
 {
 	return false;
 }
@@ -436,7 +436,7 @@ void Display::grab(Window*, Handler* h)
  * If the handler is on the list, it is unref'd.
  */
 
-void Display::ungrab(Handler* h, boolean)
+void Display::ungrab(Handler* h, bool)
 {
 	Event e;
     e.ungrab(h);
@@ -455,7 +455,7 @@ Handler* Display::grabber() const
  * Check whether a given handler is on the grabber list.
  */
 
-boolean Display::is_grabbing(Handler* h) const
+bool Display::is_grabbing(Handler* h) const
 {
 	Event e;
     return e.is_grabbing(h);

@@ -39,7 +39,7 @@ protected:
     ScrollBox(GlyphIndex size = 10);
     virtual ~ScrollBox();
 
-    virtual boolean shown(GlyphIndex) const;
+    virtual bool shown(GlyphIndex) const;
     virtual GlyphIndex first_shown() const;
     virtual GlyphIndex last_shown() const;
 };
@@ -59,7 +59,7 @@ public:
     virtual void undraw();
 
     virtual void modified(GlyphIndex);
-    virtual boolean shown(GlyphIndex) const;
+    virtual bool shown(GlyphIndex) const;
     virtual GlyphIndex first_shown() const;
     virtual GlyphIndex last_shown() const;
     virtual void allotment(GlyphIndex, DimensionName, Allotment&) const;

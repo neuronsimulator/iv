@@ -444,7 +444,7 @@ void TextEditor::BackwardPage (int count) {
     BackwardLine(pagesize * count);
 }
 
-void TextEditor::ScrollToSelection (boolean always) {
+void TextEditor::ScrollToSelection (bool always) {
     display->Draw(output, canvas);
     int line = text->LineNumber(dot);
     int offset = text->LineOffset(dot);

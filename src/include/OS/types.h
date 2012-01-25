@@ -27,12 +27,10 @@
 
 #include <OS/enter-scope.h>
 
-#undef boolean
 
 #if !defined(__MWERKS__)
 #include <sys/types.h>
 #endif
 
-#define boolean _lib_os(boolean)
 
 #endif

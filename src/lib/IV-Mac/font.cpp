@@ -115,7 +115,7 @@ inline FontRep* defaultFontRep(const char* nm)
 }
 
 static void nofont(const char* name) {
-	static boolean seen = 0;
+	static bool seen = 0;
 	if (!seen) {
 		seen = true;
 		printf("Can't find font:\n%s\nUsing default font. This is the\
@@ -416,7 +416,7 @@ const Font* Font::lookup(const char* name)
 // to also be compared to the fontlist of available TrueType fonts.  There
 // is no display in MS-Windows (ie no networked graphics), so it is ignored.
 // -----------------------------------------------------------------------
-boolean Font::exists(Display*, const String& name)
+bool Font::exists(Display*, const String& name)
 {
 	FontRep* rep = StringToFont(name);
 	if (rep != nil)
@@ -427,7 +427,7 @@ boolean Font::exists(Display*, const String& name)
 	return false;
 }
 
-boolean Font::exists(Display*, const char* name)
+bool Font::exists(Display*, const char* name)
 {
 	FontRep* rep = StringToFont(String(name));
 	if (rep != nil)
@@ -566,7 +566,7 @@ int Font::index(
 	const char* s,
 	int len,
 	float offset,
-	boolean between) const
+	bool between) const
 {
 	// not really tested. analogy to xfont.c
 	//printf("int Font::index not yet implemented\n");

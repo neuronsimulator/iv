@@ -26,7 +26,7 @@
 #define iv2_6_defs_h
 
 #include <InterViews/enter-scope.h>
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/coord.h>
 #include <IV-2_6/InterViews/alignment.h>
 #include <IV-2_6/InterViews/textstyle.h>

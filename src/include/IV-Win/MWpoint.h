@@ -73,17 +73,17 @@ public:
 		{ return (int) (xpos*p.xpos + ypos*p.ypos); }
 
 	// ---- logical operations ----
-	boolean operator==(const MWcoordPoint& p) const
+	bool operator==(const MWcoordPoint& p) const
 		{ return (xpos==p.xpos && ypos==p.ypos); }
-	boolean operator!=(const MWcoordPoint& p) const
+	bool operator!=(const MWcoordPoint& p) const
 		{ return (xpos!=p.xpos || ypos!=p.ypos); }
-	boolean operator<(const MWcoordPoint& p) const
+	bool operator<(const MWcoordPoint& p) const
 		{ return (ypos<p.ypos && xpos<p.xpos); }
-	boolean operator<=(const MWcoordPoint& p) const
+	bool operator<=(const MWcoordPoint& p) const
 		{ return (ypos<=p.ypos && xpos<=p.xpos); }
-	boolean operator>(const MWcoordPoint& p) const
+	bool operator>(const MWcoordPoint& p) const
 		{ return (ypos>p.ypos && xpos>p.xpos); }
-	boolean operator>=(const MWcoordPoint& p) const
+	bool operator>=(const MWcoordPoint& p) const
 		{ return (ypos>=p.ypos && xpos>=p.xpos); }
 
 	// ---- assignment operators ----
@@ -99,13 +99,13 @@ public:
 	MWcoordPoint min(const MWcoordPoint&) const;
 	MWcoordPoint transpose() const
 		{ return MWcoordPoint(ypos,xpos); }
-	boolean isBelow(const MWcoordPoint& p) const
+	bool isBelow(const MWcoordPoint& p) const
 		{ return ypos < p.ypos; }
-	boolean isAbove(const MWcoordPoint& p) const
+	bool isAbove(const MWcoordPoint& p) const
 		{ return ypos > p.ypos; }
-	boolean isLeft(const MWcoordPoint& p) const
+	bool isLeft(const MWcoordPoint& p) const
 		{ return xpos < p.xpos; }
-	boolean isRight(const MWcoordPoint& p) const
+	bool isRight(const MWcoordPoint& p) const
 		{ return xpos > p.xpos; }
 
 private:
@@ -158,17 +158,17 @@ public:
 		{ return xpos*p.xpos + ypos*p.ypos; }
 
 	// ---- logical operations ----
-	boolean operator==(const MWpixelPoint& p) const
+	bool operator==(const MWpixelPoint& p) const
 		{ return (xpos==p.xpos && ypos==p.ypos); }
-	boolean operator!=(const MWpixelPoint& p) const
+	bool operator!=(const MWpixelPoint& p) const
 		{ return (xpos!=p.xpos || ypos!=p.ypos); }
-	boolean operator<(const MWpixelPoint& p) const
+	bool operator<(const MWpixelPoint& p) const
 		{ return (ypos<p.ypos && xpos<p.xpos); }
-	boolean operator<=(const MWpixelPoint& p) const
+	bool operator<=(const MWpixelPoint& p) const
 		{ return (ypos<=p.ypos && xpos<=p.xpos); }
-	boolean operator>(const MWpixelPoint& p) const
+	bool operator>(const MWpixelPoint& p) const
 		{ return (ypos>p.ypos && xpos>p.xpos); }
-	boolean operator>=(const MWpixelPoint& p) const
+	bool operator>=(const MWpixelPoint& p) const
 		{ return (ypos>=p.ypos && xpos>=p.xpos); }
 
 	// ---- assignment operators ----
@@ -184,13 +184,13 @@ public:
 	MWpixelPoint min(const MWpixelPoint&) const;
 	MWpixelPoint transpose() const
 		{ return MWpixelPoint(ypos,xpos); }
-	boolean isBelow(const MWpixelPoint& p) const
+	bool isBelow(const MWpixelPoint& p) const
 		{ return ypos < p.ypos; }
-	boolean isAbove(const MWpixelPoint& p) const
+	bool isAbove(const MWpixelPoint& p) const
 		{ return ypos > p.ypos; }
-	boolean isLeft(const MWpixelPoint& p) const
+	bool isLeft(const MWpixelPoint& p) const
 		{ return xpos < p.xpos; }
-	boolean isRight(const MWpixelPoint& p) const
+	bool isRight(const MWpixelPoint& p) const
 		{ return xpos > p.xpos; }
 
 private:

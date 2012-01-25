@@ -79,8 +79,8 @@ void Tile::allocate(
         );
     }
     Coord natural = r.natural();
-    boolean growing = span > natural;
-    boolean shrinking = span < natural;
+    bool growing = span > natural;
+    bool shrinking = span < natural;
     float f;
     if (growing && r.stretch() > 0) {
         f = float(span - natural) / float(r.stretch());
@@ -142,8 +142,8 @@ void TileReversed::allocate(
         );
     }
     Coord natural = r.natural();
-    boolean growing = span > natural;
-    boolean shrinking = span < natural;
+    bool growing = span > natural;
+    bool shrinking = span < natural;
     float f;
     if (growing && r.stretch() > 0) {
         f = float(span - natural) / float(r.stretch());
@@ -240,8 +240,8 @@ void TileFirstAligned::allocate(
         );
     }
     Coord natural = r.natural();
-    boolean growing = span > natural;
-    boolean shrinking = span < natural;
+    bool growing = span > natural;
+    bool shrinking = span < natural;
     float f;
     if (growing && r.stretch() > 0) {
         f = float(span - natural) / float(r.stretch());
@@ -343,8 +343,8 @@ void TileReversedFirstAligned::allocate(
         );
     }
     Coord natural = r.natural();
-    boolean growing = span > natural;
-    boolean shrinking = span < natural;
+    bool growing = span > natural;
+    bool shrinking = span < natural;
     float f;
     if (growing && r.stretch() > 0) {
         f = float(span - natural) / float(r.stretch());

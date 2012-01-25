@@ -67,13 +67,13 @@ void rpcstream::close() {
     verify(rdbuf()->close() != nil);
 }
 
-void rpcstream::nonblocking(boolean nonblocking) { // can only fail, not clear
+void rpcstream::nonblocking(bool nonblocking) { // can only fail, not clear
     if (!rdbuf()->nonblocking(nonblocking)) {
 	setstate(ios::failbit);
     }
 }
 
-void rpcstream::verbose(boolean verbose) { // no effect on stream's state
+void rpcstream::verbose(bool verbose) { // no effect on stream's state
     rdbuf()->verbose(verbose);
 }
 

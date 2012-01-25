@@ -55,7 +55,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Mobility _mobility;
 };
@@ -74,7 +74,7 @@ public:
     virtual Graphic* GetGraphic();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     PinGraphic* GetPin();
     virtual PinComp* NewSubject(PinGraphic*);
@@ -108,10 +108,10 @@ class PSPin : public PostScriptView {
 public:
     PSPin(PinComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class SlidingPin : public SlidingEllipse {

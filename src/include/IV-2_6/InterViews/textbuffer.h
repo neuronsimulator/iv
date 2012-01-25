@@ -29,7 +29,7 @@
 #ifndef iv2_6_textbuffer_h
 #define iv2_6_textbuffer_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 
 class Regexp;
 
@@ -43,8 +43,8 @@ public:
     int BackwardSearch(Regexp* regexp, int index);
 
     int Match(Regexp* regexp, int index, int stop);
-    boolean ForwardMatch(Regexp* regexp, int index);
-    boolean BackwardMatch(Regexp* regexp, int index);
+    bool ForwardMatch(Regexp* regexp, int index);
+    bool BackwardMatch(Regexp* regexp, int index);
 
     virtual int Insert(int index, const char* string, int count);
     virtual int Delete(int index, int count);
@@ -67,25 +67,25 @@ public:
     int PreviousCharacter(int index);
     int NextCharacter(int index);
 
-    boolean IsBeginningOfText(int index);
+    bool IsBeginningOfText(int index);
     int BeginningOfText();
 
-    boolean IsEndOfText(int index);
+    bool IsEndOfText(int index);
     int EndOfText();
 
-    boolean IsBeginningOfLine(int index);
+    bool IsBeginningOfLine(int index);
     int BeginningOfLine(int index);
     int BeginningOfNextLine(int index);
 
-    boolean IsEndOfLine(int index);
+    bool IsEndOfLine(int index);
     int EndOfLine(int index);
     int EndOfPreviousLine(int index);
 
-    boolean IsBeginningOfWord(int index);
+    bool IsBeginningOfWord(int index);
     int BeginningOfWord(int index);
     int BeginningOfNextWord(int index);
 
-    boolean IsEndOfWord(int index);
+    bool IsEndOfWord(int index);
     int EndOfWord(int index);
     int EndOfPreviousWord(int index);
 protected:
@@ -116,13 +116,13 @@ inline int TextBuffer::PreviousCharacter (int i) {
 inline int TextBuffer::NextCharacter (int i) {
     return (i>=length) ? length : i+1;
 }
-inline boolean TextBuffer::IsBeginningOfText (int i) {
+inline bool TextBuffer::IsBeginningOfText (int i) {
     return i <= 0;
 }
 inline int TextBuffer::BeginningOfText () {
     return 0;
 }
-inline boolean TextBuffer::IsEndOfText (int i) {
+inline bool TextBuffer::IsEndOfText (int i) {
     return i >= length;
 }
 inline int TextBuffer::EndOfText () {

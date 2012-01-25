@@ -58,7 +58,7 @@
 
 ClassId OpenCmd::GetClassId () { return OPEN_CMD; }
 
-boolean OpenCmd::IsA (ClassId id) {
+bool OpenCmd::IsA (ClassId id) {
     return OPEN_CMD == id || ViewCompCmd::IsA(id);
 }
 
@@ -91,7 +91,7 @@ void OpenCmd::Execute () {
 
 ClassId PreciseMoveCmd::GetClassId () { return PRECISEMOVE_CMD; }
 
-boolean PreciseMoveCmd::IsA (ClassId id) {
+bool PreciseMoveCmd::IsA (ClassId id) {
     return PRECISEMOVE_CMD == id || Command::IsA(id);
 }
 
@@ -114,7 +114,7 @@ void PreciseMoveCmd::Execute () {
     }
 
     ed->InsertDialog(_dialog);
-    boolean accepted = _dialog->Accept();
+    bool accepted = _dialog->Accept();
     ed->RemoveDialog(_dialog);
 
     if (accepted) {
@@ -128,13 +128,13 @@ void PreciseMoveCmd::Execute () {
     }
 }
 
-boolean PreciseMoveCmd::Reversible () { return false; }
+bool PreciseMoveCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId PreciseScaleCmd::GetClassId () { return PRECISESCALE_CMD; }
 
-boolean PreciseScaleCmd::IsA (ClassId id) {
+bool PreciseScaleCmd::IsA (ClassId id) {
     return PRECISESCALE_CMD == id || Command::IsA(id);
 }
 
@@ -157,7 +157,7 @@ void PreciseScaleCmd::Execute () {
     }
 
     ed->InsertDialog(_dialog);
-    boolean accepted = _dialog->Accept();
+    bool accepted = _dialog->Accept();
     ed->RemoveDialog(_dialog);
 
     if (accepted) {
@@ -170,13 +170,13 @@ void PreciseScaleCmd::Execute () {
     }
 }
 
-boolean PreciseScaleCmd::Reversible () { return false; }
+bool PreciseScaleCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId PreciseRotateCmd::GetClassId () { return PRECISEROTATE_CMD; }
 
-boolean PreciseRotateCmd::IsA (ClassId id) {
+bool PreciseRotateCmd::IsA (ClassId id) {
     return PRECISEROTATE_CMD == id || Command::IsA(id);
 }
 
@@ -199,7 +199,7 @@ void PreciseRotateCmd::Execute () {
     }
 
     ed->InsertDialog(_dialog);
-    boolean accepted = _dialog->Accept();
+    bool accepted = _dialog->Accept();
     ed->RemoveDialog(_dialog);
 
     if (accepted) {
@@ -212,13 +212,13 @@ void PreciseRotateCmd::Execute () {
     }
 }
 
-boolean PreciseRotateCmd::Reversible () { return false; }
+bool PreciseRotateCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId NewViewCmd::GetClassId () { return NEWVIEW_CMD; }
 
-boolean NewViewCmd::IsA (ClassId id) {
+bool NewViewCmd::IsA (ClassId id) {
     return NEWVIEW_CMD == id || Command::IsA(id);
 }
 
@@ -240,19 +240,19 @@ void NewViewCmd::Execute () {
     unidraw->Open(newEd);
 }
 
-boolean NewViewCmd::Reversible () { return false; }
+bool NewViewCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId ArrowCmd::GetClassId () { return ARROW_CMD; }
-boolean ArrowCmd::IsA (ClassId id) {return ARROW_CMD==id || Command::IsA(id);}
+bool ArrowCmd::IsA (ClassId id) {return ARROW_CMD==id || Command::IsA(id);}
 
-ArrowCmd::ArrowCmd (ControlInfo* c, boolean head, boolean tail) : Command(c) {
+ArrowCmd::ArrowCmd (ControlInfo* c, bool head, bool tail) : Command(c) {
     _head = head;
     _tail = tail;
 }
 
-ArrowCmd::ArrowCmd (Editor* ed, boolean head, boolean tail) : Command(ed) {
+ArrowCmd::ArrowCmd (Editor* ed, bool head, bool tail) : Command(ed) {
     _head = head;
     _tail = tail;
 }
@@ -275,7 +275,7 @@ void ArrowCmd::Execute () {
 /*****************************************************************************/
 
 ClassId AboutCmd::GetClassId () { return ABOUT_CMD; }
-boolean AboutCmd::IsA (ClassId id) {return ABOUT_CMD==id || Command::IsA(id);}
+bool AboutCmd::IsA (ClassId id) {return ABOUT_CMD==id || Command::IsA(id);}
 
 AboutCmd::AboutCmd (ControlInfo* c) : Command(c) { }
 AboutCmd::AboutCmd (Editor* ed) : Command(ed) { }
@@ -295,13 +295,13 @@ void AboutCmd::Execute () {
     ed->RemoveDialog(&dialog);
 }
 
-boolean AboutCmd::Reversible () { return false; }
+bool AboutCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId IGridSpacingCmd::GetClassId () { return IGRIDSPACING_CMD; }
 
-boolean IGridSpacingCmd::IsA (ClassId id) {
+bool IGridSpacingCmd::IsA (ClassId id) {
     return IGRIDSPACING_CMD == id || GridSpacingCmd::IsA(id);
 }
 

@@ -30,7 +30,7 @@
 #define iv2_6_interactor_h
 
 #include <InterViews/enter-scope.h>
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/coord.h>
 #include <InterViews/geometry.h>
 #include <InterViews/glyph.h>
@@ -73,7 +73,7 @@ public:
     void Config(World*);
     virtual void Reconfig();
     const char* GetAttribute(const char*) const;
-    boolean AttributeIsSet(const char*) const;
+    bool AttributeIsSet(const char*) const;
     virtual void Reshape(Shape&);
     Shape* GetShape() const;
     void SetCursor(Cursor*);
@@ -92,18 +92,18 @@ public:
     /* output */
     Canvas* GetCanvas() const;
     virtual void Draw();
-    virtual void Highlight(boolean on);
+    virtual void Highlight(bool on);
     void Flush();
     void Sync();
-    static boolean ValidCanvas(Canvas*);
+    static bool ValidCanvas(Canvas*);
 
     /* input events */
-    boolean Check();
+    bool Check();
     int CheckQueue();
     void Listen(Sensor*);
     void Poll(Event&);
     void Read(Event&);
-    boolean Read(long sec, long usec, Event&);
+    bool Read(long sec, long usec, Event&);
     void UnRead(Event&);
     void Run();
     void QuitRunning(Event&);
@@ -165,8 +165,8 @@ private:
     InteractorHandler* handler_;
 
     void Init();
-    void DefaultConfig(boolean&);
-    void DoConfig(boolean);
+    void DefaultConfig(bool&);
+    void DoConfig(bool);
 
     virtual void Orphan();
 };

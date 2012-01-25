@@ -72,8 +72,8 @@ static Painter* xorPainter;
 
 /*****************************************************************************/
 
-static boolean Different (Graphic* g1, Graphic* g2) {
-    boolean different = true;
+static bool Different (Graphic* g1, Graphic* g2) {
+    bool different = true;
 
     if (
         g1->GetFgColor() == g2->GetFgColor() &&
@@ -516,9 +516,9 @@ void Viewer::Manipulate (Manipulator* m, Event& e) {
     m->Grasp(e);
 
     /*
-     * boolean b is just here to workaround a cfront 3.0 bug.
+     * bool b is just here to workaround a cfront 3.0 bug.
      */
-    boolean b = false;
+    bool b = false;
     do {
         Read(e);
 	b = m->Manipulating(e);

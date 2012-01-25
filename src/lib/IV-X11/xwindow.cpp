@@ -353,7 +353,7 @@ void Window::unbind() {
     c.clear_damage();
 }
 
-boolean Window::bound() const {
+bool Window::bound() const {
     WindowRep& w = *rep();
     return (
 	w.xwindow_ != WindowRep::unbound && (
@@ -457,7 +457,7 @@ void Window::unmap() {
   }	
 }
 
-boolean Window::is_mapped() const {
+bool Window::is_mapped() const {
     WindowRep& w = *rep();
     return w.wm_mapped_;
 }
@@ -468,7 +468,7 @@ boolean Window::is_mapped() const {
  * dispatch focus and delete events.
  */
 
-boolean Window::receive(const Event& e) {
+bool Window::receive(const Event& e) {
     WindowRep& w = *rep();
     XEvent& xe = e.rep()->xevent_;
     Handler* handler = nil;
@@ -1082,7 +1082,7 @@ void ManagedWindowRep::do_set(Window* window, HintFunction f) {
     }
 }
 
-boolean ManagedWindowRep::set_name(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_name(ManagedWindowHintInfo& info) {
     if (info.style_ != nil) {
 	Style& s = *info.style_;
 	String v;
@@ -1094,12 +1094,12 @@ boolean ManagedWindowRep::set_name(ManagedWindowHintInfo& info) {
     return false;
 }
 
-boolean ManagedWindowRep::set_geometry(ManagedWindowHintInfo&) {
+bool ManagedWindowRep::set_geometry(ManagedWindowHintInfo&) {
     /* unimplemented: should configure mapped windows */
     return false;
 }
 
-boolean ManagedWindowRep::set_group_leader(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_group_leader(ManagedWindowHintInfo& info) {
     if (group_leader_ == nil) {
 	info.hints_->flags &= ~WindowGroupHint;
 	info.hints_->window_group = None;
@@ -1115,7 +1115,7 @@ boolean ManagedWindowRep::set_group_leader(ManagedWindowHintInfo& info) {
     return false;
 }
 
-boolean ManagedWindowRep::set_transient_for(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_transient_for(ManagedWindowHintInfo& info) {
     if (transient_for_ != nil) {
 	XDrawable td = transient_for_->rep()->xwindow_;
 	if (td != WindowRep::unbound) {
@@ -1126,7 +1126,7 @@ boolean ManagedWindowRep::set_transient_for(ManagedWindowHintInfo& info) {
     return false;
 }
 
-boolean ManagedWindowRep::set_icon(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_icon(ManagedWindowHintInfo& info) {
     if (icon_ == nil) {
 	info.hints_->flags &= ~IconWindowHint;
 	info.hints_->icon_window = None;
@@ -1142,7 +1142,7 @@ boolean ManagedWindowRep::set_icon(ManagedWindowHintInfo& info) {
     return false;
 }
 
-boolean ManagedWindowRep::set_icon_name(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_icon_name(ManagedWindowHintInfo& info) {
     if (info.style_ != nil) {
 	Style& s = *info.style_;
 	String v;
@@ -1154,7 +1154,7 @@ boolean ManagedWindowRep::set_icon_name(ManagedWindowHintInfo& info) {
     return false;
 }
 
-boolean ManagedWindowRep::set_icon_geometry(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_icon_geometry(ManagedWindowHintInfo& info) {
     info.hints_->flags &= ~IconPositionHint;
     String g;
     if (!info.style_->find_attribute("iconGeometry", g)) {
@@ -1195,7 +1195,7 @@ boolean ManagedWindowRep::set_icon_geometry(ManagedWindowHintInfo& info) {
     return false;
 }
 
-boolean ManagedWindowRep::set_icon_bitmap(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_icon_bitmap(ManagedWindowHintInfo& info) {
     if (icon_bitmap_ == nil) {
 	info.hints_->flags &= ~IconPixmapHint;
 	info.hints_->icon_pixmap = None;
@@ -1206,7 +1206,7 @@ boolean ManagedWindowRep::set_icon_bitmap(ManagedWindowHintInfo& info) {
     return true;
 }
 
-boolean ManagedWindowRep::set_icon_mask(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_icon_mask(ManagedWindowHintInfo& info) {
     if (icon_mask_ == nil) {
 	info.hints_->flags &= ~IconMaskHint;
 	info.hints_->icon_mask = None;
@@ -1217,7 +1217,7 @@ boolean ManagedWindowRep::set_icon_mask(ManagedWindowHintInfo& info) {
     return true;
 }
 
-boolean ManagedWindowRep::set_all(ManagedWindowHintInfo& info) {
+bool ManagedWindowRep::set_all(ManagedWindowHintInfo& info) {
     Style* s = info.style_;
     XWMHints& h = *info.hints_;
     h.flags = InputHint;
@@ -1344,8 +1344,8 @@ public:
     unsigned short blue_;
 
     unsigned long hash() const;
-    boolean operator ==(const RGBTableEntry&) const;
-    boolean operator !=(const RGBTableEntry&) const;
+    bool operator ==(const RGBTableEntry&) const;
+    bool operator !=(const RGBTableEntry&) const;
 };
 
 inline unsigned long key_to_hash(const RGBTableEntry& k) { return k.hash(); }
@@ -1354,11 +1354,11 @@ unsigned long RGBTableEntry::hash() const {
     return (red_ >> 7) ^ (green_ >> 7) ^ (blue_ >> 7);
 }
 
-boolean RGBTableEntry::operator ==(const RGBTableEntry& rgb) const {
+bool RGBTableEntry::operator ==(const RGBTableEntry& rgb) const {
     return red_ == rgb.red_ && green_ == rgb.green_ && blue_ == rgb.blue_;
 }
 
-boolean RGBTableEntry::operator !=(const RGBTableEntry& rgb) const {
+bool RGBTableEntry::operator !=(const RGBTableEntry& rgb) const {
     return red_ != rgb.red_ || green_ != rgb.green_ || blue_ != rgb.blue_;
 }
 
@@ -1460,7 +1460,7 @@ void WindowVisual::find_visual_by_class_name(
     }
 }
 
-boolean WindowVisual::find_layer(const String& v, int& layer) {
+bool WindowVisual::find_layer(const String& v, int& layer) {
     if (v.convert(layer)) {
 	return true;
     }
@@ -1693,7 +1693,7 @@ void WindowVisual::find_color(
 	    if (localmapsize_ != 0) {
 		unsigned long best = 0;
 		double best_match = 0.0;
-		boolean matched = false;
+		bool matched = false;
 		for (unsigned long p = 0; p < localmapsize_; p++) {
 		    const WindowOverlayInfo& ov = info_.overlay_;
 		    if (ov.id_ == 0x0 || ov.transparent_ != p) {
@@ -1806,7 +1806,7 @@ Coord Display::a_height() const {
     return Coord(mm_to_points(double(DisplayHeightMM(d.display_, d.screen_))));
 }
 
-boolean Display::defaults(String& s) const {
+bool Display::defaults(String& s) const {
     const char* list = XResourceManagerString(rep_->display_);
     if (list != nil) {
 	s = list;
@@ -1878,7 +1878,7 @@ void Display::set_key_click(int v) {
     XChangeKeyboardControl(rep()->display_, KBKeyClickPercent, &k);
 }
 
-void Display::set_auto_repeat(boolean b) {
+void Display::set_auto_repeat(bool b) {
     XDisplay* dpy = rep()->display_;
     if (b) {
 	XAutoRepeatOn(dpy);
@@ -1958,7 +1958,7 @@ void DisplayRep::set_dpi(Coord& pixel) {
  * the main window has been unmapped.  We must ignore such events.
  */
 
-boolean Display::get(Event& event) {
+bool Display::get(Event& event) {
     DisplayRep* d = rep();
     EventRep& e = *(event.rep());
     e.display_ = this;
@@ -1991,7 +1991,7 @@ void Display::put(const Event& e) {
 #define FIONREAD I_NREAD
 #endif
 
-boolean Display::closed() {
+bool Display::closed() {
     XDisplay* dpy = rep()->display_;
     if (XEventsQueued(dpy, QueuedAfterReading) == 0) {
 	/* need to detect whether partial event or connection closed */
@@ -2023,7 +2023,7 @@ void Display::grab(Window* w, Handler* h) {
  * If the handler is on the list, it is unref'd.
  */
 
-void Display::ungrab(Handler* h, boolean all) {
+void Display::ungrab(Handler* h, bool all) {
     for (ListUpdater(GrabList) i(*rep()->grabbers_); i.more(); i.next()) {
 	const GrabInfo& g = i.cur_ref();
         if (g.handler_ == h) {
@@ -2048,7 +2048,7 @@ Handler* Display::grabber() const {
  * Check whether a given handler is on the grabber list.
  */
 
-boolean Display::is_grabbing(Handler* h) const {
+bool Display::is_grabbing(Handler* h) const {
     for (ListItr(GrabList) i(*rep()->grabbers_); i.more(); i.next()) {
 	const GrabInfo& g = i.cur_ref();
         if (g.handler_ == h) {
@@ -2082,7 +2082,7 @@ void DisplayRep::remove(Window* w) {
      * No easy way to delete multiple items during a single
      * list traversal.  Sigh.
      */
-    boolean done;
+    bool done;
     do {
 	done = true;
 	for (ListUpdater(GrabList) i(*grabbers_); i.more(); i.next()) {

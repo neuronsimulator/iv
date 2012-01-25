@@ -49,7 +49,7 @@ static const int SLOTS = 1000;
 class GVU_HashElem : public UHashElem {
 public:
     GVU_HashElem();
-    boolean Undefined();
+    bool Undefined();
     void Init(Iterator iview, int);
 public:
     Iterator _iview;
@@ -57,7 +57,7 @@ public:
 };
 
 GVU_HashElem::GVU_HashElem () { _iview.SetValue(nil); _n = 0; }
-boolean GVU_HashElem::Undefined () { return _iview.GetValue() == nil; }
+bool GVU_HashElem::Undefined () { return _iview.GetValue() == nil; }
 void GVU_HashElem::Init (Iterator iview, int n) { _iview = iview; _n = n; }
 
 /*****************************************************************************/
@@ -84,8 +84,8 @@ void GVUpdater::Update () {
     UpdateState();
 }
 
-static boolean Different (Graphic* g1, Graphic* g2) {
-    boolean different = true;
+static bool Different (Graphic* g1, Graphic* g2) {
+    bool different = true;
 
     if (
         g1->GetFgColor() == g2->GetFgColor() &&
@@ -153,8 +153,8 @@ void GVUpdater::RegisterSubjects (GVU_HashTable* table) {
     }
 }
 
-static boolean IsAGroup (GraphicView* view, GraphicComp* newParent) {
-    boolean result = false;
+static bool IsAGroup (GraphicView* view, GraphicComp* newParent) {
+    bool result = false;
     Iterator i;
     view->First(i);
 

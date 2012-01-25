@@ -379,7 +379,7 @@ void GraphicBlock::Adjust (Perspective& np) {
 
 GraphicBlock::~GraphicBlock () { Unref(perspective); }
 
-void GraphicBlock::Highlight (boolean on) {
+void GraphicBlock::Highlight (bool on) {
     if (_highlighted != on) {
         _highlighted = on;
 

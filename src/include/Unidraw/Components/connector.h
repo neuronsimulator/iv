@@ -43,7 +43,7 @@ public:
     
     virtual void Connect(Connector*, CGlue* = nil);
     virtual void Disconnect(Connector*);
-    virtual boolean ConnectedTo(Connector*);
+    virtual bool ConnectedTo(Connector*);
     void DisconnectAll();
 
     virtual void GetCenter(float&, float&);
@@ -59,7 +59,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Connector(Graphic* = nil);
 
@@ -69,7 +69,7 @@ protected:
 
     void Retransmit(Path*);
     void Retransmit(Connector* peer, Path*);
-    boolean Transferable(Connector* peer);
+    bool Transferable(Connector* peer);
 protected:
     UList* _cnxns;                             /* list of connections */
     StateVar* _stateVar;
@@ -84,7 +84,7 @@ public:
     Connector* GetConnector();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     ConnectorView(Connector* = nil);
 };

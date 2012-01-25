@@ -262,12 +262,12 @@ const Color* Color::brightness(float adjust) const
     return new Color(r, g, b);
 }
 
-boolean Color::distinguished(const Color* c) const 
+bool Color::distinguished(const Color* c) const 
 {
      return distinguished(Session::instance()->default_display(), c);
 }
 
-boolean Color::distinguished(Display* d, const Color* color) const 
+bool Color::distinguished(Display* d, const Color* color) const 
 {
 	RGBColor * cref = color->impl_->MACcolor();
 	int red = cref->red;
@@ -313,7 +313,7 @@ const Color* Color::lookup(Display* d, const String& s)
 	return lookup(d, s.string());
 }
 
-boolean Color::find(
+bool Color::find(
     const Display* display, const String& name,
     ColorIntensity& r, ColorIntensity& g, ColorIntensity& b) 
 {
@@ -321,7 +321,7 @@ boolean Color::find(
     return find(display, nm.string(), r, g, b);
 }
 
-boolean Color::find(
+bool Color::find(
     const Display*, 
 	const char* name,
     ColorIntensity& r, 

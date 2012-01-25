@@ -40,8 +40,8 @@ class TextBuffer;
 class ClassBuffer {
 public:
     ClassBuffer(
-	boolean recursive = false, boolean verbose = false,
-	boolean CPlusPlusFiles = false
+	bool recursive = false, bool verbose = false,
+	bool CPlusPlusFiles = false
     );
     virtual ~ClassBuffer();
 
@@ -65,7 +65,7 @@ private:
     char* Identifier(TextBuffer*, int&);
 private:
     Classes* _classes;
-    boolean _recursive, _verbose, _CPlusPlusFiles;
+    bool _recursive, _verbose, _CPlusPlusFiles;
 };
 
 #endif

@@ -65,7 +65,7 @@ public:
 	
 	enum { MODAL = 1, MODELESS, MOVABLE_MODAL};
 
-	boolean update_;					//whether window currently in list
+	bool update_;					//whether window currently in list
 	
 	//Points defining the maximum and minimus sizes of window
 	Point shrink_;
@@ -74,22 +74,22 @@ public:
 	// ---- typical window operations ----
 	void bind();                     		// bind to an MS-Windows window
 	void unbind();							// unbind from MS-Windows window
-	boolean bound();						// bound to MS-Windows window?
-	boolean map();							// map the window to the display
+	bool bound();						// bound to MS-Windows window?
+	bool map();							// map the window to the display
 	void unmap();							// unmap window from display
-	boolean isMapped();						// is window visible?	
+	bool isMapped();						// is window visible?	
 
 	//functions to determine new window placement
 	int next_window_x(void);
 	int next_window_y(void);
-	boolean placed_;
+	bool placed_;
 	int left_;
 	int bottom_;
 	
 	// MAC specific calls
 	void contentRect (void *data);
 	void drawGrowIcon(void);
-	void activate(boolean activ);
+	void activate(bool activ);
 	void repair(void);
 	void update(void);
 #if carbon
@@ -105,7 +105,7 @@ public:
 	void doZoom (void *data);
 	long MACpaint(void);
 	
-	void doubleBuffer(boolean b);
+	void doubleBuffer(bool b);
 	
 	Window* getIvWindow() const;
 #if carbon
@@ -119,18 +119,18 @@ public:
 	
 	// ----- static functions -----
 #if USE_SIOUX_WINDOW
-	static boolean noInterviewsWindows(void);
-	static void setNoInterviewsWindows(boolean windows);
+	static bool noInterviewsWindows(void);
+	static void setNoInterviewsWindows(bool windows);
 #endif
 
-	static boolean isOurWindow(WindowPtr theWin);
+	static bool isOurWindow(WindowPtr theWin);
 	static short isDialog(WindowPtr macWindow);
 	MACcreateParams * params_;					// creation parameters
 		
 	private:
 		WindowPtr		  theMacWindow_;		// the actual window associated with this
 		GWorldPtr 		  buffer_bitmap_;
-		boolean 		  doubleBuffered_;		// is window double-buffered?
+		bool 		  doubleBuffered_;		// is window double-buffered?
 };
 
 // The following are the window/class creation parameters.  
@@ -144,7 +144,7 @@ public:
 	const char* titleOf();          // fetch window title
 	Rect* bounds_;					//size of window
 	int  id_;						//type of window
-	boolean away_;						//whether a window can be closed
+	bool away_;						//whether a window can be closed
 	long refCon_input_;  			//what goes into refcon field
 	Point where_;
 #if carbon
@@ -156,11 +156,11 @@ private:
 };
 
 // ---- inline functions of MACwindow ----
-inline boolean MACwindow::bound()
+inline bool MACwindow::bound()
 	{ return (theMacWindow_) ? 1 : 0; }
 inline WindowPtr MACwindow::macWindow()
 	{ return theMacWindow_; }
-inline void MACwindow::doubleBuffer(boolean b)
+inline void MACwindow::doubleBuffer(bool b)
 	{ doubleBuffered_ = b; }
 
 
@@ -194,7 +194,7 @@ public:
 	return (WindowRep*)((CWindowPeek)wp)->refCon;
 #endif
 	}
-	boolean request_on_resize_;
+	bool request_on_resize_;
 private:	
 	Window* win;					// associated InterViews window
 	

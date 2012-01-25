@@ -590,7 +590,7 @@ public:
     
     OL_Button(
         const OLKit*, const OL_Specs*,
-        Glyph*, TelltaleState*, OL_ButtonType, boolean extend = true);
+        Glyph*, TelltaleState*, OL_ButtonType, bool extend = true);
     virtual ~OL_Button();
 
     virtual void allocate(Canvas*, const Allocation&, Extension&);
@@ -640,18 +640,18 @@ public:
     virtual void draw(Canvas*, const Allocation&) const;
     virtual void undraw();
     
-    boolean inside(const Event&) const;
-    boolean less_than(const Event&) const;
-    boolean greater_than(const Event&) const;
+    bool inside(const Event&) const;
+    bool less_than(const Event&) const;
+    bool greater_than(const Event&) const;
 
     void press(const Event&);
     void release(const Event&);
-    boolean dragging() { return dragging_; }
+    bool dragging() { return dragging_; }
 private:
     const OLKit* kit_;	
     const OL_Specs* specs_;
     DimensionName dimension_;
-    boolean dragging_;
+    bool dragging_;
     Canvas* canvas_;
     Extension extension_;
 };
@@ -667,12 +667,12 @@ public:
     virtual void undraw();
     virtual void flip_to(GlyphIndex);
     
-    virtual boolean inside(const Event&);
-    virtual boolean backward_arrow_contains(Coord x, Coord y) const;
-    virtual boolean forward_arrow_contains(Coord x, Coord y) const;
+    virtual bool inside(const Event&);
+    virtual bool backward_arrow_contains(Coord x, Coord y) const;
+    virtual bool forward_arrow_contains(Coord x, Coord y) const;
 
-    virtual boolean less_than(const Event&) const;
-    virtual boolean greater_than(const Event&) const;
+    virtual bool less_than(const Event&) const;
+    virtual bool greater_than(const Event&) const;
 
     virtual float forward_arrow_center() const;
     virtual float backward_arrow_center() const;
@@ -735,7 +735,7 @@ private:
 
 class OL_MenuMark : public Glyph {
 public:
-    OL_MenuMark(const OLKit*, const OL_Specs*, boolean is_pulldown);
+    OL_MenuMark(const OLKit*, const OL_Specs*, bool is_pulldown);
     virtual ~OL_MenuMark();
     
     virtual void request(Requisition&) const;
@@ -782,7 +782,7 @@ private:
     TelltaleState* state_;
     const Window* unpinned_;
     Window* pinned_;
-    boolean placed_;
+    bool placed_;
 };
 
 class OL_PushpinLook : public Glyph {
@@ -836,7 +836,7 @@ class OL_Setting : public OL_Frame, public Observer {
 public:
     OL_Setting(
 	const OLKit*, Glyph*, TelltaleState*,
-	const OL_Specs*, boolean is_default = false
+	const OL_Specs*, bool is_default = false
     );
     virtual ~OL_Setting();
 
@@ -846,7 +846,7 @@ public:
     virtual void draw_frame(Canvas*, const Allocation&, Coord thickness) const;
 protected:
     const OL_Specs* specs_;
-    boolean is_default_;
+    bool is_default_;
     Brush* brush_;
 };
 
@@ -884,7 +884,7 @@ public:
 
     virtual void press(const Event&);
     virtual void release(const Event&);
-    virtual boolean grabbing() const;
+    virtual bool grabbing() const;
     
     virtual void tick(long, long);
 protected:
@@ -912,13 +912,13 @@ protected:
     virtual void press_undefined();
     virtual void release_undefined();
     
-    virtual boolean is_forward(Coord x, Coord y) const = 0;
-    virtual boolean is_backward(Coord x, Coord y) const = 0;
+    virtual bool is_forward(Coord x, Coord y) const = 0;
+    virtual bool is_backward(Coord x, Coord y) const = 0;
     virtual void step_forward() = 0;
     virtual void step_backward() = 0;
     
-    virtual boolean at_start() const;
-    virtual boolean at_end() const;
+    virtual bool at_start() const;
+    virtual bool at_end() const;
 
     virtual void start_stepping();
     virtual void next_step();
@@ -932,9 +932,9 @@ protected:
     Allocation allocation_;
     Allocation thumb_allocation_;
     Coord pointer_x_, pointer_y_;
-    boolean forward_;
-    boolean backward_;
-    boolean grabbing_;
+    bool forward_;
+    bool backward_;
+    bool grabbing_;
     float initial_delay_;
     float interval_;
     IOHandler* timer_;
@@ -977,8 +977,8 @@ protected:
     virtual Requirement requirement_y() const;
     virtual void allocate_thumb(const Allocation&, Allocation&);
     virtual void adjust_pointer(Coord x, Coord y) const;
-    virtual boolean is_forward(Coord x, Coord y) const;
-    virtual boolean is_backward(Coord x, Coord y) const;
+    virtual bool is_forward(Coord x, Coord y) const;
+    virtual bool is_backward(Coord x, Coord y) const;
     virtual void step_forward();
     virtual void step_backward();
 
@@ -1011,8 +1011,8 @@ protected:
     virtual void adjust_pointer(Coord x, Coord y) const;
     virtual Coord thumb_min() const;
     virtual Coord thumb_max() const;
-    virtual boolean is_forward(Coord x, Coord y) const;
-    virtual boolean is_backward(Coord x, Coord y) const;
+    virtual bool is_forward(Coord x, Coord y) const;
+    virtual bool is_backward(Coord x, Coord y) const;
     virtual void step_forward();
     virtual void step_backward();
 private:
@@ -1027,9 +1027,9 @@ public:
 
     virtual void draw(Canvas*, const Allocation&) const;
     
-    virtual boolean inside(const Event&) const;
-    virtual boolean less_than(const Event&) const;
-    virtual boolean greater_than(const Event&) const;
+    virtual bool inside(const Event&) const;
+    virtual bool less_than(const Event&) const;
+    virtual bool greater_than(const Event&) const;
 
     virtual void press(const Event&);
     virtual void drag(const Event&);
@@ -1038,8 +1038,8 @@ protected:
     virtual Requirement requirement_y() const;
     virtual void allocate_thumb(const Allocation&, Allocation&);
     virtual void adjust_pointer(Coord x, Coord y) const;
-    virtual boolean is_forward(Coord x, Coord y) const;
-    virtual boolean is_backward(Coord x, Coord y) const;
+    virtual bool is_forward(Coord x, Coord y) const;
+    virtual bool is_backward(Coord x, Coord y) const;
     virtual void step_forward();
     virtual void step_backward();
   
@@ -1049,7 +1049,7 @@ protected:
     virtual void adjust_for_dimming();
 private:
     OL_ElevatorGlyph* glyph_;
-    boolean dragging_;
+    bool dragging_;
 };
 
 class OLKitImpl {
@@ -1508,7 +1508,7 @@ void OL_Anchor::draw(Canvas* c, const Allocation& a) const {
 
 OL_Button::OL_Button(
     const OLKit* k, const OL_Specs* s,
-    Glyph* g, TelltaleState* t, OL_ButtonType type, boolean extend
+    Glyph* g, TelltaleState* t, OL_ButtonType type, bool extend
 ) : MonoGlyph(nil), Observer(), kit_(k), specs_(s), state_(t), type_(type),
     brush_(new Brush(s->button_rule_width()))
 {
@@ -1773,7 +1773,7 @@ void OL_ElevatorGlyph::allocate(Canvas* c, const Allocation& a, Extension& e) {
 }
 
 void OL_ElevatorGlyph::draw(Canvas* c, const Allocation& a) const {
-    boolean h = dimension_ == Dimension_X;
+    bool h = dimension_ == Dimension_X;
     unsigned char ul        = h ? HORIZ_SB_UL            : VERT_SB_UL;
     unsigned char lr        = h ? HORIZ_SB_LR            : VERT_SB_LR;
     unsigned char box_ul    = h ? HORIZ_SB_BOX_UL        : VERT_SB_BOX_UL;
@@ -1860,14 +1860,14 @@ void OL_ElevatorGlyph::flip_to(GlyphIndex i) {
     }
 }
 
-boolean OL_ElevatorGlyph::inside(const Event& p) {
+bool OL_ElevatorGlyph::inside(const Event& p) {
     Coord x = p.pointer_x();
     Coord y = p.pointer_y();
     const Extension& e = extension_;
     return e.left() <= x && x < e.right() && e.bottom() <= y && y < e.top();
 }
 
-boolean OL_ElevatorGlyph::backward_arrow_contains(Coord x, Coord y) const {
+bool OL_ElevatorGlyph::backward_arrow_contains(Coord x, Coord y) const {
     Coord arrow = specs_->arrow_length();
     const Extension& e = extension_;
     Coord l = e.left(), b = e.bottom(), r = e.right(), t = e.top();
@@ -1878,7 +1878,7 @@ boolean OL_ElevatorGlyph::backward_arrow_contains(Coord x, Coord y) const {
     }
 }
 
-boolean OL_ElevatorGlyph::forward_arrow_contains(Coord x, Coord y) const {
+bool OL_ElevatorGlyph::forward_arrow_contains(Coord x, Coord y) const {
     Coord arrow = specs_->arrow_length();
     const Extension& e = extension_;
     Coord l = e.left(), b = e.bottom(), r = e.right(), t = e.top();
@@ -1889,7 +1889,7 @@ boolean OL_ElevatorGlyph::forward_arrow_contains(Coord x, Coord y) const {
     }
 }
 
-boolean OL_ElevatorGlyph::less_than(const Event& e) const {
+bool OL_ElevatorGlyph::less_than(const Event& e) const {
     if (dimension_ == Dimension_X) {
 	return extension_.right() < e.pointer_x();
     } else {
@@ -1897,7 +1897,7 @@ boolean OL_ElevatorGlyph::less_than(const Event& e) const {
     }
 }
 
-boolean OL_ElevatorGlyph::greater_than(const Event& e) const {
+bool OL_ElevatorGlyph::greater_than(const Event& e) const {
     if (dimension_ == Dimension_X) {
 	return extension_.left() > e.pointer_x();
     } else {
@@ -2020,7 +2020,7 @@ void OL_Gauge::allocate(Canvas* c, const Allocation& a, Extension& e) {
 }
 
 void OL_Gauge::draw(Canvas* c, const Allocation& a) const {
-    boolean horizontal = dimension_ == Dimension_X;
+    bool horizontal = dimension_ == Dimension_X;
     Coord l = a.left(), b = a.bottom(), r = a.right(), t = a.top();
     const Color* white = kit_->white(), *black = kit_->black();
     const Color* bg1 = kit_->bg1(), *bg2 = kit_->bg2(), *bg3 = kit_->bg3();
@@ -2125,7 +2125,7 @@ void OL_Gauge::disconnect(Observable*) {
 }
 
 OL_MenuMark::OL_MenuMark(
-    const OLKit* k, const OL_Specs* s, boolean pulldown
+    const OLKit* k, const OL_Specs* s, bool pulldown
 ) : Glyph(), kit_(k), specs_(s), font_(s->font()) {
     Resource::ref(font_); 
     if (pulldown) {
@@ -2480,7 +2480,7 @@ void OL_Slider::disconnect(Observable*) {
 
 OL_Setting::OL_Setting(
     const OLKit* k, Glyph* g, TelltaleState* t,
-    const OL_Specs* s, boolean d
+    const OL_Specs* s, bool d
 ) : OL_Frame(k, g, t, s->setting_thickness()), Observer(),
     specs_(s), is_default_(d),
     brush_(new Brush(s->setting_default_ring_thickness()))
@@ -2618,7 +2618,7 @@ void OL_Stepper::redraw() {
     thumb_->redraw();
 }
 
-boolean OL_Stepper::grabbing() const {
+bool OL_Stepper::grabbing() const {
     return grabbing_;
 }
 
@@ -2782,13 +2782,13 @@ void OL_Stepper::release_undefined() {
     canvas_->window()->cursor(saved_cursor_);
 }
 
-boolean OL_Stepper::at_start() const {
+bool OL_Stepper::at_start() const {
     Adjustable& a = *adjustable_;
     DimensionName d = dimension_;
     return a.cur_lower(d) == a.lower(d);
 }
 
-boolean OL_Stepper::at_end() const {
+bool OL_Stepper::at_end() const {
     Adjustable& a = *adjustable_;
     DimensionName d = dimension_;
     return a.cur_upper(d) == a.upper(d);
@@ -2988,7 +2988,7 @@ Coord OL_Cable::elevator_max() const {
     return thumb_position(a, l, g) + l * 0.5;
 }
 
-boolean OL_Cable::is_forward(Coord x, Coord y) const {
+bool OL_Cable::is_forward(Coord x, Coord y) const {
     if (dimension_ == Dimension_X) {
 	return elevator_max() < x;
     } else {
@@ -2996,7 +2996,7 @@ boolean OL_Cable::is_forward(Coord x, Coord y) const {
     }
 }
 
-boolean OL_Cable::is_backward(Coord x, Coord y) const {
+bool OL_Cable::is_backward(Coord x, Coord y) const {
     if (dimension_ == Dimension_X) {
 	return x < elevator_min();
     } else {
@@ -3013,7 +3013,7 @@ OL_Channel::OL_Channel(
 ) : OL_Stepper(s, a, d, new Patch(b)), kit_(k) {}
 
 void OL_Channel::draw(Canvas* c, const Allocation& a) const {
-    boolean horizontal = dimension_ == Dimension_X;
+    bool horizontal = dimension_ == Dimension_X;
     long ul, ll, ur, lr, lfill, rfill;
     if (horizontal) {
 	ul = HORIZ_SLIDER_UL;
@@ -3201,7 +3201,7 @@ Coord OL_Channel::thumb_max() const {
     return thumb_position(a, l, 0.0) + l * 0.5;
 }
 
-boolean OL_Channel::is_forward(Coord x, Coord y) const {
+bool OL_Channel::is_forward(Coord x, Coord y) const {
     if (dimension_ == Dimension_X) {
 	return thumb_max() < x;
     } else {
@@ -3209,7 +3209,7 @@ boolean OL_Channel::is_forward(Coord x, Coord y) const {
     }
 }
 
-boolean OL_Channel::is_backward(Coord x, Coord y) const {
+bool OL_Channel::is_backward(Coord x, Coord y) const {
     if (dimension_ == Dimension_X) {
 	return x < thumb_min();
     } else {
@@ -3308,14 +3308,14 @@ void OL_Dragbox::undraw() {
     canvas_ = nil;
 }
 
-boolean OL_Dragbox::inside(const Event& p) const {
+bool OL_Dragbox::inside(const Event& p) const {
     Coord x = p.pointer_x();
     Coord y = p.pointer_y();
     const Extension& e = extension_;
     return e.left() <= x && x < e.right() && e.bottom() <= y && y < e.top();
 }
 
-boolean OL_Dragbox::less_than(const Event& e) const {
+bool OL_Dragbox::less_than(const Event& e) const {
     if (dimension_ == Dimension_X) {
 	return extension_.right() < e.pointer_x();
     } else {
@@ -3323,7 +3323,7 @@ boolean OL_Dragbox::less_than(const Event& e) const {
     }
 }
 
-boolean OL_Dragbox::greater_than(const Event& e) const {
+bool OL_Dragbox::greater_than(const Event& e) const {
     if (dimension_ == Dimension_X) {
 	return extension_.left() > e.pointer_x();
     } else {
@@ -3361,15 +3361,15 @@ void OL_Elevator::draw(Canvas* c, const Allocation& a) const {
     OL_Stepper::draw(c, a);
 }
 
-boolean OL_Elevator::inside(const Event& e) const {
+bool OL_Elevator::inside(const Event& e) const {
     return glyph_->inside(e);
 }
 
-boolean OL_Elevator::less_than(const Event& e) const {
+bool OL_Elevator::less_than(const Event& e) const {
     return glyph_->less_than(e);
 }
 
-boolean OL_Elevator::greater_than(const Event& e) const {
+bool OL_Elevator::greater_than(const Event& e) const {
     return glyph_->greater_than(e);
 }
 
@@ -3442,11 +3442,11 @@ void OL_Elevator::adjust_pointer(Coord x, Coord y) const {
     }
 }
 
-boolean OL_Elevator::is_forward(Coord x, Coord y) const {
+bool OL_Elevator::is_forward(Coord x, Coord y) const {
     return glyph_->forward_arrow_contains(x, y);
 }
 
-boolean OL_Elevator::is_backward(Coord x, Coord y) const {
+bool OL_Elevator::is_backward(Coord x, Coord y) const {
     return glyph_->backward_arrow_contains(x, y);
 }
 

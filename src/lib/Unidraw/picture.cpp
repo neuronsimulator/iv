@@ -59,8 +59,8 @@ void Picture::First (Iterator& i) { i.SetValue(_kids->First()); }
 void Picture::Last (Iterator& i) { i.SetValue(_kids->Last()); }
 void Picture::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
 void Picture::Prev (Iterator& i) { i.SetValue(Elem(i)->Prev()); }
-boolean Picture::Done (Iterator i) { return Elem(i) == _kids->End(); }
-boolean Picture::IsEmpty () { return _kids->IsEmpty(); }
+bool Picture::Done (Iterator i) { return Elem(i) == _kids->End(); }
+bool Picture::IsEmpty () { return _kids->IsEmpty(); }
 Graphic* Picture::GetGraphic (Iterator i) { return graphic(Elem(i)); }
 
 void Picture::SetGraphic (Graphic* g, Iterator& i) {
@@ -338,7 +338,7 @@ void Picture::getExtent (
     tol = e._tol;
 }
 
-boolean Picture::contains (PointObj& po, Graphic* gs) {
+bool Picture::contains (PointObj& po, Graphic* gs) {
     if (!IsEmpty()) {
         Iterator i;
         FullGraphic gstemp;
@@ -365,7 +365,7 @@ boolean Picture::contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean Picture::intersects (BoxObj& userb, Graphic* gs) {
+bool Picture::intersects (BoxObj& userb, Graphic* gs) {
     if (!IsEmpty()) {
         Iterator i;
         FullGraphic gstemp;
@@ -402,7 +402,7 @@ void Picture::getCachedExtent (
     tol = _extent->_tol;
 }
 
-boolean Picture::extentCached () { return _caching && _extent != nil; }
+bool Picture::extentCached () { return _caching && _extent != nil; }
 
 void Picture::cacheExtent (float l, float b, float cx, float cy, float tol) {
     if (_caching) {

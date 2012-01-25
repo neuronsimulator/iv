@@ -46,7 +46,7 @@
 
 ClassId GraphicCompTool::GetClassId () { return GRAPHIC_COMP_TOOL; }
 
-boolean GraphicCompTool::IsA (ClassId id) {
+bool GraphicCompTool::IsA (ClassId id) {
     return GRAPHIC_COMP_TOOL == id || Tool::IsA(id);
 }
 

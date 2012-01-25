@@ -51,7 +51,7 @@ public:
     void Ignore(EventType);
     void IgnoreButton(EventType, int);
 
-    boolean Caught(const Event&) const;
+    bool Caught(const Event&) const;
 
     static void init();
 protected:
@@ -67,12 +67,12 @@ protected:
     void ClearButton(unsigned long a[], unsigned long b) {
 	a[ButtonIndex(b)] &= ~ButtonFlag(b);
     }
-    boolean ButtonIsSet(const unsigned long a[], unsigned long b) const {
+    bool ButtonIsSet(const unsigned long a[], unsigned long b) const {
 	return (a[ButtonIndex(b)] & ButtonFlag(b)) != 0;
     }
     void SetMouseButtons(unsigned long a[]) { a[0] |= 0x7; }
     void ClearMouseButtons(unsigned long a[]) { a[0] &= ~0x7; }
-    boolean MouseButtons(const unsigned long a[]) const {
+    bool MouseButtons(const unsigned long a[]) const {
 	return (a[0] & 0x7) != 0;
     }
 private:

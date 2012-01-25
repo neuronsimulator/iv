@@ -96,7 +96,7 @@ static const char* reencodeISO[] = {
 
 ClassId PostScriptView::GetClassId () { return POSTSCRIPT_VIEW; }
 
-boolean PostScriptView::IsA (ClassId id) {
+bool PostScriptView::IsA (ClassId id) {
     return POSTSCRIPT_VIEW == id || PreorderView::IsA(id);
 }
 
@@ -132,7 +132,7 @@ static void ScaleToPostScriptCoords (Graphic* g) {
     }
 }
 
-boolean PostScriptView::Emit (ostream& out) {
+bool PostScriptView::Emit (ostream& out) {
     SetPSFonts();
 
     Graphic* g = GetGraphicComp()->GetGraphic();
@@ -149,7 +149,7 @@ boolean PostScriptView::Emit (ostream& out) {
     FullGS(out);
     out << "/originalCTM matrix currentmatrix def\n\n";
 
-    boolean status = Definition(out);
+    bool status = Definition(out);
 
     out << "End " << MARK << " eop\n\n";
     out << "showpage\n\n";
@@ -885,7 +885,7 @@ void PostScriptView::Transformation (ostream& out) {
     }
 }
 
-static boolean Uncollected (const char* name, UList* fonts) {
+static bool Uncollected (const char* name, UList* fonts) {
     for (UList* u = fonts->First(); u != fonts->End(); u = u->Next()) {
         PSFont* font = (PSFont*) (*u)();
 
@@ -974,7 +974,7 @@ PostScriptView* PostScriptView::CreatePSView (GraphicComp* comp) {
 
 ClassId PostScriptViews::GetClassId () { return POSTSCRIPT_VIEWS; }
 
-boolean PostScriptViews::IsA (ClassId id) {
+bool PostScriptViews::IsA (ClassId id) {
     return POSTSCRIPT_VIEWS == id || PostScriptView::IsA(id);
 }
 
@@ -987,7 +987,7 @@ PostScriptViews::~PostScriptViews () {
     delete _views;
 }
 
-boolean PostScriptViews::Emit (ostream& out) {
+bool PostScriptViews::Emit (ostream& out) {
     SetPSFonts();
 
     Graphic* g = GetGraphicComp()->GetGraphic();
@@ -1004,7 +1004,7 @@ boolean PostScriptViews::Emit (ostream& out) {
     FullGS(out);
     out << "/originalCTM matrix currentmatrix def\n\n";
 
-    boolean status = PreorderView::Definition(out);
+    bool status = PreorderView::Definition(out);
 
     out << "End " << MARK << " eop\n\n";
     out << "showpage\n\n";
@@ -1015,12 +1015,12 @@ boolean PostScriptViews::Emit (ostream& out) {
     return status;
 }
 
-boolean PostScriptViews::Definition (ostream& out) {
+bool PostScriptViews::Definition (ostream& out) {
     out << "Begin " << MARK << " Pict\n";
     FullGS(out);
     out << "\n";
 
-    boolean status = PreorderView::Definition(out);
+    bool status = PreorderView::Definition(out);
 
     out << "End " << MARK << " eop\n\n";
 
@@ -1052,7 +1052,7 @@ void PostScriptViews::First (Iterator& i) { i.SetValue(_views->First()); }
 void PostScriptViews::Last (Iterator& i) { i.SetValue(_views->Last()); }
 void PostScriptViews::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
 void PostScriptViews::Prev (Iterator& i) { i.SetValue(Elem(i)->Prev()); }
-boolean PostScriptViews::Done (Iterator i) { return Elem(i) == _views->End(); }
+bool PostScriptViews::Done (Iterator i) { return Elem(i) == _views->End(); }
 ExternView* PostScriptViews::GetView (Iterator i) { return View(Elem(i)); }
 
 void PostScriptViews::SetView (ExternView* ev, Iterator& i) {

@@ -61,7 +61,7 @@ struct HitList {
 };
 
 struct PossibleHitTarget {
-    boolean picked_;
+    bool picked_;
     GlyphIndex count_;
     int depth_;
     HitTarget item_;
@@ -100,7 +100,7 @@ private:
     void hfree();
 
     void add_item(
-	boolean override,
+	bool override,
 	int depth, Glyph*, GlyphIndex, Handler*, GlyphIndex target
     );
     HitTarget& item(int depth, GlyphIndex);
@@ -336,7 +336,7 @@ void Hit::retarget(
     impl_->add_item(true, depth, g, i, h, target);
 }
 
-boolean Hit::any() const { return impl_->items_.used_ != 0; }
+bool Hit::any() const { return impl_->items_.used_ != 0; }
 int Hit::count() const { return impl_->items_.used_; }
 int Hit::depth(GlyphIndex target) const {
     if (target < 0 || target >= impl_->items_.used_) {
@@ -363,7 +363,7 @@ Handler* Hit::handler() const {
  */
 
 void HitImpl::add_item(
-    boolean override,
+    bool override,
     int depth, Glyph* g, GlyphIndex i, Handler* h, GlyphIndex target
 ) {
     HitTarget& t = item(depth, target);

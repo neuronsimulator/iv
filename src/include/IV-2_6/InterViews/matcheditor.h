@@ -41,11 +41,11 @@ public:
     );
     virtual ~MatchEditor();
 
-    virtual void Match(const char* pattern, boolean keystoke = true);
+    virtual void Match(const char* pattern, bool keystoke = true);
 protected:
-    virtual boolean HandleChar(char);
+    virtual bool HandleChar(char);
     char pattern[100];
-    boolean match_on_keystroke;
+    bool match_on_keystroke;
 private:
     void Init();
 };

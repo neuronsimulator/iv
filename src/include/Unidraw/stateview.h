@@ -44,7 +44,7 @@ protected:
     StateVarView(StateVar*);
 
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
     virtual void Reconfig();
 protected:
     StateVar* _subject;

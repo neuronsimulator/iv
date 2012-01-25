@@ -67,7 +67,7 @@ static char sbuf[SBUFSIZE];
 
 ClassId TextComp::GetClassId () { return TEXT_COMP; }
 
-boolean TextComp::IsA (ClassId id) {
+bool TextComp::IsA (ClassId id) {
     return TEXT_COMP == id || GraphicComp::IsA(id);
 }
 
@@ -155,13 +155,13 @@ void TextComp::Write (ostream& out) {
 TextComp* TextView::GetTextComp () { return (TextComp*) GetSubject(); }
 ClassId TextView::GetClassId () { return TEXT_VIEW; }
 
-boolean TextView::IsA (ClassId id) {
+bool TextView::IsA (ClassId id) {
     return TEXT_VIEW == id || GraphicView::IsA(id);
 }
 
 TextView::TextView (TextComp* subj) : GraphicView(subj) { }
 
-boolean TextView::TextChanged () {
+bool TextView::TextChanged () {
     TextGraphic* gview = (TextGraphic*) GetGraphic();
     TextGraphic* gsubj = (TextGraphic*) GetTextComp()->GetGraphic();
     
@@ -318,7 +318,7 @@ TextGraphic::TextGraphic (const char* s, Graphic* gr) : ULabel(s, gr) {
     _lineHt = gr->GetFont()->Height();
 }
 
-boolean TextGraphic::operator == (TextGraphic& tg) {
+bool TextGraphic::operator == (TextGraphic& tg) {
     const char* tgstring = tg.GetOriginal();
     int tgcount = strlen(tgstring);
     int count = strlen(_string);
@@ -326,7 +326,7 @@ boolean TextGraphic::operator == (TextGraphic& tg) {
     return (tgcount == count) ? strcmp(tgstring, _string) == 0 : false;
 }
 
-boolean TextGraphic::operator != (TextGraphic& tg) { return !(*this == tg); }
+bool TextGraphic::operator != (TextGraphic& tg) { return !(*this == tg); }
 
 Graphic* TextGraphic::Copy () { 
     return new TextGraphic(_string, _lineHt, this);
@@ -384,7 +384,7 @@ void TextGraphic::CalcBox (Coord& l, Coord& b, Coord& r, Coord& t, PSFont* f) {
     }
 }
 
-boolean TextGraphic::contains (PointObj& po, Graphic* gs) {
+bool TextGraphic::contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     PSFont* f = gs->GetFont();
     BoxObj box(0, 0, 0, f->Height());
@@ -406,7 +406,7 @@ boolean TextGraphic::contains (PointObj& po, Graphic* gs) {
     return false;
 }
 
-boolean TextGraphic::RotatedIntersects (BoxObj& userb, Graphic* gs) {
+bool TextGraphic::RotatedIntersects (BoxObj& userb, Graphic* gs) {
     int beg, end, lineSize, nextBeg, ypos = 0;
     const char* s = GetOriginal();
     int size = strlen(s);
@@ -435,7 +435,7 @@ boolean TextGraphic::RotatedIntersects (BoxObj& userb, Graphic* gs) {
     return false;
 }
 
-boolean TextGraphic::TransformedIntersects (BoxObj& userb, Graphic* gs) {
+bool TextGraphic::TransformedIntersects (BoxObj& userb, Graphic* gs) {
     int beg, end, lineSize, nextBeg, ypos = 0;
     const char* s = GetOriginal();
     int size = strlen(s);
@@ -460,7 +460,7 @@ boolean TextGraphic::TransformedIntersects (BoxObj& userb, Graphic* gs) {
     return false;
 }
 
-boolean TextGraphic::UntransformedIntersects (BoxObj& userb, Graphic* gs) {
+bool TextGraphic::UntransformedIntersects (BoxObj& userb, Graphic* gs) {
     int beg, end, lineSize, nextBeg, ypos = 0;
     const char* s = GetOriginal();
     int size = strlen(s);
@@ -479,9 +479,9 @@ boolean TextGraphic::UntransformedIntersects (BoxObj& userb, Graphic* gs) {
     return false;
 }
 
-boolean TextGraphic::intersects (BoxObj& userb, Graphic* gs) {
+bool TextGraphic::intersects (BoxObj& userb, Graphic* gs) {
     Transformer* t = gs->GetTransformer();
-    boolean intersects;
+    bool intersects;
     
     if (t != nil && t->Rotated()) {
         intersects = RotatedIntersects(userb, gs);
@@ -499,13 +499,13 @@ boolean TextGraphic::intersects (BoxObj& userb, Graphic* gs) {
 
 ClassId PSText::GetClassId () { return PS_TEXT; }
 
-boolean PSText::IsA (ClassId id) { 
+bool PSText::IsA (ClassId id) { 
     return PS_TEXT == id || PostScriptView::IsA(id);
 }
 
 PSText::PSText (TextComp* subj) : PostScriptView(subj) { }
 
-boolean PSText::Definition (ostream& out) {
+bool PSText::Definition (ostream& out) {
     TextComp* comp = (TextComp*) GetSubject();
     TextGraphic* g = comp->GetText();
     const char* text = g->GetOriginal();

@@ -41,12 +41,12 @@ public:
     virtual ~ImportCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
     virtual GraphicComp* PostDialog();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 
     static GraphicComp* Import(const char*);
     static GraphicComp* TIFF_Image(const char*);

@@ -118,8 +118,8 @@ void FileChooser::UpdateBrowser() {
     browser()->SetDirectory(Choice());
 }
 
-boolean FileChooser::Accept() {
-    boolean accepted, dirSelected;
+bool FileChooser::Accept() {
+    bool accepted, dirSelected;
 
     do {
         accepted = StringChooser::Accept();

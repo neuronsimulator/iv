@@ -136,7 +136,7 @@ const Color* Color::lookup(Display* d, const char* name) {
     return lookup(d, String(name));
 }
 
-boolean Color::distinguished(const Color* c) const {
+bool Color::distinguished(const Color* c) const {
     return distinguished(Session::instance()->default_display(), c);
 }
 
@@ -239,7 +239,7 @@ ColorRep* Color::create(
     return c;
 }
 
-boolean Color::find(
+bool Color::find(
     const Display* display, const String& name,
     ColorIntensity& r, ColorIntensity& g, ColorIntensity& b
 ) {
@@ -257,7 +257,7 @@ boolean Color::find(
     return false;
 }
 
-boolean Color::find(
+bool Color::find(
     const Display* display, const char* name,
     ColorIntensity& r, ColorIntensity& g, ColorIntensity& b
 ) {
@@ -268,7 +268,7 @@ void Color::destroy(ColorRep* r) {
     delete r;
 }
 
-boolean Color::distinguished(Display* d, const Color* color) const {
+bool Color::distinguished(Display* d, const Color* color) const {
     WindowVisual* wv = d->rep()->default_visual_;
     XColor& xc = rep(wv)->xcolor_;
     ColorRep* c = color->rep(wv);

@@ -66,7 +66,7 @@ CGlue* CGlue::Copy () {
     );
 }
 
-inline boolean SignsDiffer (float f1, float f2) {
+inline bool SignsDiffer (float f1, float f2) {
     return (f1 < 0 && f2 >= 0) || (f1 >= 0 && f2 < 0);
 }
 

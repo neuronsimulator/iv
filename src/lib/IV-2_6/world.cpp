@@ -80,7 +80,7 @@ const char* World::property_value(const char* s) const {
     return nil;
 }
 
-boolean World::property_is_on(const char* s) const {
+bool World::property_is_on(const char* s) const {
     return style()->value_is_on(String(s));
 }
 
@@ -127,11 +127,11 @@ const Color* World::background() const {
     return c;
 }
 
-boolean World::shaped_windows() const {
+bool World::shaped_windows() const {
     return style()->value_is_on("shaped_windows");
 }
 
-boolean World::double_buffered() const {
+bool World::double_buffered() const {
     return style()->value_is_on("double_buffered");
 }
 
@@ -144,11 +144,11 @@ unsigned int World::pheight() const { return display_->pheight(); }
 
 void World::run() { session_->run(); }
 void World::quit() { session_->quit(); }
-boolean World::done() const { return session_->done(); }
+bool World::done() const { return session_->done(); }
 
-boolean World::pending() const { return session_->pending(); }
+bool World::pending() const { return session_->pending(); }
 void World::read(Event& e) { session_->read(e); }
-boolean World::read(long sec, long usec, Event& e) {
+bool World::read(long sec, long usec, Event& e) {
     return session_->read(sec, usec, e);
 }
 void World::unread(Event& e) { session_->unread(e); }
@@ -156,7 +156,7 @@ void World::poll(Event& e) { session_->poll(e); }
 
 void World::RingBell(int i) { display_->ring_bell(i); }
 void World::SetKeyClick(int i) { display_->set_key_click(i); }
-void World::SetAutoRepeat(boolean b) { display_->set_auto_repeat(b); }
+void World::SetAutoRepeat(bool b) { display_->set_auto_repeat(b); }
 void World::SetFeedback(int t, int s) { display_->set_pointer_feedback(t, s); }
 
 void World::SetScreen(int s) { display_->set_screen(s); }

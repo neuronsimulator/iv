@@ -49,8 +49,8 @@ private:
     Canvas* canvas_;
     const Color* overlay_;
     const Color* underlay_;
-    boolean marked_;
-    boolean bounded_;
+    bool marked_;
+    bool bounded_;
     Coord left_, right_, bottom_, top_;
     Coord x1_, y1_, h1_;
     Coord x2_, y2_, h2_;

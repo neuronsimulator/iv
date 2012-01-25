@@ -42,8 +42,8 @@ public:
 
     virtual Graphic* GetGraphic();              // redefine all virtuals
     virtual void Constrain(Coord&, Coord&);     // if you redefine GetGraphic
-    virtual void Visibility(boolean);
-    virtual boolean IsVisible();
+    virtual void Visibility(bool);
+    virtual bool IsVisible();
     virtual void SetSpacing(float incr, float yincr);
 protected:
     Grid(Graphic*);

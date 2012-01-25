@@ -41,8 +41,8 @@ public:
     Dialog(const char*, ButtonState*, Interactor*, Alignment = Center);
     virtual ~Dialog();
 
-    virtual boolean Accept();
-    virtual boolean Popup(Event&, boolean placed = true);
+    virtual bool Accept();
+    virtual bool Popup(Event&, bool placed = true);
     int Status();
 protected:
     ButtonState* state;

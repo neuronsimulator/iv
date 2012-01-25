@@ -243,7 +243,7 @@ void Button::Refresh() { }
 
 void Button::Handle(register Event& e) {
     if (e.eventType == DownEvent && e.target == this) {
-	boolean inside = true;
+	bool inside = true;
 	do {
 	    if (enabled && e.target == this) {
 		if (e.eventType == EnterEvent) {

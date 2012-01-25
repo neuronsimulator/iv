@@ -40,7 +40,7 @@ public:
     InteractorHandler(Interactor*);
     virtual ~InteractorHandler();
 
-    virtual boolean event(Event&);
+    virtual bool event(Event&);
 private:
     Interactor* interactor_;
 };

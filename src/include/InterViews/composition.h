@@ -43,7 +43,7 @@ public:
     virtual ~Composition();
 
     virtual void allocate(Canvas*, const Allocation&, Extension&);
-    virtual boolean repair();
+    virtual bool repair();
 
     virtual GlyphIndex item(GlyphIndex index) const;
     virtual GlyphIndex beginning_of(GlyphIndex item) const;
@@ -71,21 +71,21 @@ protected:
     );
     virtual void damage(GlyphIndex first, GlyphIndex last);
     virtual Glyph* separator(Break&);
-    virtual Glyph* make_item(Break&, boolean created);
+    virtual Glyph* make_item(Break&, bool created);
     virtual Glyph* make(Break&);
 private:
     Compositor* compositor_;
     CompositionComponent_List* component_;
     Break_List* breaks_;
     Glyph* separator_;
-    boolean view_all_;
-    boolean damaged_;
+    bool view_all_;
+    bool damaged_;
     GlyphIndex first_damage_;
     GlyphIndex last_damage_;
     GlyphIndex item_;
     DimensionName dimension_;
     Coord span_;
-    boolean resizable_;
+    bool resizable_;
 };
 
 class LRComposition : public Composition {

@@ -77,7 +77,7 @@ void UControlInteractor::Redraw (Coord, Coord, Coord, Coord) {
     }
 }
 
-void UControlInteractor::Highlight (boolean on) {
+void UControlInteractor::Highlight (bool on) {
     if (_highlighted != on) {
         Invert();
         _highlighted = on;

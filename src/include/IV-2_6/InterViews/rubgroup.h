@@ -55,8 +55,8 @@ public:
     Rubberband* Last();
     Rubberband* Next();
     Rubberband* Prev();
-    boolean IsEmpty();
-    boolean AtEnd();
+    bool IsEmpty();
+    bool AtEnd();
 private:
     RubberList* rlist, *cur;
 };

@@ -380,9 +380,9 @@ Catalog::~Catalog () {
 #endif
 }
 
-boolean Catalog::Save (EditorInfo* edInfo, const char* name) {
+bool Catalog::Save (EditorInfo* edInfo, const char* name) {
     filebuf fbuf;
-    boolean ok = fbuf.open((char*) name, IOS_OUT) != 0;
+    bool ok = fbuf.open((char*) name, IOS_OUT) != 0;
 
     if (ok) {
         ostream out(&fbuf);
@@ -397,11 +397,11 @@ boolean Catalog::Save (EditorInfo* edInfo, const char* name) {
     return ok;
 }
 
-boolean Catalog::Save (Component* comp, const char* name) {
+bool Catalog::Save (Component* comp, const char* name) {
     ObjectMap* prevMap = _curMap;
     ObjectMap objmap(comp, COMPONENT);
     _curMap = &objmap;
-    boolean ok = FileSave((void*) comp, COMPONENT, name);
+    bool ok = FileSave((void*) comp, COMPONENT, name);
 
     if (ok) {
         _compMap->Unregister(name);
@@ -411,11 +411,11 @@ boolean Catalog::Save (Component* comp, const char* name) {
     return ok;
 }
 
-boolean Catalog::Save (Command* cmd, const char* name) {
+bool Catalog::Save (Command* cmd, const char* name) {
     ObjectMap* prevMap = _curMap;
     ObjectMap objmap(cmd, COMMAND);
     _curMap = &objmap;
-    boolean ok = FileSave((void*) cmd, COMMAND, name);
+    bool ok = FileSave((void*) cmd, COMMAND, name);
 
     if (ok) {
         _cmdMap->Unregister(name);
@@ -425,11 +425,11 @@ boolean Catalog::Save (Command* cmd, const char* name) {
     return ok;
 }
 
-boolean Catalog::Save (Tool* tool, const char* name) {
+bool Catalog::Save (Tool* tool, const char* name) {
     ObjectMap* prevMap = _curMap;
     ObjectMap objmap(tool, TOOL);
     _curMap = &objmap;
-    boolean ok = FileSave((void*) tool, TOOL, name);
+    bool ok = FileSave((void*) tool, TOOL, name);
     _curMap = prevMap;
 
     if (ok) {
@@ -439,8 +439,8 @@ boolean Catalog::Save (Tool* tool, const char* name) {
     return ok;
 }
 
-boolean Catalog::Retrieve (const char* name, EditorInfo*& edInfo) {
-    boolean ok = true;
+bool Catalog::Retrieve (const char* name, EditorInfo*& edInfo) {
+    bool ok = true;
     edInfo = (EditorInfo*) _edInfoMap->GetObject(name);
 
     if (edInfo == nil) {
@@ -461,8 +461,8 @@ boolean Catalog::Retrieve (const char* name, EditorInfo*& edInfo) {
     return ok;
 }
 
-boolean Catalog::Retrieve (const char* name, Component*& comp) {
-    boolean ok = true;
+bool Catalog::Retrieve (const char* name, Component*& comp) {
+    bool ok = true;
     comp = (Component*) _compMap->GetObject(name);
 
     if (comp == nil) {
@@ -480,8 +480,8 @@ boolean Catalog::Retrieve (const char* name, Component*& comp) {
     return ok;
 }
 
-boolean Catalog::Retrieve (const char* name, Command*& cmd) {
-    boolean ok = true;
+bool Catalog::Retrieve (const char* name, Command*& cmd) {
+    bool ok = true;
     cmd = (Command*) _cmdMap->GetObject(name);
 
     if (cmd == nil) {
@@ -499,8 +499,8 @@ boolean Catalog::Retrieve (const char* name, Command*& cmd) {
     return ok;
 }
 
-boolean Catalog::Retrieve (const char* name, Tool*& tool) {
-    boolean ok = true;
+bool Catalog::Retrieve (const char* name, Tool*& tool) {
+    bool ok = true;
     tool = (Tool*) _toolMap->GetObject(name);
 
     if (tool == nil) {
@@ -518,22 +518,22 @@ boolean Catalog::Retrieve (const char* name, Tool*& tool) {
     return ok;
 }
 
-boolean Catalog::Valid (const char* name, EditorInfo*& obj) {
+bool Catalog::Valid (const char* name, EditorInfo*& obj) {
     obj = (EditorInfo*) _edInfoMap->GetObject(name);
     return obj != nil;
 }
 
-boolean Catalog::Valid (const char* name, Component*& obj) {
+bool Catalog::Valid (const char* name, Component*& obj) {
     obj = (Component*) _compMap->GetObject(name);
     return obj != nil;
 }
 
-boolean Catalog::Valid (const char* name, Command*& obj) {
+bool Catalog::Valid (const char* name, Command*& obj) {
     obj = (Command*) _cmdMap->GetObject(name);
     return obj != nil;
 }
 
-boolean Catalog::Valid (const char* name, Tool*& obj) {
+bool Catalog::Valid (const char* name, Tool*& obj) {
     obj = (Tool*) _toolMap->GetObject(name);
     return obj != nil;
 }
@@ -637,10 +637,10 @@ void* Catalog::ReadSubstObject (
     return obj;
 }
 
-static boolean FoundDelim (const char* delim, UArray& data) {
+static bool FoundDelim (const char* delim, UArray& data) {
     int n_delim = strlen(delim);
     int n_data = data.Count();
-    boolean found = n_data >= n_delim;
+    bool found = n_data >= n_delim;
 
     if (found) {
         int j = n_data - n_delim;
@@ -683,7 +683,7 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
     if (_tmpfile == nil || ++stackLvl > 1) {
         _tmpfile = tempnam("/tmp", ".udcp");
     }
-    boolean ok = obuf.open(_tmpfile, IOS_OUT) != 0;
+    bool ok = obuf.open(_tmpfile, IOS_OUT) != 0;
 
     if (ok) {
 	ObjectMap omap(obj, base_id);
@@ -717,7 +717,7 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
     strstream inout;
 
     _curMap = &omap;
-    boolean ok = SaveObject(obj, base_id, inout);
+    bool ok = SaveObject(obj, base_id, inout);
 
     if (ok) {
         _curMap = &imap;
@@ -846,23 +846,23 @@ void Catalog::WriteObject (void* obj, ClassId base_id, ostream& out) {
     }
 }    
 
-boolean Catalog::SaveObject (void* obj, ClassId base_id, ostream& out) {
+bool Catalog::SaveObject (void* obj, ClassId base_id, ostream& out) {
     WriteVersion(_version, out);
     WriteObject(obj, base_id, out);
     csolver->Write(out);
     return out.good();
 }    
 
-boolean Catalog::RetrieveObject (istream& in, void*& obj) {
+bool Catalog::RetrieveObject (istream& in, void*& obj) {
     _fileVersion = ReadVersion(in);
     obj = ReadObject(in);
     csolver->Read(in);
     return in.good();
 }
 
-boolean Catalog::FileSave (void* obj, ClassId base_id, const char* name) {
+bool Catalog::FileSave (void* obj, ClassId base_id, const char* name) {
     filebuf fbuf;
-    boolean ok = fbuf.open((char*) name, IOS_OUT) != 0;
+    bool ok = fbuf.open((char*) name, IOS_OUT) != 0;
 
     if (ok) {
         ostream out(&fbuf);
@@ -871,9 +871,9 @@ boolean Catalog::FileSave (void* obj, ClassId base_id, const char* name) {
     return ok;
 }    
 
-boolean Catalog::FileRetrieve (const char* name, void*& obj) {
+bool Catalog::FileRetrieve (const char* name, void*& obj) {
     filebuf fbuf;
-    boolean ok = fbuf.open((char*) name, IOS_IN) != 0;
+    bool ok = fbuf.open((char*) name, IOS_IN) != 0;
 
     if (ok) {
         istream in(&fbuf);
@@ -882,12 +882,12 @@ boolean Catalog::FileRetrieve (const char* name, void*& obj) {
     return ok;
 }
 
-boolean Catalog::Exists (const char* path) {
+bool Catalog::Exists (const char* path) {
     /* cast workaround for DEC C++ prototype bug */
     return access((char*)path, F_OK) >= 0;
 }
 
-boolean Catalog::Writable (const char* path) {
+bool Catalog::Writable (const char* path) {
     /* cast workaround for DEC C++ prototype bug */
     return access((char*)path, W_OK) >= 0;
 }
@@ -1005,7 +1005,7 @@ int Catalog::ReadBgFilled (istream& in) {
     return bgFilled;
 }
 
-void Catalog::WriteBgFilled (boolean bgFilled, ostream& out) {
+void Catalog::WriteBgFilled (bool bgFilled, ostream& out) {
     Mark(out);
     out << (bgFilled ? 1 : 0) << " ";
 }
@@ -1070,8 +1070,8 @@ PSBrush* Catalog::ReadBrush (istream& in) {
 
     if (buf[0] == 'b') {
         char lookahead = '~';
-        boolean defined = true;
-        boolean none = false;
+        bool defined = true;
+        bool none = false;
         int p = 0;
         int w = 0;
 
@@ -1148,7 +1148,7 @@ PSBrush* Catalog::ReadBrush (const char* n, int index) {
 
     PSBrush* br = nil;
     int p, w;
-    boolean none = (definition[0] == 'n' || definition[0] == 'N');
+    bool none = (definition[0] == 'n' || definition[0] == 'N');
 
     if (none) {
 	br = FindNoneBrush();
@@ -1190,7 +1190,7 @@ PSColor* Catalog::ReadColor (istream& in) {
 
     if (buf[0] == 'c') {
         char lookahead = '~';
-        boolean defined = true;
+        bool defined = true;
         char name[CHARBUFSIZE];
         ColorIntensity r = 0, g = 0, b = 0;
 
@@ -1294,7 +1294,7 @@ PSFont* Catalog::ReadFont (istream& in) {
 
     if (buf[0] == 'f') {
         char lookahead = '~';
-        boolean defined = true;
+        bool defined = true;
         char name[CHARBUFSIZE];
         char printfont[CHARBUFSIZE];
         char printsize[CHARBUFSIZE];
@@ -1483,8 +1483,8 @@ PSPattern* Catalog::ReadPattern (istream& in) {
 
     if (buf[0] == 'p') {
         char lookahead = '~';
-        boolean defined = true;
-        boolean none = false;
+        bool defined = true;
+        bool none = false;
         float graylevel = 0;
         int data[patternHeight];
         int size = 0;
@@ -1603,7 +1603,7 @@ PSPattern* Catalog::ReadPattern (const char* n, int index) {
     char* definition = strnew(def); // some sscanfs write to their format...
 
     PSPattern* pat = nil;
-    boolean none = (definition[0] == 'n' || definition[0] == 'N');
+    bool none = (definition[0] == 'n' || definition[0] == 'N');
 
     if (none) {
 	pat = FindNonePattern();

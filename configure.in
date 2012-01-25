@@ -36,7 +36,7 @@ dnl This does the useful stuff from AM_INIT_AUTOMAKE, which we don't include
 dnl because I couldn't get automake to work properly.
 mlh_cxxflag="$CXXFLAGS"
 PACKAGE=iv
-VERSION=3.2b.hines17
+VERSION=3.2b.hines18
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
 
@@ -145,7 +145,6 @@ fi
 AC_SUBST(MINGW_FALSE)
 AC_SUBST(MINGW_TRUE)
 
-SHOULD_TRUE_BE_DECLARED
 NRN_FABS
 
 dnl Checks for typedefs, structures, and compiler characteristics.

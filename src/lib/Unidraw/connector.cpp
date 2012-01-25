@@ -71,7 +71,7 @@ _CSData::~_CSData () {
 
 ClassId Connector::GetClassId () { return CONNECTOR; }
 
-boolean Connector::IsA (ClassId id) {
+bool Connector::IsA (ClassId id) {
     return CONNECTOR == id || GraphicComp::IsA(id);
 }
 
@@ -153,7 +153,7 @@ void Connector::DisconnectAll () {
     }
 }
 
-boolean Connector::ConnectedTo (Connector* c) { return _cnxns->Find(c) != nil;}
+bool Connector::ConnectedTo (Connector* c) { return _cnxns->Find(c) != nil;}
 void Connector::ConnectMe (Connector* c) { c->_cnxns->Append(new UList(this));}
 void Connector::DisconnectMe (Connector* c) { c->_cnxns->Delete(this); }
 void Connector::GetCenter (float& x, float& y) {GetGraphic()->GetCenter(x, y);}
@@ -187,7 +187,7 @@ void Connector::Retransmit (Path* path) {
     if (path->Visited(this)) {
         return;
     }
-    boolean forking = _cnxns->First() != _cnxns->Last(); // fork if > 1 cnxn
+    bool forking = _cnxns->First() != _cnxns->Last(); // fork if > 1 cnxn
     path->Visit(this);
     
     for (UList* u = _cnxns->First(); u != _cnxns->End(); u = u->Next()) {
@@ -217,8 +217,8 @@ void Connector::Retransmit (Connector* peer, Path* path) {
     }
 }
 
-boolean Connector::Transferable (Connector* peer) {
-    boolean transferable = false;
+bool Connector::Transferable (Connector* peer) {
+    bool transferable = false;
     StateVar* myVar = GetBinding();
     StateVar* peerVar = peer->GetBinding();
 
@@ -243,6 +243,6 @@ Connector* ConnectorView::GetConnector () { return (Connector*) GetSubject(); }
 ConnectorView::ConnectorView (Connector* subj) : GraphicView(subj) { }
 ClassId ConnectorView::GetClassId () { return CONNECTOR_VIEW; }
 
-boolean ConnectorView::IsA (ClassId id) {
+bool ConnectorView::IsA (ClassId id) {
     return CONNECTOR_VIEW == id || GraphicView::IsA(id);
 }

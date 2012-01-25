@@ -72,7 +72,7 @@ public:
     virtual void focus_out();
 
     virtual void allocation_changed(Canvas*, const Allocation&);
-    virtual boolean inside(const Event&);
+    virtual bool inside(const Event&);
 
     virtual Canvas* canvas() const;
     virtual const Transformer& transformer() const;
@@ -99,7 +99,7 @@ public:
     virtual void enter();
     virtual void leave();
 private:
-    boolean inside_;
+    bool inside_;
 };
 
 #endif

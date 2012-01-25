@@ -47,8 +47,8 @@ public:
 
     void move(GlyphIndex, Coord x, Coord y);
     void location(GlyphIndex, Coord& x, Coord& y);
-    void show(GlyphIndex, boolean);
-    boolean showing(GlyphIndex) const;
+    void show(GlyphIndex, bool);
+    bool showing(GlyphIndex) const;
 
     virtual void request(Requisition&) const;
     virtual void allocate(Canvas*, const Allocation&, Extension&);

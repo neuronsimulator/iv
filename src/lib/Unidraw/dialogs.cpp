@@ -103,7 +103,7 @@ void BasicDialog::Forward (Event& e) {
     }
 }    
 
-boolean BasicDialog::IsAChild (Interactor* i) {
+bool BasicDialog::IsAChild (Interactor* i) {
     Scene* parent1 = i->Parent();
 
     while (parent1 != nil) {
@@ -168,7 +168,7 @@ ConfirmDialog::ConfirmDialog (
     input->Catch(KeyEvent);
 }    
 
-inline boolean Confirmed (int v) {
+inline bool Confirmed (int v) {
     return v == 'y' || v == 'n' || v == '\007';
 }
 
@@ -316,13 +316,13 @@ Interactor* UChooser::Interior (const char* acptlbl) {
 
 class PrintBS : public ButtonState {
 public:
-    PrintBS(PrintDialog*, boolean);
+    PrintBS(PrintDialog*, bool);
     virtual void Notify();
 private:
     PrintDialog* _dialog;
 };
 
-PrintBS::PrintBS (PrintDialog* pd, boolean v) : ButtonState(v) {
+PrintBS::PrintBS (PrintDialog* pd, bool v) : ButtonState(v) {
     _dialog = pd;
 }
 
@@ -350,7 +350,7 @@ static const char* DefaultPrintCmd () {
     return print_cmd;
 }
 
-PrintDialog::PrintDialog (boolean to_printer) : FileChooser(
+PrintDialog::PrintDialog (bool to_printer) : FileChooser(
     new ButtonState, ".", 10, 24, Center
 ) {
     _last_print_cmd = strnew(DefaultPrintCmd());
@@ -369,7 +369,7 @@ PrintDialog::~PrintDialog () {
     delete [] _last_file_name;
 }
 
-void PrintDialog::ToPrinter (boolean to_printer) {
+void PrintDialog::ToPrinter (bool to_printer) {
     if (to_printer != _to_printer) {
         _to_printer = to_printer;
 
@@ -391,7 +391,7 @@ void PrintDialog::ToPrinter (boolean to_printer) {
     }
 }
 
-boolean PrintDialog::ToPrinter () { return _to_printer; }
+bool PrintDialog::ToPrinter () { return _to_printer; }
 
 void PrintDialog::UpdateEditor () {
     if (!ToPrinter()) {
@@ -471,7 +471,7 @@ void GridDialog::Handle (Event& e) {
     }
 }
 
-boolean GridDialog::Accept () {
+bool GridDialog::Accept () {
     Event e;
     int v = 0;
 

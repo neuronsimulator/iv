@@ -40,7 +40,7 @@
 
 ClassId BrushCmd::GetClassId () { return BRUSH_CMD; }
 
-boolean BrushCmd::IsA (ClassId id) {
+bool BrushCmd::IsA (ClassId id) {
     return BRUSH_CMD == id || Command::IsA(id);
 }
 

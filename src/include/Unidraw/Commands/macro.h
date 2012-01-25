@@ -42,7 +42,7 @@ public:
 
     virtual void Execute();
     virtual void Unexecute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
     
     virtual void SetEditor(Editor*);
 
@@ -50,7 +50,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator&);
+    virtual bool Done(Iterator&);
 
     virtual Command* GetCommand(Iterator&);
     virtual void SetCommand(Command*, Iterator&);
@@ -66,7 +66,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Command* Cmd(UList*);
     UList* Elem(Iterator&);

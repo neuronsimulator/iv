@@ -53,7 +53,7 @@ static const int valid_mask = 2;
 
 ClassId StencilComp::GetClassId () { return STENCIL_COMP; }
 
-boolean StencilComp::IsA (ClassId id) {
+bool StencilComp::IsA (ClassId id) {
     return STENCIL_COMP == id || GraphicComp::IsA(id);
 }
 
@@ -131,7 +131,7 @@ StencilComp* StencilView::GetStencilComp () {
 
 ClassId StencilView::GetClassId () { return STENCIL_VIEW; }
 
-boolean StencilView::IsA (ClassId id) {
+bool StencilView::IsA (ClassId id) {
     return STENCIL_VIEW == id || GraphicView::IsA(id);
 }
 
@@ -164,11 +164,11 @@ Graphic* StencilView::GetGraphic () {
 PSStencil::PSStencil (StencilComp* subj) : PostScriptView(subj) { }
 ClassId PSStencil::GetClassId () { return PS_STENCIL; }
 
-boolean PSStencil::IsA (ClassId id) { 
+bool PSStencil::IsA (ClassId id) { 
     return PS_STENCIL == id || PostScriptView::IsA(id);
 }
 
-boolean PSStencil::Definition (ostream& out) {
+bool PSStencil::Definition (ostream& out) {
     StencilComp* comp = (StencilComp*) GetSubject();
     Bitmap* image, *mask;
     comp->GetStencil()->GetOriginal(image, mask);

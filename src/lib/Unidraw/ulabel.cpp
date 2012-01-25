@@ -87,7 +87,7 @@ void ULabel::getExtent (
     tol = 0;
 }
 
-boolean ULabel::contains (PointObj& po, Graphic* gs) {
+bool ULabel::contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     PSFont* f = gs->GetFont();
 
@@ -96,7 +96,7 @@ boolean ULabel::contains (PointObj& po, Graphic* gs) {
     return b.Contains(pt);
 }
 
-boolean ULabel::intersects (BoxObj& userb, Graphic* gs) {
+bool ULabel::intersects (BoxObj& userb, Graphic* gs) {
     Transformer* t = gs->GetTransformer();
     PSFont* f = gs->GetFont();
     Coord xmax = f->Width(_string);

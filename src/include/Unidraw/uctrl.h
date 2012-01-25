@@ -54,7 +54,7 @@ class UControlInteractor : public Interactor {
 public:
     virtual ~UControlInteractor();
 
-    virtual void Highlight(boolean);
+    virtual void Highlight(bool);
     virtual void SetControlInfo(ControlInfo*);
     ControlInfo* GetControlInfo();
 protected:
@@ -69,7 +69,7 @@ protected:
     ControlInfo* _info;
     Graphic* _picture;
     Graphic* _label;
-    boolean _highlighted;
+    bool _highlighted;
 private:
     void Init(ControlInfo*);
 };

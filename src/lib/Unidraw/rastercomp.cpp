@@ -50,7 +50,7 @@ static const int color_depth = 8;               // bits per color in PostScript
 
 ClassId RasterComp::GetClassId () { return RASTER_COMP; }
 
-boolean RasterComp::IsA (ClassId id) {
+bool RasterComp::IsA (ClassId id) {
     return RASTER_COMP == id || GraphicComp::IsA(id);
 }
 
@@ -98,7 +98,7 @@ RasterComp* RasterView::GetRasterComp () {
 
 ClassId RasterView::GetClassId () { return RASTER_VIEW; }
 
-boolean RasterView::IsA (ClassId id) {
+bool RasterView::IsA (ClassId id) {
     return RASTER_VIEW == id || GraphicView::IsA(id);
 }
 
@@ -129,11 +129,11 @@ Graphic* RasterView::GetGraphic () {
 PSRaster::PSRaster (RasterComp* subj) : PostScriptView(subj) { }
 ClassId PSRaster::GetClassId () { return PS_RASTER; }
 
-boolean PSRaster::IsA (ClassId id) { 
+bool PSRaster::IsA (ClassId id) { 
     return PS_RASTER == id || PostScriptView::IsA(id);
 }
 
-boolean PSRaster::Definition (ostream& out) {
+bool PSRaster::Definition (ostream& out) {
     RasterComp* comp = (RasterComp*) GetSubject();
     Raster* raster = comp->GetRasterRect()->GetOriginal();
     Coord w = raster->Width();

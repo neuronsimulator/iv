@@ -61,7 +61,7 @@ static ostream& perror(ostream& s) {
 // and the user has permission to delete it but not permission to
 // write data into it.
 
-boolean RpcRegistry::record(const char* path, int port) {
+bool RpcRegistry::record(const char* path, int port) {
     if (!path) {
 	return false;
     }
@@ -87,7 +87,7 @@ boolean RpcRegistry::record(const char* path, int port) {
 // number so that no more clients will be able to contact the RPC
 // service.
 
-boolean RpcRegistry::erase(const char* path) {
+bool RpcRegistry::erase(const char* path) {
     if (!path) {
 	return false;
     }
@@ -107,7 +107,7 @@ boolean RpcRegistry::erase(const char* path) {
 // host, speed up I/O between them by returning "localhost" instead of
 // the host's true name.
 
-boolean RpcRegistry::find(const char* path, char*& hostname, int& port) {
+bool RpcRegistry::find(const char* path, char*& hostname, int& port) {
     if (!path) {
 	return false;
     }

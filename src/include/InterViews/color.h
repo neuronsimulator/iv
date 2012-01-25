@@ -65,11 +65,11 @@ public:
     Color(const Color&, float alpha = 1.0, ColorOp = Copy);
     virtual ~Color();
 
-    static boolean find(
+    static bool find(
 	const Display*, const String&,
 	ColorIntensity& r, ColorIntensity& g, ColorIntensity& b
     );
-    static boolean find(
+    static bool find(
 	const Display*, const char* name,
 	ColorIntensity& r, ColorIntensity& g, ColorIntensity& b
     );
@@ -77,7 +77,7 @@ public:
     static const Color* lookup(Display*, const String& name);
     static const Color* lookup(Display*, const char* name);
 
-    virtual boolean distinguished(Display*, const Color*) const;
+    virtual bool distinguished(Display*, const Color*) const;
     virtual void intensities(
 	Display*, ColorIntensity& r, ColorIntensity& g, ColorIntensity& b
     ) const;
@@ -89,7 +89,7 @@ public:
     virtual const Color* brightness(float adjust) const;
 
     /* use default display */
-    boolean distinguished(const Color*) const;
+    bool distinguished(const Color*) const;
     void intensities(
 	ColorIntensity& r, ColorIntensity& g, ColorIntensity& b
     ) const;

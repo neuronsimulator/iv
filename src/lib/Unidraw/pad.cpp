@@ -61,7 +61,7 @@
 
 ClassId PadComp::GetClassId () { return PAD_COMP; }
 
-boolean PadComp::IsA (ClassId id) {
+bool PadComp::IsA (ClassId id) {
     return PAD_COMP == id || Connector::IsA(id);
 }
 
@@ -190,7 +190,7 @@ void PadComp::Write (ostream& out) {
 PadComp* PadView::GetPadComp () { return (PadComp*) GetSubject(); }
 ClassId PadView::GetClassId () { return PAD_VIEW; }
 
-boolean PadView::IsA (ClassId id) {
+bool PadView::IsA (ClassId id) {
     return PAD_VIEW == id || ConnectorView::IsA(id);
 }
 
@@ -405,11 +405,11 @@ void PadGraphic::draw (Canvas* c, Graphic* gs) {
 /**************************************************************************/
 
 ClassId PSPad::GetClassId () { return PS_PAD; }
-boolean PSPad::IsA (ClassId id) {return PS_PAD==id || PostScriptView::IsA(id);}
+bool PSPad::IsA (ClassId id) {return PS_PAD==id || PostScriptView::IsA(id);}
 
 PSPad::PSPad (PadComp* subj) : PostScriptView(subj) { }
 
-boolean PSPad::Definition (ostream&) {
+bool PSPad::Definition (ostream&) {
     // unimplemented
 
     return true;

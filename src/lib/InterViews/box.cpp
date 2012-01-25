@@ -46,7 +46,7 @@ private:
 
     Box* box_;
     Layout* layout_;
-    boolean requested_;
+    bool requested_;
     Requisition requisition_;
     AllocationTable* allocations_;
 
@@ -59,8 +59,8 @@ private:
     void invalidate();
 };
 
-boolean Box::full_request_ = false;
-void Box::full_request(boolean b) { full_request_ = b; }
+bool Box::full_request_ = false;
+void Box::full_request(bool b) { full_request_ = b; }
 
 Extension* BoxImpl::empty_ext_;
 

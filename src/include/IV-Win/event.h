@@ -69,8 +69,8 @@ class EventRep
 public:
 	int typeOf();						// event type
 	int buttonOf();						// mouse button
-	boolean isShift();					// is shift key pressed
-	boolean isControl();				// is control key pressed
+	bool isShift();					// is shift key pressed
+	bool isControl();				// is control key pressed
 	unsigned char keycode();			// key pressed
 
 	Window* windowOf() const;
@@ -151,9 +151,9 @@ inline int EventRep::typeOf()
 	{ return type_; }
 inline int EventRep::buttonOf()
 	{ return button_; }
-inline boolean EventRep::isShift()
+inline bool EventRep::isShift()
 	{ return (wparam_ & MK_SHIFT) ? 1 : 0; }
-inline boolean EventRep::isControl()
+inline bool EventRep::isControl()
 	{ return (wparam_ & MK_CONTROL) ? 1 : 0; }
 inline UINT EventRep::messageOf() const
 	{ return message_; }

@@ -45,7 +45,7 @@
 #include <X11/keysymdef.h>
 #include <string.h>
 
-boolean (*ivoc_snapshot_)(const Event*);
+bool (*ivoc_snapshot_)(const Event*);
 
 Event::Event() {
     if (sizeof(EventRep) <= sizeof(free_store_)) {
@@ -134,7 +134,7 @@ Display* Event::display() const { return rep()->display_; }
 void Event::window(Window* w1) { rep()->window_ = w1; }
 Window* Event::window() const { return rep()->window_; }
 
-boolean Event::pending() const {
+bool Event::pending() const {
     Event e;
     if (rep()->display_->get(e)) {
 	rep()->display_->put(e);
@@ -147,7 +147,7 @@ void Event::read() {
     Session::instance()->read(*this);
 }
 
-boolean Event::read(long s, long u) {
+bool Event::read(long s, long u) {
     return Session::instance()->read(s, u, *this);
 }
 
@@ -197,7 +197,7 @@ void Event::handle() {
 	h = handler();
     }
     if (h != nil) {
-	boolean b = Resource::defer(true);
+	bool b = Resource::defer(true);
 	h->ref();
 	h->event(*this);
 	h->unref();
@@ -214,7 +214,7 @@ void Event::grab(Handler* h) const {
 void Event::ungrab(Handler* h) const { rep()->display_->ungrab(h); }
 Handler* Event::grabber() const { return rep()->display_->grabber(); }
 
-boolean Event::is_grabbing(Handler* h) const {
+bool Event::is_grabbing(Handler* h) const {
     return rep()->display_->is_grabbing(h);
 }
 
@@ -315,17 +315,17 @@ unsigned int Event::keymask() const {
     }
 }
 
-static boolean check_key(const Event* e, unsigned long mask) {
+static bool check_key(const Event* e, unsigned long mask) {
     return (e->keymask() & mask) != 0;
 }
 
-boolean Event::control_is_down() const { return check_key(this, ControlMask); }
-boolean Event::meta_is_down() const { return check_key(this, Mod1Mask); }
-boolean Event::shift_is_down() const { return check_key(this, ShiftMask); }
-boolean Event::capslock_is_down() const { return check_key(this, LockMask); }
-boolean Event::left_is_down() const { return check_key(this, Button1Mask); }
-boolean Event::middle_is_down() const { return check_key(this, Button2Mask); }
-boolean Event::right_is_down() const { return check_key(this, Button3Mask); }
+bool Event::control_is_down() const { return check_key(this, ControlMask); }
+bool Event::meta_is_down() const { return check_key(this, Mod1Mask); }
+bool Event::shift_is_down() const { return check_key(this, ShiftMask); }
+bool Event::capslock_is_down() const { return check_key(this, LockMask); }
+bool Event::left_is_down() const { return check_key(this, Button1Mask); }
+bool Event::middle_is_down() const { return check_key(this, Button2Mask); }
+bool Event::right_is_down() const { return check_key(this, Button3Mask); }
 
 unsigned char Event::keycode() const {
     XEvent& xe = rep()->xevent_;
@@ -371,7 +371,7 @@ Atom wm_delete_window_;
 void EventRep::locate() {
     if (!location_valid_ && window_ != nil) {
 	PixelCoord x=0, y=0, root_x = 0, root_y = 0;
-	boolean has_root_location = true;
+	bool has_root_location = true;
 	XEvent& xe = xevent_;
 	switch (xe.type) {
 	case MotionNotify:
@@ -435,7 +435,7 @@ void EventRep::locate() {
     }
 }
 
-boolean EventRep::has_pointer_location() {
+bool EventRep::has_pointer_location() {
     locate();
     return has_pointer_location_;
 }

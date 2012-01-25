@@ -68,7 +68,7 @@ public:
     virtual void Handle(Event&);
     virtual void Reconfig();
 protected:
-    virtual boolean HandleChar(char);
+    virtual bool HandleChar(char);
     void InsertText(const char*, int);
     void DoSelect(int left, int right);
 

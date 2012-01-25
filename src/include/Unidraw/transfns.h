@@ -42,12 +42,12 @@ public:
     virtual int Outputs();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     TF_2Port();
 
     virtual void Transfer();
-    virtual boolean ChangedOutput(int index = 0);
+    virtual bool ChangedOutput(int index = 0);
 };
 
 class TF_Direct : public TF_2Port {
@@ -66,13 +66,13 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual void Transfer();
-    virtual boolean ChangedOutput(int index = 0);
+    virtual bool ChangedOutput(int index = 0);
 private:
     StateVar* _input, *_output;
-    boolean _changed;
+    bool _changed;
 };
 
 #endif

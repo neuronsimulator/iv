@@ -37,7 +37,7 @@
 class BoxElement {
 public:
     Interactor* child;
-    boolean visible;
+    bool visible;
     BoxElement* next;
 };
 
@@ -75,7 +75,7 @@ void Box::Align(Alignment a) {
     align = a;
 }
 
-void Box::DoInsert(Interactor* i, boolean, IntCoord&, IntCoord&) {
+void Box::DoInsert(Interactor* i, bool, IntCoord&, IntCoord&) {
     register BoxElement* e;
 
     ++nelements;
@@ -129,7 +129,7 @@ void Box::Resize() {
     int major, minor;		/* actual dimensions of box */
     register int have;		/* how much box is willing to change */
     register int need;		/* how much box needs to change to fit */
-    boolean grow;		/* true if stretching, false if shrinking */
+    bool grow;		/* true if stretching, false if shrinking */
     BoxCanonical s;		/* element shape along major axis */
     register int pos;		/* where to put next element on major axis */
     register int len;		/* size of element along major axis */

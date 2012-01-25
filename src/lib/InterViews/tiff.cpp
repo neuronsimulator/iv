@@ -74,15 +74,15 @@ private:
 
     Raster* load(const char* filename);
 
-    boolean gt(u_long w, u_long h);
-    boolean gtTileContig(const RGBvalue* Map, u_long h, u_long w);
-    boolean gtTileSeparate(const RGBvalue* Map, u_long h, u_long w);
-    boolean gtStripContig(const RGBvalue* Map, u_long h, u_long w);
-    boolean gtStripSeparate(const RGBvalue* Map, u_long h, u_long w);
+    bool gt(u_long w, u_long h);
+    bool gtTileContig(const RGBvalue* Map, u_long h, u_long w);
+    bool gtTileSeparate(const RGBvalue* Map, u_long h, u_long w);
+    bool gtStripContig(const RGBvalue* Map, u_long h, u_long w);
+    bool gtStripSeparate(const RGBvalue* Map, u_long h, u_long w);
 
     u_long setorientation(u_long h);
-    boolean makebwmap(RGBvalue* Map);
-    boolean makecmap(
+    bool makebwmap(RGBvalue* Map);
+    bool makecmap(
 	const u_short* rmap, const u_short* gmap, const u_short* bmap
     );
 
@@ -144,7 +144,7 @@ private:
 TIFFRasterImpl::TIFFRasterImpl() {}
 TIFFRasterImpl::~TIFFRasterImpl() {}
 
-Raster* TIFFRaster::load(const char* filename, boolean) {
+Raster* TIFFRaster::load(const char* filename, bool) {
     TIFFRasterImpl impl;
     return impl.load(filename);
 }
@@ -238,7 +238,7 @@ static int checkcmap(
     return 8;
 }
 
-boolean TIFFRasterImpl::gt(u_long w, u_long h) {
+bool TIFFRasterImpl::gt(u_long w, u_long h) {
     u_short minsamplevalue;
     u_short maxsamplevalue;
     u_short planarconfig;
@@ -327,7 +327,7 @@ boolean TIFFRasterImpl::gt(u_long w, u_long h) {
 	break;
     }
     TIFFGetField(tif_, TIFFTAG_PLANARCONFIG, &planarconfig);
-    boolean e;
+    bool e;
     if (planarconfig == PLANARCONFIG_SEPARATE && samplesperpixel_ > 1) {
 	e = TIFFIsTiled(tif_) ?
 	    gtTileSeparate(Map, h, w) : gtStripSeparate(Map, h, w);
@@ -375,7 +375,7 @@ u_long TIFFRasterImpl::setorientation(u_long h) {
  * or
  *    SamplesPerPixel == 1
  */    
-boolean TIFFRasterImpl::gtTileContig(const RGBvalue* Map, u_long h, u_long w) {
+bool TIFFRasterImpl::gtTileContig(const RGBvalue* Map, u_long h, u_long w) {
     u_char* buf = new u_char[TIFFTileSize(tif_)];
     if (buf == nil) {
 	TIFFError(TIFFFileName(tif_), "No space for tile buffer");
@@ -422,7 +422,7 @@ boolean TIFFRasterImpl::gtTileContig(const RGBvalue* Map, u_long h, u_long w) {
  *     PlanarConfiguration separated
  * We assume that all such images are RGB.
  */    
-boolean TIFFRasterImpl::gtTileSeparate(
+bool TIFFRasterImpl::gtTileSeparate(
     const RGBvalue* Map, u_long h, u_long w
 ) {
     u_long tilesize = TIFFTileSize(tif_);
@@ -482,7 +482,7 @@ boolean TIFFRasterImpl::gtTileSeparate(
  * or
  *    SamplesPerPixel == 1
  */    
-boolean TIFFRasterImpl::gtStripContig(
+bool TIFFRasterImpl::gtStripContig(
     const RGBvalue* Map, u_long h, u_long w
 ) {
     u_char* buf = new u_char[TIFFStripSize(tif_)];
@@ -519,7 +519,7 @@ boolean TIFFRasterImpl::gtStripContig(
  *     PlanarConfiguration separated
  * We assume that all such images are RGB.
  */
-boolean TIFFRasterImpl::gtStripSeparate(
+bool TIFFRasterImpl::gtStripSeparate(
     const RGBvalue* Map, u_long h, u_long w
 ) {
     u_long stripsize = TIFFStripSize(tif_);
@@ -569,7 +569,7 @@ boolean TIFFRasterImpl::gtStripSeparate(
  * pixel values simply by indexing into the table with one
  * number.
  */
-boolean TIFFRasterImpl::makebwmap(RGBvalue* Map) {
+bool TIFFRasterImpl::makebwmap(RGBvalue* Map) {
     register int i;
     int nsamples = 8 / bitspersample_;
 
@@ -619,7 +619,7 @@ boolean TIFFRasterImpl::makebwmap(RGBvalue* Map) {
  * pixel values simply by indexing into the table with one
  * number.
  */
-boolean TIFFRasterImpl::makecmap(
+bool TIFFRasterImpl::makecmap(
     const u_short* rmap, const u_short* gmap, const u_short* bmap
 ) {
     register int i;

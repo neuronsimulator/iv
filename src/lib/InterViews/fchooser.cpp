@@ -80,16 +80,16 @@ private:
 	const char* caption_attribute, const char* default_caption,
 	Glyph*, FieldEditorAction*
     );
-    boolean filtered(const String&, FieldEditor*);
+    bool filtered(const String&, FieldEditor*);
     void accept_dir();
     void accept_browser();
     void cancel_browser();
     void accept_editor(FieldEditor*);
     void cancel_editor(FieldEditor*);
     void accept_filter(FieldEditor*);
-    boolean chdir(const String&);
+    bool chdir(const String&);
     static const Color* disable_color();
-    boolean choose_dir_;
+    bool choose_dir_;
 };
 
 declareActionCallback(FileChooserImpl)
@@ -129,7 +129,7 @@ void FileChooser::reread() {
     }
 }
 
-void FileChooser::dismiss(boolean accept) {
+void FileChooser::dismiss(bool accept) {
     Dialog::dismiss(accept);
     FileChooserImpl& fc = *impl_;
     if (fc.action_ != nil) {
@@ -350,7 +350,7 @@ void FileChooserImpl::load() {
     filter_map_ = index;
     for (int i = 0; i < dircount; i++) {
 	const String& f = *d.name(i);
-	boolean is_dir = d.is_directory(i);
+	bool is_dir = d.is_directory(i);
 	if ((is_dir && filtered(f, directory_filter_)) ||
 	    (!is_dir && filtered(f, filter_))
 	) {
@@ -405,7 +405,7 @@ FieldEditor* FileChooserImpl::add_filter(
     return e;
 }
 
-boolean FileChooserImpl::filtered(const String& name, FieldEditor* e) {
+bool FileChooserImpl::filtered(const String& name, FieldEditor* e) {
     if (e == nil) {
 	return true;
     }
@@ -486,7 +486,7 @@ void FileChooserImpl::accept_filter(FieldEditor*) {
     load();
 }
 
-boolean FileChooserImpl::chdir(const String& name) {
+bool FileChooserImpl::chdir(const String& name) {
     Directory* d = Directory::open(name);
     if (d != nil) {
 	dir_->close();
@@ -503,4 +503,4 @@ boolean FileChooserImpl::chdir(const String& name) {
 
 FileChooserAction::FileChooserAction() { }
 FileChooserAction::~FileChooserAction() { }
-void FileChooserAction::execute(FileChooser*, boolean) { }
+void FileChooserAction::execute(FileChooser*, bool) { }

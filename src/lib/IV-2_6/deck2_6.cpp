@@ -121,7 +121,7 @@ void Deck::NewTop() {
     }
 }
 
-void Deck::DoInsert(Interactor* i, boolean, IntCoord&, IntCoord&) {
+void Deck::DoInsert(Interactor* i, bool, IntCoord&, IntCoord&) {
     if (i != nil) {
 	Card* c = new Card(i);
 	c->prev = cards->prev;

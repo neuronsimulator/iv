@@ -70,7 +70,7 @@ Requirement::Requirement(
     }
 }
 
-boolean Requirement::equals(const Requirement& r, float epsilon) const {
+bool Requirement::equals(const Requirement& r, float epsilon) const {
     if (!Math::equal(natural_, r.natural_, epsilon)) {
         return false;
     } else if (!Math::equal(stretch_, r.stretch_, epsilon)) {
@@ -94,7 +94,7 @@ Requisition::Requisition(const Requisition& r) : x_(r.x_), y_(r.y_) {
     penalty_ = r.penalty_;
 }
 
-boolean Requisition::equals(const Requisition& r, float epsilon) const {
+bool Requisition::equals(const Requisition& r, float epsilon) const {
     return x_.equals(r.x_, epsilon) && y_.equals(r.y_, epsilon);
 }
 
@@ -137,7 +137,7 @@ const Requirement& Requisition::requirement(DimensionName n) const {
     return *empty_requirement;
 }
 
-boolean Allotment::equals(const Allotment& a, float epsilon) const {
+bool Allotment::equals(const Allotment& a, float epsilon) const {
     if (!Math::equal(origin_, a.origin_, epsilon)) {
         return false;
     } else if (!Math::equal(span_, a.span_, epsilon)) {
@@ -188,7 +188,7 @@ const Allotment& Allocation::allotment(DimensionName n) const {
     return *empty_allotment;
 }
 
-boolean Allocation::equals(const Allocation& a, float epsilon) const {
+bool Allocation::equals(const Allocation& a, float epsilon) const {
     return x_.equals(a.x_, epsilon) && y_.equals(a.y_, epsilon);
 }
 

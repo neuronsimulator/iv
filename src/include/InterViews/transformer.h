@@ -44,11 +44,11 @@ public:
     );
     virtual ~Transformer();
 
-    boolean identity() const;
-    boolean invertible() const;
+    bool identity() const;
+    bool invertible() const;
 
-    boolean operator ==(const Transformer&) const;
-    boolean operator !=(const Transformer&) const;
+    bool operator ==(const Transformer&) const;
+    bool operator !=(const Transformer&) const;
     Transformer& operator =(const Transformer&);
 
     virtual void premultiply(const Transformer&);
@@ -73,7 +73,7 @@ public:
 	float& a00, float& a01, float& a10, float& a11, float& a20, float& a21
     ) const;
 private:
-    boolean identity_;
+    bool identity_;
     float mat00, mat01, mat10, mat11, mat20, mat21;
 
     void update();
@@ -92,11 +92,11 @@ public:
     void Translate(float dx, float dy);
     void Scale(float sx, float sy);
     void Rotate(float angle);
-    boolean Translated(float = 1e-6) const;
-    boolean Scaled(float = 1e-6) const;
-    boolean Stretched (float = 1e-6) const;
-    boolean Rotated(float = 1e-6) const;
-    boolean Rotated90(float = 1e-6) const;
+    bool Translated(float = 1e-6) const;
+    bool Scaled(float = 1e-6) const;
+    bool Stretched (float = 1e-6) const;
+    bool Rotated(float = 1e-6) const;
+    bool Rotated90(float = 1e-6) const;
 
     void Transform(IntCoord& x, IntCoord& y) const;
     void Transform(IntCoord x, IntCoord y, IntCoord& tx, IntCoord& ty) const;
@@ -122,30 +122,30 @@ public:
 
 inline float Transformer::det() const { return mat00*mat11 - mat01*mat10; }
 
-inline boolean Transformer::identity() const { return identity_; }
-inline boolean Transformer::invertible() const { return det() != 0; }
+inline bool Transformer::identity() const { return identity_; }
+inline bool Transformer::invertible() const { return det() != 0; }
 
-inline boolean Transformer::Translated(float tol) const {
+inline bool Transformer::Translated(float tol) const {
     return -tol > mat20 || mat20 > tol || -tol > mat21 || mat21 > tol;
 }
 
-inline boolean Transformer::Scaled(float tol) const {
+inline bool Transformer::Scaled(float tol) const {
     float l = 1 - tol, u = 1 + tol;
 
     return l > mat00 || mat00 > u || l > mat11 || mat11 > u;
 }
 
-inline boolean Transformer::Stretched(float tol) const {
+inline bool Transformer::Stretched(float tol) const {
     float diff = mat00 - mat11;
 
     return -tol > diff || diff > tol;
 }
 
-inline boolean Transformer::Rotated(float tol) const {
+inline bool Transformer::Rotated(float tol) const {
     return -tol > mat01 || mat01 > tol || -tol > mat10 || mat10 > tol;
 }
 
-inline boolean Transformer::Rotated90(float tol) const {
+inline bool Transformer::Rotated90(float tol) const {
     return Rotated(tol) && -tol <= mat00 && mat00 <= tol && 
         -tol <= mat11 && mat11 <= tol;
 }

@@ -77,7 +77,7 @@ void Path::Visit (Connector* c) {
     _slot[n]->Append(new UList(c));
 }
 
-boolean Path::Visited (Connector* c) {
+bool Path::Visited (Connector* c) {
     int n = Hash(c);
     UList* slot = _slot[n];
 

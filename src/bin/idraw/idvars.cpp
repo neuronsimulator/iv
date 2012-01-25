@@ -65,12 +65,12 @@ static void CenterText (
 
 /*****************************************************************************/
 
-ArrowVar::ArrowVar(boolean h, boolean t) {
+ArrowVar::ArrowVar(bool h, bool t) {
     _head = h;
     _tail = t;
 }
 
-void ArrowVar::SetArrows(boolean h, boolean t) {
+void ArrowVar::SetArrows(bool h, bool t) {
     if (h != _head || t != _tail) {
 	_head = h;
 	_tail = t;
@@ -88,14 +88,14 @@ StateVar& ArrowVar::operator = (StateVar& var) {
 
 StateVar* ArrowVar::Copy () { return new ArrowVar(_head, _tail); }
 ClassId ArrowVar::GetClassId () { return ARROW_VAR; }
-boolean ArrowVar::IsA (ClassId id) {return ARROW_VAR==id || StateVar::IsA(id);}
+bool ArrowVar::IsA (ClassId id) {return ARROW_VAR==id || StateVar::IsA(id);}
 
 void ArrowVar::Read (istream& in) {
     StateVar::Read(in);
     char h, t;
     in >> h >> t;
-    _head = (boolean) h;
-    _tail = (boolean) t;
+    _head = (bool) h;
+    _tail = (bool) t;
 }
 
 void ArrowVar::Write (ostream& out) {
@@ -108,13 +108,13 @@ void ArrowVar::Write (ostream& out) {
 class ArrowInteractor : public Interactor {
 public:
     ArrowInteractor(
-        boolean, boolean, PSBrush*, PSColor* fg = nil, PSColor* bg = nil
+        bool, bool, PSBrush*, PSColor* fg = nil, PSColor* bg = nil
     );
     virtual ~ArrowInteractor();
 
     void SetBrush(PSBrush*);
     void SetColors(PSColor*, PSColor*);
-    void SetArrows(boolean, boolean);
+    void SetArrows(bool, bool);
 
     PSBrush* GetBrush();
     PSColor* GetFgColor();
@@ -123,13 +123,13 @@ protected:
     virtual void Reconfig();
     virtual void Redraw(Coord, Coord, Coord, Coord);
 protected:
-    boolean _head, _tail;
+    bool _head, _tail;
     PSBrush* _brush;
     PSColor* _fg, *_bg;
 };
 
 ArrowInteractor::ArrowInteractor (
-    boolean h, boolean t, PSBrush* b, PSColor* fg, PSColor* bg
+    bool h, bool t, PSBrush* b, PSColor* fg, PSColor* bg
 ) {
     _head = h;
     _tail = t;
@@ -159,7 +159,7 @@ void ArrowInteractor::SetBrush (PSBrush* b) {
 
 PSBrush* ArrowInteractor::GetBrush () { return _brush; }
 
-void ArrowInteractor::SetArrows (boolean h, boolean t) {
+void ArrowInteractor::SetArrows (bool h, bool t) {
     _head = h;
     _tail = t;
 }    
@@ -272,12 +272,12 @@ ArrowVarView::~ArrowVarView () {
     }
 }
 
-boolean ArrowVarView::Stale () {
-    boolean arrowsChanged = (
+bool ArrowVarView::Stale () {
+    bool arrowsChanged = (
 	(_arrowSubj->Head() != _prevHead || _arrowSubj->Tail() != _prevTail)
     );
 	    
-    boolean colorsChanged = (
+    bool colorsChanged = (
         (_colorSubj != nil) && (
             _colorSubj->GetFgColor() != _prevFg ||
             _colorSubj->GetBgColor() != _prevBg

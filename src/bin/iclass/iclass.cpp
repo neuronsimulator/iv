@@ -243,7 +243,7 @@ void IClass::Handle (Event& e) {
         }
 
     } else if (e.target != this && e.eventType != KeyEvent) {
-        boolean focusable =
+        bool focusable =
             e.target == _classes || e.target == _parents ||
             e.target == _children || e.target == _editor;
 
@@ -256,8 +256,8 @@ void IClass::Handle (Event& e) {
     }
 }
 
-boolean IClass::Command (char c) {
-    boolean executed = true;
+bool IClass::Command (char c) {
+    bool executed = true;
 
     switch (c) {
         case BSRCH_CODE:         BackwardSearchCmd(); break;
@@ -271,9 +271,9 @@ boolean IClass::Command (char c) {
     return executed;
 }
 
-boolean IClass::ForwardSearch (const char* string) {
+bool IClass::ForwardSearch (const char* string) {
     Regexp re(string);
-    boolean successful = false;
+    bool successful = false;
 
     if (
         _text->ForwardSearch(&re, _editor->Dot()) >= 0
@@ -285,9 +285,9 @@ boolean IClass::ForwardSearch (const char* string) {
     return successful;
 }
 
-boolean IClass::BackwardSearch (const char* string) {
+bool IClass::BackwardSearch (const char* string) {
     Regexp re(string);
-    boolean successful = false;
+    bool successful = false;
 
     if (
         _text->BackwardSearch(&re, _editor->Mark()) >= 0
@@ -628,7 +628,7 @@ void IClass::ScanCmd () {
 void IClass::ClearCmd () {
     ConfirmDialog dialog("Really clear all classes?");
     InsertDialog(&dialog);
-    boolean accepted = dialog.Confirm() == 'y';
+    bool accepted = dialog.Confirm() == 'y';
     RemoveDialog(&dialog);
 
     if (accepted) {

@@ -61,7 +61,7 @@
 
 ClassId RectComp::GetClassId () { return RECT_COMP; }
 
-boolean RectComp::IsA (ClassId id) {
+bool RectComp::IsA (ClassId id) {
     return RECT_COMP == id || GraphicComp::IsA(id);
 }
 
@@ -114,7 +114,7 @@ void RectComp::Write (ostream& out) {
 RectComp* RectView::GetRectComp () { return (RectComp*) GetSubject(); }
 ClassId RectView::GetClassId () { return RECT_VIEW; }
 
-boolean RectView::IsA (ClassId id) {
+bool RectView::IsA (ClassId id) {
     return RECT_VIEW == id || GraphicView::IsA(id);
 }
 
@@ -350,11 +350,11 @@ Graphic* RectView::GetGraphic () {
 PSRect::PSRect (RectComp* subj) : PostScriptView(subj) { }
 ClassId PSRect::GetClassId () { return PS_RECT; }
 
-boolean PSRect::IsA (ClassId id) { 
+bool PSRect::IsA (ClassId id) { 
     return PS_RECT == id || PostScriptView::IsA(id);
 }
 
-boolean PSRect::Definition (ostream& out) {
+bool PSRect::Definition (ostream& out) {
     Coord l, b, r, t;
 
     RectComp* comp = (RectComp*) GetSubject();

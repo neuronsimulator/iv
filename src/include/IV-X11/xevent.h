@@ -29,7 +29,7 @@
 #ifndef iv_xevent_h
 #define iv_xevent_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/coord.h>
 #include <IV-X11/Xlib.h>
 
@@ -50,11 +50,11 @@ public:
 
     void clear();
     void locate();
-    boolean has_pointer_location();
+    bool has_pointer_location();
     void acknowledge_motion();
 private:
-    boolean location_valid_;
-    boolean has_pointer_location_;
+    bool location_valid_;
+    bool has_pointer_location_;
 };
 
 #include <InterViews/_leave.h>

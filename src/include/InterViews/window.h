@@ -79,18 +79,18 @@ public:
 
     virtual void map();
     virtual void unmap();
-    virtual boolean is_mapped() const;
+    virtual bool is_mapped() const;
 
     virtual void bind();
     virtual void unbind();
-    virtual boolean bound() const;
+    virtual bool bound() const;
 
     virtual void raise();
     virtual void lower();
     virtual void move(Coord left, Coord bottom);
     virtual void resize();
 
-    virtual boolean receive(const Event&);
+    virtual bool receive(const Event&);
     virtual Handler* target(const Event&) const;
     virtual void grab_pointer(Cursor* = nil) const;
     virtual void ungrab_pointer() const;
@@ -149,7 +149,7 @@ public:
 #endif
 
 #if defined(WIN32)
-    virtual boolean receive(const Event&);
+    virtual bool receive(const Event&);
 #endif
     virtual void icon(ManagedWindow*);
     virtual ManagedWindow* icon() const;
@@ -218,7 +218,7 @@ public:
 protected:
     virtual void set_attributes();
 #if defined(WIN32)
-    virtual boolean receive(const Event&);
+    virtual bool receive(const Event&);
 #endif
 };
 

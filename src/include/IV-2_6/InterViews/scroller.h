@@ -41,7 +41,7 @@ protected:
     Perspective* shown;
     double scale;
     Sensor* tracking;
-    boolean syncScroll;
+    bool syncScroll;
 
     Scroller(Interactor*, int);
     Scroller(const char*, Interactor*, int);

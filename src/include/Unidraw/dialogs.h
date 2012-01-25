@@ -52,7 +52,7 @@ protected:
     );
 
     virtual void Forward(Event&);
-    boolean IsAChild(Interactor*);
+    bool IsAChild(Interactor*);
 protected:
     MarginFrame* _title, *_subtitle;
 private:
@@ -104,11 +104,11 @@ protected:
 
 class PrintDialog : public FileChooser {
 public:
-    PrintDialog(boolean to_printer = true);
+    PrintDialog(bool to_printer = true);
     virtual ~PrintDialog();
 
-    void ToPrinter(boolean);
-    boolean ToPrinter();
+    void ToPrinter(bool);
+    bool ToPrinter();
 protected:
     virtual void UpdateEditor();
     virtual void UpdateBrowser();
@@ -125,7 +125,7 @@ class GridDialog : public BasicDialog {
 public:
     GridDialog();
 
-    virtual boolean Accept();
+    virtual bool Accept();
     virtual void Handle(Event&);
 
     virtual void GetValues(float& xincr, float& yincr);

@@ -37,7 +37,7 @@
 // rpcstream (connection).  Negotiate the I/O format if opening a
 // connection.  Terminate the program if errors should be fatal.
 
-RpcWriter::RpcWriter(const char* path, boolean fatal, boolean binary) :
+RpcWriter::RpcWriter(const char* path, bool fatal, bool binary) :
     _server(new rpcstream),
     _delete(true),
     _host(nil)
@@ -46,7 +46,7 @@ RpcWriter::RpcWriter(const char* path, boolean fatal, boolean binary) :
 }
 
 RpcWriter::RpcWriter(
-    const char* host, int port, boolean fatal, boolean binary
+    const char* host, int port, bool fatal, bool binary
 ) :
     _server(new rpcstream),
     _delete(true),
@@ -61,7 +61,7 @@ RpcWriter::RpcWriter(
     }
 }
 
-RpcWriter::RpcWriter(int fd, boolean fatal, boolean binary) :
+RpcWriter::RpcWriter(int fd, bool fatal, bool binary) :
     _server(new rpcstream),
     _delete(true),
     _host(nil)
@@ -95,7 +95,7 @@ RpcWriter::~RpcWriter() {
 // registered host name and port number so that a derived class's
 // constructor can retry the attempt if necessary.
 
-void RpcWriter::open(const char* path, boolean fatal, boolean binary) {
+void RpcWriter::open(const char* path, bool fatal, bool binary) {
     int port;
 
     if (RpcRegistry::find(path, _host, port)) {

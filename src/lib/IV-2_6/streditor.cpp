@@ -229,7 +229,7 @@ const char* StringEditor::Text () {
     return text->Text();
 }
 
-boolean StringEditor::HandleChar (char c) {
+bool StringEditor::HandleChar (char c) {
     if (strchr(done, c) != nil) {
         if (subject != nil) {
             subject->SetValue(c);
@@ -297,7 +297,7 @@ void StringEditor::InsertText (const char* t, int len) {
 }
 
 void StringEditor::Handle (Event& e) {
-    boolean done1 = false;
+    bool done1 = false;
     World* world1 = GetWorld();
     display->Draw(output, canvas);
     display->CaretStyle(BarCaret);

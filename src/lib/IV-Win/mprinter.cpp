@@ -37,10 +37,10 @@ class MacPrinterCanvas : public MWcanvas16 {
 public:
 	MacPrinterCanvas();
 	virtual ~MacPrinterCanvas();
-	boolean get();
+	bool get();
 	void start(float scale);
 	void finish();
-	void setup(boolean);
+	void setup(bool);
 	virtual Window* window() const;
 	virtual void size(Coord width, Coord height);
 	virtual void psize(int width, int height);
@@ -106,8 +106,8 @@ Window* MacPrinter::window()const {
 //DebugMessage("MacPrinter::window()\n");
  return nil;
 }
-void MacPrinter::setup(boolean b) { c->setup(b); }
-void MacPrinterCanvas::setup(boolean) {}
+void MacPrinter::setup(bool b) { c->setup(b); }
+void MacPrinterCanvas::setup(bool) {}
 
 void MacPrinterCanvas::setmapmode(HDC hdc) {
 	int s = int(1440./scale_);
@@ -157,8 +157,8 @@ HDC MacPrinterCanvas::GetPrinterDC(){
 
 void MacPrinter::prolog(float scale) {c->start(scale);}
 void MacPrinter::prolog(const char*) {c->start(1.);}
-boolean MacPrinter::get() { return c->get(); }
-boolean MacPrinterCanvas::get() {
+bool MacPrinter::get() { return c->get(); }
+bool MacPrinterCanvas::get() {
 	if (!hdc) {
 		hdc = GetPrinterDC();
 	}
@@ -246,7 +246,7 @@ void MacPrinter::page(const char* label) {}
 void MacPrinter::push_transform() {c->push_transform();}
 void MacPrinter::pop_transform() {c->pop_transform();}
 void MacPrinter::transform(const Transformer& t) {c->transform(t);}
-void MacPrinter::push_clipping(boolean) {c->push_clipping();}
+void MacPrinter::push_clipping(bool) {c->push_clipping();}
 void MacPrinter::pop_clipping() {c->pop_clipping();}
 void MacPrinter::new_path() {c->new_path();}
 void MacPrinter::move_to(Coord x, Coord y) {c->move_to(x,y);}

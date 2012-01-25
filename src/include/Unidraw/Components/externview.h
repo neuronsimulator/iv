@@ -33,44 +33,44 @@
 
 class ExternView : public ComponentView {
 public:
-    virtual boolean Emit(ostream&);
-    virtual boolean Definition(ostream&);
+    virtual bool Emit(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ExternView* GetView(Iterator);
     virtual void SetView(ExternView*, Iterator&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     ExternView(Component* = nil);
 };
 
 class PreorderView : public ExternView {
 public:
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     PreorderView(Component* = nil);
 };
 
 class InorderView : public ExternView {
 public:
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     InorderView(Component* = nil);
 };
 
 class PostorderView : public ExternView {
 public:
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     PostorderView(Component* = nil);
 };

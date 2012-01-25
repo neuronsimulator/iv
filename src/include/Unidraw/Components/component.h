@@ -55,7 +55,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     virtual void Attach(ComponentView*);
     virtual void Detach(ComponentView*);
@@ -67,7 +67,7 @@ public:
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*& delim);
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Component();
 

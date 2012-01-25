@@ -64,7 +64,7 @@ public:
     virtual Graphic* GetGraphic();
     virtual Viewer* GetViewer();
     GraphicComp* GetGraphicComp();
-    boolean Includes(GraphicView*);
+    bool Includes(GraphicView*);
     GraphicView* GetGraphicView(Component*);
 
     virtual GraphicView* GetView(Iterator);
@@ -79,7 +79,7 @@ public:
     virtual ConnectorView* ConnectorIntersecting(Coord, Coord, Coord, Coord);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     GraphicView(GraphicComp* = nil);
 
@@ -125,7 +125,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     virtual GraphicView* GetView(Iterator);
     virtual void SetView(GraphicView*, Iterator&);
@@ -139,7 +139,7 @@ public:
     virtual ConnectorView* ConnectorIntersecting(Coord, Coord, Coord, Coord);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     UList* Elem(Iterator);
 

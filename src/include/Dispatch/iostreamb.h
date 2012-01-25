@@ -35,13 +35,13 @@ public:
     iosb();
     ~iosb();
 
-    boolean binary() const;
-    void binary(boolean);
-    boolean swapped() const;
-    void swapped(boolean);
+    bool binary() const;
+    void binary(bool);
+    bool swapped() const;
+    void swapped(bool);
 protected:
-    boolean _binary;		// are my peer and I performing binary I/O?
-    boolean _swapped;		// does my peer have a swapped endian?
+    bool _binary;		// are my peer and I performing binary I/O?
+    bool _swapped;		// does my peer have a swapped endian?
 };
 
 // Modify istream to extract unformatted data where possible for
@@ -111,7 +111,7 @@ public:
     iostreamb(streambuf*);
     ~iostreamb();
 
-    void negotiate(boolean binary);
+    void negotiate(bool binary);
 };
 
 #endif

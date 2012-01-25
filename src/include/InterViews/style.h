@@ -67,7 +67,7 @@ public:
     virtual void attribute(const String& name, const String& value, int = 0);
     virtual void remove_attribute(const String& name);
     virtual long attribute_count() const;
-    virtual boolean attribute(long, String& name, String& value) const;
+    virtual bool attribute(long, String& name, String& value) const;
     void attribute(const char* name, const char* value, int = 0);
     void remove_attribute(const char*);
 
@@ -82,16 +82,16 @@ public:
     void add_trigger(const char*, Action*);
     void remove_trigger(const char*, Action* = nil);
 
-    virtual boolean find_attribute(const String& name, String& value) const;
-    boolean find_attribute(const char* name, String& value) const;
-    boolean find_attribute(const String& name, long&) const;
-    boolean find_attribute(const char* name, long&) const;
-    boolean find_attribute(const String& name, double&) const;
-    boolean find_attribute(const char* name, double&) const;
-    boolean find_attribute(const String& name, Coord&) const;
-    boolean find_attribute(const char* name, Coord&) const;
-    boolean value_is_on(const String& name) const;
-    boolean value_is_on(const char* name) const;
+    virtual bool find_attribute(const String& name, String& value) const;
+    bool find_attribute(const char* name, String& value) const;
+    bool find_attribute(const String& name, long&) const;
+    bool find_attribute(const char* name, long&) const;
+    bool find_attribute(const String& name, double&) const;
+    bool find_attribute(const char* name, double&) const;
+    bool find_attribute(const String& name, Coord&) const;
+    bool find_attribute(const char* name, Coord&) const;
+    bool value_is_on(const String& name) const;
+    bool value_is_on(const char* name) const;
 private:
     friend class StyleRep;
 

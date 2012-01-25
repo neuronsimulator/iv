@@ -7,7 +7,6 @@
 #undef Screen
 #undef Window
 
-#define boolean _lib_os(boolean)
 #define Bitmap _lib_iv(Bitmap)
 #define Colormap _lib_iv(Colormap)
 #define Cursor _lib_iv(Cursor)

@@ -36,7 +36,7 @@
 /*****************************************************************************/
 
 ClassId MoveCmd::GetClassId () { return MOVE_CMD; }
-boolean MoveCmd::IsA (ClassId id) { return MOVE_CMD == id || Command::IsA(id);}
+bool MoveCmd::IsA (ClassId id) { return MOVE_CMD == id || Command::IsA(id);}
 
 MoveCmd::MoveCmd (ControlInfo* c, float x, float y) : Command(c) {
     _dx = x;
@@ -73,7 +73,7 @@ void MoveCmd::Write (ostream& out) {
 
 ClassId ScaleCmd::GetClassId () { return SCALE_CMD; }
 
-boolean ScaleCmd::IsA (ClassId id) {
+bool ScaleCmd::IsA (ClassId id) {
     return SCALE_CMD == id || Command::IsA(id);
 }
 
@@ -118,7 +118,7 @@ void ScaleCmd::Write (ostream& out) {
 
 ClassId RotateCmd::GetClassId () { return ROTATE_CMD; }
 
-boolean RotateCmd::IsA (ClassId id) {
+bool RotateCmd::IsA (ClassId id) {
     return ROTATE_CMD == id || Command::IsA(id);
 }
 

@@ -449,7 +449,7 @@ Transformer& MWcanvas::matrix() const
 // ----------------------------------------------------------------------
 // Clipping stack management
 // ----------------------------------------------------------------------
-void MWcanvas::push_clipping(boolean)
+void MWcanvas::push_clipping(bool)
 {
 	HRGN old_clip = clipping_;
 	HRGN new_clip = CreateRectRgn(0, 0, pwidth(), pheight());
@@ -538,12 +538,12 @@ void MWcanvas::damage(Coord left, Coord bottom, Coord right, Coord top)
 	}
 }
 
-boolean MWcanvas::damaged(const Extension& ext) const
+bool MWcanvas::damaged(const Extension& ext) const
 {
     return damaged(ext.left(), ext.bottom(), ext.right(), ext.top());
 }
 
-boolean MWcanvas::damaged(
+bool MWcanvas::damaged(
 	Coord left,
 	Coord bottom,
 	Coord right,
@@ -568,7 +568,7 @@ void MWcanvas::damage_all()
 	}
 }
 
-boolean MWcanvas::any_damage() const
+bool MWcanvas::any_damage() const
 {
 	return (damageArea.origin() != damageArea.corner());
 }

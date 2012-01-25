@@ -78,7 +78,7 @@ public:
 	Interactor* = nil, Interactor* = nil
     );
 protected:
-    virtual void DoInsert(Interactor*, boolean, Coord& x, Coord& y);
+    virtual void DoInsert(Interactor*, bool, Coord& x, Coord& y);
     virtual void DoChange(Interactor*);
     virtual void DoRemove(Interactor*);
     virtual void Reconfig();
@@ -92,10 +92,10 @@ private:
 
     void Init(Interactor*);
     void ComponentBounds(int&, int&);
-    boolean AlreadyInserted(Interactor*);
+    bool AlreadyInserted(Interactor*);
     void CalcShape();
     void PlaceElement(TrayElement*);
-    boolean TrayOrBg(Interactor*);
+    bool TrayOrBg(Interactor*);
 };
 
 inline Shape* TGlue::GetShape () { return shape; }

@@ -43,7 +43,7 @@
 
 ClassId MagnifyTool::GetClassId () { return MAGNIFY_TOOL; }
 
-boolean MagnifyTool::IsA (ClassId id) {
+bool MagnifyTool::IsA (ClassId id) {
     return MAGNIFY_TOOL == id || Tool::IsA(id);
 }
 

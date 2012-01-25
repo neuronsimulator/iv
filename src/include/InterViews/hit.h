@@ -66,7 +66,7 @@ public:
 	int depth, Glyph*, GlyphIndex, Handler* = nil, GlyphIndex target = 0
     );
 
-    virtual boolean any() const;
+    virtual bool any() const;
     virtual int count() const;
     virtual int depth(GlyphIndex target = 0) const;
     virtual Glyph* target(int depth, GlyphIndex target = 0) const;

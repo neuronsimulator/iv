@@ -30,7 +30,7 @@
 #define iv2_6_textdisplay_h
 
 #include <InterViews/enter-scope.h>
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/coord.h>
 #include <IV-2_6/InterViews/textstyle.h>
 
@@ -46,7 +46,7 @@ class TextLine;
 
 class TextDisplay {
 public:
-    TextDisplay(boolean autosized = false);
+    TextDisplay(bool autosized = false);
     ~TextDisplay();
 
     void Draw(Painter*, Canvas*);
@@ -78,7 +78,7 @@ public:
     void CaretStyle(int);
 
     int LineNumber(IntCoord y);
-    int LineIndex(int line, IntCoord x, boolean between = true);
+    int LineIndex(int line, IntCoord x, bool between = true);
 
     IntCoord Width();
     IntCoord Height();
@@ -91,14 +91,14 @@ private:
 friend class TextLine;
 
     void Size(int, int);
-    TextLine* Line(int, boolean);
+    TextLine* Line(int, bool);
     int Index(int);
     void HideCaret();
     void ShowCaret();
 
     Painter* painter;
     Canvas* canvas;
-    boolean autosized;
+    bool autosized;
     IntCoord xmin, xmax;
     IntCoord ymin, ymax;
     IntCoord x0, y0;

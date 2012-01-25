@@ -48,7 +48,7 @@ public:
     RubberList* Next() { return next; }
     RubberList* Prev() { return prev; }
     RubberList* End() { return this; }
-    boolean IsEmpty() { return next == this; }
+    bool IsEmpty() { return next == this; }
 };
 
 RubberList::RubberList(Rubberband* r) {
@@ -215,5 +215,5 @@ Rubberband* RubberGroup::Prev() {
     return cur->rub;
 }
 
-boolean RubberGroup::AtEnd() { return cur == rlist; }
-boolean RubberGroup::IsEmpty() { return rlist->IsEmpty(); }
+bool RubberGroup::AtEnd() { return cur == rlist; }
+bool RubberGroup::IsEmpty() { return rlist->IsEmpty(); }

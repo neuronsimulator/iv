@@ -32,9 +32,9 @@
 
 class RpcRegistry {
 public:
-    static boolean record(const char* path, int port);
-    static boolean erase(const char* path);
-    static boolean find(const char* path, char*& host, int& port);
+    static bool record(const char* path, int port);
+    static bool erase(const char* path);
+    static bool find(const char* path, char*& host, int& port);
 };
 
 #endif

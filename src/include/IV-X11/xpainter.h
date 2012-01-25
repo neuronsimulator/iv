@@ -45,10 +45,10 @@ public:
 
     GC fillgc;
     GC dashgc;
-    boolean fillbg;
-    boolean overwrite;
-    boolean iv_xor;
-    boolean clipped;
+    bool fillbg;
+    bool overwrite;
+    bool iv_xor;
+    bool clipped;
     Display* display;
     XRectangle xclip[1];
 };
@@ -56,7 +56,7 @@ public:
 void DrawTransformedImage(
     XImage* src, int sx0, int sy0, XImage* mask, int mx0, int my0,
     XDrawable d, unsigned int height, int dx0, int dy0,
-    boolean stencil, unsigned long fg, unsigned long bg,
+    bool stencil, unsigned long fg, unsigned long bg,
     GC gc, const Transformer& matrix
 );
 

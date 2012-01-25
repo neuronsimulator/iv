@@ -66,7 +66,7 @@ Transformer::Transformer(
 
 Transformer::~Transformer() { }
 
-boolean Transformer::operator ==(const Transformer& t) const {
+bool Transformer::operator ==(const Transformer& t) const {
     if (identity_) {
 	return t.identity_;
     }
@@ -80,7 +80,7 @@ boolean Transformer::operator ==(const Transformer& t) const {
     );
 }
 
-boolean Transformer::operator !=(const Transformer& t) const {
+bool Transformer::operator !=(const Transformer& t) const {
     if (identity_) {
 	return !t.identity_;
     }

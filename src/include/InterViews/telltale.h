@@ -66,8 +66,8 @@ public:
     TelltaleFlags flags() const;
     TelltaleGroup* group() const;
 
-    virtual void set(const TelltaleFlags, boolean);
-    virtual boolean test(const TelltaleFlags) const;
+    virtual void set(const TelltaleFlags, bool);
+    virtual bool test(const TelltaleFlags) const;
     virtual void join(TelltaleGroup*);
     virtual void leave_group();
 private:
@@ -93,19 +93,19 @@ private:
 
     /* backward compatibility */
 public:
-    void highlight(boolean);
-    boolean highlighted() const;
+    void highlight(bool);
+    bool highlighted() const;
 
-    void choose(boolean);
-    boolean chosen() const;
+    void choose(bool);
+    bool chosen() const;
 
-    void enable(boolean);
-    boolean enabled() const;
+    void enable(bool);
+    bool enabled() const;
 };
 
 #define Telltale_access(writer,reader,flag) \
-inline void Telltale::writer(boolean b) { state()->set(flag, b); } \
-inline boolean Telltale::reader() const { return state()->test(flag); }
+inline void Telltale::writer(bool b) { state()->set(flag, b); } \
+inline bool Telltale::reader() const { return state()->test(flag); }
 
 Telltale_access(highlight,highlighted,TelltaleState::is_active)
 Telltale_access(choose,chosen,TelltaleState::is_chosen)

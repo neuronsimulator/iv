@@ -182,13 +182,13 @@ class DirectoryEntry {
 public:
     const String& name() const;
     void set_is_dir(DirectoryImpl*);
-    boolean is_dir() { return is_dir_;}
+    bool is_dir() { return is_dir_;}
 private:
     friend class Directory;
     friend class DirectoryImpl;
 
     String* name_;
-    boolean is_dir_;
+    bool is_dir_;
 };
 
 inline const String& DirectoryEntry::name() const { return *name_; }
@@ -216,7 +216,7 @@ private:
     DirectoryEntry* entries_;
     int count_;
     int used_;
-    boolean filled_;
+    bool filled_;
 
     static unsigned int overflows_;
 
@@ -226,17 +226,17 @@ private:
 #if MAC
 	static CopyString* mac_canonical(CopyString*);
 #endif
-    static boolean dot_slash(const char*);
-    static boolean dot_dot_slash(const char*);
+    static bool dot_slash(const char*);
+    static bool dot_dot_slash(const char*);
     static const char* home(const char*);
     static const char* eliminate_dot(const char*);
-    static boolean collapsed_dot_dot_slash(char*, char*& start);
+    static bool collapsed_dot_dot_slash(char*, char*& start);
     static const char* eliminate_dot_dot(const char*);
     static const char* interpret_slash_slash(const char*);
     static const char* interpret_tilde(const char*);
     static const char* expand_tilde(const char*, int);
     static const char* real_path(const char*);
-    static boolean ifdir(const char*);
+    static bool ifdir(const char*);
 };
 
 	unsigned int DirectoryImpl::overflows_ = 0;
@@ -399,7 +399,7 @@ int Directory::index(const String& name) const {
     return -1;
 }
 
-boolean Directory::is_directory(int i) const {
+bool Directory::is_directory(int i) const {
 
     DirectoryImpl& d = impl_->filled();
     if (i < 0 || i >= d.used_) {
@@ -431,11 +431,11 @@ void DirectoryEntry::set_is_dir(DirectoryImpl* d) {
 #endif
 }
 
-inline boolean DirectoryImpl::dot_slash(const char* path) {
+inline bool DirectoryImpl::dot_slash(const char* path) {
     return path[0] == '.' && (path[1] == '/' || path[1] == '\0');
 }
 
-inline boolean DirectoryImpl::dot_dot_slash(const char* path) {
+inline bool DirectoryImpl::dot_dot_slash(const char* path) {
     return (path[0] == '.' && path[1] == '.' &&
 	(path[2] == '/' || path[2] == '\0')
     );
@@ -503,7 +503,7 @@ CopyString* DirectoryImpl::mac_canonical(CopyString* name) {
 }
 #endif
 
-static boolean s_eq_p(const char* s, const char* p) {
+static bool s_eq_p(const char* s, const char* p) {
 #if defined(WIN32) || MAC
 	return toupper(*s) == toupper(*p);
 #else
@@ -511,7 +511,7 @@ static boolean s_eq_p(const char* s, const char* p) {
 #endif
 }
 
-boolean Directory::match(const String& name, const String& pattern) {
+bool Directory::match(const String& name, const String& pattern) {
     const char* s = name.string();
     const char* end_s = s + name.length();
     const char* p = pattern.string();
@@ -754,7 +754,7 @@ const char* DirectoryImpl::eliminate_dot(const char* path) {
 	 return newpath;
 }
 
-boolean DirectoryImpl::collapsed_dot_dot_slash(char* path, char*& start) {
+bool DirectoryImpl::collapsed_dot_dot_slash(char* path, char*& start) {
 	 if (path == start || *(start - 1) != '/') {
 	return false;
 	 }
@@ -807,7 +807,7 @@ const char* DirectoryImpl::interpret_slash_slash(const char* path) {
 const char* DirectoryImpl::interpret_tilde(const char* path) {
     static char realpath[path_buffer_size];
     const char* beg = strrchr(path, '~');
-    boolean valid = (beg != nil && (beg == path || *(beg - 1) == '/'));
+    bool valid = (beg != nil && (beg == path || *(beg - 1) == '/'));
     if (valid) {
 	const char* end = strchr(beg, '/');
 	int length = (end == nil) ? strlen(beg) : (end - beg);
@@ -845,7 +845,7 @@ const char* DirectoryImpl::real_path(const char* path) {
     return realpath;
 }
 
-boolean DirectoryImpl::ifdir(const char* path) {
+bool DirectoryImpl::ifdir(const char* path) {
 #if MAC
 	Directory* dir = Directory::open(path);
 	if (dir) {

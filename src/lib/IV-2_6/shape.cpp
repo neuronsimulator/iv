@@ -66,6 +66,6 @@ void Shape::SetUndefined () {
     height = 0;
 }
 
-boolean Shape::Defined () {
+bool Shape::Defined () {
     return width != 0;
 }

@@ -142,7 +142,7 @@ public:
     DialogHandler(Dialog*);
     virtual ~DialogHandler();
 
-    virtual boolean event(Event&);
+    virtual bool event(Event&);
 private:
     Dialog* dialog_;
 };
@@ -150,7 +150,7 @@ private:
 DialogHandler::DialogHandler(Dialog* d) { dialog_ = d; }
 DialogHandler::~DialogHandler() { }
 
-boolean DialogHandler::event(Event&) {
+bool DialogHandler::event(Event&) {
     dialog_->dismiss(false);
     return true;
 }
@@ -160,7 +160,7 @@ boolean DialogHandler::event(Event&) {
 Dialog::Dialog(Glyph* g, Style* s) : InputHandler(g, s) { }
 Dialog::~Dialog() { }
 
-boolean Dialog::post_for_aligned(Window* w, float x_align, float y_align) {
+bool Dialog::post_for_aligned(Window* w, float x_align, float y_align) {
     TransientWindow* t = new TransientWindow(this);
     t->style(new Style(style()));
     t->transient_for(w);
@@ -168,14 +168,14 @@ boolean Dialog::post_for_aligned(Window* w, float x_align, float y_align) {
     t->place(w->left() + 0.5 * w->width(), w->bottom() + 0.5 * w->height());
     t->align(x_align, y_align);
     t->map();
-    boolean b = run();
+    bool b = run();
     t->unmap();
     t->display()->sync();
     delete t;
     return b;
 }
 
-boolean Dialog::post_at_aligned(
+bool Dialog::post_at_aligned(
     Coord x, Coord y, float x_align, float y_align
 ) {
     TransientWindow* t = new TransientWindow(this);
@@ -184,7 +184,7 @@ boolean Dialog::post_at_aligned(
     t->place(x, y);
     t->align(x_align, y_align);
     t->map();
-    boolean b = run();
+    bool b = run();
     t->unmap();
     t->display()->sync();
     delete t;
@@ -203,11 +203,11 @@ boolean Dialog::post_at_aligned(
 #define OC_UNQUIT 1
 #if OC_UNQUIT
 extern "C" {
-boolean (*IVDialog_setAcceptInput)(boolean) = nil;
+bool (*IVDialog_setAcceptInput)(bool) = nil;
 }
 #endif
 
-boolean Dialog::run() {
+bool Dialog::run() {
     Session* s = Session::instance();
     Event e;
     done_ = false;
@@ -221,7 +221,7 @@ boolean Dialog::run() {
 	iv_carbon_in_menu_ = 0;
 #endif
 #if OC_UNQUIT
-	boolean old;
+	bool old;
 	if (IVDialog_setAcceptInput) {
 		old = (*IVDialog_setAcceptInput)(false);
 		s->unquit();
@@ -266,7 +266,7 @@ boolean Dialog::run() {
     return accepted_;
 }
 
-void Dialog::dismiss(boolean accept) {
+void Dialog::dismiss(bool accept) {
     accepted_ = accept;
     done_ = true;
 }

@@ -57,14 +57,14 @@ StateVar* TF_2Port::GetOutput (int) { return nil; }
 void TF_2Port::SetInput (StateVar*, int) { }
 void TF_2Port::SetOutput (StateVar*, int) { }
 void TF_2Port::Transfer () { }
-boolean TF_2Port::ChangedOutput (int) { return false; }
+bool TF_2Port::ChangedOutput (int) { return false; }
 
 int TF_2Port::Inputs () { return 0; }
 int TF_2Port::Outputs () { return 0; }
 
 ClassId TF_2Port::GetClassId () { return TF_2PORT; }
 
-boolean TF_2Port::IsA (ClassId id) {
+bool TF_2Port::IsA (ClassId id) {
     return TF_2PORT == id || TransferFunct::IsA(id);
 }
 
@@ -95,7 +95,7 @@ void TF_Direct::SetOutput (StateVar* output, int i) {
 
 ClassId TF_Direct::GetClassId () { return TF_DIRECT; }
 
-boolean TF_Direct::IsA (ClassId id) {
+bool TF_Direct::IsA (ClassId id) {
     return TF_DIRECT == id || TF_2Port::IsA(id); 
 }
 
@@ -104,8 +104,8 @@ void TF_Direct::Transfer () {
     _changed = true;
 }
 
-boolean TF_Direct::ChangedOutput (int i) { 
-    boolean changed = false;
+bool TF_Direct::ChangedOutput (int i) { 
+    bool changed = false;
 
     if (i == 0 && _changed) {
         changed = _changed;

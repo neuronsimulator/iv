@@ -51,8 +51,8 @@ public:
     FontFamily(const char* familyname);
     virtual ~FontFamily();
 
-    virtual boolean font(int size, const char*& name, float& scale) const;
-    virtual boolean font(
+    virtual bool font(int size, const char*& name, float& scale) const;
+    virtual bool font(
         int size, const char* style, const char*& name, float& scale
     ) const;
 
@@ -107,8 +107,8 @@ public:
     static const Font* lookup(const String&);
     static const Font* lookup(const char*);
 
-    static boolean exists(Display*, const String&);
-    static boolean exists(Display*, const char*);
+    static bool exists(Display*, const String&);
+    static bool exists(Display*, const char*);
 
     virtual const char* name() const;
     virtual const char* encoding() const;
@@ -120,7 +120,7 @@ public:
     virtual Coord width(long) const;
     virtual Coord width(const char*, int) const;
 
-    virtual int index(const char*, int, float offset, boolean between) const;
+    virtual int index(const char*, int, float offset, bool between) const;
 
     FontRep* rep(Display*) const;
 protected:
@@ -133,10 +133,10 @@ private:
     /* anachronisms */
 public:
     int Baseline() const;
-    boolean FixedWidth() const;
+    bool FixedWidth() const;
     int Height() const;
-    int Index(const char*, int offset, boolean between) const;
-    int Index(const char*, int, int offset, boolean between) const;
+    int Index(const char*, int offset, bool between) const;
+    int Index(const char*, int, int offset, bool between) const;
     int Width(const char*) const;
     int Width(const char*, int) const;
 };

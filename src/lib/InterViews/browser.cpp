@@ -88,7 +88,7 @@ void Browser::select(GlyphIndex i) {
     }
 }
 
-void Browser::active(GlyphIndex i, boolean b) {
+void Browser::active(GlyphIndex i, bool b) {
     TelltaleState* t = items_->item(i);
     t->attach(this);
     t->set(TelltaleState::is_active, b);

@@ -41,7 +41,7 @@ public:
 
     virtual void Execute();
     virtual void Unexecute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     GraphicComp* GetGroup();
     void SetGroup(GraphicComp*);
@@ -50,9 +50,9 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    boolean _executed;
+    bool _executed;
 private:
     void Init(GraphicComp*);
 private:
@@ -76,9 +76,9 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    boolean _executed;
+    bool _executed;
 private:
     void Init();
 private:
@@ -98,7 +98,7 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class BackCmd : public Command {
@@ -111,7 +111,7 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #endif

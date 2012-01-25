@@ -126,7 +126,7 @@ void ShowFrame::HandleInput(Event& e) {
     interior()->Handle(e);
 }
 
-void ShowFrame::InsideFrame(boolean) {
+void ShowFrame::InsideFrame(bool) {
     /* default is to do nothing */
 }
 
@@ -163,7 +163,7 @@ Interactor* TitleFrame::Wrap(Interactor* i) {
     return new VBox(banner, new HBorder, i);
 }
 
-void TitleFrame::InsideFrame(boolean b) {
+void TitleFrame::InsideFrame(bool b) {
     banner->highlight = b;
     banner->Draw();
 }
@@ -190,7 +190,7 @@ void BorderFrame::Init() {
     normal = false;
 }
 
-void BorderFrame::InsideFrame(boolean b) {
+void BorderFrame::InsideFrame(bool b) {
     normal = b;
     Redraw(0, 0, xmax, ymax);
 }

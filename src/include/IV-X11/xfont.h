@@ -29,7 +29,7 @@
 #ifndef iv_xfont_h
 #define iv_xfont_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <OS/enter-scope.h>
 #include <IV-X11/Xlib.h>
 
@@ -47,7 +47,7 @@ public:
     Display* display_;
     XFontStruct* font_;
     float scale_;
-    boolean unscaled_;
+    bool unscaled_;
     String* name_;
     String* encoding_;
     float size_;

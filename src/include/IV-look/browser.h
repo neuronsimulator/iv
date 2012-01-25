@@ -65,7 +65,7 @@ private:
     BrowserList* items_;
     GlyphIndex item_;
 
-    void active(GlyphIndex i, boolean);
+    void active(GlyphIndex i, bool);
 };
 
 #endif

@@ -62,7 +62,7 @@ private:
     BoxElement* head;
     BoxElement* tail;
 
-    void DoInsert(Interactor*, boolean, Coord& x, Coord& y);
+    void DoInsert(Interactor*, bool, Coord& x, Coord& y);
     void DoChange(Interactor*);
     void DoRemove(Interactor*);
 };

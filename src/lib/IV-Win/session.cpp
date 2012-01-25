@@ -494,7 +494,7 @@ void Session::read(Event& e)
  * Read an event as above, but time out after a given (sec, usec) delay.
  * Return true if an event was read, false if the time-out expired.
  */
-boolean Session::read(long, long, Event&)
+bool Session::read(long, long, Event&)
 {
 	WindowRep::errorMessage("Session::read - unsupported");
 	// NOT REACHED
@@ -505,7 +505,7 @@ boolean Session::read(long, long, Event&)
  * Check for a pending event, returning it if there is one.
  */
 
-boolean SessionRep::check(Event&)
+bool SessionRep::check(Event&)
 {
 	WindowRep::errorMessage("Session::check - unsupported");
 	return false;
@@ -605,7 +605,7 @@ void Session::disconnect(Display*)
 int Session::run()
 {
     Event e;
-    boolean& done = rep_->done_;
+    bool& done = rep_->done_;
     done = false;
     do {
 		read(e);
@@ -634,7 +634,7 @@ void Session::unquit() {
  * Return loop status.
  */
 
-boolean Session::done() const
+bool Session::done() const
 {
 	return rep_->done_;
 }
@@ -642,7 +642,7 @@ boolean Session::done() const
 /*
  * Check if an event is pending on any display.
  */
-boolean Session::pending() const
+bool Session::pending() const
 {
 //	WindowRep::errorMessage("Session::pending - unsupported");
 //	return false;
@@ -701,7 +701,7 @@ void SessionRep::parse_args(int& argc, char** argv, const OptionDesc* opts)
     newargv[0] = argv[0];
 	for (i = 1; i < argc; i++)
 	{
-		boolean matched = false;
+		bool matched = false;
 		String arg(argv[i]);
 		for (const OptionDesc* o = &opts[0]; o->name != nil; o++)
 		{
@@ -732,7 +732,7 @@ void SessionRep::parse_args(int& argc, char** argv, const OptionDesc* opts)
  * See if the given argument matches the option description.
  */
 
-boolean SessionRep::match(
+bool SessionRep::match(
 	const String& arg,
 	const OptionDesc& o,
 	int& i,
@@ -828,7 +828,7 @@ String SessionRep::next_arg(
 /*
  * Find the value for a specific argument.
  */
-boolean SessionRep::find_arg(
+bool SessionRep::find_arg(
 	const String& arg,
 	String& value)
 {

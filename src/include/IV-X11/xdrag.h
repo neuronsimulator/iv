@@ -29,7 +29,7 @@
 class XDrag {
 public:
     // these are used by xevent to detect and interpret a drag client message.
-    static boolean isDrag(const XEvent&);
+    static bool isDrag(const XEvent&);
     static void locate(const XEvent&, int& x, int& y);
 };
 

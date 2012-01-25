@@ -39,7 +39,7 @@
 
 ClassId Tool::GetClassId () { return TOOL; }
 ClassId Tool::GetSubstId (const char*&) { return UNDEFINED_CLASS; }
-boolean Tool::IsA (ClassId id) { return TOOL == id; }
+bool Tool::IsA (ClassId id) { return TOOL == id; }
 Tool::Tool (ControlInfo* m) { Tool::SetControlInfo(m); }
 
 Tool::~Tool () { 

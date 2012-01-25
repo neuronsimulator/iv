@@ -40,7 +40,7 @@ CompositorIndex SimpleCompositor::compose(
     CompositorIndex* breaks, CompositorIndex break_count
 ) {
     Coord span = 0;
-    boolean breakable = false;
+    bool breakable = false;
     CompositorIndex count = 0;
     int penalty;
     for (CompositorIndex i = 0; i < component_count; ++i) {

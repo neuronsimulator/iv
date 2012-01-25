@@ -62,7 +62,7 @@ Pattern::Pattern(const int* pattern) {
     init(p, 16, 16);
 }
 
-static boolean is_solid(
+static bool is_solid(
     unsigned char* pat, unsigned int width, unsigned int height
 ) {
     unsigned int nbits = width * height;

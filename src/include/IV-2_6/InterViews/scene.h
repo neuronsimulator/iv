@@ -48,24 +48,24 @@ public:
     void Raise(Interactor*);
     void Lower(Interactor*);
 
-    void Propagate(boolean);
+    void Propagate(bool);
 
-    virtual void Highlight(boolean);
+    virtual void Highlight(bool);
 protected:
-    boolean propagate;
+    bool propagate;
 
     void PrepareToInsert(Interactor*);
     virtual Interactor* Wrap(Interactor*);
-    virtual void DoInsert(Interactor*, boolean, Coord& x, Coord& y);
+    virtual void DoInsert(Interactor*, bool, Coord& x, Coord& y);
     virtual void DoChange(Interactor*);
     virtual void DoMove(Interactor*, Coord& x, Coord& y);
     virtual void DoRemove(Interactor*);
     virtual void DoRaise(Interactor*);
     virtual void DoLower(Interactor*);
 
-    void Place(Interactor*, Coord, Coord, Coord, Coord, boolean map = true);
+    void Place(Interactor*, Coord, Coord, Coord, Coord, bool map = true);
 
-    void Map(Interactor*, boolean raised = true);
+    void Map(Interactor*, bool raised = true);
     void Unmap(Interactor*);
 private:
     void DoAlign(Interactor*, Alignment, Coord& x, Coord& y);
@@ -87,7 +87,7 @@ protected:
     Interactor* interior();
     void interior(Interactor*);
 
-    virtual void DoInsert(Interactor*, boolean, Coord&, Coord&);
+    virtual void DoInsert(Interactor*, bool, Coord&, Coord&);
     virtual void DoChange(Interactor*);
     virtual void DoRemove(Interactor*);
 

@@ -160,7 +160,7 @@ static void possible_break(
         int break_badness = badness(
             span, b->natural_, b->stretch_, b->shrink_
         );
-        boolean only_break = b == breaks->next_ && b->next_ == breaks;
+        bool only_break = b == breaks->next_ && b->next_ == breaks;
         if (penalty <= PenaltyGood) {
             int break_demerits = demerits(
                 break_badness, penalty, breakpenalty

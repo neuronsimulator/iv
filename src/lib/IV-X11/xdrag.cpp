@@ -61,23 +61,23 @@ class DragBox : public Background {
 public:
     DragBox(Glyph* body, const Color* color);
 
-    virtual void everDrawn(boolean drawn);
-    virtual boolean everDrawn();
+    virtual void everDrawn(bool drawn);
+    virtual bool everDrawn();
 
     virtual void draw(Canvas* canvas, const Allocation& allocation) const;
 protected:
-    boolean everDrawn_;
+    bool everDrawn_;
 };
 
 DragBox::DragBox(Glyph* body, const Color* color) : Background(body, color) {
     everDrawn_ = false;
 }
 
-void DragBox::everDrawn(boolean drawn) {
+void DragBox::everDrawn(bool drawn) {
     everDrawn_ = drawn;
 }
 
-boolean DragBox::everDrawn() {
+bool DragBox::everDrawn() {
     return everDrawn_;
 }
 
@@ -93,15 +93,15 @@ class DragAtoms {
 public:
     DragAtoms();
 
-    boolean enter(const XEvent&);
-    boolean motion(const XEvent&);
-    boolean leave(const XEvent&);
-    boolean drop(const XEvent&);
+    bool enter(const XEvent&);
+    bool motion(const XEvent&);
+    bool leave(const XEvent&);
+    bool drop(const XEvent&);
 
-    boolean enter(const Event&);
-    boolean motion(const Event&);
-    boolean leave(const Event&);
-    boolean drop(const Event&);
+    bool enter(const Event&);
+    bool motion(const Event&);
+    bool leave(const Event&);
+    bool drop(const Event&);
 
     Atom enter(XDisplay*);
     Atom motion(XDisplay*);
@@ -194,7 +194,7 @@ static void getDragProperty(XEvent& xevent, char*& buffer, int& length) {
     }
 }
 
-static boolean understandsDragging(XDisplay* xdisplay, XWindow xwindow) {
+static bool understandsDragging(XDisplay* xdisplay, XWindow xwindow) {
     if (xwindow == None) {
 	return false;
     }
@@ -280,7 +280,7 @@ static XWindow translate(
 
 /* class XDrag */
 
-boolean XDrag::isDrag(const XEvent& xevent) {
+bool XDrag::isDrag(const XEvent& xevent) {
     return (
 	dragAtoms->enter(xevent) || dragAtoms->motion(xevent) ||
 	dragAtoms->leave(xevent) || dragAtoms->drop(xevent)
@@ -316,7 +316,7 @@ void DragAtoms::cache(XDisplay* display) {
     drag_   = XInternAtom(display, dragName, False);
 }
 
-boolean DragAtoms::enter(const XEvent& xevent) {
+bool DragAtoms::enter(const XEvent& xevent) {
     if (xevent.type != ClientMessage) {
 	return false;
     }
@@ -324,7 +324,7 @@ boolean DragAtoms::enter(const XEvent& xevent) {
     return enter_ && xevent.xclient.message_type == enter_;
 }
 
-boolean DragAtoms::motion(const XEvent& xevent) {
+bool DragAtoms::motion(const XEvent& xevent) {
     if (xevent.type != ClientMessage) {
 	return false;
     }
@@ -332,7 +332,7 @@ boolean DragAtoms::motion(const XEvent& xevent) {
     return motion_ && xevent.xclient.message_type == motion_;
 }
 
-boolean DragAtoms::leave(const XEvent& xevent) {
+bool DragAtoms::leave(const XEvent& xevent) {
     if (xevent.type != ClientMessage) {
 	return false;
     }
@@ -340,7 +340,7 @@ boolean DragAtoms::leave(const XEvent& xevent) {
     return leave_ && xevent.xclient.message_type == leave_;
 }
 
-boolean DragAtoms::drop(const XEvent& xevent) {
+bool DragAtoms::drop(const XEvent& xevent) {
     if (xevent.type != ClientMessage) {
 	return false;
     }
@@ -348,19 +348,19 @@ boolean DragAtoms::drop(const XEvent& xevent) {
     return drop_ && xevent.xclient.message_type == drop_;
 }
 
-boolean DragAtoms::enter(const Event& event) {
+bool DragAtoms::enter(const Event& event) {
     return enter(event.rep()->xevent_);
 }
 
-boolean DragAtoms::motion(const Event& event) {
+bool DragAtoms::motion(const Event& event) {
     return motion(event.rep()->xevent_);
 }
 
-boolean DragAtoms::leave(const Event& event) {
+bool DragAtoms::leave(const Event& event) {
     return leave(event.rep()->xevent_);
 }
 
-boolean DragAtoms::drop(const Event& event) {
+bool DragAtoms::drop(const Event& event) {
     return drop(event.rep()->xevent_);
 }
 
@@ -394,7 +394,7 @@ Atom DragAtoms::drag(XDisplay* display) {
 class DragMethod {
 public:
     virtual XWindow setup(XDisplay*, Event&, Drag*) = 0;
-    virtual boolean moveWindow(XDisplay*, XWindow, int x, int y) = 0;
+    virtual bool moveWindow(XDisplay*, XWindow, int x, int y) = 0;
     virtual void cleanup(XDisplay*, XWindow) = 0;
 };
 
@@ -403,7 +403,7 @@ public:
 class DragMethodCursor : public DragMethod {
 public:
     virtual XWindow setup(XDisplay*, Event&, Drag*);
-    virtual boolean moveWindow(XDisplay*, XWindow, int x, int y);
+    virtual bool moveWindow(XDisplay*, XWindow, int x, int y);
     virtual void cleanup(XDisplay*, XWindow);
 };
 
@@ -412,7 +412,7 @@ public:
 class DragMethodWindow : public DragMethod {
 public:
     virtual XWindow setup(XDisplay*, Event&, Drag*);
-    virtual boolean moveWindow(XDisplay*, XWindow, int x, int y);
+    virtual bool moveWindow(XDisplay*, XWindow, int x, int y);
     virtual void cleanup(XDisplay*, XWindow);
 
     Window* dragWindow_;
@@ -429,10 +429,10 @@ public:
     DragRep(Drag* drag);
     ~DragRep();
 
-    boolean event(Event& event);
+    bool event(Event& event);
 
     Drag* drag_;
-    boolean dragable_;
+    bool dragable_;
     Handler* target_;
     Coord x_;
     Coord y_;
@@ -447,7 +447,7 @@ class DragHandler : public Handler {
 public:
     DragHandler(DragRep* dragRep);
 
-    virtual boolean event(Event& event);
+    virtual bool event(Event& event);
 protected:
     DragRep* dragRep_;
 };
@@ -466,11 +466,11 @@ Drag::~Drag() {
     rep_ = 0;
 }
 
-void Drag::dragable(boolean dragable) {
+void Drag::dragable(bool dragable) {
     rep_->dragable_ = dragable;
 }
 
-boolean Drag::dragable() const {
+bool Drag::dragable() const {
     return rep_->dragable_;
 }
 
@@ -501,18 +501,18 @@ void Drag::dragOffset(Event& event, int& dx, int& dy) {
     dy = int(rep_->y_ - event.pointer_y() + 1);
 }
 
-boolean Drag::caught(const Event& event) const {
+bool Drag::caught(const Event& event) const {
     return (
 	rep_->dragable_ && (event.type() == Event::down) &&
 	event.pointer_button() == Event::middle
     );
 }
 
-boolean Drag::commit(const Event& event) const {
+bool Drag::commit(const Event& event) const {
     return event.type() == Event::up;
 }
 
-boolean Drag::abort(const Event& event) const {
+bool Drag::abort(const Event& event) const {
     return event.type() == Event::down;
 }
 
@@ -546,7 +546,7 @@ XWindow DragMethodCursor::setup(XDisplay* display, Event& event, Drag*) {
     return window;
 }
 
-boolean DragMethodCursor::moveWindow(XDisplay*, XWindow, int, int) {
+bool DragMethodCursor::moveWindow(XDisplay*, XWindow, int, int) {
     return false;
 }
 
@@ -616,7 +616,7 @@ XWindow DragMethodWindow::setup(XDisplay* display, Event& event, Drag* drag) {
     return window;
 }
 
-boolean DragMethodWindow::moveWindow(
+bool DragMethodWindow::moveWindow(
     XDisplay* display, XWindow window, int x, int y
 ) {
     // check to see if motion was due to pointer moving or window moving.
@@ -647,7 +647,7 @@ DragRep::~DragRep() {
     drag_ = 0;
 }
 
-boolean DragRep::event(Event& event) {
+bool DragRep::event(Event& event) {
     Resource::ref(drag_);
     if (drag_->dragGlyph()) {
 	method_ = &methodWindow_;
@@ -694,7 +694,7 @@ boolean DragRep::event(Event& event) {
     }
 
     XWindow last = None;
-    boolean aborted = false;
+    bool aborted = false;
     int lx = x;
     int ly = y;
 
@@ -798,7 +798,7 @@ boolean DragRep::event(Event& event) {
 
 DragHandler::DragHandler(DragRep* dragRep) : dragRep_(dragRep) { }
 
-boolean DragHandler::event(Event& event) {
+bool DragHandler::event(Event& event) {
     return dragRep_->event(event);
 }
 
@@ -809,12 +809,12 @@ public:
     DragZoneRep(DragZone* dragZone);
     ~DragZoneRep();
 
-    boolean caught(const Event&) const;
-    boolean event(Event&);
+    bool caught(const Event&) const;
+    bool event(Event&);
 
     DragZone* dragZone_;
-    boolean sensitive_ : 1;
-    boolean grabbing_ : 1;
+    bool sensitive_ : 1;
+    bool grabbing_ : 1;
     Handler* target_;
     Canvas* canvas_;
     Allocation allocation_;
@@ -827,7 +827,7 @@ class DragZoneHandler : public Handler {
 public:
     DragZoneHandler(DragZoneRep* dragZoneRep);
 
-    virtual boolean event(Event&);
+    virtual bool event(Event&);
 protected:
     DragZoneRep* dragZoneRep_;
 };
@@ -846,11 +846,11 @@ DragZone::~DragZone() {
     rep_ = 0;
 }
 
-void DragZone::sensitive(boolean sensitive) {
+void DragZone::sensitive(bool sensitive) {
     rep_->sensitive_ = sensitive;
 }
 
-boolean DragZone::sensitive() const {
+bool DragZone::sensitive() const {
     return rep_->sensitive_;
 }
 
@@ -894,7 +894,7 @@ DragZoneRep::~DragZoneRep() {
     target_ = nil;
 }
 
-boolean DragZoneRep::caught(const Event& event) const {
+bool DragZoneRep::caught(const Event& event) const {
     if (! sensitive_) {
 	return false;
     }
@@ -904,7 +904,7 @@ boolean DragZoneRep::caught(const Event& event) const {
     );
 }
 
-boolean DragZoneRep::event(Event& event) {
+bool DragZoneRep::event(Event& event) {
     Glyph* glyph = dragZone_->body();
     Hit hit(&event);
     glyph->pick(canvas_, allocation_, 0, hit);
@@ -940,7 +940,7 @@ boolean DragZoneRep::event(Event& event) {
 	getDragProperty(xevent, type, length);
 	Coord x = event.pointer_x();
 	Coord y = event.pointer_y();
-	boolean in = (
+	bool in = (
 	    extension_.left() <= x && x <= extension_.right() &&
 	    extension_.bottom() <= y && y <= extension_.top()
 	);
@@ -998,7 +998,7 @@ DragZoneHandler::DragZoneHandler(DragZoneRep* dragZoneRep) :
     dragZoneRep_(dragZoneRep) {
 }
 
-boolean DragZoneHandler::event(Event& event) {
+bool DragZoneHandler::event(Event& event) {
     return dragZoneRep_->event(event);
 }
 
@@ -1008,7 +1008,7 @@ class DragZoneSinkHandler : public Handler {
 public:
     DragZoneSinkHandler(DragZoneSink* dragZoneSink);
 
-    virtual boolean event(Event& event);
+    virtual bool event(Event& event);
 protected:
     DragZoneSink* dragZoneSink_;
 };
@@ -1017,7 +1017,7 @@ DragZoneSinkHandler::DragZoneSinkHandler(DragZoneSink* dragZoneSink) :
     dragZoneSink_(dragZoneSink) {
 }
 
-boolean DragZoneSinkHandler::event(Event& event) {
+bool DragZoneSinkHandler::event(Event& event) {
     return dragZoneSink_->event(event);
 }
 
@@ -1067,7 +1067,7 @@ void DragZoneSink::pick(Canvas* c, const Allocation& a, int depth, Hit& hit) {
     }
 }
 
-boolean DragZoneSink::event(Event& event) {
+bool DragZoneSink::event(Event& event) {
     if (dragAtoms->enter(event) || dragAtoms->motion(event) ||
 	dragAtoms->drop(event)) {
 	char* type;

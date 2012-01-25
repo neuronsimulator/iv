@@ -406,8 +406,8 @@ extern "C" {
 #if !carbon
 void mac_open_doc(const char* s);
 void mac_open_app();
-boolean is_mac_dll(FSSpec*);
-boolean mac_open_dll(const char*, FSSpec*);
+bool is_mac_dll(FSSpec*);
+bool mac_open_dll(const char*, FSSpec*);
 #endif
 }
 
@@ -895,13 +895,13 @@ assert(0);
 }
 
 // our problem is that pending does not deal with move events.
-boolean read_if_pending(Event& e);
-boolean read_if_pending(Event& e)
+bool read_if_pending(Event& e);
+bool read_if_pending(Event& e)
 {
 #if 0
 	RgnHandle region = NewRgn();
 	SetRectRgn(region, where.h, where.v, (where.h + 1), (where.v +1));	
-	boolean b = WaitNextEvent(everyEvent, e.rep()->getEventRecord(), 0, region);
+	bool b = WaitNextEvent(everyEvent, e.rep()->getEventRecord(), 0, region);
 	DisposeRgn(region);
 	if (b) {
 		where = e.rep()->getEventRecord()->where;
@@ -927,7 +927,7 @@ boolean read_if_pending(Event& e)
  * Read an event as above, but time out after a given (sec, usec) delay.
  * Return true if an event was read, false if the time-out expired.
  */
-boolean Session::read(long, long, Event&)
+bool Session::read(long, long, Event&)
 {
 	printf("Session::read - unsupported\n");
 	// NOT REACHED
@@ -937,7 +937,7 @@ boolean Session::read(long, long, Event&)
 /*
  * Check for a pending event, returning it if there is one.
  */
-boolean SessionRep::srcheck(Event&)
+bool SessionRep::srcheck(Event&)
 {
 	printf("Session::check - unsupported\n");
 	return false;
@@ -980,8 +980,8 @@ static EventTypeSpec showtype[] = {
   {kEventClassApplication, kEventAppDeactivated}
 };
 
-boolean session_deactivating_;
-boolean need_motion_on_deactivate_;
+bool session_deactivating_;
+bool need_motion_on_deactivate_;
 
 static OSStatus show_handler(EventHandlerCallRef x, EventRef er, void*) {
 	OSStatus result = noErr;
@@ -1151,13 +1151,13 @@ int Session::run() {
 int Session::run()
 {
     Event e;
-    boolean& done = rep_->done_;
+    bool& done = rep_->done_;
     EventRecord event;
     done = false;
     
 #if USE_SIOUX_WINDOW     
    	WindowPtr temp = 0;
-   	boolean eventHandled;
+   	bool eventHandled;
    	SIOUXUseWaitNextEvent = false;
    	char buffer[100];
     int n=0;
@@ -1272,7 +1272,7 @@ void Session::unquit() {
  * Return loop status.
  */
 
-boolean Session::done() const
+bool Session::done() const
 {
 	return rep_->done_;
 }
@@ -1280,7 +1280,7 @@ boolean Session::done() const
 /*
  * Check if an event is pending on any display.
  */
-boolean Session::pending() const
+bool Session::pending() const
 {
 	EventRecord event;
     return EventAvail(everyEvent, &event);
@@ -1337,7 +1337,7 @@ void SessionRep::parse_args(int& argc, char** argv, const OptionDesc* opts)
     newargv[0] = argv[0];
 	for (i = 1; i < argc; i++)
 	{
-		boolean matched = false;
+		bool matched = false;
 		String arg(argv[i]);
 		for (const OptionDesc* o = &opts[0]; o->name != nil; o++)
 		{
@@ -1368,7 +1368,7 @@ void SessionRep::parse_args(int& argc, char** argv, const OptionDesc* opts)
  * See if the given argument matches the option description.
  */
 
-boolean SessionRep::match(
+bool SessionRep::match(
 	const String& arg,
 	const OptionDesc& o,
 	int& i,
@@ -1464,7 +1464,7 @@ String SessionRep::next_arg(
 /*
  * Find the value for a specific argument.
  */
-boolean SessionRep::find_arg(
+bool SessionRep::find_arg(
 	const String& arg,
 	String& value)
 {

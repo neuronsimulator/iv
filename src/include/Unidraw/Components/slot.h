@@ -48,7 +48,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     SlotComp(SlotGraphic* = nil);
 
@@ -69,7 +69,7 @@ public:
     virtual Graphic* GetGraphic();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     SlotView(SlotComp* = nil);
 
@@ -114,7 +114,7 @@ public:
 
     virtual Component* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class HSlotView : public SlotView {
@@ -124,7 +124,7 @@ public:
     HSlotComp* GetHSlotComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual SlotComp* NewSubject(SlotGraphic*);
 };
@@ -137,7 +137,7 @@ public:
 
     virtual Component* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class VSlotView : public SlotView {
@@ -147,7 +147,7 @@ public:
     VSlotComp* GetVSlotComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual SlotComp* NewSubject(SlotGraphic*);
 };
@@ -156,10 +156,10 @@ class PSSlot : public PostScriptView {
 public:
     PSSlot(SlotComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #include <IV-2_6/_leave.h>

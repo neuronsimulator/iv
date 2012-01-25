@@ -127,13 +127,13 @@ Coord Bitmap::descent() const { return -rep()->bottom_; }
 // ---------------------------------------------------------------------
 // Bit manipulation functions... not bounds checked for efficiency.
 // ---------------------------------------------------------------------
-void Bitmap::poke(boolean set, int x, int y) 
+void Bitmap::poke(bool set, int x, int y) 
 {
     BitmapRep* b = rep();
 	b->poke(set, x, y);
 }
 
-boolean Bitmap::peek(int x, int y) const 
+bool Bitmap::peek(int x, int y) const 
 {
     BitmapRep* b = rep();
 	return b->peek(x,y);
@@ -262,7 +262,7 @@ BitmapRep::BitmapRep(
 // be mono and depends upon it... bad status will be returned if the bitmap
 // is in fact color!
 // -----------------------------------------------------------------------
-boolean BitmapRep::Load(const char* name)
+bool BitmapRep::Load(const char* name)
 {
 	HINSTANCE hinst = theApp.hinst;
 	HBITMAP hbmp;
@@ -336,7 +336,7 @@ BitmapRep::~BitmapRep()
 // efficiency the coordinates are not checked, and are presumed to have
 // been checked by the client of this function.
 // -----------------------------------------------------------------------
-boolean BitmapRep::peek(int x, int y) const 
+bool BitmapRep::peek(int x, int y) const 
 {
 	int offset = (y * bm_.bmWidthBytes) + (x / 8);
 	unsigned char* bits = (unsigned char*) bm_.bmBits;
@@ -352,7 +352,7 @@ boolean BitmapRep::peek(int x, int y) const
 // the client of this function.
 // -----------------------------------------------------------------------
 void BitmapRep::poke(
-	boolean set, 					// set or clear?
+	bool set, 					// set or clear?
 	int x, 							// x-coordinate 
 	int y) 							// y-coordinate
 {

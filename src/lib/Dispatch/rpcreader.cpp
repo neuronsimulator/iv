@@ -66,7 +66,7 @@ RpcReader::RpcReader(rpcstream* _client, int nfcns) : IOHandler(),
 // Zero the function array that a derived class will initialize with
 // addresses of static member functions to unmarshall RPC requests.
 
-RpcReader::RpcReader(int fd, int nfcns, boolean binary) : IOHandler(),
+RpcReader::RpcReader(int fd, int nfcns, bool binary) : IOHandler(),
     _nfcns(nfcns),
     _function(new PF[nfcns]),
     _client(new rpcstream),
@@ -145,7 +145,7 @@ RpcReader* RpcReader::map(unsigned long) {
 // with the reader, RPC request header, and connection as arguments.
 // Return true if the function was called, false otherwise.
 
-boolean RpcReader::execute(RpcReader* reader, RpcHdr& hdr) {
+bool RpcReader::execute(RpcReader* reader, RpcHdr& hdr) {
     if (!reader) {
 	return false;
     }

@@ -84,31 +84,31 @@ private:
     void WriteConnectors(ostream&, CCnxn_HashTable*);
     void Wrote(Connector*, CNet* cl, CCnxn_HashTable* written);
 
-    boolean FoundFixed(CNet*, CNet*&);
-    boolean FoundSeries(CNet*, CNet*&, CNet*&, Orientation);
-    boolean FoundParallel(CNet*, CNet*&, CNet*&, Orientation);
-    boolean FoundY(CNet*, CNet*&, CNet*&, CNet*&, Orientation);
-    boolean Found2Fixed(CNet* net, Connector*& c1, Connector*& c2);
+    bool FoundFixed(CNet*, CNet*&);
+    bool FoundSeries(CNet*, CNet*&, CNet*&, Orientation);
+    bool FoundParallel(CNet*, CNet*&, CNet*&, Orientation);
+    bool FoundY(CNet*, CNet*&, CNet*&, CNet*&, Orientation);
+    bool Found2Fixed(CNet* net, Connector*& c1, Connector*& c2);
 
     void SubstFixedEquiv(CNet*, CNet*, CNet*&, Orientation);
     void SubstSeriesEquiv(
-        CNet*, CNet*, CNet*, CNet*&, boolean&, boolean&, Orientation
+        CNet*, CNet*, CNet*, CNet*&, bool&, bool&, Orientation
     );
-    void SubstParallelEquiv(CNet*, CNet*, CNet*, CNet*&, boolean&,Orientation);
+    void SubstParallelEquiv(CNet*, CNet*, CNet*, CNet*&, bool&,Orientation);
     void SubstYEquiv(
         CNet*, CNet*, CNet*, CNet*, CNet*&, CNet*&, CNet*&,
-        boolean&, boolean&, boolean&, Orientation
+        bool&, bool&, bool&, Orientation
     );
     void SubstPseudoFixed(CNet*, Connector*, Connector*, CNet*&, Orientation);
 
     void ReplaceFixed(CNet*, CNet*, CNet*&, Orientation);
     void ReplaceSeries(
-        CNet*, CNet*, CNet*, CNet*&, boolean, boolean, Orientation
+        CNet*, CNet*, CNet*, CNet*&, bool, bool, Orientation
     );
-    void ReplaceParallel(CNet*, CNet*, CNet*, CNet*&, boolean, Orientation);
+    void ReplaceParallel(CNet*, CNet*, CNet*, CNet*&, bool, Orientation);
     void ReplaceY(
         CNet*, CNet*, CNet*, CNet*, CNet*&, CNet*&, CNet*&,
-        boolean, boolean, boolean, Orientation
+        bool, bool, bool, Orientation
     );
     void ReplacePseudoFixed(CNet*, Connector*, Connector*, CNet*&,Orientation);
 

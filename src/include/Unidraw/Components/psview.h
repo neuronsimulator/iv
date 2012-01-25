@@ -34,11 +34,11 @@
 
 class PostScriptView : public PreorderView {
 public:
-    virtual boolean Emit(ostream&);
+    virtual bool Emit(ostream&);
     GraphicComp* GetGraphicComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     PostScriptView(GraphicComp* = nil);
 
@@ -117,8 +117,8 @@ public:
     PostScriptViews(GraphicComps* = nil);
     virtual ~PostScriptViews();
 
-    virtual boolean Emit(ostream&);
-    virtual boolean Definition(ostream&);
+    virtual bool Emit(ostream&);
+    virtual bool Definition(ostream&);
     virtual void Update();
     GraphicComps* GetGraphicComps();
 
@@ -129,10 +129,10 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     UList* Elem(Iterator);
     void DeleteView(Iterator&);

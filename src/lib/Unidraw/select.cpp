@@ -46,7 +46,7 @@
 
 ClassId SelectTool::GetClassId () { return SELECT_TOOL; }
 
-boolean SelectTool::IsA (ClassId id) {
+bool SelectTool::IsA (ClassId id) {
     return SELECT_TOOL == id || Tool::IsA(id);
 }
 

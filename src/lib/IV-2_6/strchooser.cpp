@@ -95,7 +95,7 @@ void StringChooser::Forward(Event& e) {
     }
 }
 
-boolean StringChooser::Accept() {
+bool StringChooser::Accept() {
     Event e;
     int v = 0;
     _focus = _sedit;
@@ -121,7 +121,7 @@ boolean StringChooser::Accept() {
         state->GetValue(v);
     }
 
-    boolean accepted = v == '\r';
+    bool accepted = v == '\r';
 
     if (accepted) {
         UpdateEditor();
@@ -147,7 +147,7 @@ void StringChooser::SwitchFocus() {
     }
 }
 
-boolean StringChooser::CanFocus(Interactor* i) {
+bool StringChooser::CanFocus(Interactor* i) {
     return i == _sedit || i == _browser;
 }
 

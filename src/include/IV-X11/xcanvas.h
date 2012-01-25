@@ -89,9 +89,9 @@ public:
     PixelCoord pwidth_;
     PixelCoord pheight_;
 
-    boolean damaged_ : 1;
-    boolean on_damage_list_ : 1;
-    boolean repairing_ : 1;
+    bool damaged_ : 1;
+    bool on_damage_list_ : 1;
+    bool repairing_ : 1;
     CanvasDamage damage_;
 
     XDrawable drawbuffer_;
@@ -111,10 +111,10 @@ public:
     char* dash_list_;
     int dash_count_;
     XFontStruct* xfont_;
-    boolean text_twobyte_;
-    boolean text_reencode_;
-    boolean font_is_scaled_;
-    boolean transformed_;
+    bool text_twobyte_;
+    bool text_reencode_;
+    bool font_is_scaled_;
+    bool transformed_;
     TransformerStack* transformers_;
     ClippingStack* clippers_;
 
@@ -134,10 +134,10 @@ public:
 
     void new_damage();
     void clear_damage();
-    boolean start_repair();
+    bool start_repair();
     void finish_repair();
 
-    void bind(boolean double_buffered);
+    void bind(bool double_buffered);
     void unbind();
 
     /* for backward compability */

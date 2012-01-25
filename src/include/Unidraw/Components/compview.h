@@ -44,13 +44,13 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     Component* GetSubject();
 
     virtual ~ComponentView();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     ComponentView(Component* subject = nil);
 

@@ -201,11 +201,11 @@ void Grid::SetSpacing (float xincr, float yincr) {
     ((GridGraphic*)_graphic)->SetIncr(xincr,yincr);
 }
 
-void Grid::Visibility (boolean visible) {
+void Grid::Visibility (bool visible) {
     if (visible != IsVisible()) {
         PSBrush* br = visible ? pssingle : psnonebr;
         _graphic->SetBrush(br);
     }
 }
 
-boolean Grid::IsVisible () { return !_graphic->GetBrush()->None(); }
+bool Grid::IsVisible () { return !_graphic->GetBrush()->None(); }

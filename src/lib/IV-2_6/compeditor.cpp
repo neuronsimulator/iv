@@ -61,7 +61,7 @@ void CompletionEditor::Completions (const char* list[], int c, char comp) {
     count_ = c;
 }
 
-boolean CompletionEditor::HandleChar (char c) {
+bool CompletionEditor::HandleChar (char c) {
     if (c == complete_) {
         InsertText("", 0);
 

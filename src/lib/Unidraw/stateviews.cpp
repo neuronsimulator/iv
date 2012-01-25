@@ -136,7 +136,7 @@ NameVarView::NameVarView (
     Insert(t);
 }
 
-boolean NameVarView::Stale () {
+bool NameVarView::Stale () {
     const char* name = ((NameVar*) _subject)->GetName();
     const char* text = ((TextInteractor*) interior())->GetText();
 
@@ -159,7 +159,7 @@ void NameVarView::Init() {
 /*****************************************************************************/
 
 FileNameVarView::FileNameVarView (
-    NameVar* n, Alignment a, boolean relative, const char* samp
+    NameVar* n, Alignment a, bool relative, const char* samp
 ) : StateVarView(n) { 
     const char* sample = (samp == nil) ? "nnnnnnnnnnnnnnnnnnnnnn" : samp;
     TextInteractor* t = new TextInteractor(sample, a);
@@ -190,7 +190,7 @@ void FileNameVarView::Init() {
 /*****************************************************************************/
 
 CompNameVarView::CompNameVarView (
-    CompNameVar* n, Alignment a, boolean relative, const char* samp
+    CompNameVar* n, Alignment a, bool relative, const char* samp
 ) : StateVarView(n) { 
     const char* sample = (samp == nil) ? "nnnnnnnnnnnnnnnnnnn" : samp;
     TextInteractor* t = new TextInteractor(sample, a);
@@ -238,12 +238,12 @@ ModifStatusVarView::ModifStatusVarView (
     Insert(t);
 }
 
-boolean ModifStatusVarView::Stale () {
+bool ModifStatusVarView::Stale () {
     ModifStatusVar* msv = (ModifStatusVar*) _subject;
     return msv->GetModifStatus() != _prevVal || WriteProtected() != _prevProt;
 }
 
-boolean ModifStatusVarView::WriteProtected () {
+bool ModifStatusVarView::WriteProtected () {
     ModifStatusVar* msv = (ModifStatusVar*) _subject;
     Catalog* catalog = unidraw->GetCatalog();
     const char* name = catalog->GetName(msv->GetComponent());
@@ -280,7 +280,7 @@ MagnifVarView::MagnifVarView (MagnifVar* m, Alignment a) : StateVarView(m) {
     Insert(t);
 }
 
-boolean MagnifVarView::Stale () {
+bool MagnifVarView::Stale () {
     return ((MagnifVar*) _subject)->GetMagnif() != _prevVal;
 }
 
@@ -301,12 +301,12 @@ GravityVarView::GravityVarView (GravityVar* m, Alignment a) : StateVarView(m) {
     Insert(t);
 }
 
-boolean GravityVarView::Stale () {
+bool GravityVarView::Stale () {
     return ((GravityVar*) _subject)->IsActive() != _prevVal;
 }
 
 void GravityVarView::Init() {
-    boolean active = ((GravityVar*) _subject)->IsActive();
+    bool active = ((GravityVar*) _subject)->IsActive();
     TextInteractor* t = (TextInteractor*) interior();
     const char* string = active ? GRAVITY_ON : "";
 
@@ -325,7 +325,7 @@ FontVarView::FontVarView (
     Insert(t);
 }
 
-boolean FontVarView::Stale () {
+bool FontVarView::Stale () {
     return ((FontVar*) _subject)->GetFont() != _prevVal;
 }
 
@@ -474,8 +474,8 @@ BrushVarView::~BrushVarView () {
     }
 }
 
-boolean BrushVarView::Stale () {
-    boolean colorsChanged = (
+bool BrushVarView::Stale () {
+    bool colorsChanged = (
         (_colorSubj != nil) && (
             _colorSubj->GetFgColor() != _prevFg ||
             _colorSubj->GetBgColor() != _prevBg
@@ -619,8 +619,8 @@ PatternVarView::~PatternVarView () {
     }
 }
 
-boolean PatternVarView::Stale () {
-    boolean colorsChanged = (
+bool PatternVarView::Stale () {
+    bool colorsChanged = (
         (_colorSubj != nil) && (
             _colorSubj->GetFgColor() != _prevFg ||
             _colorSubj->GetBgColor() != _prevBg

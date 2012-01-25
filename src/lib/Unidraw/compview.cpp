@@ -37,7 +37,7 @@
 /*****************************************************************************/
 
 ClassId ComponentView::GetClassId () { return COMPONENT_VIEW; }
-boolean ComponentView::IsA (ClassId id) { return COMPONENT_VIEW == id; }
+bool ComponentView::IsA (ClassId id) { return COMPONENT_VIEW == id; }
 
 ComponentView::ComponentView (Component* subj) {
     _subject = subj;
@@ -65,5 +65,5 @@ void ComponentView::First (Iterator&) { }
 void ComponentView::Last (Iterator&) { }
 void ComponentView::Next (Iterator&) { }
 void ComponentView::Prev (Iterator&) { }
-boolean ComponentView::Done (Iterator) { return true; }
+bool ComponentView::Done (Iterator) { return true; }
 Component* ComponentView::GetSubject () { return _subject; }

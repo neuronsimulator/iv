@@ -42,19 +42,19 @@ public:
     virtual ~RpcReader();
 protected:
     RpcReader(rpcstream* client, int nfcns);
-    RpcReader(int fd, int nfcns, boolean binary);
+    RpcReader(int fd, int nfcns, bool binary);
 
     rpcstream& client();
     virtual int inputReady(int);
     virtual RpcReader* map(unsigned long);
-    boolean execute(RpcReader*, RpcHdr&);
+    bool execute(RpcReader*, RpcHdr&);
     virtual void connectionClosed(int fd) = 0;
 protected:
     typedef void (*PF)(RpcReader*, RpcHdr&, rpcstream&);
     int _nfcns;			/* size of function array */
     PF* _function;		/* function array indexed by request number */
     rpcstream* _client;		/* source of RPC requests coming from client */
-    boolean _delete;		/* should the destructor delete _client? */
+    bool _delete;		/* should the destructor delete _client? */
     int _fd;			/* file number of connection with client */
 private:
     /* deny access since unimplemented and member-wise won't work */

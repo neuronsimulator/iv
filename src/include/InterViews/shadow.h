@@ -35,7 +35,7 @@ class Color;
 
 class Shadow : public MonoGlyph {
 public:
-    Shadow(Glyph*, Coord x, Coord y, const Color*, boolean single = false);
+    Shadow(Glyph*, Coord x, Coord y, const Color*, bool single = false);
     virtual ~Shadow();
 
     virtual void request(Requisition&) const;
@@ -47,7 +47,7 @@ private:
     Coord x_offset_;
     Coord y_offset_;
     const Color* color_;
-    boolean single_;
+    bool single_;
 
     void compute_requirement(Requirement&, Coord offset) const;
     void compute_allocation(Allocation&) const;

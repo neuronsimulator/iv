@@ -105,7 +105,7 @@ extern "C" {void debugfile(const char*, ...);}
 //This is used to ensure that the Inteviews loop will not be called the SIOUX window
 //if there are no Interviews windows
 #if USE_SIOUX_WINDOW
-static boolean NO_IV_WINDOWS = true;
+static bool NO_IV_WINDOWS = true;
 #endif
 
 //Variable to keep track of next window placement
@@ -411,7 +411,7 @@ void MACwindow::unbind()
 	theMacWindow_ = 0;
 }
 
-boolean MACwindow::map()
+bool MACwindow::map()
 {
 	if(theMacWindow_){
 		ShowWindow(theMacWindow_);
@@ -432,7 +432,7 @@ void MACwindow::unmap()
 		HideWindow(theMacWindow_);
 }
 
-boolean MACwindow::isMapped()
+bool MACwindow::isMapped()
 {
 	if(theMacWindow_){
 #if carbon
@@ -449,11 +449,11 @@ boolean MACwindow::isMapped()
 
 //SIOUX Specific stuff
 #if USE_SIOUX_WINDOW
-boolean MACwindow::noInterviewsWindows(void){
+bool MACwindow::noInterviewsWindows(void){
 	return NO_IV_WINDOWS;
 }
 
-void MACwindow::setNoInterviewsWindows(boolean windows){
+void MACwindow::setNoInterviewsWindows(bool windows){
 	NO_IV_WINDOWS = windows;
 }
 #endif
@@ -477,7 +477,7 @@ Window * MACwindow::getIvWindow() const{
 // isOurWindow -
 // 	I honestly don't know how effective/necessary this function is yet ... may fail to
 // distinguish between one of our graphics windows and the SIOUX window
-boolean MACwindow::isOurWindow(WindowPtr theWin){
+bool MACwindow::isOurWindow(WindowPtr theWin){
 	if(theWin){
 #if carbon
 		return GetWindowKind(theWin) == userKind;
@@ -598,7 +598,7 @@ void MACwindow::drawGrowIcon(void){
 
 // activate -
 // 	Responds to an activate event from the system on one of our windows
-void MACwindow::activate(boolean activ){
+void MACwindow::activate(bool activ){
 	short			hiliteCode;
 	ControlHandle	theControl;
 	GrafPtr			oldPort;
@@ -1708,7 +1708,7 @@ void Window::unmap()
 	}
 }
 
-boolean Window::is_mapped() const
+bool Window::is_mapped() const
 {
    	WindowRep& w = *rep();
 	return w.isMapped(); 
@@ -1734,7 +1734,7 @@ void Window::unbind()
     w.unbind();
 }
 
-boolean Window::bound() const
+bool Window::bound() const
 {
 	WindowRep& w = *rep();
 	return w.bound();
@@ -1767,7 +1767,7 @@ Handler* Window::target(const Event& e) const
 // current implementation.  It is used as a function to communicte with the
 // Window/Print Manager.
 // -----------------------------------------------------------------------
-boolean Window::receive(const Event& e)
+bool Window::receive(const Event& e)
 {
 	//printf("Window::receive not implemented\n");
 	return false;

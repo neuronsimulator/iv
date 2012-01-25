@@ -42,8 +42,8 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
-    boolean IsEmpty();
+    virtual bool Done(Iterator);
+    bool IsEmpty();
 
     virtual Graphic* GetGraphic(Iterator);
     virtual void SetGraphic(Graphic*, Iterator&);
@@ -74,11 +74,11 @@ protected:
     virtual void drawClipped(Canvas*, Coord, Coord, Coord, Coord, Graphic*);
     
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
 
     void getCachedExtent(float&, float&, float&, float&, float&);
-    virtual boolean extentCached();
+    virtual bool extentCached();
     virtual void cacheExtent(float, float, float, float, float);
     virtual void uncacheExtent();
     virtual void uncacheChildren();

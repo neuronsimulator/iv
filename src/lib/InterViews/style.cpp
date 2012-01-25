@@ -88,7 +88,7 @@ private:
     StyleAttributeList* list_;
     StyleList* children_;
     Macro* observers_;
-    boolean modified_;
+    bool modified_;
 
     StyleRep(UniqueString*);
     ~StyleRep();
@@ -104,7 +104,7 @@ private:
     String* parse_value(const String&);
     int find_separator(const String&);
     int match_name(const UniqueString&);
-    boolean same_path(const UniqueStringList&, const UniqueStringList&);
+    bool same_path(const UniqueStringList&, const UniqueStringList&);
     void delete_path(UniqueStringList*);
     void delete_attribute(StyleAttribute*);
 
@@ -114,10 +114,10 @@ private:
     void bad_property_value(const String&);
 
     StyleAttributeTableEntry* find_entry(const UniqueString&);
-    boolean wildcard_match(
+    bool wildcard_match(
 	const StyleAttributeTableEntry&, const StyleList&, String& value
     );
-    boolean wildcard_match_name(
+    bool wildcard_match_name(
 	const UniqueString& name, const StyleAttributeTableEntry&,
 	const StyleList&, long s_index, String& value
     );
@@ -139,7 +139,7 @@ public:
     ValueString(char*, int len);
     virtual ~ValueString();
 
-    virtual boolean null_terminated() const;
+    virtual bool null_terminated() const;
 };
 
 ValueString::ValueString(char* str, int len) : String(str, len) { }
@@ -148,7 +148,7 @@ ValueString::~ValueString() {
     delete [] s;
 }
 
-boolean ValueString::null_terminated() const { return true; }
+bool ValueString::null_terminated() const { return true; }
 
 String* StyleRep::parse_value(const String& v) {
     if (v.index('\\') == -1) {
@@ -481,13 +481,13 @@ StyleAttribute* StyleRep::add_attribute(
  */
 
 UniqueStringList* StyleRep::parse_name(String& s, int& priority) {
-    boolean leading_star = false;
+    bool leading_star = false;
     if (s[0] == '*') {
 	leading_star = true;
 	s.set_to_right(1);
     }
     UniqueStringList* list = new UniqueStringList;
-    boolean first = true;
+    bool first = true;
     for (int i = find_separator(s); i != -1; i = find_separator(s)) {
 	UniqueString name(s.left(i));
 	if (first) {
@@ -555,7 +555,7 @@ int StyleRep::match_name(const UniqueString& name) {
  * Compare to lists of strings.
  */
 
-boolean StyleRep::same_path(
+bool StyleRep::same_path(
     const UniqueStringList& p1, const UniqueStringList& p2
 ) {
     if (p1.count() != p2.count()) {
@@ -672,7 +672,7 @@ long Style::attribute_count() const {
  * Return an attribute name and value for a given index.
  */
 
-boolean Style::attribute(long i, String& name, String& value) const {
+bool Style::attribute(long i, String& name, String& value) const {
     StyleAttributeList* list = rep_->list_;
     if (list == nil || i < 0 || i >= list->count()) {
 	return false;
@@ -834,7 +834,7 @@ void Style::remove_trigger(const char* name, Action* a) {
  * Find the value bound to a given name, if any.
  */
 
-boolean Style::find_attribute(const String& name, String& value) const {
+bool Style::find_attribute(const String& name, String& value) const {
     StyleRep* s = rep_;
     s->update();
     UniqueString uname(name);
@@ -887,7 +887,7 @@ StyleAttributeTableEntry* StyleRep::find_entry(const UniqueString& name) {
  * the closest match.
  */
 
-boolean StyleRep::wildcard_match(
+bool StyleRep::wildcard_match(
     const StyleAttributeTableEntry& e, const StyleList& sl, String& value
 ) {
     long n = sl.count();
@@ -908,7 +908,7 @@ boolean StyleRep::wildcard_match(
     return false;
 }
 
-boolean StyleRep::wildcard_match_name(
+bool StyleRep::wildcard_match_name(
     const UniqueString& name, const StyleAttributeTableEntry& e,
     const StyleList& sl, long s_index, String& value
 ) {
@@ -916,7 +916,7 @@ boolean StyleRep::wildcard_match_name(
     for (long i = n; i >= 1; i--) {
 	StyleAttributeList* list = e.entries_[i];
 	if (list != nil) {
-	    boolean found_match = false;
+	    bool found_match = false;
 	    int best_match = 0;
 	    for (ListItr(StyleAttributeList) a(*list); a.more(); a.next()) {
 		StyleAttribute& attr = *a.cur();
@@ -966,29 +966,29 @@ int StyleRep::finish_match(
  * Short-hand
  */
 
-boolean Style::find_attribute(const char* name, String& value) const {
+bool Style::find_attribute(const char* name, String& value) const {
     return find_attribute(String(name), value);
 }
 
-boolean Style::find_attribute(const String& name, long& value) const {
+bool Style::find_attribute(const String& name, long& value) const {
     String v;
     return find_attribute(name, v) && v.convert(value);
 }
 
-boolean Style::find_attribute(const char* name, long& value) const {
+bool Style::find_attribute(const char* name, long& value) const {
     return find_attribute(String(name), value);
 }
 
-boolean Style::find_attribute(const String& name, double& value) const {
+bool Style::find_attribute(const String& name, double& value) const {
     String v;
     return find_attribute(name, v) && v.convert(value);
 }
 
-boolean Style::find_attribute(const char* name, double& value) const {
+bool Style::find_attribute(const char* name, double& value) const {
     return find_attribute(String(name), value);
 }
 
-boolean Style::find_attribute(const String& name, Coord& value) const {
+bool Style::find_attribute(const String& name, Coord& value) const {
     String v;
     if (!find_attribute(name, v)) {
 	return false;
@@ -1000,7 +1000,7 @@ boolean Style::find_attribute(const String& name, Coord& value) const {
     if (p < end && (*p == '-' || *p == '+')) {
 	++p;
     }
-    boolean dot = false;
+    bool dot = false;
     for (; p < end; p++) {
 	if (!dot && *p == '.') {
 	    dot = true;
@@ -1027,11 +1027,11 @@ boolean Style::find_attribute(const String& name, Coord& value) const {
     return false;
 }
 
-boolean Style::find_attribute(const char* name, Coord& value) const {
+bool Style::find_attribute(const char* name, Coord& value) const {
     return find_attribute(String(name), value);
 }
 
-boolean Style::value_is_on(const String& s) const {
+bool Style::value_is_on(const String& s) const {
     String v;
     if (!find_attribute(s, v)) {
 	return false;
@@ -1039,6 +1039,6 @@ boolean Style::value_is_on(const String& s) const {
     return v.case_insensitive_equal("on") || v.case_insensitive_equal("true");
 }
 
-boolean Style::value_is_on(const char* s) const {
+bool Style::value_is_on(const char* s) const {
     return value_is_on(String(s));
 }

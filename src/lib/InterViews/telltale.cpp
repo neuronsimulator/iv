@@ -41,7 +41,7 @@ TelltaleState::~TelltaleState() {
     leave_group();
 }
 
-void TelltaleState::set(const TelltaleFlags flags, boolean b) {
+void TelltaleState::set(const TelltaleFlags flags, bool b) {
     TelltaleFlags newflags = b ? (flags_ | flags) : (flags_ & ~flags);
     if (newflags != flags_) {
 	flags_ = newflags;
@@ -52,7 +52,7 @@ void TelltaleState::set(const TelltaleFlags flags, boolean b) {
     }
 }
 
-boolean TelltaleState::test(const TelltaleFlags flags) const {
+bool TelltaleState::test(const TelltaleFlags flags) const {
     return (flags_ & flags) == flags;
 }
 

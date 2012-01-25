@@ -207,15 +207,15 @@ const Transformer& Printer::transformer() const {
 
 void Printer::damage(const Extension&){}
 void Printer::damage(Coord, Coord, Coord, Coord){}
-boolean Printer::damaged(const Extension&) const{return true;}
-boolean Printer::damaged(
+bool Printer::damaged(const Extension&) const{return true;}
+bool Printer::damaged(
 	Coord, Coord, Coord, Coord
 	 ) const{return true;}
 void Printer::damage_area(Extension& ex){
 	ex.set_xy(this, 0.0, 0.0, width(), height());
 }
 void Printer::damage_all(){}
-boolean Printer::any_damage() const{return true;}
+bool Printer::any_damage() const{return true;}
 void Printer::restrict_damage(const Extension&){}
 void Printer::restrict_damage(
 		Coord, Coord, Coord, Coord
@@ -329,7 +329,7 @@ void Printer::transform(const Transformer& t) {
  */
 
 #if defined(WIN32) || MAC
-void Printer::push_clipping(boolean) {
+void Printer::push_clipping(bool) {
 #else
 void Printer::push_clipping() {
 #endif

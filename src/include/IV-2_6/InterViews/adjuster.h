@@ -46,7 +46,7 @@ public:
     virtual ~Adjuster();
 
     void Handle(Event&);
-    virtual void Highlight(boolean on);
+    virtual void Highlight(bool on);
     void Redraw(IntCoord, IntCoord, IntCoord, IntCoord);
     void Reshape(Shape&);
 protected:
@@ -55,9 +55,9 @@ protected:
     Bitmap* hit;
     Bitmap* mask;
     int delay;
-    boolean timer;
+    bool timer;
     Perspective* shown;
-    boolean highlighted;
+    bool highlighted;
 
     virtual void AdjustView(Event&);
     void AutoRepeat();

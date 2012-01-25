@@ -36,7 +36,7 @@ protected:
     Handler();
     virtual ~Handler();
 public:
-    virtual boolean event(Event&) = 0;
+    virtual bool event(Event&) = 0;
 };
 
 #include <InterViews/_leave.h>

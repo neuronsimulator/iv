@@ -45,7 +45,7 @@
 
 ClassId NormSizeCmd::GetClassId () { return NORMSIZE_CMD; }
 
-boolean NormSizeCmd::IsA (ClassId id) {
+bool NormSizeCmd::IsA (ClassId id) {
     return NORMSIZE_CMD == id || Command::IsA(id);
 }
 
@@ -66,13 +66,13 @@ void NormSizeCmd::Execute () {
     }
 }
 
-boolean NormSizeCmd::Reversible () { return false; }
+bool NormSizeCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId RedToFitCmd::GetClassId () { return REDTOFIT_CMD; }
 
-boolean RedToFitCmd::IsA (ClassId id) {
+bool RedToFitCmd::IsA (ClassId id) {
     return REDTOFIT_CMD == id || Command::IsA(id);
 }
 
@@ -93,13 +93,13 @@ void RedToFitCmd::Execute () {
     }
 }
 
-boolean RedToFitCmd::Reversible () { return false; }
+bool RedToFitCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId CenterCmd::GetClassId () { return CENTER_CMD; }
 
-boolean CenterCmd::IsA (ClassId id) {
+bool CenterCmd::IsA (ClassId id) {
     return CENTER_CMD == id || Command::IsA(id);
 }
 
@@ -120,13 +120,13 @@ void CenterCmd::Execute () {
     }
 }
 
-boolean CenterCmd::Reversible () { return false; }
+bool CenterCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId GridCmd::GetClassId () { return GRID_CMD; }
 
-boolean GridCmd::IsA (ClassId id) {
+bool GridCmd::IsA (ClassId id) {
     return GRID_CMD == id || Command::IsA(id);
 }
 
@@ -150,13 +150,13 @@ void GridCmd::Execute () {
     }
 }
 
-boolean GridCmd::Reversible () { return false; }
+bool GridCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId GridSpacingCmd::GetClassId () { return GRIDSPACING_CMD; }
 
-boolean GridSpacingCmd::IsA (ClassId id) {
+bool GridSpacingCmd::IsA (ClassId id) {
     return GRIDSPACING_CMD == id || Command::IsA(id);
 }
 
@@ -179,7 +179,7 @@ void GridSpacingCmd::Execute () {
     }
 
     ed->InsertDialog(_dialog);
-    boolean accepted = _dialog->Accept();
+    bool accepted = _dialog->Accept();
     ed->RemoveDialog(_dialog);
 
     if (accepted) {
@@ -196,13 +196,13 @@ void GridSpacingCmd::Execute () {
     }
 }
 
-boolean GridSpacingCmd::Reversible () { return false; }
+bool GridSpacingCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId GravityCmd::GetClassId () { return GRAVITY_CMD; }
 
-boolean GravityCmd::IsA (ClassId id) {
+bool GravityCmd::IsA (ClassId id) {
     return GRAVITY_CMD == id || Command::IsA(id);
 }
 
@@ -223,13 +223,13 @@ void GravityCmd::Execute () {
     }
 }
 
-boolean GravityCmd::Reversible () { return false; }
+bool GravityCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId OrientationCmd::GetClassId () { return ORIENTATION_CMD; }
 
-boolean OrientationCmd::IsA (ClassId id) {
+bool OrientationCmd::IsA (ClassId id) {
     return ORIENTATION_CMD == id || Command::IsA(id);
 }
 
@@ -254,13 +254,13 @@ void OrientationCmd::Execute () {
     }
 }
 
-boolean OrientationCmd::Reversible () { return false; }
+bool OrientationCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId CloseEditorCmd::GetClassId () { return CLOSEEDITOR_CMD; }
 
-boolean CloseEditorCmd::IsA (ClassId id) {
+bool CloseEditorCmd::IsA (ClassId id) {
     return CLOSEEDITOR_CMD == id || Command::IsA(id);
 }
 
@@ -273,7 +273,7 @@ Command* CloseEditorCmd::Copy () {
     return copy;
 }
 
-static boolean FoundAnyExcept (Editor* ed) {
+static bool FoundAnyExcept (Editor* ed) {
     Component* comp = ed->GetComponent()->GetRoot();
     Iterator i;
 
@@ -323,4 +323,4 @@ void CloseEditorCmd::Execute () {
     }
 }
 
-boolean CloseEditorCmd::Reversible () { return false; }
+bool CloseEditorCmd::Reversible () { return false; }

@@ -117,8 +117,8 @@ public:
 private:
     int argc_;
     char** argv_;
-    boolean done_;
-    boolean readinput_;
+    bool done_;
+    bool readinput_;
     const char* classname_;
     String* name_;
     Style* style_;
@@ -132,7 +132,7 @@ private:
 	const OptionDesc*, const PropertyData*
     );
     void parse_args(int& argc, char** argv, const OptionDesc*);
-    boolean match(
+    bool match(
 	const String& arg, const OptionDesc& o, int& i, int argc, char** argv
     );
     void extract(
@@ -143,7 +143,7 @@ private:
     String next_arg(
 	int& i, int argc, char** argv, const char* message, const String&
     );
-    boolean find_arg(const String& name, String& value);
+    bool find_arg(const String& name, String& value);
 
     void init_style(const char*, const PropertyData*);
     String* find_name();
@@ -159,7 +159,7 @@ private:
     void init_display();
     void connect(Display*);
     void set_style(Display*);
-    boolean check(Event&);
+    bool check(Event&);
 };
 
 Session* SessionRep::instance_;
@@ -275,7 +275,7 @@ void SessionRep::handle_display_input(Display* d) {
 
 int Session::run() {
     Event e;
-    boolean& done = rep_->done_;
+    bool& done = rep_->done_;
     done = false;
     do {
 	read(e);
@@ -309,7 +309,7 @@ void Session::unquit() {
  * Return loop status.
  */
 
-boolean Session::done() const {
+bool Session::done() const {
     return rep_->done_;
 }
 
@@ -317,9 +317,9 @@ boolean Session::done() const {
  * Check if an event is pending on any display.
  */
 
-boolean Session::pending() const {
+bool Session::pending() const {
     Event e;
-    boolean b = rep_->check(e);
+    bool b = rep_->check(e);
     if (b) {
 	e.unread();
     }
@@ -333,7 +333,7 @@ boolean Session::pending() const {
  */
 
 void Session::read(Event& e) {
-    boolean save = rep_->readinput_;
+    bool save = rep_->readinput_;
     rep_->readinput_ = false;
     while (!rep_->done_ && !rep_->check(e) && !rep_->done_) {
 	Dispatcher::instance().dispatch();
@@ -346,10 +346,10 @@ void Session::read(Event& e) {
  * Return true if an event was read, false if the time-out expired.
  */
 
-boolean Session::read(long sec, long usec, Event& e) {
+bool Session::read(long sec, long usec, Event& e) {
     long sec_left = sec;
     long usec_left = usec;
-    boolean save = rep_->readinput_;
+    bool save = rep_->readinput_;
     rep_->readinput_ = false;
     while (!rep_->done_ && !rep_->check(e) && !rep_->done_) {
 	if (!(sec_left > 0 || usec_left > 0)) {
@@ -366,7 +366,7 @@ boolean Session::read(long sec, long usec, Event& e) {
  * Check for a pending event, returning it if there is one.
  */
 
-boolean SessionRep::check(Event& e) {
+bool SessionRep::check(Event& e) {
     DisplayList& list = *displays_;
     long n = list.count();
     for (long i = 0; i < n; i++) {
@@ -452,7 +452,7 @@ void SessionRep::parse_args(int& argc, char** argv, const OptionDesc* opts) {
     char* newargv[1024];
     newargv[0] = argv[0];
     for (i = 1; i < argc; i++) {
-	boolean matched = false;
+	bool matched = false;
 	String arg(argv[i]);
 	for (const OptionDesc* o = &opts[0]; o->name != nil; o++) {
 	    if (match(arg, *o, i, argc, argv)) {
@@ -478,7 +478,7 @@ void SessionRep::parse_args(int& argc, char** argv, const OptionDesc* opts) {
  * See if the given argument matches the option description.
  */
 
-boolean SessionRep::match(
+bool SessionRep::match(
     const String& arg, const OptionDesc& o, int& i, int argc, char** argv
 ) {
     String opt(o.name);
@@ -569,7 +569,7 @@ String SessionRep::next_arg(
  * Find the value for a specific argument.
  */
 
-boolean SessionRep::find_arg(const String& arg, String& value) {
+bool SessionRep::find_arg(const String& arg, String& value) {
     int last = argc_ - 1;
     for (int i = 1; i < last; i++) {
 	if (arg == argv_[i]) {

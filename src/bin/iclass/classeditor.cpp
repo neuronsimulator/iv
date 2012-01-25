@@ -95,7 +95,7 @@ void ClassEditor::Handle (Event& e) {
         HandleKeyEvent(e);
 
     } else {
-        boolean done = false;
+        bool done = false;
 
         do {
             switch (e.eventType) {
@@ -114,8 +114,8 @@ void ClassEditor::Handle (Event& e) {
     }
 }
 
-boolean ClassEditor::HandleKeyEvent (Event& e) {
-    boolean done = false;
+bool ClassEditor::HandleKeyEvent (Event& e) {
+    bool done = false;
 
     if (e.len != 0) {
         done = HandleChar(e.keystring[0]);
@@ -123,8 +123,8 @@ boolean ClassEditor::HandleKeyEvent (Event& e) {
     return done;
 }    
 
-boolean ClassEditor::HandleDownEvent (Event& e) {
-    boolean done = true;
+bool ClassEditor::HandleDownEvent (Event& e) {
+    bool done = true;
 
     if (e.target == this) {
         switch (e.button) {
@@ -139,8 +139,8 @@ boolean ClassEditor::HandleDownEvent (Event& e) {
     return done;
 }
 
-boolean ClassEditor::HandleChar (char c) {
-    boolean done = false;
+bool ClassEditor::HandleChar (char c) {
+    bool done = false;
     int lines = display->LineNumber(0) - display->LineNumber(ymax) + 1;
     int i;
 

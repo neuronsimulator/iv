@@ -81,7 +81,7 @@ void MacPrinter::prolog(const char*) {c->start();}
 
 void MacPrinter::setup() { c->setup();}
 
-boolean MacPrinterCanvas::setup(boolean s){
+bool MacPrinterCanvas::setup(bool s){
 #if carbon
 	return false;
 #else
@@ -112,7 +112,7 @@ boolean MacPrinterCanvas::setup(boolean s){
 #endif
 }
 
-boolean MacPrinterCanvas::start() {
+bool MacPrinterCanvas::start() {
 #if carbon
 	return false;
 #else
@@ -146,7 +146,7 @@ boolean MacPrinterCanvas::start() {
 #endif
 }
 void MacPrinter::epilog() {c->finish();}
-boolean MacPrinterCanvas::finish() {
+bool MacPrinterCanvas::finish() {
 #if carbon
 	return false;
 #else
@@ -227,7 +227,7 @@ void MacPrinter::page(const char* label) {}
 void MacPrinter::push_transform() {c->push_transform();}
 void MacPrinter::pop_transform() {c->pop_transform();}
 void MacPrinter::transform(const Transformer& t) {c->transform(t);}
-void MacPrinter::push_clipping(boolean) {c->push_clipping();}
+void MacPrinter::push_clipping(bool) {c->push_clipping();}
 void MacPrinter::pop_clipping() {c->pop_clipping();}
 void MacPrinter::new_path() {c->new_path();}
 void MacPrinter::move_to(Coord x, Coord y) {c->move_to(x,y);}

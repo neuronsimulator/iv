@@ -52,21 +52,21 @@
 #include <string.h>
 
 StringBrowser::StringBrowser (
-    ButtonState* bs, int r, int c, boolean u, int h, const char* d
+    ButtonState* bs, int r, int c, bool u, int h, const char* d
 ) {
     Init(bs, r, c, u, h, d);
 }
 
 StringBrowser::StringBrowser (
     const char* name,
-    ButtonState* bs, int r, int c, boolean u, int h, const char* d
+    ButtonState* bs, int r, int c, bool u, int h, const char* d
 ) {
     SetInstance(name);
     Init(bs, r, c, u, h, d);
 }
 
 void StringBrowser::Init (
-    ButtonState* bs, int r, int c, boolean u, int h, const char* d
+    ButtonState* bs, int r, int c, bool u, int h, const char* d
 ) {
     const int defaultSize = 256;
 
@@ -298,8 +298,8 @@ void StringBrowser::Browse () {
     Handle(e);
 }
 
-boolean StringBrowser::HandleDownEvent (Event& e) {
-    boolean done1 = true;
+bool StringBrowser::HandleDownEvent (Event& e) {
+    bool done1 = true;
 
     if (e.target == this) {
         if (e.button == LEFTMOUSE) {
@@ -315,8 +315,8 @@ boolean StringBrowser::HandleDownEvent (Event& e) {
     return done1;
 }
 
-boolean StringBrowser::HandleKeyEvent (Event& e) {
-    boolean done1 = false;
+bool StringBrowser::HandleKeyEvent (Event& e) {
+    bool done1 = false;
 
     if (e.len != 0) {
         done1 = HandleChar(e.keystring[0]);
@@ -329,7 +329,7 @@ void StringBrowser::Handle (Event& e) {
         HandleKeyEvent(e);
 
     } else {
-        boolean done1 = false;
+        bool done1 = false;
 
         do {
             switch (e.eventType) {
@@ -348,7 +348,7 @@ void StringBrowser::Handle (Event& e) {
     }
 }
 
-boolean StringBrowser::HandleChar (char c) {
+bool StringBrowser::HandleChar (char c) {
     int index = Selection();
     int i;
 
@@ -484,7 +484,7 @@ void StringBrowser::UpdateWidth () {
     }
 }
 
-void StringBrowser::InitPerspective (boolean scroll_to_top) {
+void StringBrowser::InitPerspective (bool scroll_to_top) {
     register Perspective* p = perspective;
     int old_top = p->height - p->cury - p->curheight;
 
@@ -609,7 +609,7 @@ void StringBrowser::Note (Event& e) {
     lasty = e.y;
 }
 
-boolean StringBrowser::DoubleClicked (Event& e) {
+bool StringBrowser::DoubleClicked (Event& e) {
     if (e.eventType != DownEvent) {
 	return false;
     }
@@ -663,8 +663,8 @@ void StringBrowser::UpdateSelection (int d, int m, int style1) {
     lastmark = m;
 }
 
-boolean StringBrowser::LeftButtonDown (Event& e) {
-    boolean status = false;
+bool StringBrowser::LeftButtonDown (Event& e) {
+    bool status = false;
 
     if (DoubleClicked(e)) {
         subject->SetValue(done[0]);

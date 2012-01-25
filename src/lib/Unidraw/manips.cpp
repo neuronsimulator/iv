@@ -57,15 +57,15 @@ class ManipList : public UList {
 public:
     ManipList(Manipulator* = nil);
 
-    boolean manipulating();
-    void manipulating(boolean);
+    bool manipulating();
+    void manipulating(bool);
 private:
-    boolean _manipulating;
+    bool _manipulating;
 };
 
 ManipList::ManipList (Manipulator* m) : UList(m) { _manipulating = true; }
-inline boolean ManipList::manipulating () { return _manipulating; }
-inline void ManipList::manipulating (boolean m) { _manipulating = m; }
+inline bool ManipList::manipulating () { return _manipulating; }
+inline void ManipList::manipulating (bool m) { _manipulating = m; }
 
 /****************************************************************************/
 
@@ -96,9 +96,9 @@ void ManipGroup::Grasp (Event& e) {
     }
 }
 
-boolean ManipGroup::Manipulating (Event& e) {
+bool ManipGroup::Manipulating (Event& e) {
     Iterator i;
-    boolean finished = true;
+    bool finished = true;
 
     for (First(i); !Done(i); Next(i)) {
         ManipList* ml = (ManipList*) Elem(i);
@@ -144,7 +144,7 @@ void ManipGroup::First (Iterator& i) { i.SetValue(_kids->First()); }
 void ManipGroup::Last (Iterator& i) { i.SetValue(_kids->Last()); }
 void ManipGroup::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
 void ManipGroup::Prev (Iterator& i) { i.SetValue(Elem(i)->Prev()); }
-boolean ManipGroup::Done (Iterator i) { return Elem(i) == _kids->End(); }
+bool ManipGroup::Done (Iterator i) { return Elem(i) == _kids->End(); }
 Manipulator* ManipGroup::GetManip (Iterator i) { return Manip(Elem(i)); }
 
 void ManipGroup::SetManip (Manipulator* m, Iterator& i) {
@@ -247,7 +247,7 @@ void DragManip::Grasp (Event& e) {
     if (_r != nil) _r->Track(e.x, e.y);
 }
 
-boolean DragManip::Manipulating (Event& e) {
+bool DragManip::Manipulating (Event& e) {
     if (_r == nil) {
         return false;
     }
@@ -338,7 +338,7 @@ VertexManip::VertexManip (
     Viewer* v, GrowingVertices* r, Transformer* rel, Tool* t, DragConstraint c
 ) : DragManip(v, r, rel, t, c) { }
 
-boolean VertexManip::Manipulating (Event& e) {
+bool VertexManip::Manipulating (Event& e) {
     Rubberband* r = GetRubberband();
 
     if (r == nil) {
@@ -378,7 +378,7 @@ ConnectManip::ConnectManip (
     _target = nil;
 }
 
-boolean ConnectManip::Manipulating (Event& e) {
+bool ConnectManip::Manipulating (Event& e) {
     GraphicView* views = GetViewer()->GetGraphicView();
     Rubberband* r = GetRubberband();
     float cx, cy;
@@ -442,7 +442,7 @@ TextManip::TextManip (
 }
 
 void TextManip::Init (
-    Viewer* v, Painter* p, Coord h, Coord tab, Tool* t, boolean multiline,
+    Viewer* v, Painter* p, Coord h, Coord tab, Tool* t, bool multiline,
     const char* sample, int samplen
 ) {
     _bufsize = (CHARBUFSIZE > samplen) ? CHARBUFSIZE : samplen*2;
@@ -558,8 +558,8 @@ void TextManip::Grasp (Event& e) {
     }
 }
 
-boolean TextManip::Manipulating (Event& e) {
-    boolean manipulating = true;
+bool TextManip::Manipulating (Event& e) {
+    bool manipulating = true;
 
     if (e.eventType == KeyEvent) {
         manipulating = HandleKey(e);
@@ -597,10 +597,10 @@ void TextManip::Effect (Event& e) {
     delete _selection;
 }
 
-boolean TextManip::HandleKey (Event& e) {
+bool TextManip::HandleKey (Event& e) {
     World* world = GetViewer()->GetWorld();
     char c = e.keystring[0];
-    boolean manipulating = true;
+    bool manipulating = true;
 
     switch (c) {
         case '\007':  world->RingBell(1); break;
@@ -895,7 +895,7 @@ void TextManip::Select (int d, int m) {
     }
 }
 
-boolean TextManip::Contains (Coord x, Coord y) {
+bool TextManip::Contains (Coord x, Coord y) {
     Transformer* rel = _painter->GetTransformer();
 
     if (rel != nil) rel->InvTransform(x, y);

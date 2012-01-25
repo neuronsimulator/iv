@@ -51,7 +51,7 @@
 
 ClassId PolygonComp::GetClassId () { return POLYGON_COMP; }
 
-boolean PolygonComp::IsA (ClassId id) {
+bool PolygonComp::IsA (ClassId id) {
     return POLYGON_COMP == id || VerticesComp::IsA(id);
 }
 
@@ -115,11 +115,11 @@ PolygonComp* PolygonView::GetPolygonComp () {
 
 ClassId PolygonView::GetClassId () { return POLYGON_VIEW; }
 
-boolean PolygonView::IsA (ClassId id) {
+bool PolygonView::IsA (ClassId id) {
     return POLYGON_VIEW == id || VerticesView::IsA(id);
 }
 
-boolean PolygonView::VertexChanged () { 
+bool PolygonView::VertexChanged () { 
     SF_Polygon* gview = (SF_Polygon*) GetGraphic();
     SF_Polygon* gsubj = (SF_Polygon*) GetPolygonComp()->GetGraphic();
 
@@ -233,7 +233,7 @@ Command* PolygonView::InterpretManipulator (Manipulator* m) {
 
 ClassId PSPolygon::GetClassId () { return PS_POLYGON; }
 
-boolean PSPolygon::IsA (ClassId id) { 
+bool PSPolygon::IsA (ClassId id) { 
     return PS_POLYGON == id || PSVertices::IsA(id);
 }
 

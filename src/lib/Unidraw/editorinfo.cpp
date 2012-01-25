@@ -86,7 +86,7 @@ void EditorInfo::UnregisterInfo (const char* info) {
     }
 }
 
-boolean EditorInfo::Registered (const char* name) {
+bool EditorInfo::Registered (const char* name) {
     return FindId((void*) name) != nil;
 }
 

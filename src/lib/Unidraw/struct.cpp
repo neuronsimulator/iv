@@ -51,7 +51,7 @@
 
 ClassId GroupCmd::GetClassId () { return GROUP_CMD; }
 
-boolean GroupCmd::IsA (ClassId id) {
+bool GroupCmd::IsA (ClassId id) {
     return GROUP_CMD == id || Command::IsA(id);
 }
 
@@ -126,7 +126,7 @@ void GroupCmd::Unexecute () {
     }
 }
 
-boolean GroupCmd::Reversible () {
+bool GroupCmd::Reversible () {
     Clipboard* cb = GetClipboard();
     return cb == nil || !cb->IsEmpty();
 }
@@ -145,7 +145,7 @@ void GroupCmd::Write (ostream& out) {
 
 ClassId UngroupCmd::GetClassId () { return UNGROUP_CMD; }
 
-boolean UngroupCmd::IsA (ClassId id) {
+bool UngroupCmd::IsA (ClassId id) {
     return UNGROUP_CMD == id || Command::IsA(id);
 }
 
@@ -222,7 +222,7 @@ void UngroupCmd::Unexecute () {
 /*****************************************************************************/
 
 ClassId FrontCmd::GetClassId () { return FRONT_CMD; }
-boolean FrontCmd::IsA (ClassId id) { return FRONT_CMD==id || Command::IsA(id);}
+bool FrontCmd::IsA (ClassId id) { return FRONT_CMD==id || Command::IsA(id);}
 
 FrontCmd::FrontCmd (ControlInfo* c) : Command(c) { }
 FrontCmd::FrontCmd (Editor* ed) : Command(ed) { }
@@ -283,7 +283,7 @@ void FrontCmd::Unexecute () {
 /*****************************************************************************/
 
 ClassId BackCmd::GetClassId () { return BACK_CMD; }
-boolean BackCmd::IsA (ClassId id) { return BACK_CMD == id || Command::IsA(id);}
+bool BackCmd::IsA (ClassId id) { return BACK_CMD == id || Command::IsA(id);}
 
 BackCmd::BackCmd (ControlInfo* c) : Command(c) { }
 BackCmd::BackCmd (Editor* ed) : Command(ed) { }

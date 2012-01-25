@@ -149,7 +149,7 @@ private:
     static WidgetKit* make_kit();
 
     Style* style_;
-    boolean style_changed_;
+    bool style_changed_;
     const Font* font_;
     const Color* foreground_;
     const Color* background_;
@@ -165,7 +165,7 @@ private:
     Cursor* dfast_cursor_;
     Cursor* ldfast_cursor_;
 
-    boolean initialized_label_styles_;
+    bool initialized_label_styles_;
     UniqueString* chiseled_label_style_;
     UniqueString* raised_label_style_;
 

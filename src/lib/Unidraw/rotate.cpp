@@ -44,7 +44,7 @@
 
 ClassId RotateTool::GetClassId () { return ROTATE_TOOL; }
 
-boolean RotateTool::IsA (ClassId id) {
+bool RotateTool::IsA (ClassId id) {
     return ROTATE_TOOL == id || Tool::IsA(id);
 }
 

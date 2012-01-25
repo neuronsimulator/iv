@@ -86,7 +86,7 @@ void Ellipse::f_getExtent (
     transform(float(_x0), float(_y0), cx, cy, gs);
 }
 
-boolean Ellipse::s_contains (PointObj& po, Graphic* gs) {
+bool Ellipse::s_contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     invTransform(pt._x, pt._y, gs);
 
@@ -96,7 +96,7 @@ boolean Ellipse::s_contains (PointObj& po, Graphic* gs) {
     );
 }
 
-boolean Ellipse::f_contains (PointObj& po, Graphic* gs) {
+bool Ellipse::f_contains (PointObj& po, Graphic* gs) {
     PointObj pt (&po);
     invTransform(pt._x, pt._y, gs);
 
@@ -106,7 +106,7 @@ boolean Ellipse::f_contains (PointObj& po, Graphic* gs) {
     ) <= 0;
 }
 
-boolean Ellipse::s_intersects (BoxObj& userb, Graphic* gs) {
+bool Ellipse::s_intersects (BoxObj& userb, Graphic* gs) {
     BoxObj b;
     getBox(b, gs);
 
@@ -121,7 +121,7 @@ boolean Ellipse::s_intersects (BoxObj& userb, Graphic* gs) {
     return false;
 }
 
-boolean Ellipse::f_intersects (BoxObj& userb, Graphic* gs) {
+bool Ellipse::f_intersects (BoxObj& userb, Graphic* gs) {
     BoxObj b;
     getBox(b, gs);
 
@@ -209,11 +209,11 @@ void S_Ellipse::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean S_Ellipse::contains (PointObj& po, Graphic* gs) {
+bool S_Ellipse::contains (PointObj& po, Graphic* gs) {
     return s_contains(po, gs);
 }
 
-boolean S_Ellipse::intersects (BoxObj& userb, Graphic* gs) {
+bool S_Ellipse::intersects (BoxObj& userb, Graphic* gs) {
     return s_intersects(userb, gs);
 }
 
@@ -252,11 +252,11 @@ void F_Ellipse::getExtent (
     f_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean F_Ellipse::contains (PointObj& po, Graphic* gs) {
+bool F_Ellipse::contains (PointObj& po, Graphic* gs) {
     return !gs->GetPattern()->None() && f_contains(po, gs);
 }
 
-boolean F_Ellipse::intersects (BoxObj& userb, Graphic* gs) {
+bool F_Ellipse::intersects (BoxObj& userb, Graphic* gs) {
     return !gs->GetPattern()->None() && f_intersects(userb, gs);
 }
 
@@ -312,13 +312,13 @@ void SF_Ellipse::getExtent (
     s_getExtent(l, b, cx, cy, tol, gs);
 }
 
-boolean SF_Ellipse::contains (PointObj& po, Graphic* gs) {
+bool SF_Ellipse::contains (PointObj& po, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_contains(po, gs)) ||
         s_contains(po, gs);
 }
 
-boolean SF_Ellipse::intersects (BoxObj& userb, Graphic* gs) {
+bool SF_Ellipse::intersects (BoxObj& userb, Graphic* gs) {
     return
         (!gs->GetPattern()->None() && f_intersects(userb, gs)) ||
         s_intersects(userb, gs);

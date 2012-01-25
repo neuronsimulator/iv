@@ -156,7 +156,7 @@ Painter::~Painter() {
     delete rep;
 }
 
-void Painter::FillBg(boolean b) {
+void Painter::FillBg(bool b) {
     if (rep->fillbg != b) {
         if (rep->iv_xor) {
             End_xor();
@@ -171,7 +171,7 @@ void Painter::FillBg(boolean b) {
     }
 }
 
-boolean Painter::BgFilled() const { return rep->fillbg; }
+bool Painter::BgFilled() const { return rep->fillbg; }
 
 void Painter::SetColors(const Color* f, const Color* b) {
     if (rep->iv_xor) {
@@ -287,7 +287,7 @@ void Painter::NoClip() {
     XSetClipMask(dpy, rep->dashgc, None);
 }
 
-void Painter::SetOverwrite(boolean children) {
+void Painter::SetOverwrite(bool children) {
     if (rep->overwrite != children) {
 	XDisplay* dpy = rep->display->rep()->display_;
 	rep->overwrite = children;
@@ -1275,7 +1275,7 @@ void CanvasRep::wait_for_copy() {
     WindowTable* wt = r->wtable_;
     Window* w;
 
-    boolean keep_waiting = true;
+    bool keep_waiting = true;
     while (keep_waiting) {
 	XWindowEvent(dpy, xdrawable_, ExposureMask, &xe);
 	switch (xe.type) {

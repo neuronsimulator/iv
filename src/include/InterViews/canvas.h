@@ -153,13 +153,13 @@ public:
 
     virtual void damage(const Extension&);
     virtual void damage(Coord left, Coord bottom, Coord right, Coord top);
-    virtual boolean damaged(const Extension&) const;
-    virtual boolean damaged(
+    virtual bool damaged(const Extension&) const;
+    virtual bool damaged(
 	Coord left, Coord bottom, Coord right, Coord top
     ) const;
     virtual void damage_area(Extension&);
     virtual void damage_all();
-    virtual boolean any_damage() const;
+    virtual bool any_damage() const;
     virtual void restrict_damage(const Extension&);
     virtual void restrict_damage(
 		Coord left, Coord bottom, Coord right, Coord top
@@ -279,20 +279,20 @@ public:
     virtual void transformer(const Transformer&) = 0;
     virtual const Transformer& transformer() const = 0;
 
-    virtual void push_clipping(boolean all = false) = 0;
+    virtual void push_clipping(bool all = false) = 0;
     virtual void clip() = 0;
     virtual void clip_rect(Coord l, Coord b, Coord r, Coord t);
     virtual void pop_clipping() = 0;
 
     virtual void damage(const Extension&) = 0;
     virtual void damage(Coord left, Coord bottom, Coord right, Coord top) = 0;
-    virtual boolean damaged(const Extension&) const = 0;
-    virtual boolean damaged(
+    virtual bool damaged(const Extension&) const = 0;
+    virtual bool damaged(
 	Coord left, Coord bottom, Coord right, Coord top
     ) const = 0;
     virtual void damage_area(Extension&) = 0;
     virtual void damage_all() = 0;
-    virtual boolean any_damage() const = 0;
+    virtual bool any_damage() const = 0;
     virtual void restrict_damage(const Extension&) = 0;
     virtual void restrict_damage(
 		Coord left, Coord bottom, Coord right, Coord top

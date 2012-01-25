@@ -182,7 +182,7 @@ void CommandInteractor::Reconfig () {
 void CommandInteractor::Resize () {
     const char* keyLabel = _info->GetKeyLabel();
     Graphic* bg;
-    boolean invert = false;
+    bool invert = false;
 
     Iterator i;
     _picture->First(i);
@@ -260,7 +260,7 @@ void PanelInteractor::Reconfig () {
 void PanelInteractor::Resize () {
     const char* keyLabel = _info->GetKeyLabel();
     Graphic* bg;
-    boolean invert = false;
+    bool invert = false;
     Iterator i;
     _picture->First(i);
 

@@ -43,7 +43,7 @@
 /****************************************************************************/
 
 ArrowLine::ArrowLine (
-    Coord x0, Coord y0, Coord x1, Coord y1, boolean h, boolean t, 
+    Coord x0, Coord y0, Coord x1, Coord y1, bool h, bool t, 
     float arrow_scale, Graphic* gr
 ) : Line(x0, y0, x1, y1, gr) {
     _head = nil;
@@ -129,14 +129,14 @@ void ArrowLine::getExtent (
     tol = e._tol;
 }
 
-boolean ArrowLine::contains (PointObj& po, Graphic* gs) {
+bool ArrowLine::contains (PointObj& po, Graphic* gs) {
     return 
         Line::contains(po, gs) || 
         Head() && ArrowheadContains(_head, po, gs) ||
         Tail() && ArrowheadContains(_tail, po, gs);
 }
 
-boolean ArrowLine::intersects (BoxObj& bo, Graphic* gs) {
+bool ArrowLine::intersects (BoxObj& bo, Graphic* gs) {
     return 
         Line::intersects(bo, gs) || 
         Head() && ArrowheadIntersects(_head, bo, gs) ||
@@ -172,7 +172,7 @@ Extent& ArrowLine::ArrowheadExtent (Arrowhead* arrow, Graphic* gs) {
     return e;
 }
 
-boolean ArrowLine::ArrowheadContains (
+bool ArrowLine::ArrowheadContains (
     Arrowhead* arrow, PointObj& po, Graphic* gs
 ) {
     FullGraphic gstemp;
@@ -183,7 +183,7 @@ boolean ArrowLine::ArrowheadContains (
     return containsGraphic(arrow, po, &gstemp);
 }
 
-boolean ArrowLine::ArrowheadIntersects (
+bool ArrowLine::ArrowheadIntersects (
     Arrowhead* arrow, BoxObj& bo, Graphic* gs
 ) {
     FullGraphic gstemp;
@@ -203,7 +203,7 @@ void ArrowLine::ArrowheadDraw (Arrowhead* arrow, Canvas* c, Graphic* gs) {
     drawGraphic(arrow, c, &gstemp);
 }
 
-void ArrowLine::SetArrows (boolean h, boolean t) {
+void ArrowLine::SetArrows (bool h, bool t) {
     delete _head;
     delete _tail;
 
@@ -225,7 +225,7 @@ void ArrowLine::SetArrows (boolean h, boolean t) {
 /****************************************************************************/
 
 ArrowMultiLine::ArrowMultiLine (
-    Coord* x, Coord* y, int count, boolean h, boolean t,
+    Coord* x, Coord* y, int count, bool h, bool t,
     float arrow_scale, Graphic* gr
 ) : SF_MultiLine(x, y, count, gr) {
     _head = nil;
@@ -296,14 +296,14 @@ void ArrowMultiLine::getExtent (
     tol = e._tol;
 }
 
-boolean ArrowMultiLine::contains (PointObj& po, Graphic* gs) {
+bool ArrowMultiLine::contains (PointObj& po, Graphic* gs) {
     return 
         SF_MultiLine::contains(po, gs) || 
         Head() && ArrowheadContains(_head, po, gs) ||
         Tail() && ArrowheadContains(_tail, po, gs);
 }
 
-boolean ArrowMultiLine::intersects (BoxObj& bo, Graphic* gs) {
+bool ArrowMultiLine::intersects (BoxObj& bo, Graphic* gs) {
     return 
         SF_MultiLine::intersects(bo, gs) || 
         Head() && ArrowheadIntersects(_head, bo, gs) ||
@@ -350,7 +350,7 @@ Extent& ArrowMultiLine::ArrowheadExtent (Arrowhead* arrow, Graphic* gs) {
     return e;
 }
 
-boolean ArrowMultiLine::ArrowheadContains (
+bool ArrowMultiLine::ArrowheadContains (
     Arrowhead* arrow, PointObj& po, Graphic* gs
 ) {
     FullGraphic gstemp;
@@ -361,7 +361,7 @@ boolean ArrowMultiLine::ArrowheadContains (
     return containsGraphic(arrow, po, &gstemp);
 }
 
-boolean ArrowMultiLine::ArrowheadIntersects (
+bool ArrowMultiLine::ArrowheadIntersects (
     Arrowhead* arrow, BoxObj& bo, Graphic* gs
 ) {
     FullGraphic gstemp;
@@ -381,7 +381,7 @@ void ArrowMultiLine::ArrowheadDraw (Arrowhead* arrow, Canvas* c, Graphic* gs) {
     drawGraphic(arrow, c, &gstemp);
 }
 
-void ArrowMultiLine::SetArrows (boolean h, boolean t) {
+void ArrowMultiLine::SetArrows (bool h, bool t) {
     delete _head;
     delete _tail;
 
@@ -407,7 +407,7 @@ void ArrowMultiLine::SetArrows (boolean h, boolean t) {
 /****************************************************************************/
 
 ArrowOpenBSpline::ArrowOpenBSpline (
-    Coord* x, Coord* y, int count, boolean h, boolean t,
+    Coord* x, Coord* y, int count, bool h, bool t,
     float arrow_scale, Graphic* gr
 ) : SFH_OpenBSpline(x, y, count, gr) {
     _head = nil;
@@ -482,14 +482,14 @@ void ArrowOpenBSpline::getExtent (
     tol = e._tol;
 }
 
-boolean ArrowOpenBSpline::contains (PointObj& po, Graphic* gs) {
+bool ArrowOpenBSpline::contains (PointObj& po, Graphic* gs) {
     return 
         SFH_OpenBSpline::contains(po, gs) || 
         Head() && ArrowheadContains(_head, po, gs) ||
         Tail() && ArrowheadContains(_tail, po, gs);
 }
 
-boolean ArrowOpenBSpline::intersects (BoxObj& bo, Graphic* gs) {
+bool ArrowOpenBSpline::intersects (BoxObj& bo, Graphic* gs) {
     return 
         SFH_OpenBSpline::intersects(bo, gs) || 
         Head() && ArrowheadIntersects(_head, bo, gs) ||
@@ -536,7 +536,7 @@ Extent& ArrowOpenBSpline::ArrowheadExtent (Arrowhead* arrow, Graphic* gs) {
     return e;
 }
 
-boolean ArrowOpenBSpline::ArrowheadContains (
+bool ArrowOpenBSpline::ArrowheadContains (
     Arrowhead* arrow, PointObj& po, Graphic* gs
 ) {
     FullGraphic gstemp;
@@ -547,7 +547,7 @@ boolean ArrowOpenBSpline::ArrowheadContains (
     return containsGraphic(arrow, po, &gstemp);
 }
 
-boolean ArrowOpenBSpline::ArrowheadIntersects (
+bool ArrowOpenBSpline::ArrowheadIntersects (
     Arrowhead* arrow, BoxObj& bo, Graphic* gs
 ) {
     FullGraphic gstemp;
@@ -567,7 +567,7 @@ void ArrowOpenBSpline::ArrowheadDraw (Arrowhead* arrow,Canvas* c,Graphic* gs) {
     drawGraphic(arrow, c, &gstemp);
 }
 
-void ArrowOpenBSpline::SetArrows (boolean h, boolean t) {
+void ArrowOpenBSpline::SetArrows (bool h, bool t) {
     delete _head;
     delete _tail;
 

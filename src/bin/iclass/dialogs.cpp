@@ -68,7 +68,7 @@ BasicDialog::BasicDialog () : Dialog(new ButtonState, nil) {
     input->Catch(KeyEvent);
 }
 
-boolean BasicDialog::Accept () {
+bool BasicDialog::Accept () {
     Event e;
     int v = 0;
 
@@ -97,8 +97,8 @@ void BasicDialog::Forward (Event& e) {
     }
 }
 
-boolean BasicDialog::KeyEquiv (Event& e) {
-    boolean keyEquiv = false;
+bool BasicDialog::KeyEquiv (Event& e) {
+    bool keyEquiv = false;
 
     if (e.eventType == KeyEvent && e.len > 0) {
         char c = e.keystring[0];
@@ -157,7 +157,7 @@ ConfirmDialog::ConfirmDialog (const char* msg) {
     input->Catch(KeyEvent);
 }    
 
-inline boolean Confirmed (int v) {
+inline bool Confirmed (int v) {
     return v == 'y' || v == 'n' || v == '\007';
 }
 
@@ -263,7 +263,7 @@ void StringDialog::Init (const char* msg, const char* confirmLbl, int width) {
 
 const char* StringDialog::String () { return _sedit->Text(); }
 
-boolean StringDialog::Accept () {
+bool StringDialog::Accept () {
     Event e;
     int v = 0;
 
@@ -345,7 +345,7 @@ Interactor* FileDialog::AddScroller (Interactor* i) {
     );
 }
 
-boolean FileDialog::Accept () {
+bool FileDialog::Accept () {
     Event e;
     int v = 0;
 

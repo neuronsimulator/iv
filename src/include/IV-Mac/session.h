@@ -67,7 +67,7 @@ public:
 		const OptionDesc*, const PropertyData*
     );
     void parse_args(int& argc, char** argv, const OptionDesc*);
-    boolean match(
+    bool match(
 		const String& arg, const OptionDesc& o, int& i, int argc, char** argv
     );
     void extract(
@@ -78,7 +78,7 @@ public:
     	String next_arg(
 		int& i, int argc, char** argv, const char* message, const String&
     );
-    boolean find_arg(const String& name, String& value);
+    bool find_arg(const String& name, String& value);
 
     void init_style(const char*, const PropertyData*);
     String* find_name();
@@ -97,7 +97,7 @@ public:
     void init_display();
     void connect(Display*);
     void set_style(Display*);
-    boolean srcheck(Event&); // "check" screws up carbon
+    bool srcheck(Event&); // "check" screws up carbon
 	
 private:
 	friend class Session;
@@ -108,7 +108,7 @@ private:
 	int argc_;
 	char** argv_;
 	Display* display_;
-	boolean done_; 
+	bool done_; 
 };
 
 

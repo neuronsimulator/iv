@@ -39,7 +39,7 @@
 /*****************************************************************************/
 
 ClassId ColorCmd::GetClassId () { return COLOR_CMD; }
-boolean ColorCmd::IsA (ClassId id) {return COLOR_CMD==id || Command::IsA(id);}
+bool ColorCmd::IsA (ClassId id) {return COLOR_CMD==id || Command::IsA(id);}
 
 ColorCmd::ColorCmd (ControlInfo* c, PSColor* fg, PSColor* bg) : Command(c) {
     _fg = fg;

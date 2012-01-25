@@ -38,15 +38,15 @@ public:
 
     virtual int GetOriginal(const Coord*&, const Coord*&);
 
-    virtual boolean operator == (const Vertices&)const;
-    virtual boolean operator != (const Vertices&)const;
+    virtual bool operator == (const Vertices&)const;
+    virtual bool operator != (const Vertices&)const;
 
     virtual Graphic* Copy();
 protected:
     Vertices(Graphic* gr = nil);
     Vertices(Coord* x, Coord* y, int count, Graphic* gr = nil);
 
-    virtual boolean extentCached();
+    virtual bool extentCached();
     void cacheExtent(float, float, float, float, float);
     virtual void uncacheExtent();
     void getCachedExtent(float&, float&, float&, float&, float&);

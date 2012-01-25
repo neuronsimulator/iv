@@ -38,7 +38,7 @@
 
 ClassId FontCmd::GetClassId () { return FONT_CMD; }
 
-boolean FontCmd::IsA (ClassId id) {
+bool FontCmd::IsA (ClassId id) {
     return FONT_CMD == id || Command::IsA(id);
 }
 

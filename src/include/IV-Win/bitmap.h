@@ -59,7 +59,7 @@ public:
     ~BitmapRep();
 
 	// ---- load from a resource ----
-	boolean Load(const char* name);
+	bool Load(const char* name);
 
     // ---- should phase this stuff out ------
 	Coord left_;
@@ -70,8 +70,8 @@ public:
 	Coord height_;
 
 	// ---- data access functions ----
-	virtual void poke(boolean set, int x, int y);		// set or clear a bit
-	virtual boolean peek(int x, int y) const;           // test a bit
+	virtual void poke(bool set, int x, int y);		// set or clear a bit
+	virtual bool peek(int x, int y) const;           // test a bit
 
 	unsigned int pwidth()								// width in pixels
 		{ return bm_.bmWidth; }

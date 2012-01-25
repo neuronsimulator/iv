@@ -40,7 +40,7 @@ public:
 
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*&);
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     float _xincr, _yincr;
 };
@@ -50,7 +50,7 @@ public:
     IdrawView(IdrawComp* = nil);
     
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class PSIdraw : public PostScriptViews {
@@ -69,7 +69,7 @@ protected:
     virtual void SetBrushProc(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #endif

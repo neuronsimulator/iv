@@ -40,17 +40,17 @@ class FileBrowser : public StringBrowser {
 public:
     FileBrowser(
         ButtonState*, const char* dir = "~", int rows = 10, int cols = 24,
-        boolean uniqueSel = true, int highlight = Reversed,
+        bool uniqueSel = true, int highlight = Reversed,
         const char* done = SBDone
     );
     FileBrowser(
         const char* name, ButtonState*, const char* = "~", int = 10,
-	int = 24, boolean = true, int = Reversed, const char* = SBDone
+	int = 24, bool = true, int = Reversed, const char* = SBDone
     );
     virtual ~FileBrowser();
 
-    boolean IsADirectory(const char*);
-    boolean SetDirectory(const char*);
+    bool IsADirectory(const char*);
+    bool SetDirectory(const char*);
     const char* GetDirectory();
     const char* ValidDirectories(const char*);
     const char* Normalize(const char*);
@@ -65,7 +65,7 @@ public:
     virtual void Update();
 protected:
     void UpdateStrings();
-    virtual boolean Acceptable(const char*);
+    virtual bool Acceptable(const char*);
 private:
     void Init(const char*);
 

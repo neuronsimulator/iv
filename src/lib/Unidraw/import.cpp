@@ -76,7 +76,7 @@ static int hexmap[] = {
 /*****************************************************************************/
 
 static FILE* CheckCompression(
-	FILE* file, const char *filename, boolean& compressed
+	FILE* file, const char *filename, bool& compressed
 ) {
     char cmd[256];
     
@@ -106,7 +106,7 @@ static const char* ReadCreator (const char* filename) {
     FILE* file = fopen(filename, "r");
     
     if (file != nil) {
-        boolean compressed;
+        bool compressed;
         static char creator[CHARBUFSIZE];
         char line[CHARBUFSIZE];
         
@@ -185,7 +185,7 @@ static int gethex (FILE* file) {
 
 ClassId ImportCmd::GetClassId () { return IMPORT_CMD; }
 
-boolean ImportCmd::IsA (ClassId id) {
+bool ImportCmd::IsA (ClassId id) {
     return IMPORT_CMD == id || Command::IsA(id);
 }
 
@@ -214,15 +214,15 @@ void ImportCmd::Execute () {
     }
 }
 
-boolean ImportCmd::Reversible () { return false; }
+bool ImportCmd::Reversible () { return false; }
 
 GraphicComp* ImportCmd::PostDialog () {
-    boolean imported = false;
+    bool imported = false;
     GraphicComp* comp = nil;
     Editor* ed = GetEditor();
 
     Style* style;
-    boolean reset_caption = false;
+    bool reset_caption = false;
     if (chooser_ == nil) {
 	style = new Style(Session::instance()->style());
 	style->attribute("subcaption", "Import graphic from file:");
@@ -326,7 +326,7 @@ GraphicComp* ImportCmd::PGM_Image (const char* filename) {
 		    int limit = column + 8;
 
 		    for (int pos = column; pos < limit; ++pos, bit >>= 1) {
-			boolean value = !(byte & bit);
+			bool value = !(byte & bit);
 			bm->poke(value, pos, row);
 		    }
 		}
@@ -355,7 +355,7 @@ GraphicComp* ImportCmd::PGM_Image (const char* filename) {
 GraphicComp* ImportCmd::PPM_Image (const char* filename) {
     GraphicComp* comp = nil;
     FILE* file = fopen(filename, "r");
-    boolean compressed;
+    bool compressed;
     file = CheckCompression(file, filename, compressed);
 
     if (file != nil) {
@@ -385,7 +385,7 @@ GraphicComp* ImportCmd::PPM_Image (const char* filename) {
 		    int limit = column + 8;
 
 		    for (int pos = column; pos < limit; ++pos, bit >>= 1) {
-			boolean value = !(byte & bit);
+			bool value = !(byte & bit);
 			bm->poke(value, pos, row);
 		    }
 		}

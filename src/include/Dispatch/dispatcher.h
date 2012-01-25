@@ -58,22 +58,22 @@ public:
     virtual void startChild(int pid, IOHandler*);
     virtual void stopChild(IOHandler*);
 
-    virtual boolean setReady(int fd, DispatcherMask);
+    virtual bool setReady(int fd, DispatcherMask);
     virtual void dispatch();
-    virtual boolean dispatch(long& sec, long& usec);
+    virtual bool dispatch(long& sec, long& usec);
 
     static Dispatcher& instance();
     static void instance(Dispatcher*);
 protected:
     virtual void attach(int fd, DispatcherMask, IOHandler*);
     virtual void detach(int fd);
-    virtual boolean dispatch(timeval*);
-    virtual boolean anyReady() const;
+    virtual bool dispatch(timeval*);
+    virtual bool anyReady() const;
     virtual int fillInReady(FdMask&, FdMask&, FdMask&);
     virtual int waitFor(FdMask&, FdMask&, FdMask&, timeval*);
     virtual void notify(int, FdMask&, FdMask&, FdMask&);
     virtual timeval* calculateTimeout(timeval*) const;
-    virtual boolean handleError();
+    virtual bool handleError();
     virtual void checkConnections();
 protected:
     int	_nfds;

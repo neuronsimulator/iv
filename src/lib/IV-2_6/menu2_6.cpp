@@ -130,7 +130,7 @@ void MenuShadow::Redraw(IntCoord x1, IntCoord y1, IntCoord x2, IntCoord y2) {
     if (x2 >= depth_ && y1 <= ymax - depth_) {
 	const Pattern* p = output->GetPattern();
 	Resource::ref(p);
-	boolean b = output->BgFilled();
+	bool b = output->BgFilled();
 	output->SetPattern(halftone);
 	output->FillBg(false);
 	IntCoord left = Math::max(x1, depth_);

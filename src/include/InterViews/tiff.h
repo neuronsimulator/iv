@@ -37,7 +37,7 @@ class Raster;
 
 class TIFFRaster {
 public:
-    static Raster* load(const char* filename, boolean make_gray = false);
+    static Raster* load(const char* filename, bool make_gray = false);
 };
 
 #include <InterViews/_leave.h>

@@ -67,7 +67,7 @@
 
 ClassId SlotComp::GetClassId () { return SLOT_COMP; }
 
-boolean SlotComp::IsA (ClassId id) {
+bool SlotComp::IsA (ClassId id) {
     return SLOT_COMP == id || Connector::IsA(id);
 }
 
@@ -150,7 +150,7 @@ SlotComp* SlotView::NewSubject (SlotGraphic*) { return nil; }
 
 ClassId SlotView::GetClassId () { return SLOT_VIEW; }
 
-boolean SlotView::IsA (ClassId id) {
+bool SlotView::IsA (ClassId id) {
     return SLOT_VIEW == id || ConnectorView::IsA(id);
 }
 
@@ -502,14 +502,14 @@ void HSlotComp::Connect (Connector* target, CGlue* g) {
 }
 
 ClassId HSlotComp::GetClassId () { return HSLOT_COMP; }
-boolean HSlotComp::IsA (ClassId id) {return HSLOT_COMP==id||SlotComp::IsA(id);}
+bool HSlotComp::IsA (ClassId id) {return HSLOT_COMP==id||SlotComp::IsA(id);}
 
 /**************************************************************************/
 
 HSlotComp* HSlotView::GetHSlotComp () { return (HSlotComp*) GetSubject(); }
 HSlotView::HSlotView (HSlotComp* subj) : SlotView(subj) { }
 ClassId HSlotView::GetClassId () { return HSLOT_VIEW; }
-boolean HSlotView::IsA (ClassId id) {return HSLOT_VIEW==id||SlotView::IsA(id);}
+bool HSlotView::IsA (ClassId id) {return HSLOT_VIEW==id||SlotView::IsA(id);}
 
 SlotComp* HSlotView::NewSubject (SlotGraphic* slotgr) {
     return new HSlotComp(slotgr);
@@ -573,14 +573,14 @@ void VSlotComp::Connect (Connector* target, CGlue* g) {
 }
 
 ClassId VSlotComp::GetClassId () { return VSLOT_COMP; }
-boolean VSlotComp::IsA (ClassId id) {return VSLOT_COMP==id||SlotComp::IsA(id);}
+bool VSlotComp::IsA (ClassId id) {return VSLOT_COMP==id||SlotComp::IsA(id);}
 
 /**************************************************************************/
 
 VSlotComp* VSlotView::GetVSlotComp () { return (VSlotComp*) GetSubject(); }
 VSlotView::VSlotView (VSlotComp* subj) : SlotView(subj) { }
 ClassId VSlotView::GetClassId () { return VSLOT_VIEW; }
-boolean VSlotView::IsA (ClassId id) {return VSLOT_VIEW==id||SlotView::IsA(id);}
+bool VSlotView::IsA (ClassId id) {return VSLOT_VIEW==id||SlotView::IsA(id);}
 
 SlotComp* VSlotView::NewSubject (SlotGraphic* slotgr) {
     return new VSlotComp(slotgr);
@@ -589,10 +589,10 @@ SlotComp* VSlotView::NewSubject (SlotGraphic* slotgr) {
 /**************************************************************************/
 
 ClassId PSSlot::GetClassId () { return PS_SLOT; }
-boolean PSSlot::IsA (ClassId id) {return PS_SLOT==id||PostScriptView::IsA(id);}
+bool PSSlot::IsA (ClassId id) {return PS_SLOT==id||PostScriptView::IsA(id);}
 PSSlot::PSSlot (SlotComp* subj) : PostScriptView(subj) { }
 
-boolean PSSlot::Definition (ostream&) {
+bool PSSlot::Definition (ostream&) {
     // unimplemented
 
     return true;

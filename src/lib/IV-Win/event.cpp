@@ -118,7 +118,7 @@ Window* Event::window() const
 // things with Session::run() and using the Dispatch class for any other
 // forms of event handling.
 // -----------------------------------------------------------------------
-boolean Event::pending() const
+bool Event::pending() const
 {
 	WindowRep::errorMessage("Event::pending - unsupported");
 	return false;
@@ -130,7 +130,7 @@ void Event::read()
 	//Session::instance()->read(*this);
 }
 
-boolean Event::read(long , long )
+bool Event::read(long , long )
 {
 	Event::read();
 	//return Session::instance()->read(s, u, *this);
@@ -212,7 +212,7 @@ Handler* Event::grabber() const
 	return grabberList.item(0);
 }
 
-boolean Event::is_grabbing(Handler* h) const
+bool Event::is_grabbing(Handler* h) const
 {
 	for (ListItr(MWhandlerPtrList) i(grabberList); i.more(); i.next())
 	{
@@ -286,20 +286,20 @@ unsigned int Event::keymask() const
 // to some key/pointer event, in which case the wParam of the message would
 // hold valid information. 
 // -------------------------------------------------------------------------
-boolean Event::control_is_down() const
+bool Event::control_is_down() const
 	{ return (rep_->wparamOf() & MK_CONTROL) ? true : false; }
-boolean Event::shift_is_down() const
+bool Event::shift_is_down() const
 	{ return (rep_->wparamOf() & MK_SHIFT) ? true : false; }
-boolean Event::left_is_down() const
+bool Event::left_is_down() const
 	{ return (rep_->wparamOf() & MK_LBUTTON) ? true : false; }
-boolean Event::middle_is_down() const
+bool Event::middle_is_down() const
 	{ return (rep_->wparamOf() & MK_MBUTTON) ? true : false; }
-boolean Event::right_is_down() const
+bool Event::right_is_down() const
 	{ return (rep_->wparamOf() & MK_RBUTTON) ? true : false; }
 
-boolean Event::capslock_is_down() const
+bool Event::capslock_is_down() const
 	{ return false; }
-boolean Event::meta_is_down() const
+bool Event::meta_is_down() const
 	{ return false; }
 
 unsigned char Event::keycode() const
@@ -396,7 +396,7 @@ void EventRep::handleCallback(Event& e)
     }
 	if (h != nil)
 	{
-		boolean b = Resource::defer(true);
+		bool b = Resource::defer(true);
 		h->ref();
 		h->event(e);
 		h->unref();

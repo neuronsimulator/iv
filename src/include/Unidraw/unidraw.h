@@ -52,18 +52,18 @@ public:
     virtual ~Unidraw();
 
     virtual void Run();
-    virtual void Update(boolean immediate = false);
+    virtual void Update(bool immediate = false);
     virtual void Quit();
 
     virtual void Open(Editor*);
     virtual void Close(Editor*);                // delete editor
     virtual void CloseDependents(Component*);
     virtual void CloseAll();
-    virtual boolean Opened(Editor*);
+    virtual bool Opened(Editor*);
 
     void First(Iterator&);
     void Next(Iterator&);
-    boolean Done(Iterator);
+    bool Done(Iterator);
     Editor* GetEditor(Iterator);
 
     Editor* Find(Component*);
@@ -83,7 +83,7 @@ public:
 protected:
     virtual void Process();
 
-    boolean IsClean(Editor*);
+    bool IsClean(Editor*);
     void Mark(Editor*);
     void Sweep();
     void DoUpdate();
@@ -93,11 +93,11 @@ protected:
 
     UList* elem(Iterator);
     Command* command(UList*);
-    boolean alive();
-    boolean updated();
+    bool alive();
+    bool updated();
 
-    void alive(boolean);
-    void updated(boolean);
+    void alive(bool);
+    void updated(bool);
 private:
     void Init(Catalog*, World*);
     void InitAttributes();
@@ -111,8 +111,8 @@ private:
     World* _world;
     UList* _editors;
     UList* _deadEditors;
-    boolean _alive;
-    boolean _updated;
+    bool _alive;
+    bool _updated;
 
     HistoryMap* _histories;
     int _histlen;
@@ -120,9 +120,9 @@ private:
 
 inline Catalog* Unidraw::GetCatalog () { return _catalog; }
 inline World* Unidraw::GetWorld () { return _world; }
-inline boolean Unidraw::alive () { return _alive; }
-inline boolean Unidraw::updated () { return _updated; }
-inline void Unidraw::alive (boolean a) { _alive = a; }
-inline void Unidraw::updated (boolean u) { _updated = u; }
+inline bool Unidraw::alive () { return _alive; }
+inline bool Unidraw::updated () { return _updated; }
+inline void Unidraw::alive (bool a) { _alive = a; }
+inline void Unidraw::updated (bool u) { _updated = u; }
 
 #endif

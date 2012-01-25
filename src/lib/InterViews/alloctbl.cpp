@@ -53,8 +53,8 @@ private:
 
     AllocationTableImpl(GlyphIndex, long);
 
-    static boolean equal(const Allocation&, const Allocation&);
-    static boolean same_size(const Allotment&, const Allotment&);
+    static bool equal(const Allocation&, const Allocation&);
+    static bool same_size(const Allotment&, const Allotment&);
 
     GlyphIndex count_;
     long maximum_allocations_;
@@ -68,13 +68,13 @@ AllocationTableImpl::AllocationTableImpl(
     GlyphIndex count, long maximum
 ) : count_(count), maximum_allocations_(maximum), allocations_(maximum) { }
 
-inline boolean AllocationTableImpl::equal(
+inline bool AllocationTableImpl::equal(
     const Allocation& a1, const Allocation& a2
 ) {
     return a1.equals(a2, epsilon_);
 }
 
-inline boolean AllocationTableImpl::same_size(
+inline bool AllocationTableImpl::same_size(
     const Allotment& a1, const Allotment& a2
 ) {
     return (

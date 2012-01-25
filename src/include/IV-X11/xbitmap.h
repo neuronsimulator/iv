@@ -52,7 +52,7 @@ public:
     Coord height_;
     unsigned int pwidth_;
     unsigned int pheight_;
-    boolean modified_;
+    bool modified_;
 };
 
 #include <InterViews/_leave.h>

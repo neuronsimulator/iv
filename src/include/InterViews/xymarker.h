@@ -48,7 +48,7 @@ private:
     Canvas* canvas_;
     const Color* overlay_;
     const Color* underlay_;
-    boolean marked_;
+    bool marked_;
     Coord left_, right_, top_, bottom_;
 };
 

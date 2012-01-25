@@ -52,7 +52,7 @@ protected:
     const char* _path;		// my registration's path
     int _port;			// my port's address
     rpcbuf* _service;		// my network socket
-    boolean _running;		// am I running my dispatch loop?
+    bool _running;		// am I running my dispatch loop?
 private:
     // deny access since unimplemented and member-wise won't work
     RpcService(const RpcService&);

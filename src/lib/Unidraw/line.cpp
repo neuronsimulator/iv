@@ -61,7 +61,7 @@
 
 ClassId LineComp::GetClassId () { return LINE_COMP; }
 
-boolean LineComp::IsA (ClassId id) {
+bool LineComp::IsA (ClassId id) {
     return LINE_COMP == id || GraphicComp::IsA(id);
 }
 
@@ -118,7 +118,7 @@ void LineComp::Write (ostream& out) {
 LineComp* LineView::GetLineComp () { return (LineComp*) GetSubject(); }
 ClassId LineView::GetClassId () { return LINE_VIEW; }
 
-boolean LineView::IsA (ClassId id) {
+bool LineView::IsA (ClassId id) {
     return LINE_VIEW == id || GraphicView::IsA(id);
 }
 
@@ -323,13 +323,13 @@ Graphic* LineView::GetGraphic () {
 
 ClassId PSLine::GetClassId () { return PS_LINE; }
 
-boolean PSLine::IsA (ClassId id) { 
+bool PSLine::IsA (ClassId id) { 
     return PS_LINE == id || PostScriptView::IsA(id);
 }
 
 PSLine::PSLine (LineComp* subj) : PostScriptView(subj) { }
 
-boolean PSLine::Definition (ostream& out) {
+bool PSLine::Definition (ostream& out) {
     Coord x0, y0, x1, y1;
 
     LineComp* comp = (LineComp*) GetSubject();
@@ -348,7 +348,7 @@ boolean PSLine::Definition (ostream& out) {
 
 ClassId MultiLineComp::GetClassId () { return MULTILINE_COMP; }
 
-boolean MultiLineComp::IsA (ClassId id) {
+bool MultiLineComp::IsA (ClassId id) {
     return MULTILINE_COMP == id || VerticesComp::IsA(id);
 }
 
@@ -412,11 +412,11 @@ MultiLineComp* MultiLineView::GetMultiLineComp () {
 
 ClassId MultiLineView::GetClassId () { return MULTILINE_VIEW; }
 
-boolean MultiLineView::IsA (ClassId id) {
+bool MultiLineView::IsA (ClassId id) {
     return MULTILINE_VIEW == id || VerticesView::IsA(id);
 }
 
-boolean MultiLineView::VertexChanged () { 
+bool MultiLineView::VertexChanged () { 
     SF_MultiLine* gview = (SF_MultiLine*) GetGraphic();
     SF_MultiLine* gsubj =
         (SF_MultiLine*) GetMultiLineComp()->GetGraphic();
@@ -531,7 +531,7 @@ Command* MultiLineView::InterpretManipulator (Manipulator* m) {
 
 ClassId PSMultiLine::GetClassId () { return PS_MULTILINE; }
 
-boolean PSMultiLine::IsA (ClassId id) { 
+bool PSMultiLine::IsA (ClassId id) { 
     return PS_MULTILINE == id || PSVertices::IsA(id);
 }
 

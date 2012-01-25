@@ -226,7 +226,7 @@ inline void ThirdPoint(
     ty = (2*y0 + y1) / 3.0;
 }
 
-inline boolean CanApproxWithLine(
+inline bool CanApproxWithLine(
     double x0, double y0, double x2, double y2, double x3, double y3
 ) {
     double triangleArea, sideSquared, dx, dy;

@@ -38,7 +38,7 @@
 
 ClassId PatternCmd::GetClassId () { return PATTERN_CMD; }
 
-boolean PatternCmd::IsA (ClassId id) {
+bool PatternCmd::IsA (ClassId id) {
     return PATTERN_CMD == id || Command::IsA(id);
 }
 

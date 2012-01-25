@@ -110,16 +110,16 @@ public:
 		{ return tr.y()-bl.y(); }
 	
 	// ---- operations ----
-	boolean operator==(const MWcoordRect&) const;
-	boolean operator!=(const MWcoordRect& r) const
+	bool operator==(const MWcoordRect&) const;
+	bool operator!=(const MWcoordRect& r) const
 		{ return !(*this==r); }
 	MWcoordRect operator&&(const MWcoordRect&) const;		// intersection 
 	MWcoordRect operator||(const MWcoordRect&) const;		// union
 	void operator+=(const MWcoordPoint&);					// translate
 	void operator-=(const MWcoordPoint&);
-	boolean contains(const MWcoordPoint&) const;
-	boolean contains(const MWcoordRect&) const;
-	boolean intersects(const MWcoordRect&) const;
+	bool contains(const MWcoordPoint&) const;
+	bool contains(const MWcoordRect&) const;
+	bool intersects(const MWcoordRect&) const;
 	void moveTo(const MWcoordPoint&);
 
 private:
@@ -129,7 +129,7 @@ private:
 };
 
 
-inline boolean MWcoordRect::operator==(const MWcoordRect& r) const
+inline bool MWcoordRect::operator==(const MWcoordRect& r) const
 {
 	return (bl==r.bl && tr==r.tr);
 }
@@ -156,17 +156,17 @@ inline void MWcoordRect::operator-=(const MWcoordPoint& p)
 	tr -= p;
 }
 
-inline boolean MWcoordRect::contains(const MWcoordPoint& p) const
+inline bool MWcoordRect::contains(const MWcoordPoint& p) const
 {
 	return (bl <= p) && (p <= tr);
 }
 
-inline boolean MWcoordRect::contains(const MWcoordRect& r) const
+inline bool MWcoordRect::contains(const MWcoordRect& r) const
 {
 	return (contains(r.bl) && contains(r.tr));
 }
 
-inline boolean MWcoordRect::intersects(const MWcoordRect& r) const
+inline bool MWcoordRect::intersects(const MWcoordRect& r) const
 {
 	if (bl.max(r.bl) <= tr.min(r.tr)) return true;
 	return false;
@@ -241,16 +241,16 @@ public:
 		{ return tr.y()-bl.y(); }
 	
 	// ---- operations ----
-	boolean operator==(const MWpixelRect&) const;
-	boolean operator!=(const MWpixelRect& r) const
+	bool operator==(const MWpixelRect&) const;
+	bool operator!=(const MWpixelRect& r) const
 		{ return !(*this==r); }
 	MWpixelRect operator&&(const MWpixelRect&) const;			// intersection 
 	MWpixelRect operator||(const MWpixelRect&) const;			// union
 	void operator+=(const MWpixelPoint&);					// translate
 	void operator-=(const MWpixelPoint&);
-	boolean contains(const MWpixelPoint&) const;
-	boolean contains(const MWpixelRect&) const;
-	boolean intersects(const MWpixelRect&) const;
+	bool contains(const MWpixelPoint&) const;
+	bool contains(const MWpixelRect&) const;
+	bool intersects(const MWpixelRect&) const;
 	void moveTo(const MWpixelPoint&);
 
 private:
@@ -259,7 +259,7 @@ private:
 
 };
 
-inline boolean MWpixelRect::operator==(const MWpixelRect& r) const
+inline bool MWpixelRect::operator==(const MWpixelRect& r) const
 {
 	return (bl==r.bl && tr==r.tr);
 }
@@ -286,17 +286,17 @@ inline void MWpixelRect::operator-=(const MWpixelPoint& p)
 	tr -= p;
 }
 
-inline boolean MWpixelRect::contains(const MWpixelPoint& p) const
+inline bool MWpixelRect::contains(const MWpixelPoint& p) const
 {
 	return (bl <= p) && (p <= tr);
 }
 
-inline boolean MWpixelRect::contains(const MWpixelRect& r) const
+inline bool MWpixelRect::contains(const MWpixelRect& r) const
 {
 	return (contains(r.bl) && contains(r.tr));
 }
 
-inline boolean MWpixelRect::intersects(const MWpixelRect& r) const
+inline bool MWpixelRect::intersects(const MWpixelRect& r) const
 {
 	if (bl.max(r.bl) < tr.min(r.tr)) return true;
 	return false;

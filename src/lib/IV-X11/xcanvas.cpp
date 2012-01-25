@@ -272,7 +272,7 @@ void Canvas::back_buffer() {
     }
 }
 
-static boolean rectangular(
+static bool rectangular(
     int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3
 ) {
     return (
@@ -281,7 +281,7 @@ static boolean rectangular(
     );
 }
 
-static boolean xrect(const XPoint* p, unsigned int n) {
+static bool xrect(const XPoint* p, unsigned int n) {
     return (
 	n == 5 && p[0].x == p[4].x && p[0].y == p[4].y &&
 	rectangular(
@@ -292,7 +292,7 @@ static boolean xrect(const XPoint* p, unsigned int n) {
 
 static const float smoothness = 10.0;
 
-static boolean straight(
+static bool straight(
     const Transformer& tx,
     Coord x0, Coord y0, Coord x1, Coord y1,
     Coord x2, Coord y2, Coord x3, Coord y3
@@ -638,7 +638,7 @@ void Canvas::character(
 ) {
     CanvasRep* c = rep();
     int int_ch = int(ch);
-    boolean is_flush = !isprint(int_ch);
+    bool is_flush = !isprint(int_ch);
     if (f != nil && f != c->font_) {
 	c->flush();
 	c->font(f);
@@ -1053,11 +1053,11 @@ void Canvas::damage(Coord left, Coord bottom, Coord right, Coord top) {
     c.new_damage();
 }
 
-boolean Canvas::damaged(const Extension& ext) const {
+bool Canvas::damaged(const Extension& ext) const {
     return damaged(ext.left(), ext.bottom(), ext.right(), ext.top());
 }
 
-boolean Canvas::damaged(
+bool Canvas::damaged(
     Coord left, Coord bottom, Coord right, Coord top
 ) const {
     CanvasRep& c = *rep();
@@ -1085,7 +1085,7 @@ void Canvas::damage_all() {
     c.new_damage();
 }
 
-boolean Canvas::any_damage() const { return rep()->damaged_; }
+bool Canvas::any_damage() const { return rep()->damaged_; }
 
 void Canvas::restrict_damage(const Extension& ext) {
     restrict_damage(ext.left(), ext.bottom(), ext.right(), ext.top());
@@ -1141,7 +1141,7 @@ void Canvas::repair() {
  * We set the canvas' xdrawable to the backbuffer.
  */
 
-void CanvasRep::bind(boolean double_buffered) {
+void CanvasRep::bind(bool double_buffered) {
     CanvasRep& c = *this;
     XDisplay* dpy = c.display_->rep()->display_;
     XGCValues gcv;
@@ -1204,7 +1204,7 @@ static inline void restrict(int& c, int a, int b) {
     }
 }
 
-boolean CanvasRep::start_repair() {
+bool CanvasRep::start_repair() {
     CanvasRep& c = *this;
     if (!c.damaged_) {
 	return false;

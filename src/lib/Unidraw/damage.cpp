@@ -137,7 +137,7 @@ void Damage::Added (Graphic* g) {
     _additions->Append(new UList(g));
 }
 
-boolean Damage::Incurred () {
+bool Damage::Incurred () {
     return !_areas->IsEmpty() || !_additions->IsEmpty();
 }
 
@@ -236,7 +236,7 @@ void Damage::Next (Iterator& i) {
     i.SetValue(Elem(i)->Next()); 
 }
 
-boolean Damage::Done (Iterator i) { 
+bool Damage::Done (Iterator i) { 
     UList* u = Elem(i);
     return u == _areas->End() || u == _additions->End(); 
 }

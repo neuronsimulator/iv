@@ -32,11 +32,11 @@
 
 class ArrowVar : public StateVar {
 public:
-    ArrowVar(boolean h = false, boolean t = false);
+    ArrowVar(bool h = false, bool t = false);
     
-    boolean Head();
-    boolean Tail();
-    void SetArrows(boolean, boolean);
+    bool Head();
+    bool Tail();
+    void SetArrows(bool, bool);
 
     virtual StateVar& operator = (StateVar&);
 
@@ -44,13 +44,13 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
-    boolean _head, _tail;
+    bool _head, _tail;
 };
 
-inline boolean ArrowVar::Head() { return _head; }
-inline boolean ArrowVar::Tail() { return _tail; }
+inline bool ArrowVar::Head() { return _head; }
+inline bool ArrowVar::Tail() { return _tail; }
 
 
 class ArrowVarView : public StateVarView {
@@ -59,10 +59,10 @@ public:
     virtual ~ArrowVarView();
 protected:
     virtual void Init();
-    virtual boolean Stale();
+    virtual bool Stale();
 protected:
     ArrowVar* _arrowSubj;
-    boolean _prevHead, _prevTail;
+    bool _prevHead, _prevTail;
     PSBrush* _prevVal;
     PSColor* _prevFg, *_prevBg;
     ColorVar* _colorSubj;

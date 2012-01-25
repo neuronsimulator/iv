@@ -63,7 +63,7 @@ MoveDialog::MoveDialog () : BasicDialog(
 
 void MoveDialog::Handle (Event& e) { _medit->Handle(e); }
 
-boolean MoveDialog::Accept () {
+bool MoveDialog::Accept () {
     Event e;
     int v = 0;
 
@@ -160,7 +160,7 @@ ScaleDialog::ScaleDialog () : BasicDialog(
 
 void ScaleDialog::Handle (Event& e) { _medit->Handle(e); }
 
-boolean ScaleDialog::Accept () {
+bool ScaleDialog::Accept () {
     Event e;
     int v = 0;
 
@@ -234,7 +234,7 @@ RotateDialog::RotateDialog () : BasicDialog(
 
 void RotateDialog::Handle (Event& e) { _medit->Handle(e); }
 
-boolean RotateDialog::Accept () {
+bool RotateDialog::Accept () {
     Event e;
     int v = 0;
 

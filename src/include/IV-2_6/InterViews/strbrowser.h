@@ -60,12 +60,12 @@ class StringBrowser : public Interactor {
 public:
     StringBrowser(
         ButtonState*, int rows, int cols, 
-        boolean uniqueSel = true, int highlight = Reversed,
+        bool uniqueSel = true, int highlight = Reversed,
         const char* done = SBDone
     );
     StringBrowser(
         const char* name, ButtonState*, int, int,
-        boolean = true, int = Reversed, const char* = SBDone
+        bool = true, int = Reversed, const char* = SBDone
     );
     virtual ~StringBrowser();
 
@@ -87,7 +87,7 @@ public:
     int Selection(int selindex = 0);
     int SelectionIndex(int index);
     int Selections();
-    boolean Selected(int index);
+    bool Selected(int index);
 
     virtual void Handle(Event&);
     virtual void Adjust(Perspective&);
@@ -103,10 +103,10 @@ protected:
     void RateScroll(Event&);
 
     int Locate(IntCoord, IntCoord);
-    boolean DoubleClicked(Event&);
+    bool DoubleClicked(Event&);
 
-    virtual boolean HandleChar(char);
-    virtual boolean LeftButtonDown(Event&);
+    virtual bool HandleChar(char);
+    virtual bool LeftButtonDown(Event&);
 
     virtual void Reconfig();
     virtual void Redraw(IntCoord, IntCoord, IntCoord, IntCoord);
@@ -114,23 +114,23 @@ protected:
 protected:
     int rows;
     int columns;
-    boolean uniqueSel;
-    boolean singleClick;
+    bool uniqueSel;
+    bool singleClick;
     int clickDelay;
     int highlight;
     ButtonState* subject;
     const char* done;
 private:
-    void Init(ButtonState*, int, int, boolean, int, const char*);
+    void Init(ButtonState*, int, int, bool, int, const char*);
     void InitTextDisplay();
-    void InitPerspective(boolean scroll_to_top);
+    void InitPerspective(bool scroll_to_top);
 
     void UpdateSelection(int dot, int mark, int style);
     void UpdateWidth();
     void Note(Event&);
 
-    boolean HandleDownEvent(Event&);
-    boolean HandleKeyEvent(Event&);
+    bool HandleDownEvent(Event&);
+    bool HandleKeyEvent(Event&);
 private:
     char** strbuf;
     int strbufsize;
@@ -149,7 +149,7 @@ private:
 inline void StringBrowser::Append (const char* s) { Insert(s, strcount); }
 inline int StringBrowser::Count () { return strcount; }
 inline int StringBrowser::Selections () { return selcount; }
-inline boolean StringBrowser::Selected (int i) {return SelectionIndex(i) >= 0;}
+inline bool StringBrowser::Selected (int i) {return SelectionIndex(i) >= 0;}
 
 #include <IV-2_6/_leave.h>
 

@@ -51,7 +51,7 @@ public:
     virtual void Update();
     virtual void Draw();
     virtual void Adjust(Perspective&);
-    virtual void Highlight(boolean);
+    virtual void Highlight(bool);
 
     virtual Graphic* GetGraphic();
     virtual float GetMagnification();
@@ -85,7 +85,7 @@ private:
     Zooming _zooming;
     Coord _x0, _y0;                 /* graphic offset */
     float _mag;			    /* total magnification */
-    boolean _highlighted;
+    bool _highlighted;
 };
 
 #include <IV-2_6/_leave.h>

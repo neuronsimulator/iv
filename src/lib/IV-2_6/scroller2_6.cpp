@@ -247,7 +247,7 @@ void VScroller::Redraw(IntCoord x1, IntCoord y1, IntCoord x2, IntCoord y2) {
 void HScroller::Handle(Event& e) {
     if (e.eventType == DownEvent) {
         Perspective s = *view;
-        boolean syncing =
+        bool syncing =
             (syncScroll && !e.control) || (!syncScroll && e.control);
 
 	IntCoord nx = Slide(e);
@@ -261,7 +261,7 @@ void HScroller::Handle(Event& e) {
 void VScroller::Handle(Event& e) {
     if (e.eventType == DownEvent) {
         Perspective s = *view;
-        boolean syncing =
+        bool syncing =
             (syncScroll && !e.control) || (!syncScroll && e.control);
 
 	IntCoord ny = Slide(e);
@@ -292,7 +292,7 @@ IntCoord HScroller::Slide(register Event& e) {
     maxx = Math::max(xmax + 1, oldx + width) - width;
     w = e.x - x1;
 
-    boolean syncing = (syncScroll && !e.control) || (!syncScroll && e.control);
+    bool syncing = (syncScroll && !e.control) || (!syncScroll && e.control);
     SlidingRect r(output, canvas, x1+1, inset+1, x2-1, ymax-inset-1, e.x, 0);
     r.Draw();
 
@@ -345,7 +345,7 @@ IntCoord VScroller::Slide(register Event& e) {
     maxy = Math::max(ymax + 1, oldy + height) - height;
     h = e.y - y1;
 
-    boolean syncing = (syncScroll && !e.control) || (!syncScroll && e.control);
+    bool syncing = (syncScroll && !e.control) || (!syncScroll && e.control);
     SlidingRect r(output, canvas, inset+1, y1+1, xmax-inset-1, y2-1, 0, e.y );
     r.Draw();
 

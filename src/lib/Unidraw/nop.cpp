@@ -33,7 +33,7 @@
 /*****************************************************************************/
 
 ClassId NOPCmd::GetClassId () { return NOP_CMD; }
-boolean NOPCmd::IsA (ClassId id) { return NOP_CMD == id || Command::IsA(id); }
+bool NOPCmd::IsA (ClassId id) { return NOP_CMD == id || Command::IsA(id); }
 
 NOPCmd::NOPCmd (ControlInfo* c) : Command(c) { }
 NOPCmd::NOPCmd (Editor* ed) : Command(ed) { }
@@ -45,4 +45,4 @@ Command* NOPCmd::Copy () {
 }
 
 void NOPCmd::Execute () { }
-boolean NOPCmd::Reversible () { return false; }
+bool NOPCmd::Reversible () { return false; }

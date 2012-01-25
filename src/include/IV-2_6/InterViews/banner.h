@@ -38,7 +38,7 @@ public:
     char* left;
     char* middle;
     char* right;
-    boolean highlight;
+    bool highlight;
 
     Banner(char* lt, char* mid, char* rt);
     Banner(const char*, char* lt, char* mid, char* rt);

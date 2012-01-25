@@ -59,8 +59,8 @@ public:
     Drag(Glyph* glyph);
     virtual ~Drag();
 
-    virtual void dragable(boolean);
-    virtual boolean dragable() const;
+    virtual void dragable(bool);
+    virtual bool dragable() const;
 
     virtual Glyph* dragGlyph() = 0;
     virtual Cursor* dragCursor() = 0;
@@ -68,9 +68,9 @@ public:
     virtual void dragType(char*& value, int& length);
     virtual void dragOffset(Event& event, int& dx, int& dy);
 
-    virtual boolean caught(const Event&) const;
-    virtual boolean commit(const Event&) const;
-    virtual boolean abort(const Event&) const;
+    virtual bool caught(const Event&) const;
+    virtual bool commit(const Event&) const;
+    virtual bool abort(const Event&) const;
 
     virtual void allocate(Canvas*, const Allocation&, Extension&);
     virtual void pick(Canvas*, const Allocation&, int depth, Hit&);
@@ -94,8 +94,8 @@ public:
     DragZone(Glyph*);
     virtual ~DragZone();
 
-    virtual void sensitive(boolean);
-    virtual boolean sensitive() const;
+    virtual void sensitive(bool);
+    virtual bool sensitive() const;
 
     virtual void enter(Event&, const char* type, int length);
     virtual void motion(Event&);
@@ -127,9 +127,9 @@ public:
     virtual void draw(Canvas*, const Allocation&) const;
     virtual void pick(Canvas*, const Allocation&, int depth, Hit&);
 
-    virtual boolean event(Event& event);
+    virtual bool event(Event& event);
 private:
-    boolean dragPublished_;
+    bool dragPublished_;
     DragZoneSinkHandler* target_;
 };
 

@@ -49,7 +49,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     virtual GraphicComp* GetComp(Iterator);
     virtual void SetComp(GraphicComp*, Iterator&);
@@ -62,7 +62,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Connector* _conn1, *_conn2;
 };
@@ -80,7 +80,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     virtual GraphicView* GetView(Iterator);
     virtual void SetView(GraphicView*, Iterator&);
@@ -90,7 +90,7 @@ public:
     virtual Graphic* GetGraphic();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual void CreateHandles();
     Line* GetLine();
@@ -106,10 +106,10 @@ class PSLink : public PostScriptView {
 public:
     PSLink(LinkComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #include <IV-2_6/_leave.h>

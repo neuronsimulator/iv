@@ -41,7 +41,7 @@ void TransferFunct::Evaluate (Path*) { }
 TransferFunct* TransferFunct::Copy () { return nil; }
 ClassId TransferFunct::GetClassId () { return TRANSFER_FUNCT; }
 ClassId TransferFunct::GetSubstId (const char*&) { return UNDEFINED_CLASS; }
-boolean TransferFunct::IsA (ClassId id) { return TRANSFER_FUNCT == id; }
+bool TransferFunct::IsA (ClassId id) { return TRANSFER_FUNCT == id; }
 void TransferFunct::Read (istream&) { }
 void TransferFunct::Write (ostream&) { }
 

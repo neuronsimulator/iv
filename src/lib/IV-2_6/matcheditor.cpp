@@ -55,7 +55,7 @@ void MatchEditor::Init () {
     Match("%[]", true);
 }
 
-void MatchEditor::Match (const char* p, boolean m) {
+void MatchEditor::Match (const char* p, bool m) {
     char* pp;
     for (pp = pattern; *p != '\0'; ++p, ++pp) {
         *pp = *p;
@@ -74,8 +74,8 @@ void MatchEditor::Match (const char* p, boolean m) {
     match_on_keystroke = m;
 }
 
-boolean MatchEditor::HandleChar (char c) {
-    boolean done1 = StringEditor::HandleChar(c);
+bool MatchEditor::HandleChar (char c) {
+    bool done1 = StringEditor::HandleChar(c);
     if (done1 || (!iscntrl(c) && match_on_keystroke)) {
         char buf[1000];
         int length = text->Length();

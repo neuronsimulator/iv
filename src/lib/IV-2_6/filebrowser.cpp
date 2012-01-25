@@ -66,7 +66,7 @@ public:
     FBDirectory(const char* name);
     ~FBDirectory();
 
-    boolean LoadDirectory(const char*);
+    bool LoadDirectory(const char*);
     const char* Normalize(const char*);
     const char* ValidDirectories(const char*);
 
@@ -74,7 +74,7 @@ public:
     const char* File(unsigned int index);
     int Count();
 
-    boolean IsADirectory(const char*);
+    bool IsADirectory(const char*);
 private:
     const char* Home(const char* = nil);
     const char* ElimDot(const char*);
@@ -84,7 +84,7 @@ private:
     const char* ExpandTilde(const char*, int);
     const char* RealPath(const char*);
 
-    boolean Reset(const char*);
+    bool Reset(const char*);
 private:
     Directory* dir;
 };
@@ -123,7 +123,7 @@ const char* FBDirectory::RealPath(const char* path) {
     return realpath;
 }
 
-boolean FBDirectory::LoadDirectory(const char* name) {
+bool FBDirectory::LoadDirectory(const char* name) {
     char buf[max_filename_length+2];
     const char* path = buf;
 
@@ -138,7 +138,7 @@ int FBDirectory::Index(const char* name) {
     return dir->index(name);
 }
 
-boolean FBDirectory::Reset(const char* path) {
+bool FBDirectory::Reset(const char* path) {
     Directory* d = Directory::open(path);
     if (d == nil) {
 	return false;
@@ -148,7 +148,7 @@ boolean FBDirectory::Reset(const char* path) {
     return true;
 }
 
-boolean FBDirectory::IsADirectory(const char* path) {
+bool FBDirectory::IsADirectory(const char* path) {
     struct stat st;
     return stat(path, &st) == 0 && (st.st_mode & S_IFMT) == S_IFDIR;
 }
@@ -160,13 +160,13 @@ const char* FBDirectory::Home(const char* name) {
     return (pw == nil) ? nil : pw->pw_dir;
 }
 
-inline boolean DotSlash(const char* path) {
+inline bool DotSlash(const char* path) {
     return 
         path[0] != '\0' && path[0] == '.' &&
         (path[1] == '/' || path[1] == '\0');
 }
 
-inline boolean DotDotSlash(const char* path) {
+inline bool DotDotSlash(const char* path) {
     return 
         path[0] != '\0' && path[1] != '\0' &&
         path[0] == '.' && path[1] == '.' &&
@@ -240,7 +240,7 @@ const char* FBDirectory::ElimDot(const char* path) {
     return newpath;
 }
 
-static boolean CollapsedDotDotSlash(const char* path, const char*& start) {
+static bool CollapsedDotDotSlash(const char* path, const char*& start) {
     if (path == start || *(start-1) != '/') {
         return false;
 
@@ -285,7 +285,7 @@ const char* FBDirectory::ElimDotDot(const char* path) {
 const char* FBDirectory::InterpTilde(const char* path) {
     static char realpath[MAXPATHLEN+1];
     const char* beg = strrchr(path, '~');
-    boolean validTilde = beg != nil && (beg == path || *(beg-1) == '/');
+    bool validTilde = beg != nil && (beg == path || *(beg-1) == '/');
 
     if (validTilde) {
         const char* end = strchr(beg, '/');
@@ -320,7 +320,7 @@ const char* FBDirectory::ExpandTilde(const char* tildeName, int length) {
 
 FileBrowser::FileBrowser(
     ButtonState* bs, const char* dir1, int r, int c,
-    boolean u, int h, const char* d
+    bool u, int h, const char* d
 ) : StringBrowser(bs, r, c, u, h, d) {
     Init(dir1);
     UpdateStrings();
@@ -328,7 +328,7 @@ FileBrowser::FileBrowser(
 
 FileBrowser::FileBrowser(
     const char* name, ButtonState* bs, const char* dir1, int r, int c,
-    boolean u, int h, const char* d
+    bool u, int h, const char* d
 ) : StringBrowser(name, bs, r, c, u, h, d) {
     Init(dir1);
     UpdateStrings();
@@ -360,12 +360,12 @@ static const char* Concat(const char* path, const char* file) {
     return strcat(buf, file);
 }
 
-boolean FileBrowser::IsADirectory(const char* path) {
+bool FileBrowser::IsADirectory(const char* path) {
     return dir->IsADirectory(Normalize(path));
 }
 
-boolean FileBrowser::SetDirectory(const char* path) {
-    boolean successful = true;
+bool FileBrowser::SetDirectory(const char* path) {
+    bool successful = true;
     path = ValidDirectories(path);
     const char* normpath = Normalize(path);
 
@@ -398,11 +398,11 @@ const char* FileBrowser::Path(int index) {
     return (s == nil ) ? nil : Normalize(Concat(lastpath, s));
 }
 
-boolean FileBrowser::Acceptable(const char* name) {
-    boolean dir1 = IsADirectory(name);
+bool FileBrowser::Acceptable(const char* name) {
+    bool dir1 = IsADirectory(name);
     int m = dir1 ? directory_mode : mode;
     Regexp* r = dir1 ? directory_regexp : regexp;
-    boolean mode_ok, name_ok;
+    bool mode_ok, name_ok;
 
     if (m != 0) {
 	struct stat st;

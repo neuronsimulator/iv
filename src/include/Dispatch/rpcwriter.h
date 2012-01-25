@@ -38,15 +38,15 @@ public:
 
     rpcstream& server();
 protected:
-    RpcWriter(const char* path, boolean fatal, boolean binary);
-    RpcWriter(const char* host, int port, boolean fatal, boolean binary);
-    RpcWriter(int fd, boolean fatal, boolean binary);
+    RpcWriter(const char* path, bool fatal, bool binary);
+    RpcWriter(const char* host, int port, bool fatal, bool binary);
+    RpcWriter(int fd, bool fatal, bool binary);
     RpcWriter(rpcstream* server);
 
-    void open(const char* path, boolean fatal, boolean binary);
+    void open(const char* path, bool fatal, bool binary);
 
     rpcstream* _server;		// sink of RPC requests going to server
-    boolean _delete;		// should the destructor delete _server?
+    bool _delete;		// should the destructor delete _server?
     char* _host;		// dynamically allocated storage to be deleted
 private:
     // deny access since unimplemented and member-wise won't work

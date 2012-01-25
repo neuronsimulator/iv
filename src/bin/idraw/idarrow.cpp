@@ -61,13 +61,13 @@
 
 class _ArrowData : public Data {
 public:
-    _ArrowData(boolean, boolean);
+    _ArrowData(bool, bool);
 public:
-    boolean _head : 16;
-    boolean _tail : 16;
+    bool _head : 16;
+    bool _tail : 16;
 };
 
-_ArrowData::_ArrowData (boolean head, boolean tail) {
+_ArrowData::_ArrowData (bool head, bool tail) {
     _head = head;
     _tail = tail;
 }
@@ -83,7 +83,7 @@ ClassId ArrowLineComp::GetSubstId (const char*& delim) {
     return LineComp::GetClassId();
 }
 
-boolean ArrowLineComp::IsA (ClassId id) {
+bool ArrowLineComp::IsA (ClassId id) {
     return ARROWLINE_COMP == id || LineComp::IsA(id);
 }
 
@@ -165,7 +165,7 @@ ArrowLineComp* ArrowLineView::GetArrowLineComp () {
 ArrowLineView::ArrowLineView (ArrowLineComp* subj) : LineView(subj) { }
 ClassId ArrowLineView::GetClassId () { return ARROWLINE_VIEW; }
 
-boolean ArrowLineView::IsA (ClassId id) {
+bool ArrowLineView::IsA (ClassId id) {
     return ARROWLINE_VIEW == id || LineView::IsA(id);
 }
 
@@ -256,11 +256,11 @@ Command* ArrowLineView::InterpretManipulator (Manipulator* m) {
 PSArrowLine::PSArrowLine (ArrowLineComp* subj) : PSLine (subj) { }
 ClassId PSArrowLine::GetClassId () { return PS_ARROWLINE; }
 
-boolean PSArrowLine::IsA (ClassId id) {
+bool PSArrowLine::IsA (ClassId id) {
     return PS_ARROWLINE == id || PSLine::IsA(id);
 }
 
-boolean PSArrowLine::Definition (ostream& out) {
+bool PSArrowLine::Definition (ostream& out) {
     ArrowLineComp* comp = (ArrowLineComp*) GetSubject();
     ArrowLine* aline = comp->GetArrowLine();
 
@@ -283,7 +283,7 @@ boolean PSArrowLine::Definition (ostream& out) {
 void PSArrowLine::Brush (ostream& out) {
     ArrowLineComp* comp = (ArrowLineComp*) GetSubject();
     PSBrush* brush = (PSBrush*) GetGraphicComp()->GetGraphic()->GetBrush();
-    boolean head, tail;
+    bool head, tail;
     head = comp->GetArrowLine()->Head();
     tail = comp->GetArrowLine()->Tail();
 
@@ -335,7 +335,7 @@ ClassId ArrowMultiLineComp::GetSubstId (const char*& delim) {
     return MultiLineComp::GetClassId();
 }
 
-boolean ArrowMultiLineComp::IsA (ClassId id) {
+bool ArrowMultiLineComp::IsA (ClassId id) {
     return ARROWMULTILINE_COMP == id || MultiLineComp::IsA(id);
 }
 
@@ -418,7 +418,7 @@ ArrowMultiLineView::ArrowMultiLineView (
 
 ClassId ArrowMultiLineView::GetClassId () { return ARROWMULTILINE_VIEW; }
 
-boolean ArrowMultiLineView::IsA (ClassId id) {
+bool ArrowMultiLineView::IsA (ClassId id) {
     return ARROWMULTILINE_VIEW == id || MultiLineView::IsA(id);
 }
 
@@ -507,11 +507,11 @@ Command* ArrowMultiLineView::InterpretManipulator (Manipulator* m) {
 PSArrowMultiLine::PSArrowMultiLine (ArrowMultiLineComp* s) : PSMultiLine(s) { }
 ClassId PSArrowMultiLine::GetClassId () { return PS_ARROWLINE; }
 
-boolean PSArrowMultiLine::IsA (ClassId id) { 
+bool PSArrowMultiLine::IsA (ClassId id) { 
     return PS_ARROWMULTILINE == id || PSMultiLine::IsA(id);
 }
 
-boolean PSArrowMultiLine::Definition (ostream& out) {
+bool PSArrowMultiLine::Definition (ostream& out) {
     ArrowMultiLineComp* comp = (ArrowMultiLineComp*) GetSubject();
     ArrowMultiLine* aml = comp->GetArrowMultiLine();
 
@@ -537,7 +537,7 @@ boolean PSArrowMultiLine::Definition (ostream& out) {
 void PSArrowMultiLine::Brush (ostream& out) {
     ArrowMultiLineComp* comp = (ArrowMultiLineComp*) GetSubject();
     PSBrush* brush = (PSBrush*) GetGraphicComp()->GetGraphic()->GetBrush();
-    boolean head, tail;
+    bool head, tail;
     head = comp->GetArrowMultiLine()->Head();
     tail = comp->GetArrowMultiLine()->Tail();
 
@@ -588,7 +588,7 @@ ClassId ArrowSplineComp::GetSubstId (const char*& delim) {
     return SplineComp::GetClassId();
 }
 
-boolean ArrowSplineComp::IsA (ClassId id) {
+bool ArrowSplineComp::IsA (ClassId id) {
     return ARROWSPLINE_COMP == id || SplineComp::IsA(id);
 }
 
@@ -668,7 +668,7 @@ ArrowSplineComp* ArrowSplineView::GetArrowSplineComp () {
 ArrowSplineView::ArrowSplineView (ArrowSplineComp* s) : SplineView(s) { }
 ClassId ArrowSplineView::GetClassId () { return ARROWSPLINE_VIEW; }
 
-boolean ArrowSplineView::IsA (ClassId id) {
+bool ArrowSplineView::IsA (ClassId id) {
     return ARROWSPLINE_VIEW == id || SplineView::IsA(id);
 }
 
@@ -757,11 +757,11 @@ Command* ArrowSplineView::InterpretManipulator (Manipulator* m) {
 PSArrowSpline::PSArrowSpline (ArrowSplineComp* s) : PSSpline(s) { }
 ClassId PSArrowSpline::GetClassId () { return PS_ARROWLINE; }
 
-boolean PSArrowSpline::IsA (ClassId id) { 
+bool PSArrowSpline::IsA (ClassId id) { 
     return PS_ARROWSPLINE == id || PSSpline::IsA(id);
 }
 
-boolean PSArrowSpline::Definition (ostream& out) {
+bool PSArrowSpline::Definition (ostream& out) {
     ArrowSplineComp* comp = (ArrowSplineComp*) GetSubject();
     ArrowOpenBSpline* aml = comp->GetArrowOpenBSpline();
 
@@ -787,7 +787,7 @@ boolean PSArrowSpline::Definition (ostream& out) {
 void PSArrowSpline::Brush (ostream& out) {
     ArrowSplineComp* comp = (ArrowSplineComp*) GetSubject();
     PSBrush* brush = (PSBrush*) GetGraphicComp()->GetGraphic()->GetBrush();
-    boolean head, tail;
+    bool head, tail;
     head = comp->GetArrowOpenBSpline()->Head();
     tail = comp->GetArrowOpenBSpline()->Tail();
 

@@ -36,7 +36,7 @@
 #include <OS/math.h>
 
 Shadow::Shadow(
-    Glyph* g, Coord x, Coord y, const Color* c, boolean single
+    Glyph* g, Coord x, Coord y, const Color* c, bool single
 ) : MonoGlyph(g) {
     x_offset_ = x;
     y_offset_ = y;

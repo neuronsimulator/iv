@@ -25,7 +25,7 @@
 #ifndef iv2_6_shape_h
 #define iv2_6_shape_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 
 /*
  * Constants for defining "infinite" stretchability or shrinkability.
@@ -49,8 +49,8 @@ public:
     void Rect(int w, int h);
     void Rigid(int hshr = 0, int hstr = 0, int vshr = 0, int vstr = 0);
     void SetUndefined();
-    boolean Defined();
-    boolean Undefined () { return !Defined(); }
+    bool Defined();
+    bool Undefined () { return !Defined(); }
 };
 
 #endif

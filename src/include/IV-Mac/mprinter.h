@@ -13,9 +13,9 @@ class MacPrinterCanvas : public MACcanvas {
 public:
 	MacPrinterCanvas();
 	virtual ~MacPrinterCanvas();
-	boolean start();
-	boolean finish();
-	boolean setup(boolean s = true);
+	bool start();
+	bool finish();
+	bool setup(bool s = true);
 	virtual Window* window() const;
 	virtual void size(Coord width, Coord height);
 	virtual void psize(Coord width, Coord height);
@@ -65,7 +65,7 @@ public:
     virtual void transform(const Transformer&);
     virtual void pop_transform();
 
-    virtual void push_clipping(boolean all = false);
+    virtual void push_clipping(bool all = false);
     virtual void clip();
     virtual void pop_clipping();
 

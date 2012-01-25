@@ -54,11 +54,11 @@ iosb::~iosb() {}
 // assumptions about sizes of integral types hold before enabling
 // binary I/O; if they do not hold, then refuse to enable binary I/O.
 
-boolean iosb::binary() const {
+bool iosb::binary() const {
     return _binary;
 }
 
-void iosb::binary(boolean binary) {
+void iosb::binary(bool binary) {
     if (binary) {
 	// don't use consts; cfront has wrong idea of their values
 	UINT32 max32 = ~0;
@@ -71,11 +71,11 @@ void iosb::binary(boolean binary) {
     _binary = binary;
 }
 
-boolean iosb::swapped() const {
+bool iosb::swapped() const {
     return _swapped;
 }
 
-void iosb::swapped(boolean swapped) {
+void iosb::swapped(bool swapped) {
     _swapped = swapped;
 }
 
@@ -456,7 +456,7 @@ iostreamb::~iostreamb() {}
 // the stream flush itself before every insertion because it doesn't
 // check for streams tied to themselves.  Sigh....
 
-void iostreamb::negotiate(boolean b) {
+void iostreamb::negotiate(bool b) {
     if (!good()) {
 	return;
     }

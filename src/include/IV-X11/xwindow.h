@@ -25,7 +25,7 @@
 #ifndef iv_xwindow_h
 #define iv_xwindow_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/geometry.h>
 #include <IV-X11/Xlib.h>
 #include <IV-X11/Xutil.h>
@@ -102,7 +102,7 @@ private:
     unsigned long xor_;
 
     static void find_visual_by_class_name(const String&, WindowVisualInfo&);
-    static boolean find_layer(const String&, int& layer);
+    static bool find_layer(const String&, int& layer);
     static void find_overlay(int layer, WindowVisualInfo&);
     static void find_visual_by_info(
 	XVisualInfo&, long mask, WindowVisualInfo&
@@ -160,14 +160,14 @@ public:
     Window* toplevel_;
     XWindow xtoplevel_;
 
-    boolean placed_ : 1;
-    boolean aligned_ : 1;
-    boolean needs_resize_ : 1;
-    boolean resized_ : 1;
-    boolean moved_ : 1;
-    boolean unmapped_ : 1;
-    boolean wm_mapped_ : 1;
-    boolean map_pending_ : 1;
+    bool placed_ : 1;
+    bool aligned_ : 1;
+    bool needs_resize_ : 1;
+    bool resized_ : 1;
+    bool moved_ : 1;
+    bool unmapped_ : 1;
+    bool wm_mapped_ : 1;
+    bool map_pending_ : 1;
 
     static Atom wm_delete_atom_;
     static Atom wm_protocols_atom_;
@@ -195,7 +195,7 @@ public:
     // a full request necessitates the invalidation of any box in the window.
     // and that is accomplished by a temporary setting of
     // a static flag for Box which is checked when the Box::request is called.
-    boolean request_on_resize_;
+    bool request_on_resize_;
     
     static Window* find(XWindow, WindowTable*);
 };
@@ -216,7 +216,7 @@ private:
     Display* display_;
 };
 
-typedef boolean (ManagedWindowRep::*HintFunction)(ManagedWindowHintInfo&);
+typedef bool (ManagedWindowRep::*HintFunction)(ManagedWindowHintInfo&);
 
 class ManagedWindowRep {
 public:
@@ -231,16 +231,16 @@ public:
 
     void do_set(Window*, HintFunction);
 
-    boolean set_name(ManagedWindowHintInfo&);
-    boolean set_geometry(ManagedWindowHintInfo&);
-    boolean set_group_leader(ManagedWindowHintInfo&);
-    boolean set_transient_for(ManagedWindowHintInfo&);
-    boolean set_icon_name(ManagedWindowHintInfo&);
-    boolean set_icon_geometry(ManagedWindowHintInfo&);
-    boolean set_icon(ManagedWindowHintInfo&);
-    boolean set_icon_bitmap(ManagedWindowHintInfo&);
-    boolean set_icon_mask(ManagedWindowHintInfo&);
-    boolean set_all(ManagedWindowHintInfo&);
+    bool set_name(ManagedWindowHintInfo&);
+    bool set_geometry(ManagedWindowHintInfo&);
+    bool set_group_leader(ManagedWindowHintInfo&);
+    bool set_transient_for(ManagedWindowHintInfo&);
+    bool set_icon_name(ManagedWindowHintInfo&);
+    bool set_icon_geometry(ManagedWindowHintInfo&);
+    bool set_icon(ManagedWindowHintInfo&);
+    bool set_icon_bitmap(ManagedWindowHintInfo&);
+    bool set_icon_mask(ManagedWindowHintInfo&);
+    bool set_all(ManagedWindowHintInfo&);
 
     void wm_normal_hints(Window*);
     void wm_name(Window*);

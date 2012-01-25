@@ -48,7 +48,7 @@
 
 ClassId VerticesComp::GetClassId () { return VERTICES_COMP; }
 
-boolean VerticesComp::IsA (ClassId id) {
+bool VerticesComp::IsA (ClassId id) {
     return VERTICES_COMP == id || GraphicComp::IsA(id);
 }
 
@@ -63,7 +63,7 @@ VerticesComp* VerticesView::GetVerticesComp () {
 
 ClassId VerticesView::GetClassId () { return VERTICES_VIEW; }
 
-boolean VerticesView::IsA (ClassId id) {
+bool VerticesView::IsA (ClassId id) {
     return VERTICES_VIEW == id || GraphicView::IsA(id);
 }
 
@@ -95,7 +95,7 @@ void VerticesView::CreateHandles () {
     }
 }
 
-boolean VerticesView::VertexChanged () { return false; }
+bool VerticesView::VertexChanged () { return false; }
 
 void VerticesView::Interpret (Command* cmd) {
     if (cmd->IsA(ALIGNTOGRID_CMD)) {
@@ -140,14 +140,14 @@ Graphic* VerticesView::GetGraphic () {
 
 ClassId PSVertices::GetClassId () { return PS_VERTICES; }
 
-boolean PSVertices::IsA (ClassId id) { 
+bool PSVertices::IsA (ClassId id) { 
     return PS_VERTICES == id || PostScriptView::IsA(id);
 }
 
 PSVertices::PSVertices (VerticesComp* subj) : PostScriptView(subj) { }
 const char* PSVertices::Name () { return ""; }
 
-boolean PSVertices::Definition (ostream& out) {
+bool PSVertices::Definition (ostream& out) {
     const Coord* x;
     const Coord* y;
     int n;

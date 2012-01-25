@@ -45,7 +45,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Alignment _align1, _align2;
 };
@@ -63,7 +63,7 @@ public:
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     void Move(GraphicComp*);
     void Unmove(GraphicComp*);

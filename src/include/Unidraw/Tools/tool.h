@@ -52,7 +52,7 @@ public:
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*& delim);
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     Tool(ControlInfo* = nil);
 

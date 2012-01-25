@@ -35,7 +35,7 @@ class BevelFrame : public MonoGlyph {
 public:
     BevelFrame(
 	Glyph*, Coord, float xalign = 0.0, float yalign = 0.0,
-	boolean hmargin = true, boolean vmargin = true
+	bool hmargin = true, bool vmargin = true
     );
     virtual ~BevelFrame();
 
@@ -50,8 +50,8 @@ private:
     Coord thickness_;
     float xalign_;
     float yalign_;
-    boolean hmargin_ : 1;
-    boolean vmargin_ : 1;
+    bool hmargin_ : 1;
+    bool vmargin_ : 1;
 
     Coord thickness(Canvas*) const;
     void allocate_body(Glyph*, Coord, Allocation&) const;
@@ -70,7 +70,7 @@ public:
 	Glyph*, Beveler,
 	const Color* light, const Color* medium, const Color* dark,
 	Coord thickness, float xalign = 0.0, float yalign = 0.0,
-	boolean hmargin = true, boolean vmargin = true
+	bool hmargin = true, bool vmargin = true
     );
     virtual ~Bevel();
 

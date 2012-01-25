@@ -166,7 +166,7 @@ void Editor::Update () {
     }
 }
 
-boolean Editor::DependsOn (Component* parent) {
+bool Editor::DependsOn (Component* parent) {
     Component* child = GetComponent();
 
     while (child != nil) {

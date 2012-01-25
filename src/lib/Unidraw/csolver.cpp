@@ -190,8 +190,8 @@ public:
 
     void Limit();
     void Reverse();
-    boolean IsFixed();
-    boolean Contains(Connector*);
+    bool IsFixed();
+    bool Contains(Connector*);
     virtual float GetCenter(Connector*);
 
     virtual CCnxn* Copy();
@@ -323,11 +323,11 @@ void CCnxn::Reverse () {
     _glue->Reverse();
 }
 
-boolean CCnxn::IsFixed () { 
+bool CCnxn::IsFixed () { 
     return _lbConn->GetMobility() == Fixed && _rtConn->GetMobility() == Fixed;
 }
 
-boolean CCnxn::Contains (Connector* c) { return _lbConn == c || _rtConn == c; }
+bool CCnxn::Contains (Connector* c) { return _lbConn == c || _rtConn == c; }
 float CCnxn::GetCenter (Connector*) { return 0; }
 
 void CCnxn::Read (istream& in) {
@@ -425,15 +425,15 @@ public:
     CNet* Last();
     CNet* End();
     CNet* Next();
-    boolean IsEmpty();
+    bool IsEmpty();
 
     CCnxn* Cnxn();
     virtual CCnxn* CreateCnxn(
         Connector* lb = nil, Connector* rt = nil, CSGlue* = nil
     );
     virtual CNet* CreateNetwork(CCnxn* = nil);
-    boolean Includes(Connector*);
-    boolean IsDegenerate();
+    bool Includes(Connector*);
+    bool IsDegenerate();
 protected:
     CNet(CCnxn* = nil);
 };
@@ -444,9 +444,9 @@ inline CNet* CNet::First () { return (CNet*) UList::First(); }
 inline CNet* CNet::Last () { return (CNet*) UList::Last(); }
 inline CNet* CNet::End () { return (CNet*) UList::End(); }
 inline CNet* CNet::Next () { return (CNet*) UList::Next(); }
-inline boolean CNet::IsEmpty () { return UList::IsEmpty(); }
+inline bool CNet::IsEmpty () { return UList::IsEmpty(); }
 inline CNet* CNet::Find (CCnxn* cnxn) { return (CNet*) UList::Find(cnxn); }
-inline boolean CNet::IsDegenerate () { return First() == Last(); }
+inline bool CNet::IsDegenerate () { return First() == Last(); }
 
 void CNet::Print () {
     for (CNet* nw = First(); nw != End(); nw = nw->Next()) {
@@ -461,7 +461,7 @@ CNet* CNet::CreateNetwork (CCnxn*) { return nil; }
 void CNet::Append (CNet* nw) { UList::Append(nw); }
 void CNet::Remove (CNet* nw) { UList::Remove(nw); }
 
-boolean CNet::Includes (Connector* c) {
+bool CNet::Includes (Connector* c) {
     for (CNet* nw = First(); nw != End(); nw = nw->Next()) {
         CCnxn* cnxn = nw->Cnxn();
 
@@ -569,7 +569,7 @@ public:
 
     void First(Iterator&);
     void Next(Iterator&);
-    boolean Done(Iterator);
+    bool Done(Iterator);
     void Remove(Iterator&);
     UHashElem* GetElem(Iterator);
 
@@ -584,7 +584,7 @@ private:
 
 UHashElem* CS_HashTable::Elem (UList* r) { return (UHashElem*) (*r)(); }
 UList* CS_HashTable::ULElem (Iterator i) { return (UList*) i.GetValue(); }
-boolean CS_HashTable::Done (Iterator i) { return ULElem(i) == _elems->End(); }
+bool CS_HashTable::Done (Iterator i) { return ULElem(i) == _elems->End(); }
 void CS_HashTable::First (Iterator& i) { i.SetValue(_elems->First()); }
 void CS_HashTable::Next (Iterator& i) { i.SetValue(ULElem(i)->Next()); }
 UHashElem* CS_HashTable::GetElem (Iterator i) { return Elem(ULElem(i)); }
@@ -793,7 +793,7 @@ public:
 
     void First(Iterator&);
     void Next(Iterator&);
-    boolean Done(Iterator);
+    bool Done(Iterator);
     void Append(Connector*);
     void Remove(Iterator&);
     PeerInfo* GetInfo(Iterator);
@@ -818,7 +818,7 @@ inline UList* ConnInfo::Elem (Iterator i) { return (UList*) i.GetValue(); }
 
 inline void ConnInfo::First (Iterator& i) { i.SetValue(_peers->First()); }
 inline void ConnInfo::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
-inline boolean ConnInfo::Done (Iterator i) { return Elem(i) == _peers->End(); }
+inline bool ConnInfo::Done (Iterator i) { return Elem(i) == _peers->End(); }
 inline PeerInfo* ConnInfo::GetInfo (Iterator i) { return Info(Elem(i)); }
 
 inline CNet* ConnInfo::GetNetwork () { return _net; }
@@ -1021,7 +1021,7 @@ void CSolver::SolveAll (UList* nets, Orientation orient) {
 void CSolver::Solve (CNet* net, Orientation orient) {
     CNet* nwa, *nwb, *nwc, *eqa, *eqb, *eqc;
     Connector* c1, *c2;
-    boolean rva, rvb, rvc;
+    bool rva, rvb, rvc;
 
     if (net->IsDegenerate()) {
         DefaultPosition(net);
@@ -1226,7 +1226,7 @@ void CSolver::Disconnect (Connector* c1, Connector* c2) {
         DeletePeerInfo(c1, csinfo1->_hinfo, c2);
         DeletePeerInfo(c1, csinfo1->_vinfo, c2);
 
-        boolean bothEmpty = hnw->IsEmpty() && vnw->IsEmpty();
+        bool bothEmpty = hnw->IsEmpty() && vnw->IsEmpty();
 
         if (bothEmpty || hnw->IsEmpty()) {
             _hnets->Delete(hnw);
@@ -1458,7 +1458,7 @@ void CSolver::Write (ostream& out) {
     _vwritten = new CCnxn_HashTable;
 }
 
-boolean CSolver::FoundFixed (CNet* net, CNet*& nw) { 
+bool CSolver::FoundFixed (CNet* net, CNet*& nw) { 
     for (nw = net->First(); nw != net->End(); nw = nw->Next()) {
         if (nw->Cnxn()->IsFixed()) {
             return true;
@@ -1475,7 +1475,7 @@ inline Connector* Shared (CCnxn* c1, CCnxn* c2) {
     }
 }
 
-inline boolean IsCrossover (CCnxn* c1, CCnxn* c2) {
+inline bool IsCrossover (CCnxn* c1, CCnxn* c2) {
     return c1->_lbConn == c2->_rtConn && c1->_rtConn == c2->_lbConn;
 }
 
@@ -1541,7 +1541,7 @@ static void FindY (
     }
 }
 
-boolean CSolver::Found2Fixed (CNet* net, Connector*& c1, Connector*& c2) {
+bool CSolver::Found2Fixed (CNet* net, Connector*& c1, Connector*& c2) {
     CNet* cur = net, *end = net->End();
     c1 = FindFixed(cur, end);
 
@@ -1556,7 +1556,7 @@ boolean CSolver::Found2Fixed (CNet* net, Connector*& c1, Connector*& c2) {
     return c2 != nil;
 }
 
-boolean CSolver::FoundSeries (
+bool CSolver::FoundSeries (
     CNet* net, CNet*& nwa, CNet*& nwb, Orientation orient
 ) {
     for (nwa = net->First(); nwa != net->End(); nwa = nwa->Next()) {
@@ -1583,7 +1583,7 @@ boolean CSolver::FoundSeries (
     return false;
 }
 
-boolean CSolver::FoundParallel (
+bool CSolver::FoundParallel (
     CNet* net, CNet*& nwa, CNet*& nwb, Orientation orient
 ) {
     for (nwa = net->First(); nwa != net->End(); nwa = nwa->Next()) {
@@ -1604,7 +1604,7 @@ boolean CSolver::FoundParallel (
     return false;
 }
 
-boolean CSolver::FoundY (
+bool CSolver::FoundY (
     CNet* net, CNet*& nwa, CNet*& nwb, CNet*& nwc, Orientation orient
 ) {
     for (nwa = net->First(); nwa != net->End(); nwa = nwa->Next()) {
@@ -1641,7 +1641,7 @@ void CSolver::SubstFixedEquiv (
 
 void CSolver::SubstSeriesEquiv (
     CNet* net, CNet* nwa, CNet* nwb, CNet*& equiv, 
-    boolean& rva, boolean& rvb, Orientation orient
+    bool& rva, bool& rvb, Orientation orient
 ) {
     CCnxn* ca = nwa->Cnxn();
     CCnxn* cb = nwb->Cnxn();
@@ -1663,7 +1663,7 @@ void CSolver::SubstSeriesEquiv (
 }
 
 void CSolver::SubstParallelEquiv (
-    CNet* net, CNet* nwa, CNet* nwb, CNet*& equiv, boolean& reversed,
+    CNet* net, CNet* nwa, CNet* nwb, CNet*& equiv, bool& reversed,
     Orientation orient
 ) {
     CCnxn* ca = nwa->Cnxn();
@@ -1689,7 +1689,7 @@ void CSolver::SubstParallelEquiv (
 void CSolver::SubstYEquiv (
     CNet* net, 
     CNet* nwa, CNet* nwb, CNet* nwc, CNet*& nweqa, CNet*& nweqb, CNet*& nweqc,
-    boolean& rva, boolean& rvb, boolean& rvc, Orientation orient
+    bool& rva, bool& rvb, bool& rvc, Orientation orient
 ) {
     CCnxn* ca = nwa->Cnxn();
     CCnxn* cb = nwb->Cnxn();
@@ -1753,7 +1753,7 @@ void CSolver::ReplaceFixed (
 
 void CSolver::ReplaceSeries (
     CNet* net, CNet* nwa, CNet* nwb, CNet*& equiv, 
-    boolean rva, boolean rvb, Orientation orient
+    bool rva, bool rvb, Orientation orient
 ) {
     CCnxn* ca = nwa->Cnxn();
     CCnxn* cb = nwb->Cnxn();
@@ -1774,7 +1774,7 @@ void CSolver::ReplaceSeries (
 }
 
 void CSolver::ReplaceParallel (
-    CNet* net, CNet* nwa, CNet* nwb, CNet*& equiv, boolean reversed,
+    CNet* net, CNet* nwa, CNet* nwb, CNet*& equiv, bool reversed,
     Orientation orient
 ) {
     CCnxn* ca = nwa->Cnxn();
@@ -1797,7 +1797,7 @@ void CSolver::ReplaceParallel (
 void CSolver::ReplaceY (
     CNet* net, 
     CNet* nwa, CNet* nwb, CNet* nwc, CNet*& nweqa, CNet*& nweqb, CNet*& nweqc,
-    boolean rva, boolean rvb, boolean rvc, Orientation orient
+    bool rva, bool rvb, bool rvc, Orientation orient
 ) {
     CCnxn* ca = nwa->Cnxn();
     CCnxn* cb = nwb->Cnxn();

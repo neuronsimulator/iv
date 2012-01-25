@@ -42,7 +42,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class SplineView : public VerticesView {
@@ -55,9 +55,9 @@ public:
     SplineComp* GetSplineComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    virtual boolean VertexChanged();
+    virtual bool VertexChanged();
 };
 
 class PSSpline : public PSVertices {
@@ -65,7 +65,7 @@ public:
     PSSpline(SplineComp* = nil);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual const char* Name();
 };
@@ -80,7 +80,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ClosedSplineView : public VerticesView {
@@ -93,9 +93,9 @@ public:
     ClosedSplineComp* GetClosedSplineComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    virtual boolean VertexChanged();
+    virtual bool VertexChanged();
 };
 
 class PSClosedSpline : public PSVertices {
@@ -103,7 +103,7 @@ public:
     PSClosedSpline(ClosedSplineComp* = nil);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual const char* Name();
 };

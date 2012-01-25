@@ -98,8 +98,8 @@ public:
     void zero();
     void setBit(int);
     void clrBit(int);
-    boolean isSet(int) const;
-    boolean anySet() const;
+    bool isSet(int) const;
+    bool anySet() const;
     int numSet() const;
 };
 
@@ -110,9 +110,9 @@ FdMask::FdMask() {
 void FdMask::zero() { Memory::zero(this, sizeof(FdMask)); }
 void FdMask::setBit(int fd) { FD_SET(fd,(fd_set*)this); }
 void FdMask::clrBit(int fd) { FD_CLR(fd,(fd_set*)this); }
-boolean FdMask::isSet(int fd) const { return FD_ISSET(fd,(fd_set*)this); }
+bool FdMask::isSet(int fd) const { return FD_ISSET(fd,(fd_set*)this); }
 
-boolean FdMask::anySet() const {
+bool FdMask::anySet() const {
 
 #if 0 && defined(_XOPEN_SOURCE)
     const int mskcnt = howmany(FD_SETSIZE,NFDBITS);
@@ -188,7 +188,7 @@ timeval operator-(timeval src1, timeval src2) {
     return delta;
 }
 
-boolean operator>(timeval src1, timeval src2) {
+bool operator>(timeval src1, timeval src2) {
     if (src1.tv_sec > src2.tv_sec) {
 	return true;
     } else if (src1.tv_sec == src2.tv_sec && src1.tv_usec > src2.tv_usec) {
@@ -198,7 +198,7 @@ boolean operator>(timeval src1, timeval src2) {
     }
 }
 
-boolean operator<(timeval src1, timeval src2) {
+bool operator<(timeval src1, timeval src2) {
     if (src1.tv_sec < src2.tv_sec) {
 	return true;
     } else if (src1.tv_sec == src2.tv_sec && src1.tv_usec < src2.tv_usec) {
@@ -225,7 +225,7 @@ public:
     TimerQueue();
     virtual ~TimerQueue();
 
-    boolean isEmpty() const;
+    bool isEmpty() const;
     static timeval zeroTime();
     timeval earliestTime() const;
     static timeval currentTime();
@@ -257,7 +257,7 @@ TimerQueue::~TimerQueue() {
     }
 }
 
-inline boolean TimerQueue::isEmpty() const {
+inline bool TimerQueue::isEmpty() const {
     return _first == nil;
 }
 
@@ -338,8 +338,8 @@ public:
     ChildQueue();
     virtual ~ChildQueue();
 
-    boolean isEmpty() const;
-    boolean isReady() const;
+    bool isEmpty() const;
+    bool isReady() const;
 
     void insert(pid_t, IOHandler*);
     void remove(IOHandler*);
@@ -347,7 +347,7 @@ public:
     void setStatus(pid_t, int status);
 private:
     Child* _first;            // queue head
-    boolean _ready;           // something is ready
+    bool _ready;           // something is ready
 };
 
 Child::Child(pid_t p, IOHandler* h, Child* n) {
@@ -371,8 +371,8 @@ ChildQueue::~ChildQueue() {
     }
 }
 
-inline boolean ChildQueue::isEmpty() const { return _first == nil; }
-inline boolean ChildQueue::isReady() const { return _ready; }
+inline bool ChildQueue::isEmpty() const { return _first == nil; }
+inline bool ChildQueue::isReady() const { return _ready; }
 
 void ChildQueue::insert(pid_t p, IOHandler* handler) {
     if (isEmpty()) {
@@ -558,7 +558,7 @@ void Dispatcher::stopChild(IOHandler* handler) {
     _cqueue->remove(handler);
 }
 
-boolean Dispatcher::setReady(int fd, DispatcherMask mask) {
+bool Dispatcher::setReady(int fd, DispatcherMask mask) {
     if (handler(fd, mask) == nil) {
 	return false;
     }
@@ -578,7 +578,7 @@ void Dispatcher::dispatch() {
     dispatch(nil);
 }
 
-boolean Dispatcher::dispatch(long& sec, long& usec) {
+bool Dispatcher::dispatch(long& sec, long& usec) {
     timeval howlong;
     timeval prevTime;
     timeval elapsedTime;
@@ -587,7 +587,7 @@ boolean Dispatcher::dispatch(long& sec, long& usec) {
     howlong.tv_usec = usec;
     prevTime = TimerQueue::currentTime();
 
-    boolean success = dispatch(&howlong);
+    bool success = dispatch(&howlong);
 
     elapsedTime = TimerQueue::currentTime() - prevTime;
     if (howlong > elapsedTime) {
@@ -601,7 +601,7 @@ boolean Dispatcher::dispatch(long& sec, long& usec) {
     return success;
 }
 
-boolean Dispatcher::dispatch(timeval* howlong) {
+bool Dispatcher::dispatch(timeval* howlong) {
     FdMask rmaskret;
     FdMask wmaskret;
     FdMask emaskret;
@@ -618,7 +618,7 @@ boolean Dispatcher::dispatch(timeval* howlong) {
     return (nfound != 0);
 }
 
-boolean Dispatcher::anyReady() const {
+bool Dispatcher::anyReady() const {
     return
        _rmaskready->anySet() || _wmaskready->anySet() || _emaskready->anySet();
 }
@@ -818,7 +818,7 @@ timeval* Dispatcher::calculateTimeout(timeval* howlong) const {
     return howlong;
 }
 
-boolean Dispatcher::handleError() {
+bool Dispatcher::handleError() {
     switch (errno) {
     case EBADF:
 	checkConnections();

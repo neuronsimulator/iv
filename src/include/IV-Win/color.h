@@ -82,7 +82,7 @@ public:
 		// If the color already exists, nothing is done, otherwise it is added
 		// and a reference is returned.
 
-	boolean findEntry(int r, int g, int b, COLORREF& value);
+	bool findEntry(int r, int g, int b, COLORREF& value);
 		// Looks for the given rgb color specification in the palette.  If
 		// found, true is returned and the value set to the corresponding 
 		// reference.

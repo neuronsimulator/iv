@@ -44,7 +44,7 @@ public:
     virtual ~Path();
 
     virtual void Visit(Connector*);
-    virtual boolean Visited(Connector*);
+    virtual bool Visited(Connector*);
 private:
     class UList* _slot[SLOTS];
 };

@@ -69,7 +69,7 @@
 
 ClassId PinComp::GetClassId () { return PIN_COMP; }
 
-boolean PinComp::IsA (ClassId id) {
+bool PinComp::IsA (ClassId id) {
     return PIN_COMP == id || Connector::IsA(id);
 }
 
@@ -190,7 +190,7 @@ void PinComp::Write (ostream& out) {
 PinComp* PinView::GetPinComp () { return (PinComp*) GetSubject(); }
 ClassId PinView::GetClassId () { return PIN_VIEW; }
 
-boolean PinView::IsA (ClassId id) {
+bool PinView::IsA (ClassId id) {
     return PIN_VIEW == id || ConnectorView::IsA(id);
 }
 
@@ -408,11 +408,11 @@ void PinGraphic::draw (Canvas* c, Graphic* gs) {
 /**************************************************************************/
 
 ClassId PSPin::GetClassId () { return PS_PIN; }
-boolean PSPin::IsA (ClassId id) {return PS_PIN==id || PostScriptView::IsA(id);}
+bool PSPin::IsA (ClassId id) {return PS_PIN==id || PostScriptView::IsA(id);}
 
 PSPin::PSPin (PinComp* subj) : PostScriptView(subj) { }
 
-boolean PSPin::Definition (ostream&) {
+bool PSPin::Definition (ostream&) {
     // unimplemented
 
     return true;

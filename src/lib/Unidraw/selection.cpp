@@ -172,10 +172,10 @@ void Selection::First (Iterator& i) { i.SetValue(_ulist->First()); }
 void Selection::Last (Iterator& i) { i.SetValue(_ulist->Last()); }
 void Selection::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
 void Selection::Prev (Iterator& i) { i.SetValue(Elem(i)->Prev()); }
-boolean Selection::Done (Iterator i) { return Elem(i) == _ulist->End(); }
+bool Selection::Done (Iterator i) { return Elem(i) == _ulist->End(); }
 int Selection::Number () { return _count; }
 
-boolean Selection::Includes (GraphicView* e) {
+bool Selection::Includes (GraphicView* e) {
     return _ulist->Find(e) != nil;
 }
 
@@ -261,4 +261,4 @@ void Selection::GetBox (Coord& l, Coord& b, Coord& r, Coord& t) {
     t = btotal._top;
 }
 
-boolean Selection::IsEmpty () { return _ulist->IsEmpty(); }
+bool Selection::IsEmpty () { return _ulist->IsEmpty(); }

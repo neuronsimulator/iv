@@ -59,13 +59,13 @@ public:
 
     virtual Style* style() const;
     virtual const char* property_value(const char*) const;
-    virtual boolean property_is_on(const char*) const;
+    virtual bool property_is_on(const char*) const;
 
     virtual const Font* font() const;
     virtual const Color* foreground() const;
     virtual const Color* background() const;
-    virtual boolean shaped_windows() const;
-    virtual boolean double_buffered() const;
+    virtual bool shaped_windows() const;
+    virtual bool double_buffered() const;
 
     virtual void flush();
     virtual void sync();
@@ -77,17 +77,17 @@ public:
 
     virtual void run();
     virtual void quit();
-    virtual boolean done() const;
+    virtual bool done() const;
 
-    virtual boolean pending() const;
+    virtual bool pending() const;
     virtual void read(Event&);
-    virtual boolean read(long sec, long usec, Event&);
+    virtual bool read(long sec, long usec, Event&);
     virtual void unread(Event&);
     virtual void poll(Event&);
 
     virtual void RingBell(int);
     virtual void SetKeyClick(int);
-    virtual void SetAutoRepeat(boolean);
+    virtual void SetAutoRepeat(bool);
     virtual void SetFeedback(int thresh, int scale);
 
     virtual void SetScreen(int);

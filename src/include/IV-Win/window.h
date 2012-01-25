@@ -75,10 +75,10 @@ public:
 	// ---- typical window operations ----
 	void bind();                     		// bind to an MS-Windows window
 	void unbind();							// unbind from MS-Windows window
-	boolean bound();						// bound to MS-Windows window?
-	boolean map();							// map the window to the display
+	bool bound();						// bound to MS-Windows window?
+	bool map();							// map the window to the display
 	void unmap();							// unmap window from display
-	boolean isMapped();						// is window visible?
+	bool isMapped();						// is window visible?
 
 	// ---- window creation parameters ----
 	void windowTitle(const char*);
@@ -154,7 +154,7 @@ private:
 };
 
 // ---- inline functions of MWwindow ----
-inline boolean MWwindow::bound()
+inline bool MWwindow::bound()
 	{ return (hwnd) ? 1 : 0; }
 inline HWND MWwindow::msWindow()
 	{ return hwnd; }
@@ -230,7 +230,7 @@ public:
 		{ return win; }
 	void bind();       					 	// bind to MS-Window & canvas
 
-	void doubleBuffer(boolean);
+	void doubleBuffer(bool);
 		// Turn double-buffering on if true, off if false.
 
 	void frontBuffer();
@@ -248,7 +248,7 @@ public:
 	Cursor* cursor_;
 	UINT left_;
 	UINT bottom_;
-	boolean request_on_resize_;
+	bool request_on_resize_;
 
 protected:
 
@@ -262,14 +262,14 @@ private:
 	MWcontrolTable* controls;		// hash table of registered controls
 	MWcontrolHWND* cntrlHWND;		// hash table of registered control handles
 
-	boolean doubleBuffered;			// is window double-buffered?
+	bool doubleBuffered;			// is window double-buffered?
 	HBITMAP back_bitmap_;			// bitmap associated with back buffer
 	HDC frontBuff;					// front buffer device context
-	boolean offscreen_;	// WM_MOVE needs to redraw if portion
+	bool offscreen_;	// WM_MOVE needs to redraw if portion
    							// was off screen
 };
 
-inline void WindowRep::doubleBuffer(boolean b)
+inline void WindowRep::doubleBuffer(bool b)
 	{ doubleBuffered = b; }
 
 // #######################################################################

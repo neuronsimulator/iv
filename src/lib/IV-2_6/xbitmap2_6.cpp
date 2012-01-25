@@ -49,7 +49,7 @@ static void DrawSourceTransformedImage(
     XImage* s, int sx0, int sy0,
     XImage* m, int mx0, int my0,
     XDrawable d, unsigned int height, int dx0, int dy0,
-    boolean stencil, unsigned long fg, unsigned long bg,
+    bool stencil, unsigned long fg, unsigned long bg,
     GC gc, const Transformer& matrix,
     int xmin, int ymin, int xmax, int ymax
 ) {
@@ -66,7 +66,7 @@ static void DrawSourceTransformedImage(
         float dy = (ty - ly) / float(ymax - ymin + 1);
         int ilx = 0, ily = 0;
         int irx = 0, iry = 0;
-        boolean lastmask = false, mask;
+        bool lastmask = false, mask;
         unsigned long lastpixel = fg, pixel, source;
         for (int yy = ymin; yy <= ymax+1; ++yy) {
             mask = (
@@ -129,7 +129,7 @@ static void DrawDestinationTransformedImage(
     XImage* s, int sx0, int sy0,
     XImage* m, int mx0, int my0,
     XDrawable d, unsigned int height, int dx0, int dy0,
-    boolean stencil, unsigned long fg, unsigned long bg,
+    bool stencil, unsigned long fg, unsigned long bg,
     GC gc, const Transformer& matrix,
     int xmin, int ymin, int xmax, int ymax
 ) {
@@ -146,15 +146,15 @@ static void DrawDestinationTransformedImage(
         float dx = (tx - fx) / float(ymax - ymin + 1); 
         float dy = (ty - fy) / float(ymax - ymin + 1);
         IntCoord lasty = ymin;
-        boolean lastmask = false, mask;
+        bool lastmask = false, mask;
         unsigned long lastpixel = fg, pixel, source;
         for (IntCoord yy = ymin; yy <= ymax+1; ++yy) {
             int ix = Math::round(fx - 0.5), iy = Math::round(fy - 0.5);
-            boolean insource = (
+            bool insource = (
                ix >= sx0 && ix < sx0 + s->width
                && iy >= sy0 && iy < sy0 + s->height
             );
-            boolean inmask = (
+            bool inmask = (
                 m != nil && ix >= mx0 && ix < mx0 + m->width
                 && iy >= my0 && iy < my0 + m->height
             );
@@ -205,7 +205,7 @@ void DrawTransformedImage(
     XImage* s, int sx0, int sy0,
     XImage* m, int mx0, int my0,
     XDrawable d, unsigned int height, int dx0, int dy0,
-    boolean stencil, unsigned long fg, unsigned long bg,
+    bool stencil, unsigned long fg, unsigned long bg,
     GC gc, const Transformer& matrix
 ) {
     int x1 = (m != nil) ? mx0 : sx0;
@@ -237,10 +237,10 @@ void DrawTransformedImage(
     int dwidth = dxmax - dxmin + 1;
     int dheight = dymax - dymin + 1;
 
-    boolean rect = (x1 == x2 || y1 == y2) && (x1 == x4 || y1 == y4);
-    boolean alwaysdest = dwidth < 2 * swidth;
-    boolean alwayssource = dwidth * dheight > 3 * swidth * sheight;
-    boolean dest = alwaysdest || (!alwayssource && !rect);
+    bool rect = (x1 == x2 || y1 == y2) && (x1 == x4 || y1 == y4);
+    bool alwaysdest = dwidth < 2 * swidth;
+    bool alwayssource = dwidth * dheight > 3 * swidth * sheight;
+    bool dest = alwaysdest || (!alwayssource && !rect);
     if (dest) {
         if (dheight > 0) {
             DrawDestinationTransformedImage(

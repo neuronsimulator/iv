@@ -45,7 +45,7 @@ public:
     virtual ~IClass();
 
     void Run();
-    boolean Command(char);
+    bool Command(char);
 
     void ScanCmd();
     void ClearCmd();
@@ -73,8 +73,8 @@ private:
 
     void Visit(const char*);
     void Complain(const char* = nil);
-    boolean ForwardSearch(const char*);
-    boolean BackwardSearch(const char*);
+    bool ForwardSearch(const char*);
+    bool BackwardSearch(const char*);
 
     void UpdateClassesBrowser();
     void UpdateParentBrowser();

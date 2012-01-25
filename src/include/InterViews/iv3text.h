@@ -203,14 +203,14 @@ public:	// ---------------- adjustable interface ----------------
   void deannotate(TextAnnotation* annotation);
   void deannotate();
 
-  void readOnly(boolean readOnly);
-  boolean readOnly() const;
+  void readOnly(bool readOnly);
+  bool readOnly() const;
 
   void font(const Font*);
   const Font* font() const;
 
-  boolean dirty();
-  boolean delete_selection(); //true if nonempty selection
+  bool dirty();
+  bool delete_selection(); //true if nonempty selection
 
   virtual void modified();
 
@@ -224,7 +224,7 @@ protected:
     Coord y, const String& line) const;
   void drawLine(unsigned i, Coord x, Coord y, const String& line) const;
   Coord columnCoord(const String& line, unsigned column) const;
-  boolean snap(const Event& event, unsigned& line, unsigned& column) const;
+  bool snap(const Event& event, unsigned& line, unsigned& column) const;
   Coord width(char ch) const;
   Coord width(const String& line) const;
   Coord width() const;
@@ -235,18 +235,18 @@ protected:
   void damage(const TextLocation& location);
   void damage(const TextRegion& region);
   void damage();
-  boolean damaged(unsigned line) const;
+  bool damaged(unsigned line) const;
   void eraseLine();
   void backspace();
   void insertChars(const char* buffer, unsigned count);
   void expose(unsigned line, unsigned column);
   void expose(unsigned line1, unsigned column1, unsigned line2,
     unsigned column2);
-  void dirty(boolean dirty);
+  void dirty(bool dirty);
   void context_key(char key);
   
   TextBuffer* text_;
-  boolean readOnly_;
+  bool readOnly_;
   Handler* handler_;
 
   TextRegion selection_;
@@ -270,10 +270,10 @@ protected:
   Coord curLowerY_;
   Coord curUpperY_;
 
-  boolean dirty_;
+  bool dirty_;
 
   Coord width_;
-  boolean needWidth_;
+  bool needWidth_;
 
   TextActionArray dirtyActions_;
 
@@ -307,13 +307,13 @@ public:
   void update(Observable*);
 
 protected:
-  boolean needButtons();
+  bool needButtons();
   void addButtons();
   void removeButtons();
 
   TextLine* adjustable_;
-  boolean have_:1;
-  boolean updating_:1;
+  bool have_:1;
+  bool updating_:1;
   PolyGlyph* box_;
 };
 

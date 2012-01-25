@@ -49,8 +49,8 @@ public:
 
     virtual void Handle(Event&);
 
-    virtual void Enable(boolean);
-    boolean Enabled();
+    virtual void Enable(bool);
+    bool Enabled();
 
     virtual void Select();		/* highlight, open, and grab */
     virtual void Unselect();		/* close, unhighlight */
@@ -72,18 +72,18 @@ protected:
     virtual void Busy();
     virtual void Done();
 
-    virtual boolean IsGrabbing(Interactor*);
+    virtual bool IsGrabbing(Interactor*);
 
     void Reparent(Control*, Control* parent);
 private:
     ControlState* state_;
-    boolean enabled_;
+    bool enabled_;
     Control* parent_;
 
     void Init(const char*, Interactor*);
 };
 
-inline boolean Control::Enabled() { return enabled_; }
+inline bool Control::Enabled() { return enabled_; }
 inline Control* Control::ParentControl() { return parent_; }
 
 /*
@@ -98,7 +98,7 @@ public:
     ControlState(unsigned status = 0);
     ~ControlState();
 
-    boolean Active() { return Set(ControlActive); }
+    bool Active() { return Set(ControlActive); }
     void Activate() { Set(ControlActive, true); }
     virtual void Deactivate();
 
@@ -120,8 +120,8 @@ protected:
     ControlState* next;
     ControlState* prev;
 
-    boolean Set(ControlStatus s) { return (status & s) != 0; }
-    void Set(ControlStatus s, boolean b) {
+    bool Set(ControlStatus s) { return (status & s) != 0; }
+    void Set(ControlStatus s, bool b) {
 	status = b ? (status | s) : (status & ~s);
     }
 };

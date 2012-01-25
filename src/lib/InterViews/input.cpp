@@ -58,12 +58,12 @@ private:
     InputHandler* focus_handler_;
     InputHandler* parent_;
     AllocationTable* allocations_;
-    boolean pressed_ : 1;
-    boolean recorded_time_ : 1;
+    bool pressed_ : 1;
+    bool recorded_time_ : 1;
     EventButton button_;
     unsigned long click_time_;
 
-    virtual boolean event(Event&);
+    virtual bool event(Event&);
 
     AllocationInfo& info(Canvas*, const Allocation&);
     AllocationInfo* most_recent_info();
@@ -71,7 +71,7 @@ private:
     void down(Event&);
     void motion(Event&);
     void up(Event&);
-    boolean inside(const Event&, const AllocationInfo&, boolean hit_check = true);
+    bool inside(const Event&, const AllocationInfo&, bool hit_check = true);
 
     static unsigned long threshold_;
 };
@@ -314,7 +314,7 @@ void InputHandler::focus_out() { }
 
 void InputHandler::allocation_changed(Canvas*, const Allocation&) { }
 
-boolean InputHandler::inside(const Event& e) {
+bool InputHandler::inside(const Event& e) {
     InputHandlerImpl& i = *impl_;
     AllocationInfo* info = i.most_recent_info();
     return info != nil && i.inside(e, *info);
@@ -408,8 +408,8 @@ void InputHandlerImpl::reset() {
     recorded_time_ = false;
 }
 
-boolean InputHandlerImpl::event(Event& e) {
-    boolean handled = true;
+bool InputHandlerImpl::event(Event& e) {
+    bool handled = true;
     switch (e.type()) {
     case Event::down:
 	down(e);
@@ -464,7 +464,7 @@ void InputHandlerImpl::motion(Event& e) {
 
 void InputHandlerImpl::up(Event& e) {
 #if carbon
-	extern boolean session_deactivating_;
+	extern bool session_deactivating_;
 	if (session_deactivating_) {
 		input_->release(e);
 		return;
@@ -486,8 +486,8 @@ void InputHandlerImpl::up(Event& e) {
     }
 }
 
-boolean InputHandlerImpl::inside(
-    const Event& event, const AllocationInfo& info, boolean hit_check
+bool InputHandlerImpl::inside(
+    const Event& event, const AllocationInfo& info, bool hit_check
 ) {
     Coord x = event.pointer_x();
     Coord y = event.pointer_y();

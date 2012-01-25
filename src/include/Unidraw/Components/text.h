@@ -51,7 +51,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class TextView : public GraphicView {
@@ -68,9 +68,9 @@ public:
     virtual Graphic* GetGraphic();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    virtual boolean TextChanged();
+    virtual bool TextChanged();
 };
 
 class TextGraphic : public ULabel {
@@ -81,20 +81,20 @@ public:
     void SetLineHeight(int);
     int GetLineHeight();
 
-    virtual boolean operator == (TextGraphic&);
-    virtual boolean operator != (TextGraphic&);
+    virtual bool operator == (TextGraphic&);
+    virtual bool operator != (TextGraphic&);
 
     virtual Graphic* Copy();
 protected:
     virtual void getExtent(float&, float&, float&, float&, float&, Graphic*);
-    virtual boolean contains(PointObj&, Graphic*);
-    virtual boolean intersects(BoxObj&, Graphic*);
+    virtual bool contains(PointObj&, Graphic*);
+    virtual bool intersects(BoxObj&, Graphic*);
     virtual void draw(Canvas*, Graphic*);
 private:
     void CalcBox(Coord&, Coord&, Coord&, Coord&, PSFont*);
-    boolean RotatedIntersects(BoxObj&, Graphic*);
-    boolean TransformedIntersects(BoxObj&, Graphic*);
-    boolean UntransformedIntersects(BoxObj&, Graphic*);
+    bool RotatedIntersects(BoxObj&, Graphic*);
+    bool TransformedIntersects(BoxObj&, Graphic*);
+    bool UntransformedIntersects(BoxObj&, Graphic*);
 protected:
     int _lineHt;
 };
@@ -103,10 +103,10 @@ class PSText : public PostScriptView {
 public:
     PSText(TextComp* = nil);
 
-    virtual boolean Definition(ostream&);
+    virtual bool Definition(ostream&);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     const char* Filter(const char*, int);
 };

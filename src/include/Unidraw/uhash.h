@@ -59,14 +59,14 @@ public:
 
     void First(Iterator&);
     void Next(Iterator&);
-    boolean Done(Iterator);
+    bool Done(Iterator);
 
     UHashElem* GetElem(Iterator);
     UHashElem* Find(void* key);
 protected:
     virtual UHashElem* CreateElem();
     virtual int Hash(void*);
-    virtual boolean Equal(void* key1, void* key2);
+    virtual bool Equal(void* key1, void* key2);
 protected:
     int _nslots;
 private:

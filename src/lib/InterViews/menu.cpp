@@ -55,9 +55,9 @@ private:
     MenuItemList itemlist_;
     GlyphIndex item_;
     float x1_, y1_, x2_, y2_;
-    boolean saved_cursor_;
+    bool saved_cursor_;
     Cursor* cursor_;
-    boolean grabbed_;
+    bool grabbed_;
 
     static Cursor* menu_cursor_;
 
@@ -323,7 +323,7 @@ void Menu::unselect() {
 }
 
 #if carbon
-extern boolean need_motion_on_deactivate_;
+extern bool need_motion_on_deactivate_;
 #define NEEDMOTION(arg) need_motion_on_deactivate_ = arg;
 #else
 #define NEEDMOTION(arg) /**/
@@ -379,7 +379,7 @@ void Menu::drag(const Event& e) {
 
 void Menu::release(const Event& e) {
 #if carbon
-	extern boolean session_deactivating_;
+	extern bool session_deactivating_;
 	if (session_deactivating_) {
 		unselect();
 		return;
@@ -413,7 +413,7 @@ void Menu::release(const Event& e) {
 	TelltaleState* t = mi->state();
 	Action* a = mi->action();
 	if (t != nil && t->test(TelltaleState::is_enabled)) {
-	    boolean act = !t->test(TelltaleState::is_chosen);
+	    bool act = !t->test(TelltaleState::is_chosen);
 	    if (t->test(TelltaleState::is_toggle)) {
 		t->set(TelltaleState::is_chosen, act);
 		act = true;

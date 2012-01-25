@@ -98,7 +98,7 @@ Coord PSFont::size() const { return impl_->size; }
 Coord PSFont::width(long c) const { return impl_->widths[c]; }
 Coord PSFont::width(const char* s, int n) const { return Font::width(s, n); }
 
-boolean PSFont::exists(const char* psname) {
+bool PSFont::exists(const char* psname) {
     char* metrics_file = PSFontImpl::psfile(psname);
     FILE* f = fopen(metrics_file, "r");
     delete [] metrics_file;

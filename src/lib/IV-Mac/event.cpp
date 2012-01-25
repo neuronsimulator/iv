@@ -132,7 +132,7 @@ Window* Event::window() const
 // Pending has been implemented under the Macintosh because it was fairly
 // simple.  The other functions haven't really been considered.
 // -----------------------------------------------------------------------
-boolean Event::pending() const
+bool Event::pending() const
 {
 	return Session::instance()->pending();
 }
@@ -143,7 +143,7 @@ void Event::read()
 	//Session::instance()->read(*this);
 }
 
-boolean Event::read(long , long )
+bool Event::read(long , long )
 {
 	Event::read();
 	//return Session::instance()->read(s, u, *this);
@@ -272,7 +272,7 @@ Handler* Event::grabber() const
 	return grabberList.item(0);   
 }
 
-boolean Event::is_grabbing(Handler* h) const
+bool Event::is_grabbing(Handler* h) const
 {
 	for (ListItr(MAChandlerPtrList) i(grabberList); i.more(); i.next())
 	{
@@ -354,23 +354,23 @@ unsigned int Event::keymask() const
 // to some key/pointer event, in which case the modifiers field of the EvenT
 //  record would hold valid information. 
 // -------------------------------------------------------------------------
-boolean Event::control_is_down() const
+bool Event::control_is_down() const
 	{ return (rep_->getEventRecord()->modifiers & controlKey) ? true : false; }
-boolean Event::shift_is_down() const
+bool Event::shift_is_down() const
 	{ return (rep_->getEventRecord()->modifiers & shiftKey) ? true : false; }
 
 //These aren't called ... so we'll deal with it later
 //
-boolean Event::left_is_down() const
+bool Event::left_is_down() const
 	{ return true;}
-boolean Event::middle_is_down() const
+bool Event::middle_is_down() const
 	{ return false; }
-boolean Event::right_is_down() const
+bool Event::right_is_down() const
 	{ return false; }
 
-boolean Event::capslock_is_down() const
+bool Event::capslock_is_down() const
 	{ return (rep_->getEventRecord()->modifiers & alphaLock) ? true : false; }
-boolean Event::meta_is_down() const
+bool Event::meta_is_down() const
 	{ return false; }
 
 unsigned char Event::keycode() const
@@ -888,7 +888,7 @@ void EventRep::handleCallback(Event& e)
     }
 	if (h != nil)
 	{
-		boolean b = Resource::defer(true);
+		bool b = Resource::defer(true);
 		h->ref();
 		h->event(e);
 		h->unref();

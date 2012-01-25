@@ -45,7 +45,7 @@
 
 ClassId StretchTool::GetClassId () { return STRETCH_TOOL; }
 
-boolean StretchTool::IsA (ClassId id) {
+bool StretchTool::IsA (ClassId id) {
     return STRETCH_TOOL == id || Tool::IsA(id);
 }
 

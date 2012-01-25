@@ -88,7 +88,7 @@ const char* Directory::RealPath (const char* path) {
     return realpath;
 }
 
-boolean Directory::LoadDirectory (const char* name) {
+bool Directory::LoadDirectory (const char* name) {
     char buf[MAX_PATH_LENGTH+2];
     const char* path = buf;
 
@@ -101,7 +101,7 @@ int Directory::Index (const char* name) {
     return rep_->dir == nil ? -1 : rep_->dir->index(s);
 }
 
-boolean Directory::Reset (char* path) {
+bool Directory::Reset (char* path) {
     SysDir* d = SysDir::open(_lib_os(String)(path));
     if (d != nil) {
 	delete rep_->dir;
@@ -111,7 +111,7 @@ boolean Directory::Reset (char* path) {
     return false;
 }
 
-boolean Directory::IsADirectory (const char* path) {
+bool Directory::IsADirectory (const char* path) {
     struct stat filestats;
     stat(path, &filestats);
     return filestats.st_mode & S_IFDIR;
@@ -138,13 +138,13 @@ const char* Directory::Home (const char* name) {
     return (pw == nil) ? nil : pw->pw_dir;
 }
 
-inline boolean DotSlash (const char* path) {
+inline bool DotSlash (const char* path) {
     return 
         path[0] != '\0' && path[0] == '.' &&
         (path[1] == '/' || path[1] == '\0');
 }
 
-inline boolean DotDotSlash (const char* path) {
+inline bool DotDotSlash (const char* path) {
     return 
         path[0] != '\0' && path[1] != '\0' &&
         path[0] == '.' && path[1] == '.' &&
@@ -218,7 +218,7 @@ const char* Directory::ElimDot (const char* path) {
     return newpath;
 }
 
-static boolean CollapsedDotDotSlash (char* path, char*& start) {
+static bool CollapsedDotDotSlash (char* path, char*& start) {
     if (path == start || *(start-1) != '/') {
         return false;
 
@@ -261,7 +261,7 @@ const char* Directory::ElimDotDot (const char* path) {
 const char* Directory::InterpTilde (const char* path) {
     static char realpath[MAX_PATH_LENGTH+1];
     const char* beg = strrchr(path, '~');
-    boolean validTilde = beg != nil && (beg == path || *(beg-1) == '/');
+    bool validTilde = beg != nil && (beg == path || *(beg-1) == '/');
 
     if (validTilde) {
         const char* end = strchr(beg, '/');

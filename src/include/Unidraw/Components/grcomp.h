@@ -71,7 +71,7 @@ public:
     virtual void SetMobility(Mobility);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     GraphicComp(Graphic* = nil);
 
@@ -93,7 +93,7 @@ protected:
     Raster* ReadRaster(istream&);
     void ReadVertices(istream&, Coord*&, Coord*&, int&);
 
-    void WriteBgFilled(boolean, ostream&);
+    void WriteBgFilled(bool, ostream&);
     void WriteBrush(PSBrush*, ostream&);
     void WriteColor(PSColor*, ostream&);
     void WriteFont(PSFont*, ostream&);
@@ -125,7 +125,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     virtual GraphicComp* GetComp(Iterator);
     virtual void SetComp(GraphicComp*, Iterator&);
@@ -144,7 +144,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     GraphicComp* Comp(UList*);
     UList* Elem(Iterator);

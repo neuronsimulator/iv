@@ -37,10 +37,10 @@ class BasicDialog : public Dialog {
 public:
     BasicDialog();
 
-    virtual boolean Accept();
+    virtual bool Accept();
 protected:
     void Forward(Event&);
-    boolean KeyEquiv(Event&);
+    bool KeyEquiv(Event&);
 };
 
 class AcknowledgeDialog : public BasicDialog {
@@ -74,7 +74,7 @@ public:
     void Select();
     void Select(int);
     void Select(int, int);
-    virtual boolean Accept();
+    virtual bool Accept();
 private:
     void Init(const char*, const char*, int width = 0);
 private:
@@ -90,7 +90,7 @@ public:
 
     FileBrowser* GetBrowser();
     const char* FullPath(const char* relpath);
-    virtual boolean Accept();
+    virtual bool Accept();
 private:
     Interactor* AddScroller(Interactor*);
     const char* FullPath(FileBrowser*, const char* relpath = nil);

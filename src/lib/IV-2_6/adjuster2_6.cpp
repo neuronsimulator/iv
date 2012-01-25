@@ -203,7 +203,7 @@ void Adjuster::Reshape(Shape& s) {
     shape->Rigid(s.hshrink, s.hstretch, s.vshrink, s.vstretch);
 }
 
-void Adjuster::Highlight(boolean on) {
+void Adjuster::Highlight(bool on) {
     if (highlighted != on) {
 	highlighted = on;
         Draw();

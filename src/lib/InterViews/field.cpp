@@ -65,7 +65,7 @@ public:
     virtual void pick(Canvas*, const Allocation&, int depth, Hit&);
 
     void press(const Event&);
-    boolean keystroke(const Event&);
+    bool keystroke(const Event&);
     void cursor_on();
     void cursor_off();
     void focus_in();
@@ -217,7 +217,7 @@ void FieldStringEditor::do_rate_scroll(Event& e) {
 #include <X11/keysymdef.h>
 #include <IV-2_6/InterViews/textbuffer.h>
 
-boolean FieldStringEditor::keystroke(const Event& e) {
+bool FieldStringEditor::keystroke(const Event& e) {
   unsigned long keysym = e.keysym();
   switch(keysym) {
   case XK_Right:
@@ -294,7 +294,7 @@ private:
     FieldStringEditor* editor_;
     FieldButton* bs_;
     String text_;
-    boolean cursor_is_on_;
+    bool cursor_is_on_;
     IOHandler* blink_handler_;
     long flash_rate_;
 

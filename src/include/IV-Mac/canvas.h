@@ -82,7 +82,7 @@ public:
     virtual void transformer(const Transformer&);
     virtual const Transformer& transformer() const;
 
-	virtual void push_clipping(boolean all = false);
+	virtual void push_clipping(bool all = false);
     virtual void pop_clipping();
     virtual void clip();
 
@@ -91,12 +91,12 @@ public:
 
     virtual void damage(const Extension&);
     virtual void damage(Coord left, Coord bottom, Coord right, Coord top);
-    virtual boolean damaged(const Extension&) const;
-    virtual boolean damaged( 
+    virtual bool damaged(const Extension&) const;
+    virtual bool damaged( 
 		Coord left, Coord bottom, Coord right, Coord top) const;
     virtual void damage_area(Extension&);
     virtual void damage_all();
-    virtual boolean any_damage() const;
+    virtual bool any_damage() const;
     virtual void restrict_damage(const Extension&);
     virtual void restrict_damage(Coord left, Coord bottom, 
 		Coord right, Coord top);
@@ -149,7 +149,7 @@ protected:
 	WindowRep* win_;				// associated window
 	Display* dpy;					// display
 	
-	boolean transformed_;
+	bool transformed_;
 	MACtransformPtrList* transformers_;
 	
 	Rect* clipping_;

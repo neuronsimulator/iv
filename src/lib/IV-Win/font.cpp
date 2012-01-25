@@ -113,7 +113,7 @@ inline FontRep* defaultFontRep(const char* nm)
 
 static void nofont(const char* name) {
 printf("nofont: |%s|\n", name);
-	static boolean seen = 0;
+	static bool seen = 0;
 	if (!seen) {
 		seen = true;
 		char buf[512];
@@ -180,7 +180,7 @@ FontRep::~FontRep()
 // any attempt is made to fetch metric data.
 // -----------------------------------------------------------------------
 void dpy_setmapmode(HDC);
-boolean FontRep::CheckAssociation()
+bool FontRep::CheckAssociation()
 {
 	if (char_widths_ == nil)
 	{
@@ -190,7 +190,7 @@ boolean FontRep::CheckAssociation()
 		MWassert(hdc);
 //		MWassert( SetMapMode(hdc, MM_TWIPS) );
 		dpy_setmapmode(hdc);
-		boolean success = AssociateWith(hdc);
+		bool success = AssociateWith(hdc);
 		ReleaseDC(hwnd, hdc);
 		return success;
 	}
@@ -201,14 +201,14 @@ boolean FontRep::CheckAssociation()
 // Associates the font metric data with the given device context. 
 // Returns the success of finding all of the data.
 // -------------------------------------------------------------------
-boolean FontRep::AssociateWith(
+bool FontRep::AssociateWith(
 	HDC hdc)						// device context to use (for printer)
 {
   if(hfont_ == nil)
     hfont_ = CreateFontIndirect(&font_);
 
 	HFONT old_fnt;
-	boolean status = false;
+	bool status = false;
 
 	// ---- make this font active for check ----
 	if ((hfont_ != nil) &&
@@ -474,7 +474,7 @@ const Font* Font::lookup(const char* name)
 // to also be compared to the fontlist of available TrueType fonts.  There
 // is no display in MS-Windows (ie no networked graphics), so it is ignored.
 // -----------------------------------------------------------------------
-boolean Font::exists(Display*, const String& name)
+bool Font::exists(Display*, const String& name)
 {
 	FontRep* rep = StringToFont(name);
 	if (rep != nil)
@@ -485,7 +485,7 @@ boolean Font::exists(Display*, const String& name)
 	return false;
 }
 
-boolean Font::exists(Display*, const char* name)
+bool Font::exists(Display*, const char* name)
 {
 	FontRep* rep = StringToFont(String(name));
 	if (rep != nil)
@@ -636,7 +636,7 @@ int Font::index(
 	const char*,
 	int,
 	float /* offset */,
-	boolean /* between */) const
+	bool /* between */) const
 {
 #ifdef IS_IMPLIMENTED
 	 const char* p;
@@ -694,19 +694,19 @@ int Font::Width(const char* s, int len) const {
     return impl_->default_rep()->display_->to_pixels(width(s, len));
 }
 
-int Font::Index(const char* s, int offset, boolean between) const {
+int Font::Index(const char* s, int offset, bool between) const {
     return impl_->default_rep()->display_->to_pixels(
 	index(s, strlen(s), float(offset), between)
     );
 }
 
-int Font::Index(const char* s, int len, int offset, boolean between) const {
+int Font::Index(const char* s, int len, int offset, bool between) const {
     return impl_->default_rep()->display_->to_pixels(
 	index(s, len, float(offset), between)
     );
 }
 
-boolean Font::FixedWidth() const {
+bool Font::FixedWidth() const {
     FontRep* f = impl_->default_rep();
     XFontStruct* xf = f->font_;
     return xf->min_bounds.width == xf->max_bounds.width;
@@ -753,7 +753,7 @@ FontFamilyRep::~FontFamilyRep()
 // the form:
 //    *facename*style*--size*
 // -----------------------------------------------------------------------
-boolean FontFamilyRep::font(
+bool FontFamilyRep::font(
 	int size,
 	const char* style,
 	const char*& name,
@@ -815,12 +815,12 @@ FontFamilyRep* FontFamily::rep(Display*) const
 // translate a desired set of font characteristics into a fontname.  This
 // is a pretty X11-specific thing, but a name is dummied up for use.
 // -----------------------------------------------------------------------
-boolean FontFamily::font(int size, const char*& name, float& scale) const
+bool FontFamily::font(int size, const char*& name, float& scale) const
 {
     return font(size, "normal", name, scale);
 }
 
-boolean FontFamily::font(
+bool FontFamily::font(
 	int size,
 	const char* style,
 	const char*& name,

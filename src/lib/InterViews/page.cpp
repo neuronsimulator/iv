@@ -90,7 +90,7 @@ Coord Page::top() const { return allocation_.top(); }
 Coord Page::x() const { return allocation_.x(); }
 Coord Page::y() const { return allocation_.y(); }
 
-void Page::show(GlyphIndex index, boolean showing) {
+void Page::show(GlyphIndex index, bool showing) {
     PageInfo& info = info_->item_ref(index);
     if (((info.status_ & PageInfoHidden) == 0) != showing) {
         if (canvas_ != nil) {
@@ -104,7 +104,7 @@ void Page::show(GlyphIndex index, boolean showing) {
     }
 }
 
-boolean Page::showing(GlyphIndex index) const {
+bool Page::showing(GlyphIndex index) const {
     return (info_->item_ref(index).status_ & PageInfoHidden) == 0;
 }
 

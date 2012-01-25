@@ -34,7 +34,7 @@
 Manipulator::Manipulator () { }
 Manipulator::~Manipulator () { }
 void Manipulator::Grasp (Event&) { }
-boolean Manipulator::Manipulating (Event&) { return false; }
+bool Manipulator::Manipulating (Event&) { return false; }
 void Manipulator::Effect (Event&) { }
 void Manipulator::SetViewer (Viewer*) { }
 Viewer* Manipulator::GetViewer () { return nil; }

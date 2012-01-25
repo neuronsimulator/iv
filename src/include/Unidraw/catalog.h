@@ -64,15 +64,15 @@ public:
     Catalog(const char*, Creator*, float version = UV_LATEST);
     virtual ~Catalog();
     
-    virtual boolean Save(EditorInfo*, const char*);
-    virtual boolean Save(Component*, const char*);
-    virtual boolean Save(Command*, const char*);
-    virtual boolean Save(Tool*, const char*);
+    virtual bool Save(EditorInfo*, const char*);
+    virtual bool Save(Component*, const char*);
+    virtual bool Save(Command*, const char*);
+    virtual bool Save(Tool*, const char*);
 
-    virtual boolean Retrieve(const char*, EditorInfo*&);
-    virtual boolean Retrieve(const char*, Component*&);
-    virtual boolean Retrieve(const char*, Command*&);
-    virtual boolean Retrieve(const char*, Tool*&);
+    virtual bool Retrieve(const char*, EditorInfo*&);
+    virtual bool Retrieve(const char*, Component*&);
+    virtual bool Retrieve(const char*, Command*&);
+    virtual bool Retrieve(const char*, Tool*&);
 
     virtual void Forget(EditorInfo*, const char* = nil);
     virtual void Forget(Component*, const char* = nil);
@@ -84,17 +84,17 @@ public:
     virtual const char* GetName(Command*);
     virtual const char* GetName(Tool*);
 
-    virtual boolean Valid(const char*, EditorInfo*&);
-    virtual boolean Valid(const char*, Component*&);
-    virtual boolean Valid(const char*, Command*&);
-    virtual boolean Valid(const char*, Tool*&);
+    virtual bool Valid(const char*, EditorInfo*&);
+    virtual bool Valid(const char*, Component*&);
+    virtual bool Valid(const char*, Command*&);
+    virtual bool Valid(const char*, Tool*&);
 
     virtual Component* Copy(Component*);
     virtual Command* Copy(Command*);
     virtual Tool* Copy(Tool*);
 
-    virtual boolean Exists(const char*);
-    virtual boolean Writable(const char*);
+    virtual bool Exists(const char*);
+    virtual bool Writable(const char*);
 
     void SetClipboard(Clipboard*);
     void SetEditorInfo(EditorInfo*);
@@ -147,7 +147,7 @@ public:
     Raster* ReadRaster(istream&);
     void ReadRasterData(Raster*, istream&);
 
-    void WriteBgFilled(boolean, ostream&);
+    void WriteBgFilled(bool, ostream&);
     void WriteBrush(PSBrush*, ostream&);
     void WriteColor(PSColor*, ostream&);
     void WriteFont(PSFont*, ostream&);
@@ -202,10 +202,10 @@ private:
     void* CopyObject(void*, ClassId);
     void Forget(void*, const char* name, NameMap*);
 
-    boolean SaveObject(void*, ClassId, ostream&);
-    boolean RetrieveObject(istream&, void*&);
-    boolean FileSave(void*, ClassId, const char*);
-    boolean FileRetrieve(const char*, void*&);
+    bool SaveObject(void*, ClassId, ostream&);
+    bool RetrieveObject(istream&, void*&);
+    bool FileSave(void*, ClassId, const char*);
+    bool FileRetrieve(const char*, void*&);
 private:
     char* _name;
     Creator* _creator;

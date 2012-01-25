@@ -50,9 +50,9 @@ public:
 
     float pos, sigma;			/* ultimate values */
     float nat, stretch, shrink;
-    boolean combinable;		    /* false for tray elements when calcing */
+    bool combinable;		    /* false for tray elements when calcing */
 				    /* shape of tray having no background */
-    boolean leftBotHalf;	    /* true if represents left/bottom of a */
+    bool leftBotHalf;	    /* true if represents left/bottom of a */
 				    /* pair of elems modelling an interactor */
     Interactor* owner;
     TGlue* tglue;
@@ -212,7 +212,7 @@ protected:
     TList* End();
     TList* Next();
     TList* Prev();
-    boolean Empty();
+    bool Empty();
 
     void SetContents(void*);
     void* GetContents();
@@ -230,7 +230,7 @@ inline TList* TList::Last() { return prev; }
 inline TList* TList::End() { return this; }
 inline TList* TList::Next() { return next; }
 inline TList* TList::Prev() { return prev; }
-inline boolean TList::Empty() { return next == this; }
+inline bool TList::Empty() { return next == this; }
 inline void TList::SetContents(void *o) { object = o; }
 inline void* TList::GetContents() { return object; }
 
@@ -292,8 +292,8 @@ public:
     TElementList(TElement* = nil);
     TElementList* Copy();
 
-    boolean Includes(TElement*);
-    boolean Includes(Interactor*, TElement*&);
+    bool Includes(TElement*);
+    bool Includes(Interactor*, TElement*&);
 
     void Append(TElementList*);
     void Remove(TElementList*);
@@ -301,9 +301,9 @@ public:
     TElementList* End();
     TElementList* Next();
     void Delete(TElement*);
-    boolean Empty();
-    boolean OnlyOne();
-    boolean OnlyTwo();
+    bool Empty();
+    bool OnlyOne();
+    bool OnlyTwo();
     TElement* GetElem();
 };
 
@@ -311,16 +311,16 @@ inline TElement* TElementList::GetElem() { return (TElement*) GetContents();}
 inline void TElementList::Append(TElementList* el) { TList::Append(el); }
 inline void TElementList::Remove(TElementList* el) { TList::Remove(el); }
 inline void TElementList::Delete(TElement* o) { TList::Delete(o); }
-inline boolean TElementList::Includes(TElement* e) { return Find(e) != nil; }
+inline bool TElementList::Includes(TElement* e) { return Find(e) != nil; }
 inline TElementList* TElementList::First() 
     { return (TElementList*) TList::First(); }
 inline TElementList* TElementList::End()
     { return (TElementList*) TList::End(); }
 inline TElementList* TElementList::Next() 
     { return (TElementList*) TList::Next(); }
-inline boolean TElementList::Empty() { return TList::Empty(); }
-inline boolean TElementList::OnlyOne() { return !Empty() && First()==Last(); }
-inline boolean TElementList::OnlyTwo()
+inline bool TElementList::Empty() { return TList::Empty(); }
+inline bool TElementList::OnlyOne() { return !Empty() && First()==Last(); }
+inline bool TElementList::OnlyTwo()
     { return !Empty() && !OnlyOne() && First()->Next() == Last(); }
 
 TElementList::TElementList(TElement* o) : TList(o) { }
@@ -335,7 +335,7 @@ TElementList* TElementList::Copy() {
     return newlist;
 }
 
-boolean TElementList::Includes(Interactor* i, TElement*& e) {
+bool TElementList::Includes(Interactor* i, TElement*& e) {
     register TElementList* t;
 
     for (t = First(); t != End(); t = t->Next()) {
@@ -395,15 +395,15 @@ public:
     
     void Merge(TNode*);
     void Exclude(TElement*);
-    boolean Includes(TElement*);
-    boolean Includes(Alignment&, TElement*);
-    boolean Overlaps(TNode*);
-    boolean Empty();
-    boolean Degenerate(TElement*&);
-    boolean Degenerate(Alignment&, TElement*&);
-    boolean Series(TElement*&, TElement*&);
-    boolean Stub(TElement*&);
-    boolean Loop(TElement*&);
+    bool Includes(TElement*);
+    bool Includes(Alignment&, TElement*);
+    bool Overlaps(TNode*);
+    bool Empty();
+    bool Degenerate(TElement*&);
+    bool Degenerate(Alignment&, TElement*&);
+    bool Series(TElement*&, TElement*&);
+    bool Stub(TElement*&);
+    bool Loop(TElement*&);
 
     void SetPosition(float);
     float GetPosition();
@@ -416,9 +416,9 @@ private:
     void DeleteElements(TElementList*);
 };
 
-inline boolean TNode::Includes(TElement* e) 
+inline bool TNode::Includes(TElement* e) 
     { Alignment dummy; return Includes(dummy, e); }
-inline boolean TNode::Empty() { return lbElems->Empty() && rtElems->Empty(); }
+inline bool TNode::Empty() { return lbElems->Empty() && rtElems->Empty(); }
 inline void TNode::SetPosition(float p) { position = p; }
 inline float TNode::GetPosition() { return position; }
 inline TElementList* TNode::LeftBottomElements() { return lbElems; }
@@ -506,7 +506,7 @@ void TNode::Exclude(TElement* e) {
     rtElems->Delete(e);
 }
 
-boolean TNode::Includes(Alignment& a, TElement* e) {
+bool TNode::Includes(Alignment& a, TElement* e) {
     if (lbElems->Includes(e)) {
 	a = TopRight;
 	return true;
@@ -517,7 +517,7 @@ boolean TNode::Includes(Alignment& a, TElement* e) {
     return false;
 }
 
-boolean TNode::Overlaps(TNode* n) {
+bool TNode::Overlaps(TNode* n) {
     register TElementList* nelems;
     register TElementList* cur;
     
@@ -536,13 +536,13 @@ boolean TNode::Overlaps(TNode* n) {
     return false;
 }
 
-boolean TNode::Degenerate(TElement*& e) {
+bool TNode::Degenerate(TElement*& e) {
     Alignment dummy; 
 
     return Degenerate(dummy, e);
 }
 
-boolean TNode::Degenerate(Alignment& a, TElement*& e) {
+bool TNode::Degenerate(Alignment& a, TElement*& e) {
     if (!lbElems->Empty() && rtElems->Empty()) {
 	if (lbElems->OnlyOne()) {
 	    e = lbElems->First()->GetElem();
@@ -559,7 +559,7 @@ boolean TNode::Degenerate(Alignment& a, TElement*& e) {
     return false;
 }
 
-boolean TNode::Series(TElement*& e1, TElement*& e2) {
+bool TNode::Series(TElement*& e1, TElement*& e2) {
     if (
 	!lbElems->Empty() && !rtElems->Empty() &&
 	lbElems->OnlyOne() && rtElems->OnlyOne()
@@ -573,7 +573,7 @@ boolean TNode::Series(TElement*& e1, TElement*& e2) {
     return false;
 }
 
-boolean TNode::Stub(TElement*& e) {
+bool TNode::Stub(TElement*& e) {
     if (lbElems->OnlyTwo() && rtElems->Empty()) {
 	e = lbElems->First()->GetElem();
 	return true;
@@ -585,7 +585,7 @@ boolean TNode::Stub(TElement*& e) {
     return false;
 }
 
-boolean TNode::Loop(TElement*& e) {
+bool TNode::Loop(TElement*& e) {
     register TElementList* cur;
     
     for (cur = lbElems->First(); cur != lbElems->End(); cur = cur->Next()) {
@@ -606,7 +606,7 @@ public:
 
     void Include(Alignment, TElement*, Alignment = BottomLeft, TElement* =nil);
     void Exclude(TElement*);
-    boolean Includes(TNode*);
+    bool Includes(TNode*);
     void Nodes(TElement*, TNode*&, TNode*&);
     TNode* Node(Alignment, TElement*);
     TNode* OtherNode(TElement*, TNode*);
@@ -619,17 +619,17 @@ public:
     TNodeList* Next();
     TNodeList* Last();
     void Delete(TNode*);
-    boolean Empty();
-    boolean OnlyOne();
+    bool Empty();
+    bool OnlyOne();
     TNode* GetNode();
     
-    boolean Degenerate(TElement*&);
-    boolean FoundTermination(TTermination*&, TNode*, TNode*);
-    boolean FoundSeries(TElement*&, TElement*&, TNode*, TNode*);
-    boolean FoundStub(TElement*&);
-    boolean FoundParallel(TElement*&, TElement*&);
-    boolean FoundCrossover(TElement*&);
-    boolean FoundLoop(TLoop*&);
+    bool Degenerate(TElement*&);
+    bool FoundTermination(TTermination*&, TNode*, TNode*);
+    bool FoundSeries(TElement*&, TElement*&, TNode*, TNode*);
+    bool FoundStub(TElement*&);
+    bool FoundParallel(TElement*&, TElement*&);
+    bool FoundCrossover(TElement*&);
+    bool FoundLoop(TLoop*&);
     void Reverse(TElement*);
     
     void RemoveTermination(TTermination*);
@@ -650,18 +650,18 @@ public:
     void FindElements(Interactor*, TElement*&, TElement*&);
     void FindElement(TGlue*, TElement*&);
 private:
-    boolean FoundParallel(TNode*, TElement*&, TElement*&);
-    boolean FoundParallel(TElementList*, TNode*, TElement*&, TElement*&);
-    boolean FoundCrossover(TNode*, TElement*&);
+    bool FoundParallel(TNode*, TElement*&, TElement*&);
+    bool FoundParallel(TElementList*, TNode*, TElement*&, TElement*&);
+    bool FoundCrossover(TNode*, TElement*&);
     void FindElements(TElementList*, Interactor*, TElement*&, TElement*&);
     void FindElement(TElementList*, TGlue*, TElement*&);
     Alignment Inverse(Alignment);
     void GetElemOtherThan(TElement*, TNode*, Alignment&, TElement*&);
 };
 
-inline boolean TNodeList::Includes(TNode* t) { return TList::Find(t) != nil; }
+inline bool TNodeList::Includes(TNode* t) { return TList::Find(t) != nil; }
 inline TNode* TNodeList::GetNode() { return (TNode*) GetContents(); }
-inline boolean TNodeList::FoundParallel(
+inline bool TNodeList::FoundParallel(
     TNode* n, TElement*& e1, TElement*& e2
 ) {
     return    
@@ -675,8 +675,8 @@ inline TNodeList* TNodeList::First() { return (TNodeList*) TList::First(); }
 inline TNodeList* TNodeList::End() { return (TNodeList*) TList::End(); }
 inline TNodeList* TNodeList::Next() { return (TNodeList*) TList::Next(); }
 inline TNodeList* TNodeList::Last() { return (TNodeList*) TList::Last(); }
-inline boolean TNodeList::Empty() { return TList::Empty(); }
-inline boolean TNodeList::OnlyOne() { return !Empty() && First() == Last(); }
+inline bool TNodeList::Empty() { return TList::Empty(); }
+inline bool TNodeList::OnlyOne() { return !Empty() && First() == Last(); }
 inline Alignment TNodeList::Inverse(Alignment a)
     { return (a == BottomLeft) ? TopRight : BottomLeft; }
 
@@ -744,7 +744,7 @@ void TNodeList::Exclude(TElement* e) {
     }
 }
 
-boolean TNodeList::Degenerate(TElement*& e) {
+bool TNodeList::Degenerate(TElement*& e) {
     TElement* alt;
     TNode* nfirst = First()->GetNode();
     TNode* nlast = Last()->GetNode();
@@ -755,7 +755,7 @@ boolean TNodeList::Degenerate(TElement*& e) {
 	e == alt;
 }
 
-boolean TNodeList::FoundTermination(
+bool TNodeList::FoundTermination(
     TTermination*& term, TNode* lbMagic, TNode* rtMagic
 ) {
     register TNodeList* t;
@@ -781,7 +781,7 @@ boolean TNodeList::FoundTermination(
     return false;
 }
 
-boolean TNodeList::FoundSeries(
+bool TNodeList::FoundSeries(
     TElement*& e1, TElement*& e2, TNode* lbMagic, TNode* rtMagic
 ) {
     register TNodeList* t;
@@ -796,7 +796,7 @@ boolean TNodeList::FoundSeries(
     return false;
 }
 
-boolean TNodeList::FoundStub(TElement*& e) {
+bool TNodeList::FoundStub(TElement*& e) {
     register TNodeList* t;
     TNode* node;
     
@@ -809,7 +809,7 @@ boolean TNodeList::FoundStub(TElement*& e) {
     return false;
 }
 
-boolean TNodeList::FoundParallel(TElement*& e1, TElement*& e2) {
+bool TNodeList::FoundParallel(TElement*& e1, TElement*& e2) {
     register TNodeList* t;
     TNode* node;
     
@@ -822,7 +822,7 @@ boolean TNodeList::FoundParallel(TElement*& e1, TElement*& e2) {
     return false;
 }
 
-boolean TNodeList::FoundParallel(
+bool TNodeList::FoundParallel(
     TElementList* elems, TNode* n, TElement*& e1, TElement*& e2
 ) {
     register TElementList* cur, *test;
@@ -849,7 +849,7 @@ boolean TNodeList::FoundParallel(
     return false;
 }
 
-boolean TNodeList::FoundCrossover(TElement*& e) {
+bool TNodeList::FoundCrossover(TElement*& e) {
     register TNodeList* t;
     TNode* node;
     
@@ -862,7 +862,7 @@ boolean TNodeList::FoundCrossover(TElement*& e) {
     return false;
 }
 
-boolean TNodeList::FoundLoop(TLoop*& loop) {
+bool TNodeList::FoundLoop(TLoop*& loop) {
     register TNodeList* t;
     TElement* looped, *attached;
     Alignment toAttached;
@@ -879,7 +879,7 @@ boolean TNodeList::FoundLoop(TLoop*& loop) {
     return false;
 }
 
-boolean TNodeList::FoundCrossover(TNode* n, TElement*& e1) {
+bool TNodeList::FoundCrossover(TNode* n, TElement*& e1) {
     TElementList* lbElems, *rtElems, *cur, *test;
     TElement* e2;
     TNode* ncur, *ntest;
@@ -1350,11 +1350,11 @@ void TSolver::DeleteNodesAndElements(TNodeList* nodes) {
     delete merged;
 }
 
-inline boolean HAlignment (Alignment a) {
+inline bool HAlignment (Alignment a) {
     return a != Bottom && a != VertCenter && a != Top;
 }
 
-inline boolean VAlignment (Alignment a) {
+inline bool VAlignment (Alignment a) {
     return a != Left && a != HorizCenter && a != Right;
 }
 
@@ -1860,7 +1860,7 @@ Interactor* TSolver::BgFilter(Interactor* i) {
 class TrayElement {
 public:
     Interactor* child;
-    boolean visible;
+    bool visible;
     TrayElement* next;
 };
 
@@ -1892,7 +1892,7 @@ TGlue::~TGlue() {
 
 /*************************************************************************/
 
-inline boolean Tray::TrayOrBg(Interactor* i) { return i == this || i == bg; }
+inline bool Tray::TrayOrBg(Interactor* i) { return i == this || i == bg; }
 
 Tray::Tray(Interactor* b) {
     Init(b);
@@ -1963,7 +1963,7 @@ void Tray::Reconfig() {
     CalcShape();
 }
 
-void Tray::DoInsert(Interactor* i, boolean, IntCoord&, IntCoord&) {
+void Tray::DoInsert(Interactor* i, bool, IntCoord&, IntCoord&) {
     ++nelements;
     register TrayElement* e = new TrayElement;
     e->child = i;
@@ -2029,7 +2029,7 @@ void Tray::Resize() {
     }
 }
 
-boolean Tray::AlreadyInserted(Interactor* i) {
+bool Tray::AlreadyInserted(Interactor* i) {
     register TrayElement* e;
 
     if (i == this || i == bg) {

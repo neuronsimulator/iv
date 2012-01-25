@@ -42,7 +42,7 @@ public:
 #pragma __static_class
 #endif
     Display* display_;
-    boolean modified_;
+    bool modified_;
     Coord left_;
     Coord bottom_;
     Coord right_;

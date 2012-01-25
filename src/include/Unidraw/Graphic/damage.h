@@ -45,7 +45,7 @@ public:
     Damage(Canvas* = nil, Painter* = nil, Graphic* = nil);
     virtual ~Damage();
     
-    virtual boolean Incurred();
+    virtual bool Incurred();
     virtual void Added(Graphic*);
     virtual void Incur(Graphic*);
     virtual void Incur(BoxObj&);
@@ -74,7 +74,7 @@ protected:
     void FirstAddition(Iterator&);
 
     void Next(Iterator&);
-    boolean Done(Iterator);
+    bool Done(Iterator);
 
     UList* Elem(Iterator);
 

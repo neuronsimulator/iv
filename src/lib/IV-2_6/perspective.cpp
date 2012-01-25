@@ -125,7 +125,7 @@ void Perspective::Update() {
     }
 }
 
-boolean Perspective::operator ==(Perspective& p) {
+bool Perspective::operator ==(Perspective& p) {
     return
 	x0 == p.x0 && y0 == p.y0 &&
 	width == p.width && height == p.height &&
@@ -135,7 +135,7 @@ boolean Perspective::operator ==(Perspective& p) {
 	lx == p.lx && ly == p.ly;
 }
 
-boolean Perspective::operator !=(Perspective& p) {
+bool Perspective::operator !=(Perspective& p) {
     return
 	x0 != p.x0 || y0 != p.y0 ||
 	width != p.width || height != p.height ||

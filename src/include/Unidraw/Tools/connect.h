@@ -40,7 +40,7 @@ public:
 
     virtual Tool* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     ConnectorView* _source;
 };

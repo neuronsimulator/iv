@@ -62,7 +62,7 @@ public:
 
     virtual void Handle(Event&);
     virtual void HandleInput(Event&);
-    virtual void InsideFrame(boolean);
+    virtual void InsideFrame(bool);
 protected:
     ShowFrame(
 	Interactor* i, int l, int b, int r, int h
@@ -83,7 +83,7 @@ public:
     TitleFrame(const char*, Banner*, Interactor*, int width = 1);
     virtual ~TitleFrame();
 
-    virtual void InsideFrame(boolean);
+    virtual void InsideFrame(bool);
 protected:
     Banner* banner;
 
@@ -98,11 +98,11 @@ public:
     BorderFrame(const char*, Interactor* = nil, int width = 1);
     virtual ~BorderFrame();
 
-    virtual void InsideFrame(boolean);
+    virtual void InsideFrame(bool);
 protected:
     virtual void Redraw(IntCoord, IntCoord, IntCoord, IntCoord);
 private:
-    boolean normal;
+    bool normal;
 
     void Init();
 };

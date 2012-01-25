@@ -97,11 +97,11 @@ int rpcbuf::fd() {
     return _fd;
 }
 
-boolean rpcbuf::opened() {
+bool rpcbuf::opened() {
     return _opened;
 }
 
-boolean rpcbuf::nonblocking() {
+bool rpcbuf::nonblocking() {
     return _nonblocking;
 }
 
@@ -288,7 +288,7 @@ rpcbuf* rpcbuf::close() {
 
 // Set or clear non-blocking I/O on the file descriptor.
 
-rpcbuf* rpcbuf::nonblocking(boolean nonblocking) {
+rpcbuf* rpcbuf::nonblocking(bool nonblocking) {
     if (!_opened) {
 	error("rpcbuf::nonblocking: not using a file number yet");
 	return nil;
@@ -317,7 +317,7 @@ rpcbuf* rpcbuf::nonblocking(boolean nonblocking) {
 
 // Set or clear printing of system error messages.
 
-rpcbuf* rpcbuf::verbose(boolean verbose) {
+rpcbuf* rpcbuf::verbose(bool verbose) {
     _verbose = verbose;
     return this;
 }
@@ -558,7 +558,7 @@ int rpcbuf::doallocate() {
 
 // Expand the get area to make room for a large incoming request.
 
-boolean rpcbuf::expand_g(int newsize) {
+bool rpcbuf::expand_g(int newsize) {
     char* get = new char[newsize];
     if (!get) {
 	return false;
@@ -576,7 +576,7 @@ boolean rpcbuf::expand_g(int newsize) {
 // Expand the put area to make room for additional data to be appended
 // to an outgoing request.
 
-boolean rpcbuf::expand_p() {
+bool rpcbuf::expand_p() {
     int newsize = (epptr() - pbase()) * 2;
     char* put = new char[newsize];
     if (!put) {

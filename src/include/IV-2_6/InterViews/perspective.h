@@ -30,7 +30,7 @@
 #ifndef iv2_6_perspective_h
 #define iv2_6_perspective_h
 
-#include <InterViews/boolean.h>
+#include <InterViews/enter-scope.h>
 #include <InterViews/coord.h>
 #include <InterViews/resource.h>
 
@@ -56,8 +56,8 @@ public:
     void Detach(Interactor*);
     void Update();
 
-    boolean operator ==(Perspective&);
-    boolean operator !=(Perspective&);
+    bool operator ==(Perspective&);
+    bool operator !=(Perspective&);
     Perspective& operator =(Perspective&);
 protected:
     ViewList* views;	/* interactors that access the perspective */

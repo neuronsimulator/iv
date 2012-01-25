@@ -103,7 +103,7 @@ void Clipboard::First (Iterator& i) { i.SetValue(_comps->First()); }
 void Clipboard::Last (Iterator& i) { i.SetValue(_comps->Last()); }
 void Clipboard::Next (Iterator& i) { i.SetValue(Elem(i)->Next()); }
 void Clipboard::Prev (Iterator& i) { i.SetValue(Elem(i)->Prev()); }
-boolean Clipboard::Done (Iterator i) { return Elem(i) == _comps->End(); }
+bool Clipboard::Done (Iterator i) { return Elem(i) == _comps->End(); }
 GraphicComp* Clipboard::Comp (UList* r) { return (GraphicComp*) (*r)(); }
 GraphicComp* Clipboard::GetComp (Iterator i) { return Comp(Elem(i)); }
 
@@ -111,7 +111,7 @@ void Clipboard::SetComp (GraphicComp* gc, Iterator& i) {
     i.SetValue(_comps->Find(gc));
 }
 
-boolean Clipboard::Includes (GraphicComp* gc) {
+bool Clipboard::Includes (GraphicComp* gc) {
     Iterator i;
     
     for (First(i); !Done(i); Next(i)) {
@@ -143,4 +143,4 @@ void Clipboard::Remove (Iterator& i) {
 
 void Clipboard::Remove (GraphicComp* comp) { _comps->Delete(comp); }
 Clipboard::~Clipboard () { delete _comps; }
-boolean Clipboard::IsEmpty () { return _comps->IsEmpty(); }
+bool Clipboard::IsEmpty () { return _comps->IsEmpty(); }

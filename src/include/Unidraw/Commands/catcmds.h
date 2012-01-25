@@ -43,7 +43,7 @@ public:
     virtual ~NewCompCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     Component* GetPrototype();
 
@@ -51,7 +51,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     Component* prototype_;
 };
@@ -64,11 +64,11 @@ public:
     RevertCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class ViewCompCmd : public Command {
@@ -78,11 +78,11 @@ public:
     virtual ~ViewCompCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     FileChooser* chooser_;
 };
@@ -93,11 +93,11 @@ public:
     SaveCompCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class SaveCompAsCmd : public Command {
@@ -107,11 +107,11 @@ public:
     virtual ~SaveCompAsCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     FileChooser* chooser_;
 };
@@ -123,11 +123,11 @@ public:
     virtual ~PrintCmd();
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     int print(const char* print_cmd, const char* file);
 protected:
@@ -140,11 +140,11 @@ public:
     QuitCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #endif

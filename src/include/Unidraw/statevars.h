@@ -48,7 +48,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     char* _name;
 };
@@ -68,7 +68,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     const char* CatalogName(Component*);
 private:
@@ -77,11 +77,11 @@ private:
 
 class ModifStatusVar : public StateVar {
 public:
-    ModifStatusVar(Component* = nil, boolean = false);
+    ModifStatusVar(Component* = nil, bool = false);
     ~ModifStatusVar();
 
-    virtual boolean GetModifStatus();
-    virtual void SetModifStatus(boolean);
+    virtual bool GetModifStatus();
+    virtual void SetModifStatus(bool);
     virtual Component* GetComponent();
     virtual void SetComponent(Component*);
 
@@ -91,7 +91,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     void modified(int);
 private:
@@ -113,17 +113,17 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     float _magnif;
 };
 
 class GravityVar : public StateVar {
 public:
-    GravityVar(boolean = false);
+    GravityVar(bool = false);
 
-    virtual boolean IsActive();
-    virtual void Activate(boolean);
+    virtual bool IsActive();
+    virtual void Activate(bool);
 
     virtual StateVar& operator = (StateVar&);
 
@@ -131,7 +131,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     int _active;
 };
@@ -150,7 +150,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     PSFont* _psfont;
 };
@@ -169,7 +169,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     PSBrush* _psbrush;
 };
@@ -188,7 +188,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     PSPattern* _pspattern;
 };
@@ -208,7 +208,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 private:
     PSColor* _psfgcolor, *_psbgcolor;
 };

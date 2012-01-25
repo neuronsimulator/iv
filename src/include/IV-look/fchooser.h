@@ -44,7 +44,7 @@ protected:
     FileChooserAction();
     virtual ~FileChooserAction();
 public:
-    virtual void execute(FileChooser*, boolean accept);
+    virtual void execute(FileChooser*, bool accept);
 };
 
 #if 1 || defined(__STDC__) || defined(__ANSI_CPP__)
@@ -56,13 +56,13 @@ public:
 #endif
 
 #define declareFileChooserCallback(T) \
-typedef void (T::*FileChooserMemberFunction(T))(FileChooser*, boolean); \
+typedef void (T::*FileChooserMemberFunction(T))(FileChooser*, bool); \
 class FileChooserCallback(T) : public FileChooserAction { \
 public: \
     FileChooserCallback(T)(T*, FileChooserMemberFunction(T)); \
     virtual ~FileChooserCallback(T)(); \
 \
-    virtual void execute(FileChooser*, boolean accept); \
+    virtual void execute(FileChooser*, bool accept); \
 private: \
     T* obj_; \
     FileChooserMemberFunction(T) func_; \
@@ -78,7 +78,7 @@ FileChooserCallback(T)::FileChooserCallback(T)( \
 \
 FileChooserCallback(T)::~FileChooserCallback(T)() { } \
 \
-void FileChooserCallback(T)::execute(FileChooser* f, boolean accept) { \
+void FileChooserCallback(T)::execute(FileChooser* f, bool accept) { \
     FileChooserMemberFunction(T) pf = func_; \
     (obj_->*pf)(f, accept); \
 }
@@ -93,7 +93,7 @@ public:
     virtual const String* selected() const;
     virtual const String* dir() const;
     virtual void reread();
-    virtual void dismiss(boolean);
+    virtual void dismiss(bool);
 private:
     FileChooserImpl* impl_;
 };

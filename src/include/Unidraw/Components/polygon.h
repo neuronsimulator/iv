@@ -41,7 +41,7 @@ public:
     virtual void Read(istream&);
     virtual void Write(ostream&);
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 class PolygonView : public VerticesView {
@@ -53,9 +53,9 @@ public:
     PolygonComp* GetPolygonComp();
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
-    virtual boolean VertexChanged();
+    virtual bool VertexChanged();
 };
 
 class PSPolygon : public PSVertices {
@@ -63,7 +63,7 @@ public:
     PSPolygon(PolygonComp* = nil);
 
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 protected:
     virtual const char* Name();
 };

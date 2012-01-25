@@ -45,7 +45,7 @@
 
 ClassId ScaleTool::GetClassId () { return SCALE_TOOL; }
 
-boolean ScaleTool::IsA (ClassId id) {
+bool ScaleTool::IsA (ClassId id) {
     return SCALE_TOOL == id || Tool::IsA(id);
 }
 

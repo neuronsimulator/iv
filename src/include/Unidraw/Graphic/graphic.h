@@ -75,8 +75,8 @@ public:
     void GetBox(Coord&, Coord&, Coord&, Coord&);
     void GetBox(BoxObj&);
     virtual void GetCenter(float&, float&);    
-    virtual boolean Contains(PointObj&);
-    virtual boolean Intersects(BoxObj&);
+    virtual bool Contains(PointObj&);
+    virtual bool Intersects(BoxObj&);
 
     void SetTag(void*);
     void* GetTag();
@@ -86,7 +86,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     virtual Graphic* GetGraphic(Iterator);
     virtual void SetGraphic(Graphic*, Iterator&);
@@ -136,8 +136,8 @@ protected:
     void getBounds(float&, float&, float&, float&, Graphic* gs);
     void getBox(Coord&, Coord&, Coord&, Coord&, Graphic* gs);
     void getBox(BoxObj&, Graphic* gs);
-    virtual boolean contains(PointObj&, Graphic* gs);
-    virtual boolean intersects(BoxObj&, Graphic* gs);
+    virtual bool contains(PointObj&, Graphic* gs);
+    virtual bool intersects(BoxObj&, Graphic* gs);
 /*
  * Parent-related operations.
  */
@@ -151,7 +151,7 @@ protected:
  */
     void cachingOn();
     void cachingOff();
-    virtual boolean extentCached();
+    virtual bool extentCached();
     virtual void uncacheExtent();
     virtual void uncacheParents();
     virtual void uncacheChildren();
@@ -204,10 +204,10 @@ protected:
     void getExtentGraphic(
         Graphic*, float&, float&, float&, float&, float&, Graphic* gs
     );
-    boolean containsGraphic(Graphic*, PointObj&, Graphic* gs);
-    boolean intersectsGraphic(Graphic*, BoxObj&, Graphic* gs);
+    bool containsGraphic(Graphic*, PointObj&, Graphic* gs);
+    bool intersectsGraphic(Graphic*, BoxObj&, Graphic* gs);
 
-    boolean extentCachedGraphic(Graphic*);
+    bool extentCachedGraphic(Graphic*);
     void uncacheExtentGraphic(Graphic*);
     void uncacheParentsGraphic(Graphic*);
     void uncacheChildrenGraphic(Graphic*);
@@ -220,7 +220,7 @@ protected:
     void concatGraphic(Graphic*, Graphic*, Graphic*, Graphic*);
 protected:
     static Transformer* _identity;  /* identity matrix */
-    static boolean _caching;	    /* state of bounding box caching */
+    static bool _caching;	    /* state of bounding box caching */
     static Painter* _p;
     static BoxObj* _clipping;       /* current painter clipping, if any */
 
@@ -301,15 +301,15 @@ inline void Graphic::getExtentGraphic (
     Graphic* g, float& l, float& b, float& r, float& t, float& tol, Graphic* gs
 ) { g->getExtent(l, b, r, t, tol, gs); }
 
-inline boolean Graphic::containsGraphic (Graphic* g, PointObj& p, Graphic* gs){
+inline bool Graphic::containsGraphic (Graphic* g, PointObj& p, Graphic* gs){
     return g->contains(p, gs);
 }
 
-inline boolean Graphic::intersectsGraphic (Graphic* g, BoxObj& b, Graphic* gs){
+inline bool Graphic::intersectsGraphic (Graphic* g, BoxObj& b, Graphic* gs){
     return g->intersects(b, gs);
 }
 
-inline boolean Graphic::extentCachedGraphic (Graphic* g) {
+inline bool Graphic::extentCachedGraphic (Graphic* g) {
     return g->extentCached();
 }
 

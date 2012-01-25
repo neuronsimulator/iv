@@ -37,7 +37,7 @@
 #include <math.h>
 
 BevelFrame::BevelFrame(
-    Glyph* g, Coord t, float x, float y, boolean hmargin, boolean vmargin
+    Glyph* g, Coord t, float x, float y, bool hmargin, bool vmargin
 ) : MonoGlyph(g) {
     thickness_ = t;
     xalign_ = x;
@@ -167,7 +167,7 @@ void BevelFrame::allocate_body(Glyph* g, Coord t, Allocation& a) const {
 Bevel::Bevel(
     Glyph* g, Beveler b,
     const Color* light, const Color* medium, const Color* dark,
-    Coord thickness, float x, float y, boolean hmargin, boolean vmargin
+    Coord thickness, float x, float y, bool hmargin, bool vmargin
 ) : BevelFrame(g, thickness, x, y, hmargin, vmargin) {
     beveler_ = b;
     light_ = light;

@@ -104,7 +104,7 @@ void Message::Redraw (IntCoord l, IntCoord b, IntCoord r, IntCoord t) {
     output->NoClip();
 }
 
-void Message::Highlight (boolean b) {
+void Message::Highlight (bool b) {
     if (highlighted != b) {
 	highlighted = b;
 	Draw();

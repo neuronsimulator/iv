@@ -70,7 +70,7 @@ private:
     IntCoord left, bottom, right, top;
     IntCoord prevl, prevb, prevr, prevt;	// for smart update
     IntCoord llim, blim, rlim, tlim;	// sliding limits
-    boolean constrained, syncScroll;
+    bool constrained, syncScroll;
     int moveType;
     IntCoord origx, origy;
 
@@ -81,7 +81,7 @@ private:
     IntCoord SliderY(IntCoord);
     void CalcLimits(Event&);		// calculate sliding limits
     void SizeKnob();			// calculate size of slider knob
-    boolean Inside(Event&);		// true if inside slider knob
+    bool Inside(Event&);		// true if inside slider knob
     void Constrain(Event&);		// constrain slider knob motion
     void Move(IntCoord dx, IntCoord dy);// move view to reflect slider position
     void Slide(Event&);			// rubberband rect while mousing

@@ -44,7 +44,7 @@
 
 ClassId MoveTool::GetClassId () { return MOVE_TOOL; }
 
-boolean MoveTool::IsA (ClassId id) {
+bool MoveTool::IsA (ClassId id) {
     return MOVE_TOOL == id || Tool::IsA(id);
 }
 

@@ -54,7 +54,7 @@ public:
     virtual ~ManipGroup();
 
     virtual void Grasp(Event&);
-    virtual boolean Manipulating(Event&);
+    virtual bool Manipulating(Event&);
     virtual void Effect(Event&);
 
     virtual void SetViewer(Viewer*);
@@ -67,7 +67,7 @@ public:
     virtual void Last(Iterator&);
     virtual void Next(Iterator&);
     virtual void Prev(Iterator&);
-    virtual boolean Done(Iterator);
+    virtual bool Done(Iterator);
 
     virtual Manipulator* GetManip(Iterator);
     virtual void SetManip(Manipulator*, Iterator&);
@@ -103,7 +103,7 @@ public:
     virtual ~DragManip();
     
     virtual void Grasp(Event&);
-    virtual boolean Manipulating(Event&);
+    virtual bool Manipulating(Event&);
     virtual void Effect(Event&);
 
     virtual void SetViewer(Viewer*);
@@ -128,7 +128,7 @@ private:
     Transformer* _relative;
     Tool* _tool;
     DragConstraint _constraint;
-    boolean _origPreset;
+    bool _origPreset;
     Coord _origx, _origy;
     Event _grasp_e;
 };    
@@ -142,7 +142,7 @@ public:
         DragConstraint = None
     );
 
-    virtual boolean Manipulating(Event&);
+    virtual bool Manipulating(Event&);
 
     GrowingVertices* GetGrowingVertices();
 };
@@ -151,7 +151,7 @@ class ConnectManip : public DragManip {
 public:
     ConnectManip(Viewer*, Rubberband*, Transformer* = nil, Tool* = nil);
 
-    virtual boolean Manipulating(Event&);
+    virtual bool Manipulating(Event&);
     ConnectorView* GetTarget();
 protected:
     ConnectorView* _target;
@@ -172,7 +172,7 @@ public:
     virtual ~TextManip();
 
     virtual void Grasp(Event&);
-    virtual boolean Manipulating(Event&);
+    virtual bool Manipulating(Event&);
     virtual void Effect(Event&);
 
     virtual void SetViewer(Viewer*);
@@ -190,7 +190,7 @@ public:
 
     const Event& GraspEvent();
 
-    virtual boolean HandleKey(Event&);
+    virtual bool HandleKey(Event&);
 
     int Dot();
     int Mark();
@@ -217,18 +217,18 @@ public:
     void SelectAll();
     void Select(int dot, int mark);
 
-    boolean Contains(Coord, Coord);
+    bool Contains(Coord, Coord);
     int Locate(Coord, Coord);
 private:
     void Init(
-        Viewer*, Painter*, Coord, Coord, Tool*, boolean,const char* =nil,int =0
+        Viewer*, Painter*, Coord, Coord, Tool*, bool,const char* =nil,int =0
     );
     void InitTextDisplay(const char*, int);
     void PlaceTextDisplay (Coord, Coord);
     void CheckBuf(int more);
 private:
-    boolean _prepositioned;
-    boolean _selecting;
+    bool _prepositioned;
+    bool _selecting;
     Coord _xpos, _ypos;
     Viewer* _viewer;
     Selection* _selection;
@@ -236,7 +236,7 @@ private:
     Tool* _tool;
     PSFont* _font;
     Coord _lineHt, _tabWidth;
-    boolean _multiline;
+    bool _multiline;
     TextBuffer* _text;
     TextDisplay* _display;
     char* _buf;

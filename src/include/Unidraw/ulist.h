@@ -37,7 +37,7 @@ public:
     UList(void* = nil);
     virtual ~UList();
 
-    boolean IsEmpty();
+    bool IsEmpty();
     void Append(UList*);
     void Prepend(UList*);
     void Remove(UList*);
@@ -57,7 +57,7 @@ protected:
     UList* _prev;
 };
 
-inline boolean UList::IsEmpty () { return _next == this; }
+inline bool UList::IsEmpty () { return _next == this; }
 inline UList* UList::First () { return _next; }
 inline UList* UList::Last () { return _prev; }
 inline UList* UList::End () { return this; }

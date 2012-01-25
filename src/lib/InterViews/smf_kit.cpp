@@ -206,7 +206,7 @@ public:
     SMFKitFrame(
 	Glyph*, TelltaleState*, SMFKitInfo*, Coord thickness,
 	float xalign = 0.5, float yalign = 0.5,
-	boolean hmargin = true, boolean vmargin = true
+	bool hmargin = true, bool vmargin = true
     );
     virtual ~SMFKitFrame();
 
@@ -359,7 +359,7 @@ private:
     SMFKitImpl(SMFKit*);
     ~SMFKitImpl();
 
-    boolean match(const Style&, const Style&, const char*);
+    bool match(const Style&, const Style&, const char*);
     void make_thumb(Slider*, DimensionName, SMFKitInfo*);
 };
 
@@ -595,7 +595,7 @@ Glyph* SMFKit::scroll_bar_look(DimensionName d, Adjustable* a) const {
     Glyph* g, * box, * mover1, * mover2;
     Slider* slider;
     Coord xspan, yspan;
-    boolean hmargin, vmargin;
+    bool hmargin, vmargin;
     switch (d) {
     case Dimension_X:
 	xspan = info->mover_size();
@@ -694,11 +694,11 @@ SMFKitImpl::~SMFKitImpl() {
     }
 }
 
-boolean SMFKitImpl::match(const Style& s1, const Style& s2, const char* n) {
+bool SMFKitImpl::match(const Style& s1, const Style& s2, const char* n) {
     String name(n);
     String v1, v2;
-    boolean b1 = s1.find_attribute(n, v1);
-    boolean b2 = s2.find_attribute(n, v2);
+    bool b1 = s1.find_attribute(n, v1);
+    bool b2 = s2.find_attribute(n, v2);
     return (!b1 && !b2) || (b1 && b2 && v1 == v2);
 }
 
@@ -830,7 +830,7 @@ void SMFKitInfo::update() {
 
 SMFKitFrame::SMFKitFrame(
     Glyph* g, TelltaleState* t, SMFKitInfo* info, Coord thickness,
-    float xalign, float yalign, boolean hmargin, boolean vmargin
+    float xalign, float yalign, bool hmargin, bool vmargin
 ) : BevelFrame(g, thickness, xalign, yalign, hmargin, vmargin) {
     state_ = t;
     Resource::ref(state_);

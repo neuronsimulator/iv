@@ -43,7 +43,7 @@
 ConnectTool::ConnectTool (ControlInfo* m) : Tool(m) { }
 ClassId ConnectTool::GetClassId () { return CONNECT_TOOL; }
 
-boolean ConnectTool::IsA (ClassId id) {
+bool ConnectTool::IsA (ClassId id) {
     return CONNECT_TOOL == id || Tool::IsA(id);
 }
 

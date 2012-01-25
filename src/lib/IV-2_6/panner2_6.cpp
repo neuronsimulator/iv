@@ -210,7 +210,7 @@ void Slider::Move (IntCoord dx, IntCoord dy) {
     shown->cury += dy;
 }
 
-boolean Slider::Inside (Event& e) {
+bool Slider::Inside (Event& e) {
     return e.x > left && e.x < right && e.y > bottom && e.y < top;
 }
 
@@ -262,7 +262,7 @@ void Slider::Constrain (Event& e) {
 
 void Slider::Slide (Event& e) {
     IntCoord newleft, newbot, dummy;
-    boolean control = e.control;
+    bool control = e.control;
 
     Listen(allEvents);
     SlidingRect r(output, canvas, left, bottom, right, top, e.x, e.y);

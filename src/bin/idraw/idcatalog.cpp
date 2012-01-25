@@ -79,32 +79,32 @@ IdrawCatalog::IdrawCatalog (
     _psversion = PSV_ORIGINAL;
 }
 
-boolean IdrawCatalog::Save (EditorInfo* o, const char* name) {
+bool IdrawCatalog::Save (EditorInfo* o, const char* name) {
     return Catalog::Save(o, name);
 }
 
-boolean IdrawCatalog::Save (Command* o, const char* name) {
+bool IdrawCatalog::Save (Command* o, const char* name) {
     return Catalog::Save(o, name);
 }
 
-boolean IdrawCatalog::Save (Tool* o, const char* name) {
+bool IdrawCatalog::Save (Tool* o, const char* name) {
     return Catalog::Save(o, name);
 }
 
-boolean IdrawCatalog::Retrieve (const char* name, EditorInfo*& o) {
+bool IdrawCatalog::Retrieve (const char* name, EditorInfo*& o) {
     return Catalog::Retrieve(name, o);
 }
 
-boolean IdrawCatalog::Retrieve (const char* name, Command*& o) {
+bool IdrawCatalog::Retrieve (const char* name, Command*& o) {
     return Catalog::Retrieve(name, o);
 }
 
-boolean IdrawCatalog::Retrieve (const char* name, Tool*& o) {
+bool IdrawCatalog::Retrieve (const char* name, Tool*& o) {
     return Catalog::Retrieve(name, o);
 }
 
-boolean IdrawCatalog::Save (Component* comp, const char* name) {
-    boolean ok = false;
+bool IdrawCatalog::Save (Component* comp, const char* name) {
+    bool ok = false;
 
     if (UnidrawFormat(name)) {
         ok = Catalog::Save(comp, name);
@@ -133,7 +133,7 @@ boolean IdrawCatalog::Save (Component* comp, const char* name) {
     return ok;
 }
 
-boolean IdrawCatalog::Retrieve (const char* name, Component*& comp) {
+bool IdrawCatalog::Retrieve (const char* name, Component*& comp) {
     if (Valid(name, comp)) {
         _valid = true;
 
@@ -157,9 +157,9 @@ boolean IdrawCatalog::Retrieve (const char* name, Component*& comp) {
     return _valid;
 }
 
-boolean IdrawCatalog::UnidrawFormat (const char* name) {
+bool IdrawCatalog::UnidrawFormat (const char* name) {
     filebuf fbuf;
-    boolean unidraw_format = false;
+    bool unidraw_format = false;
 
     if (fbuf.open(name, IOS_IN) != 0) {
         istream in(&fbuf);
@@ -441,8 +441,8 @@ void IdrawCatalog::PSReadBrush (istream& in, Graphic* gs) {
 
     if (_buf[0] == 'b') {
 	char lookahead = 'u';
-	boolean undefined = false;
-	boolean none = false;
+	bool undefined = false;
+	bool none = false;
 	int p = 0;
 	int w = 0;
 	int head = false;
@@ -488,7 +488,7 @@ void IdrawCatalog::PSReadFgColor (istream& in, Graphic* gs) {
         _buf[0] == 'c' && (_buf[1] == 'f' || _psversion < PSV_FGANDBGCOLOR)
     ) {
 	char lookahead = 'u';
-	boolean undefined = false;
+	bool undefined = false;
 	char name[100];
 	ColorIntensity r = 0, g = 0, b = 0;
 
@@ -530,7 +530,7 @@ void IdrawCatalog::PSReadBgColor (istream& in, Graphic* gs) {
 
     if (_buf[0] == 'c' && _buf[1] == 'b') {
 	char lookahead = 'u';
-	boolean undefined = false;
+	bool undefined = false;
 	char name[100];
 	ColorIntensity r = 0, g = 0, b = 0;
 
@@ -567,7 +567,7 @@ void IdrawCatalog::PSReadFont (istream& in, Graphic* gs) {
 
     if (_buf[0] == 'f') {
 	char lookahead = 'u';
-	boolean undefined = false;
+	bool undefined = false;
 
 	char name[CHARBUFSIZE];
 	char printfont[CHARBUFSIZE];
@@ -630,8 +630,8 @@ void IdrawCatalog::PSReadPattern (istream& in, Graphic* gs) {
 
     if (_buf[0] == 'p') {
 	char lookahead = 'u';
-	boolean undefined = false;
-	boolean none = false;
+	bool undefined = false;
+	bool none = false;
 	float graylevel = 0;
 	int data[patternHeight];
 	int size = 0;
@@ -701,7 +701,7 @@ void IdrawCatalog::PSReadTransformer (istream& in, Graphic* gs) {
 
     if (_buf[0] == 't') {
 	char uorbracket = 'u';
-	boolean undefined = false;
+	bool undefined = false;
 	float a00, a01, a10, a11, a20, a21;
 
 	in >> uorbracket;

@@ -121,12 +121,12 @@ Coord Bitmap::descent() const { return Coord(0); }
 // ---------------------------------------------------------------------
 // Bit manipulation functions... not bounds checked for efficiency.
 // ---------------------------------------------------------------------
-void Bitmap::poke(boolean set, int x, int y) 
+void Bitmap::poke(bool set, int x, int y) 
 {
     ;
 }
 
-boolean Bitmap::peek(int x, int y) const 
+bool Bitmap::peek(int x, int y) const 
 {
    return false;
 }

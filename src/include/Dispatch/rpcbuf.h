@@ -38,16 +38,16 @@ public:
     const char* host();
     int port();
     int fd();
-    boolean opened();
-    boolean nonblocking();
+    bool opened();
+    bool nonblocking();
 
     enum { anyport = 0 };
     rpcbuf* listen(int port);
     rpcbuf* connect(const char* host, int port);
     rpcbuf* accept(int& fd);
     rpcbuf* attach(int fd);
-    rpcbuf* nonblocking(boolean);
-    rpcbuf* verbose(boolean);
+    rpcbuf* nonblocking(bool);
+    rpcbuf* verbose(bool);
     rpcbuf* close();
     int start_request();
     int read_request();
@@ -64,8 +64,8 @@ public:
 protected:
     virtual int doallocate();
     void finish_request();
-    boolean expand_g(int);
-    boolean expand_p();
+    bool expand_g(int);
+    bool expand_p();
     void error(const char*);
     void sys_error(const char*);
     iostreamb& mystream();
@@ -79,10 +79,10 @@ protected:
     const char* _host;		// name of my peer's host or nil if no peer
     int _port;			// my peer's port or my port if I'm a listener
     int _fd;			// my IPC connection's file descriptor
-    boolean _opened;		// do I have an open file descriptor?
-    boolean _close;		// should I close my file descriptor on exit?
-    boolean _nonblocking;	// can I read or write without blocking?
-    boolean _verbose;		// should I print system error messages?
+    bool _opened;		// do I have an open file descriptor?
+    bool _close;		// should I close my file descriptor on exit?
+    bool _nonblocking;	// can I read or write without blocking?
+    bool _verbose;		// should I print system error messages?
 };
 
 // Get the stream which will format the length field of RPC requests.

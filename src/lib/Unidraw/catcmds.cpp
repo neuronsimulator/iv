@@ -70,13 +70,13 @@ static void UpdateCompNameVars () {
     }
 }
 
-static boolean Writable (Component* comp) {
+static bool Writable (Component* comp) {
     Catalog* catalog = unidraw->GetCatalog();
     const char* name = catalog->GetName(comp);
     return name == nil || (catalog->Exists(name) && catalog->Writable(name));
 }
 
-static boolean OnlyOneEditorOf (Component* c) {
+static bool OnlyOneEditorOf (Component* c) {
     Component* comp = c->GetRoot();
     Iterator i;
     int count = 0;
@@ -91,7 +91,7 @@ static boolean OnlyOneEditorOf (Component* c) {
     return count == 1;
 }
 
-static boolean ReadyToClose (Editor* ed) {
+static bool ReadyToClose (Editor* ed) {
     ModifStatusVar* mv = (ModifStatusVar*) ed->GetState("ModifStatusVar");
 
     if (mv != nil && Writable(mv->GetComponent()) && mv->GetModifStatus()) {
@@ -120,7 +120,7 @@ static boolean ReadyToClose (Editor* ed) {
 
 ClassId NewCompCmd::GetClassId () { return NEWCOMP_CMD; }
 
-boolean NewCompCmd::IsA (ClassId id) {
+bool NewCompCmd::IsA (ClassId id) {
     return NEWCOMP_CMD == id || Command::IsA(id);
 }
 
@@ -163,7 +163,7 @@ void NewCompCmd::Execute () {
     }
 }
 
-boolean NewCompCmd::Reversible () { return false; }
+bool NewCompCmd::Reversible () { return false; }
 
 void NewCompCmd::Read (istream& in) {
     Command::Read(in);
@@ -179,7 +179,7 @@ void NewCompCmd::Write (ostream& out) {
 
 ClassId RevertCmd::GetClassId () { return REVERT_CMD; }
 
-boolean RevertCmd::IsA (ClassId id) {
+bool RevertCmd::IsA (ClassId id) {
     return REVERT_CMD == id || Command::IsA(id);
 }
 
@@ -245,13 +245,13 @@ void RevertCmd::Execute () {
     }
 }
 
-boolean RevertCmd::Reversible () { return false; }
+bool RevertCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId ViewCompCmd::GetClassId () { return VIEWCOMP_CMD; }
 
-boolean ViewCompCmd::IsA (ClassId id) {
+bool ViewCompCmd::IsA (ClassId id) {
     return VIEWCOMP_CMD == id || Command::IsA(id);
 }
 
@@ -283,7 +283,7 @@ void ViewCompCmd::Execute () {
     }
 
     Style* style;
-    boolean reset_caption = false;
+    bool reset_caption = false;
     if (chooser_ == nil) {
 	style = new Style(Session::instance()->style());
 	chooser_ = DialogKit::instance()->file_chooser(".", style);
@@ -333,13 +333,13 @@ void ViewCompCmd::Execute () {
     }
 }
 
-boolean ViewCompCmd::Reversible () { return false; }
+bool ViewCompCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId SaveCompCmd::GetClassId () { return SAVECOMP_CMD; }
 
-boolean SaveCompCmd::IsA (ClassId id) {
+bool SaveCompCmd::IsA (ClassId id) {
     return SAVECOMP_CMD == id || Command::IsA(id);
 }
 
@@ -391,13 +391,13 @@ void SaveCompCmd::Execute () {
     }
 }
 
-boolean SaveCompCmd::Reversible () { return false; }
+bool SaveCompCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId SaveCompAsCmd::GetClassId () { return SAVECOMPAS_CMD; }
 
-boolean SaveCompAsCmd::IsA (ClassId id) {
+bool SaveCompAsCmd::IsA (ClassId id) {
     return SAVECOMPAS_CMD == id || Command::IsA(id);
 }
 
@@ -429,7 +429,7 @@ void SaveCompAsCmd::Execute () {
     domain = (domain == nil) ? "component" : domain;
     sprintf(buf, "Save this %s as:", domain);
 
-    boolean reset_caption = false;
+    bool reset_caption = false;
     Style* style = new Style(Session::instance()->style());
     style->attribute("subcaption", buf);
     style->attribute("open", "Save");
@@ -442,7 +442,7 @@ void SaveCompAsCmd::Execute () {
 	NullTerminatedString ns(*str);
         const char* name = ns.string();
         Catalog* catalog = unidraw->GetCatalog();
-        boolean ok = true;
+        bool ok = true;
 
         if (catalog->Exists(name) && catalog->Writable(name)) {
             char buf[CHARBUFSIZE];
@@ -497,13 +497,13 @@ void SaveCompAsCmd::Execute () {
     }
 }
 
-boolean SaveCompAsCmd::Reversible () { return false; }
+bool SaveCompAsCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId PrintCmd::GetClassId () { return PRINT_CMD; }
 
-boolean PrintCmd::IsA (ClassId id) {
+bool PrintCmd::IsA (ClassId id) {
     return PRINT_CMD == id || Command::IsA(id);
 }
 
@@ -525,7 +525,7 @@ Command* PrintCmd::Copy () {
 
 void PrintCmd::Execute () {
     GraphicComp* comps = GetGraphicComp();
-    boolean ok;
+    bool ok;
 
     if (_dialog == nil) {
         _dialog = new PrintDialog;
@@ -533,7 +533,7 @@ void PrintCmd::Execute () {
 
     do {
         _editor->InsertDialog(_dialog);
-        boolean accepted = _dialog->Accept();
+        bool accepted = _dialog->Accept();
         _editor->RemoveDialog(_dialog);
 
         if (!accepted) {
@@ -577,12 +577,12 @@ int PrintCmd::print (const char* print_cmd, const char* file) {
     return system(cmd);
 }
 
-boolean PrintCmd::Reversible () { return false; }
+bool PrintCmd::Reversible () { return false; }
 
 /*****************************************************************************/
 
 ClassId QuitCmd::GetClassId () { return QUIT_CMD; }
-boolean QuitCmd::IsA (ClassId id) { return QUIT_CMD == id || Command::IsA(id);}
+bool QuitCmd::IsA (ClassId id) { return QUIT_CMD == id || Command::IsA(id);}
 QuitCmd::QuitCmd (ControlInfo* c) : Command(c) { }
 QuitCmd::QuitCmd (Editor* ed) : Command(ed) { }
 
@@ -630,4 +630,4 @@ void QuitCmd::Execute () {
     }
 }
 
-boolean QuitCmd::Reversible () { return false; }
+bool QuitCmd::Reversible () { return false; }

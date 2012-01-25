@@ -78,7 +78,7 @@ void Subject::Notify() {
 }
 
 
-boolean Subject::IsView(Interactor* v) {
+bool Subject::IsView(Interactor* v) {
     ViewList& vl = *rep_->views_;
     for (unsigned int i = 0; i < vl.count(); i++) {
 	if (vl.item(i) == v) {

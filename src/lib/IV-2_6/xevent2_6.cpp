@@ -49,7 +49,7 @@ Mask upmask = ButtonReleaseMask|OwnerGrabButtonMask;
 Mask downmask = ButtonPressMask|OwnerGrabButtonMask;
 Mask initmask = PointerMotionHintMask;
 
-boolean Sensor::Caught(const Event& e) const {
+bool Sensor::Caught(const Event& e) const {
     XEvent& xe = e.rep()->xevent_;
     switch (xe.type) {
     case MotionNotify:

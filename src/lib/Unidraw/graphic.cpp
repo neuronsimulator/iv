@@ -40,7 +40,7 @@
 /*****************************************************************************/
 
 Transformer* Graphic::_identity;
-boolean Graphic::_caching;
+bool Graphic::_caching;
 Painter* Graphic::_p;
 BoxObj* Graphic::_clipping;
 
@@ -383,7 +383,7 @@ void Graphic::GetCenter (float& x, float& y) {
     getExtent(l, b, x, y, tol, &gs);
 }    
 
-boolean Graphic::Contains (PointObj& p) {
+bool Graphic::Contains (PointObj& p) {
     if (Parent() == nil) {
         return contains(p, this);
 
@@ -394,7 +394,7 @@ boolean Graphic::Contains (PointObj& p) {
     }
 }
 
-boolean Graphic::Intersects (BoxObj& b) {
+bool Graphic::Intersects (BoxObj& b) {
     if (Parent() == nil) {
         return intersects(b, this);
 
@@ -409,7 +409,7 @@ void Graphic::First (Iterator&) { }
 void Graphic::Last (Iterator&) { }
 void Graphic::Next (Iterator&) { }
 void Graphic::Prev (Iterator&) { }
-boolean Graphic::Done (Iterator) { return true; }
+bool Graphic::Done (Iterator) { return true; }
 
 Graphic* Graphic::GetGraphic (Iterator) { return nil; }
 void Graphic::SetGraphic (Graphic*, Iterator&) { }
@@ -531,14 +531,14 @@ void Graphic::getBox (Coord& x0, Coord& y0, Coord& x1, Coord& y1, Graphic* gs){
     y1 = Coord(top + 1);
 }
 
-boolean Graphic::contains (PointObj& po, Graphic* gs) { 
+bool Graphic::contains (PointObj& po, Graphic* gs) { 
     BoxObj b;
 
     getBox(b, gs);
     return b.Contains(po);
 }
 
-boolean Graphic::intersects (BoxObj& userb, Graphic* gs) { 
+bool Graphic::intersects (BoxObj& userb, Graphic* gs) { 
     BoxObj b;
 
     getBox(b, gs);
@@ -591,7 +591,7 @@ void Graphic::unsetParent (Graphic* g) {
 
 void Graphic::cachingOn () { _caching = true; }
 void Graphic::cachingOff () { _caching = false; }
-boolean Graphic::extentCached () { return false; }
+bool Graphic::extentCached () { return false; }
 void Graphic::uncacheExtent () { }
 void Graphic::uncacheChildren () { }
 

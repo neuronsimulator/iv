@@ -35,11 +35,11 @@ public:
     NOPCmd(Editor* = nil);
 
     virtual void Execute();
-    virtual boolean Reversible();
+    virtual bool Reversible();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
+    virtual bool IsA(ClassId);
 };
 
 #endif

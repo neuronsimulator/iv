@@ -83,7 +83,7 @@ private:
     Visual* visual_;
     unsigned int depth_;
     XColormap colormap_;
-    boolean double_buffered_;
+    bool double_buffered_;
 
     static void config(GLXconfig&, int buffer, int mode, int arg);
     void setup_glx_config();

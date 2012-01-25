@@ -46,13 +46,13 @@ public:
     );
     virtual ~Message();
 
-    virtual void Highlight(boolean);
+    virtual void Highlight(bool);
     virtual void Realign(Alignment);
 protected:
     char* text;
     Alignment alignment : 16;
     unsigned pad : 15;
-    boolean highlighted : 1;
+    bool highlighted : 1;
 
     virtual void Reconfig();
     virtual void Redraw(IntCoord, IntCoord, IntCoord, IntCoord);
