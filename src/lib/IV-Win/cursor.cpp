@@ -178,7 +178,7 @@ CursorRep::CursorRep(int id)
 // MODIFIED by NL for WIN32s:
 //		must use NULL as the HINSTANCE, when trying to load standard
 //		windows cursors.
-	cursor = LoadCursor(NULL, (char *) id);
+	cursor = LoadCursor(NULL, MAKEINTRESOURCE(id));
 
 // OLD CODE
 //	char buff[25];

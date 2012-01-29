@@ -111,8 +111,7 @@ const char* TOPLEVEL_CLASSNAME = "ivTopLevelWindow";
 
 // Properties used to hold the pointer to the C++ window object that is
 // associated with the MS-Windows window.
-const char* PROP_PTR_HIGH = "mw_h";
-const char* PROP_PTR_LOW = "mw_l";
+const char* PROP_PTR = "mw_ptr";
 
 // #######################################################################
 // ################## MS-Window to C++ window object translation
@@ -137,10 +136,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage,
 	WPARAM wParam, LPARAM lParam)
 {
 	// Pointer to the (C++ object that is the) window.
-	DWORD addr = ((((DWORD) cp2int GetProp(hwnd, PROP_PTR_HIGH)) << 16)
-		 & 0xFFFF0000L);
-	addr |= ((DWORD) cp2int GetProp(hwnd, PROP_PTR_LOW)) & 0xFFFF;
-	MWwindow* pWindow = (MWwindow*) addr;
+	MWwindow* pWindow = (MWwindow*) GetProp(hwnd, PROP_PTR);
 
     
 	if ((pWindow == 0) || (iMessage == WM_DESTROY))
@@ -291,8 +287,7 @@ void MWwindow::bind()
 	params = 0;
 
 	// ---- store our pointer in the properties ----
-	MWassert(SetProp(hwnd, PROP_PTR_HIGH, (HANDLE) ((long)HIWORD(this))));
-	MWassert(SetProp(hwnd, PROP_PTR_LOW, (HANDLE) ((long)LOWORD(this))));
+	MWassert(SetProp(hwnd, PROP_PTR, (HANDLE) this));
 }
 
 void MWwindow::unbind()
@@ -302,8 +297,7 @@ void MWwindow::unbind()
 		return;
 	}
 	// ---- remove properties... stops C++ messages -----
-	RemoveProp(hwnd, PROP_PTR_HIGH);
-	RemoveProp(hwnd, PROP_PTR_LOW);
+	RemoveProp(hwnd, PROP_PTR);
 
 	// ---- tell MS-Windows to toss it ----
 	DestroyWindow(hwnd);
