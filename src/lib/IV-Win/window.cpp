@@ -276,7 +276,7 @@ void MWwindow::bind()
 		params->width,			 	// window width.
 		params->height,				// window height.
 		params->parent,				// parent of this window.
-		(HMENU) params->id,			// control id
+		(HMENU)((long)params->id),			// control id
 		hInstance,				// This instance owns this window.
 		(LPSTR) this			// pointer to c++ object
 	);
