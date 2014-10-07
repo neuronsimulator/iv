@@ -76,6 +76,8 @@ Cursor* noCursor;
 
 #if defined(__SIZEOF_POINTER__) && __SIZEOF_POINTER__ > __SIZEOF_LONG__
 #define cp2int (int)(unsigned long long)
+#elif defined(__SIZEOF_POINTER__) && __SIZEOF_POINTER__ > __SIZEOF_INT__
+#define cp2int (int)(unsigned long)
 #else
 #define cp2int (int)
 #endif

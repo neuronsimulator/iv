@@ -56,6 +56,14 @@
 //
 // =======================================================================
 
+#if defined(CYGWIN)
+#include <unistd.h>
+static int myclose(int fd) { return close(fd); }
+static ssize_t myread(int fd, void* buf, size_t count) {
+  return read(fd, buf, count);
+}
+
+#endif
 #include <OS/file.h>
 #include <OS/string.h>
 #include <OS/types.h>
@@ -79,14 +87,6 @@ extern "C" {
 
 #ifdef WIN32
 #include <io.h>
-#endif
-
-#ifdef CYGWIN
-extern "C" {
-// These are the POSIX definitions.  Hopefully they won't conflict.
-    extern int _close(int);
-    extern int _read(int, void*, unsigned int);
-}
 #endif
 
 #if !defined(__GNUC__) || !defined (WIN32) && !defined (MAC)
@@ -187,7 +187,9 @@ void File::close() {
 	if (i->buf_ != nil) {
 	    delete [] i->buf_;
 	}
-#ifdef WIN32
+#if defined(CYGWIN)
+	myclose(i->fd_);
+#elif defined(WIN32)
 	_close(i->fd_);
 #else
 	::close(i->fd_);
@@ -263,7 +265,9 @@ int InputFile::read(const char*& start) {
 	i->buf_ = new char[len];
     }
     start = i->buf_;
-#ifdef WIN32
+#if defined(CYGWIN)
+    len = myread(i->fd_, i->buf_, len);
+#elif defined(WIN32)
     len = _read(i->fd_, i->buf_, len);
 #else
     len = ::read(i->fd_, i->buf_, len);
@@ -296,7 +300,9 @@ int StdInput::read(const char*& start) {
 	i->buf_ = new char[i->limit_];
     }
 
-#ifdef WIN32
+#if defined(CYGWIN)
+    int nbytes = myread(i->fd_, (char*)i->buf_, i->limit_);
+#elif defined(WIN32)
     int nbytes = _read(i->fd_, (char*)i->buf_, i->limit_);
 #else
     int nbytes = ::read(i->fd_, (char*)i->buf_, i->limit_);
