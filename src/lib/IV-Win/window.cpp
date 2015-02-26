@@ -255,6 +255,36 @@ long MWwindow::WndProc(UINT message, WPARAM wParam, LPARAM lParam)
 // window and destroys it.
 // -----------------------------------------------------------------------
 
+// mingw + launch python needs all windows to be bound from a specific
+// thread.
+#if defined(MINGW)
+extern "C" {
+int (*iv_bind_enqueue_)(void*, int);
+void iv_bind_call(void* v, int type) {
+	switch (type) {
+	  case 1: {
+		Window* w = (Window*)v;
+		w->map();
+		}
+		break;
+	  case 2: {
+		HWND hwnd = (HWND)v;
+//printf("iv_bind_call ShowWindow hide %p\n", hwnd);
+		ShowWindow(hwnd, SW_HIDE);
+		}
+		break;
+	  case 3: {
+		HWND hwnd = (HWND)v;
+//printf("iv_bind_call RemoveProp DestroyWindow %p\n", hwnd);
+		RemoveProp(hwnd, PROP_PTR);
+		DestroyWindow(hwnd);
+		}
+		break;
+	}
+}
+}
+#endif
+
 void MWwindow::bind()
 {
 	// ---- if already bound... nothing to do ----
@@ -296,6 +326,15 @@ void MWwindow::unbind()
 //		MessageBox(NULL,"MWwindow::unbind has no binding", "zzz", MB_OK);
 		return;
 	}
+#if defined(MINGW)
+	// if not correct thread enqueue and unmap will be called later
+	if (iv_bind_enqueue_ && (*iv_bind_enqueue_)((void*)hwnd, 3)) {
+		//printf("MWwindow::unbind defer hwnd=%p\n", hwnd);
+		hwnd = 0;
+		return;
+	}
+#endif
+//printf("MWwindow::unbind %p\n", this);
 	// ---- remove properties... stops C++ messages -----
 	RemoveProp(hwnd, PROP_PTR);
 
@@ -356,8 +395,17 @@ bool MWwindow::map()
 
 void MWwindow::unmap()
 {
+//printf("enter MWwindow::unmap()\n");
 	if (hwnd)
+#if defined(MINGW)
+	// if not correct thread enqueue and unmap will be called later
+	if (iv_bind_enqueue_ && (*iv_bind_enqueue_)((void*)hwnd, 2)) {
+		//printf("MWwindow::unmap ShowWindow defer hwnd=%p\n", hwnd);
+		return;
+	}
+#endif
 		ShowWindow(hwnd, SW_HIDE);
+//printf("leave MWwindow::unmap()\n");
 }
 
 bool MWwindow::isMapped()
@@ -1036,6 +1084,7 @@ Window::Window(WindowRep* w)
 
 Window::~Window()
 {
+//printf("Window::~Window %p\n", this);
 	if (bound()) {
 	 Window::unbind();
 	}
@@ -1277,6 +1326,7 @@ Coord Window::height() const
 // create the window and map it.  If the window is already bound to an
 // MS-Window, than we simply map it.
 // -----------------------------------------------------------------------
+
 void Window::map()
 {
 	// ---- check to see if we are already mapped ----
@@ -1286,6 +1336,12 @@ void Window::map()
 	// ---- check to see if we are bound to an MS-Windows window ----
 	if (!bound())
 	{
+#if defined(MINGW)
+		// if not correct thread enqueue and map will be called later
+		if (iv_bind_enqueue_ && (*iv_bind_enqueue_)((void*)this, 1)) {
+			return;
+		}
+#endif
 		if (style_ == nil)
 			style(new Style(Session::instance()->style()));
 
@@ -1310,12 +1366,14 @@ void Window::map()
 }
 void Window::unmap()
 {
+//printf("enter Window::unmap %p\n", this);
 	if (is_mapped())
 	{
 		WindowRep& w = *rep();
 		glyph_->undraw();
 		w.unmap();
 	}
+//printf("leave Window::unmap()\n");
 }
 
 bool Window::is_mapped() const
