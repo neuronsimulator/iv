@@ -82,7 +82,7 @@ bool MatchEditor::HandleChar (char c) {
         strncpy(buf, text->Text(), length);
         while (length > 0) {
             buf[length] = '\0';
-            if (sscanf(buf, pattern) == EOF) {
+            if (sscanf(buf, "%s", pattern) == EOF) {
                 break;
             }
             --length;
