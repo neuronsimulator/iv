@@ -259,6 +259,7 @@ long MWwindow::WndProc(UINT message, WPARAM wParam, LPARAM lParam)
 // thread.
 #if defined(MINGW)
 extern "C" {
+extern void iv_dialog_run_in_gui_thread(void*);
 int (*iv_bind_enqueue_)(void*, int);
 void iv_bind_call(void* v, int type) {
 	switch (type) {
@@ -279,6 +280,10 @@ void iv_bind_call(void* v, int type) {
 		RemoveProp(hwnd, PROP_PTR);
 		DestroyWindow(hwnd);
 		}
+		break;
+	  case 4: {
+		iv_dialog_run_in_gui_thread(v);
+	  	}
 		break;
 	}
 }

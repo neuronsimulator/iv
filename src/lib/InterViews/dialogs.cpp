@@ -160,6 +160,26 @@ bool DialogHandler::event(Event&) {
 Dialog::Dialog(Glyph* g, Style* s) : InputHandler(g, s) { }
 Dialog::~Dialog() { }
 
+#if defined(MINGW)
+extern "C" {
+extern int (*iv_bind_enqueue_)(void*, int);
+static bool rval_;
+
+static bool run_mingw(Dialog* d) {
+    if (iv_bind_enqueue_ && (*iv_bind_enqueue_)((void*)d, 4)) {
+        return rval_;
+    }
+    return d->run();
+}
+
+void iv_dialog_run_in_gui_thread(void* v) {
+    Dialog* d = (Dialog*)v;
+    rval_ = d->run();
+}
+
+} // extern "C"
+#endif // MINGW
+
 bool Dialog::post_for_aligned(Window* w, float x_align, float y_align) {
     TransientWindow* t = new TransientWindow(this);
     t->style(new Style(style()));
@@ -168,7 +188,11 @@ bool Dialog::post_for_aligned(Window* w, float x_align, float y_align) {
     t->place(w->left() + 0.5 * w->width(), w->bottom() + 0.5 * w->height());
     t->align(x_align, y_align);
     t->map();
+#if defined(MINGW)
+    bool b = run_mingw(this);
+#else
     bool b = run();
+#endif
     t->unmap();
     t->display()->sync();
     delete t;
@@ -184,7 +208,11 @@ bool Dialog::post_at_aligned(
     t->place(x, y);
     t->align(x_align, y_align);
     t->map();
+#if defined(MINGW)
+    bool b = run_mingw(this);
+#else
     bool b = run();
+#endif
     t->unmap();
     t->display()->sync();
     delete t;
