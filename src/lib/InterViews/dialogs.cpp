@@ -162,19 +162,19 @@ Dialog::~Dialog() { }
 
 #if defined(MINGW)
 extern "C" {
-extern int (*iv_bind_enqueue_)(void*, int);
+extern int (*iv_bind_enqueue_)(void(*)(void*), void*);
 static bool rval_;
 
+static void run_in_gui_thread(void* v) {
+    Dialog* d = (Dialog*)v;
+    rval_ = d->run();
+}
+
 static bool run_mingw(Dialog* d) {
-    if (iv_bind_enqueue_ && (*iv_bind_enqueue_)((void*)d, 4)) {
+    if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(run_in_gui_thread, (void*)d)) {
         return rval_;
     }
     return d->run();
-}
-
-void iv_dialog_run_in_gui_thread(void* v) {
-    Dialog* d = (Dialog*)v;
-    rval_ = d->run();
 }
 
 } // extern "C"

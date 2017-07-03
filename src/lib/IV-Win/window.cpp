@@ -88,6 +88,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <IV-Win/MWapp.h>
 
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 // #include "\nrn\src\winio\debug.h"
 #include <stdio.h>
@@ -259,34 +260,27 @@ long MWwindow::WndProc(UINT message, WPARAM wParam, LPARAM lParam)
 // thread.
 #if defined(MINGW)
 extern "C" {
-extern void iv_dialog_run_in_gui_thread(void*);
-int (*iv_bind_enqueue_)(void*, int);
-void iv_bind_call(void* v, int type) {
-	switch (type) {
-	  case 1: {
-		Window* w = (Window*)v;
-		w->map();
-		}
-		break;
-	  case 2: {
-		HWND hwnd = (HWND)v;
-//printf("iv_bind_call ShowWindow hide %p\n", hwnd);
-		ShowWindow(hwnd, SW_HIDE);
-		}
-		break;
-	  case 3: {
-		HWND hwnd = (HWND)v;
-//printf("iv_bind_call RemoveProp DestroyWindow %p\n", hwnd);
-		RemoveProp(hwnd, PROP_PTR);
-		DestroyWindow(hwnd);
-		}
-		break;
-	  case 4: {
-		iv_dialog_run_in_gui_thread(v);
-	  	}
-		break;
-	}
+int (*iv_bind_enqueue_)(void(*)(void*), void*);
+
+static void wmap1(void* v) {
+	Window* w = (Window*)v;
+	w->map();
 }
+static void hide1(void* v) {
+	HWND hwnd = (HWND)v;
+	ShowWindow(hwnd, SW_HIDE);
+}
+static void unbind1(void* v) {
+	HWND hwnd = (HWND)v;
+	RemoveProp(hwnd, PROP_PTR);
+	DestroyWindow(hwnd);
+}
+static void mwmap1(void* v) {
+	HWND hwnd = (HWND)v;
+	ShowWindow(hwnd, SW_SHOW);
+	UpdateWindow(hwnd);
+}
+
 }
 #endif
 
@@ -311,7 +305,7 @@ void MWwindow::bind()
 		params->width,			 	// window width.
 		params->height,				// window height.
 		params->parent,				// parent of this window.
-		(HMENU)((long)params->id),			// control id
+		(HMENU)((intptr_t)params->id),			// control id
 		hInstance,				// This instance owns this window.
 		(LPSTR) this			// pointer to c++ object
 	);
@@ -333,7 +327,7 @@ void MWwindow::unbind()
 	}
 #if defined(MINGW)
 	// if not correct thread enqueue and unmap will be called later
-	if (iv_bind_enqueue_ && (*iv_bind_enqueue_)((void*)hwnd, 3)) {
+	if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(unbind1, hwnd)) {
 		//printf("MWwindow::unbind defer hwnd=%p\n", hwnd);
 		hwnd = 0;
 		return;
@@ -391,6 +385,11 @@ bool MWwindow::map()
 {
 	if (hwnd)
 	{
+#if defined(MINGW)
+		if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(mwmap1, hwnd)) {
+			return 1;
+		}
+#endif
 		ShowWindow(hwnd, SW_SHOW);
 		UpdateWindow(hwnd);
 		return 1;
@@ -404,7 +403,7 @@ void MWwindow::unmap()
 	if (hwnd)
 #if defined(MINGW)
 	// if not correct thread enqueue and unmap will be called later
-	if (iv_bind_enqueue_ && (*iv_bind_enqueue_)((void*)hwnd, 2)) {
+	if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(hide1, hwnd)) {
 		//printf("MWwindow::unmap ShowWindow defer hwnd=%p\n", hwnd);
 		return;
 	}
@@ -1343,7 +1342,7 @@ void Window::map()
 	{
 #if defined(MINGW)
 		// if not correct thread enqueue and map will be called later
-		if (iv_bind_enqueue_ && (*iv_bind_enqueue_)((void*)this, 1)) {
+		if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(wmap1, this)) {
 			return;
 		}
 #endif
