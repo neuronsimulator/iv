@@ -38,6 +38,9 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_fax4.c,v 1.2 1997/0
 #include "tiffioP.h"
 #include "tif_fax3.h"
 
+extern	int TIFFFlushData1(TIFF *);
+extern	int TIFFInitCCITTFax3(TIFF*);
+
 #if USE_PROTOTYPES
 static	int Fax4Decode(TIFF*, u_char *, int, u_int);
 static	int Fax4Encode(TIFF*, u_char *, int, u_int);
@@ -48,7 +51,7 @@ static	int Fax4Encode();
 static	int Fax4PostEncode();
 #endif
 
-TIFFInitCCITTFax4(tif)
+int TIFFInitCCITTFax4(tif)
 	TIFF *tif;
 {
 	TIFFInitCCITTFax3(tif);		/* reuse G3 compression */
@@ -115,7 +118,7 @@ Fax4Encode(tif, bp, cc, s)
 }
 
 static
-Fax4PostEncode(tif)
+int Fax4PostEncode(tif)
 	TIFF *tif;
 {
 	Fax3BaseState *sp = (Fax3BaseState *)tif->tif_data;

@@ -61,13 +61,13 @@
 
 class _ArrowData : public Data {
 public:
-    _ArrowData(bool, bool);
+    _ArrowData(int, int);
 public:
-    bool _head : 16;
-    bool _tail : 16;
+    int _head : 16;
+    int _tail : 16;
 };
 
-_ArrowData::_ArrowData (bool head, bool tail) {
+_ArrowData::_ArrowData (int head, int tail) {
     _head = head;
     _tail = tail;
 }

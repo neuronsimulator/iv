@@ -420,7 +420,7 @@ void Printer::character(
     const Font* font, long c, Coord width, const Color* color, Coord x, Coord y
 ) {
 #if defined(__GNUC__)
-    char g3[8];
+    char g3[40];
 #endif
     PrinterRep* p = rep_;
     ostream& out = *p->out_;
@@ -489,7 +489,7 @@ void Printer::stencil(
     const Bitmap* mask, const Color* color, Coord x, Coord y
 ) {
 #if defined(__GNUC__)
-    char g3[8];
+    char g3[24];
 #endif
     PrinterRep* p = rep_;
     ostream& out = *p->out_;

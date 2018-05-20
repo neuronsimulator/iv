@@ -34,6 +34,8 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_write.c,v 1.2 1997/
  *
  * Scanline-oriented Write Support
  */
+#include <sys/types.h>
+#include <unistd.h>
 #include "tiffioP.h"
 #include <stdio.h>
 #include <assert.h>
@@ -41,19 +43,19 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_write.c,v 1.2 1997/
 #define	STRIPINCR	20		/* expansion factor on strip array */
 
 #if USE_PROTOTYPES
-static	TIFFWriteCheck(TIFF *, int, char []);
-static	TIFFBufferSetup(TIFF *, char []);
-static	TIFFGrowStrips(TIFF *, int, char []);
-static	TIFFAppendToStrip(TIFF *, u_int, u_char *, u_int);
+static	int TIFFWriteCheck(TIFF *, int, char []);
+static	int TIFFBufferSetup(TIFF *, char []);
+static	int TIFFGrowStrips(TIFF *, int, char []);
+static	int TIFFAppendToStrip(TIFF *, u_int, u_char *, u_int);
 #else
-static	TIFFWriteCheck();
-static	TIFFBufferSetup();
-static	TIFFGrowStrips();
-static	TIFFAppendToStrip();
+static	int TIFFWriteCheck();
+static	int TIFFBufferSetup();
+static	int TIFFGrowStrips();
+static	int TIFFAppendToStrip();
 #endif
 
 /*VARARGS3*/
-TIFFWriteScanline(tif, buf, row, sample)
+int TIFFWriteScanline(tif, buf, row, sample)
 	register TIFF *tif;
 	u_char *buf;
 	u_int row, sample;
@@ -176,7 +178,7 @@ TIFFWriteScanline(tif, buf, row, sample)
  *     interface does not support automatically growing
  *     the image on each write (as TIFFWriteScanline does).
  */
-TIFFWriteEncodedStrip(tif, strip, data, cc)
+int TIFFWriteEncodedStrip(tif, strip, data, cc)
 	TIFF *tif;
 	u_int strip;
 	u_char *data;
@@ -231,7 +233,7 @@ TIFFWriteEncodedStrip(tif, strip, data, cc)
  *     interface does not support automatically growing
  *     the image on each write (as TIFFWriteScanline does).
  */
-TIFFWriteRawStrip(tif, strip, data, cc)
+int TIFFWriteRawStrip(tif, strip, data, cc)
 	TIFF *tif;
 	u_int strip;
 	u_char *data;
@@ -253,7 +255,7 @@ TIFFWriteRawStrip(tif, strip, data, cc)
  * Write and compress a tile of data.  The
  * tile is selected by the (x,y,z,s) coordinates.
  */
-TIFFWriteTile(tif, buf, x, y, z, s)
+int TIFFWriteTile(tif, buf, x, y, z, s)
 	TIFF *tif;
 	u_char *buf;
 	u_long x, y, z;
@@ -283,7 +285,7 @@ TIFFWriteTile(tif, buf, x, y, z, s)
  *     interface does not support automatically growing
  *     the image on each write (as TIFFWriteScanline does).
  */
-TIFFWriteEncodedTile(tif, tile, data, cc)
+int TIFFWriteEncodedTile(tif, tile, data, cc)
 	TIFF *tif;
 	u_int tile;
 	u_char *data;
@@ -354,7 +356,7 @@ TIFFWriteEncodedTile(tif, tile, data, cc)
  *     interface does not support automatically growing
  *     the image on each write (as TIFFWriteScanline does).
  */
-TIFFWriteRawTile(tif, tile, data, cc)
+int TIFFWriteRawTile(tif, tile, data, cc)
 	TIFF *tif;
 	u_int tile;
 	u_char *data;
@@ -373,7 +375,7 @@ TIFFWriteRawTile(tif, tile, data, cc)
 }
 
 static
-TIFFSetupStrips(tif)
+int TIFFSetupStrips(tif)
 	TIFF *tif;
 {
 #define	isUnspecified(td, v) \
@@ -414,7 +416,7 @@ TIFFSetupStrips(tif)
  * that important information is not changed.
  */
 static
-TIFFWriteCheck(tif, tiles, module)
+int TIFFWriteCheck(tif, tiles, module)
 	register TIFF *tif;
 	int tiles;
 	char module[];
@@ -469,7 +471,7 @@ TIFFWriteCheck(tif, tiles, module)
  * Setup the raw data buffer used for encoding.
  */
 static
-TIFFBufferSetup(tif, module)
+int TIFFBufferSetup(tif, module)
 	register TIFF *tif;
 	char module[];
 {
@@ -500,7 +502,7 @@ TIFFBufferSetup(tif, module)
  * Grow the strip data structures by delta strips.
  */
 static
-TIFFGrowStrips(tif, delta, module)
+int TIFFGrowStrips(tif, delta, module)
 	TIFF *tif;
 	int delta;
 	char module[];
@@ -531,7 +533,7 @@ TIFFGrowStrips(tif, delta, module)
  *     file (i.e. that strips do not overlap).
  */
 static
-TIFFAppendToStrip(tif, strip, data, cc)
+int TIFFAppendToStrip(tif, strip, data, cc)
 	TIFF *tif;
 	u_int strip;
 	u_char *data;
@@ -571,7 +573,7 @@ TIFFAppendToStrip(tif, strip, data, cc)
  * called by ``encodestrip routines'' w/o concern
  * for infinite recursion.
  */
-TIFFFlushData1(tif)
+int TIFFFlushData1(tif)
 	register TIFF *tif;
 {
 	if (tif->tif_rawcc > 0) {

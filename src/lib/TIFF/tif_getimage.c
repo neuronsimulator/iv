@@ -59,8 +59,11 @@ static	u_long **BWmap;
 static	u_long **PALmap;
 
 static	int gt();
+static int makebwmap(RGBvalue *Map);
+static int makecmap(u_short *rmap, ushort *gmap, ushort *bmap);
 
-TIFFReadRGBAImage(tif, rwidth, rheight, raster, stop)
+
+int TIFFReadRGBAImage(tif, rwidth, rheight, raster, stop)
 	TIFF *tif;
 	u_long rwidth, rheight;
 	u_long *raster;
@@ -132,14 +135,14 @@ checkcmap(n, r, g, b)
 	return (8);
 }
 
-static	gtTileContig();
-static	gtTileSeparate();
-static	gtStripContig();
-static	gtStripSeparate();
+static	int gtTileContig();
+static	int gtTileSeparate();
+static	int gtStripContig();
+static	int gtStripSeparate();
 static	void initYCbCrConversion();
 
 static
-gt(tif, w, h, raster)
+int gt(tif, w, h, raster)
 	TIFF *tif;
 	int w, h;
 	u_long *raster;
@@ -289,7 +292,7 @@ static tileContigRoutine pickTileContigCase();
  *	SamplesPerPixel == 1
  */	
 static
-gtTileContig(tif, raster, Map, h, w)
+int gtTileContig(tif, raster, Map, h, w)
 	TIFF *tif;
 	u_long *raster;
 	RGBvalue *Map;
@@ -355,7 +358,7 @@ static tileSeparateRoutine pickTileSeparateCase();
  * We assume that all such images are RGB.
  */	
 static
-gtTileSeparate(tif, raster, Map, h, w)
+int gtTileSeparate(tif, raster, Map, h, w)
 	TIFF *tif;
 	u_long *raster;
 	RGBvalue *Map;
@@ -421,7 +424,7 @@ gtTileSeparate(tif, raster, Map, h, w)
  *	SamplesPerPixel == 1
  */	
 static
-gtStripContig(tif, raster, Map, h, w)
+int gtStripContig(tif, raster, Map, h, w)
 	TIFF *tif;
 	u_long *raster;
 	RGBvalue *Map;
@@ -468,7 +471,7 @@ gtStripContig(tif, raster, Map, h, w)
  * We assume that all such images are RGB.
  */
 static
-gtStripSeparate(tif, raster, Map, h, w)
+int gtStripSeparate(tif, raster, Map, h, w)
 	TIFF *tif;
 	u_long *raster;
 	register RGBvalue *Map;
@@ -528,7 +531,7 @@ gtStripSeparate(tif, raster, Map, h, w)
  * pixel values simply by indexing into the table with one
  * number.
  */
-makebwmap(Map)
+int makebwmap(Map)
 	RGBvalue *Map;
 {
 	register int i;
@@ -583,7 +586,7 @@ makebwmap(Map)
  * pixel values simply by indexing into the table with one
  * number.
  */
-makecmap(rmap, gmap, bmap)
+int makecmap(rmap, gmap, bmap)
 	u_short *rmap, *gmap, *bmap;
 {
 	register int i;

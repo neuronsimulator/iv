@@ -36,7 +36,7 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_jpeg.c,v 1.2 1997/0
  */
 #include "tiffioP.h"
 
-TIFFInitJPEG(tif)
+int TIFFInitJPEG(tif)
 	register TIFF *tif;
 {
 	return (1);

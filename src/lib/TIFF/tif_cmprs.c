@@ -205,7 +205,7 @@ TIFFNoTileDecode(tif, pp, cc, s)
 	return (TIFFNoDecode(tif, "tile"));
 }
 
-TIFFSetCompressionScheme(tif, scheme)
+int TIFFSetCompressionScheme(tif, scheme)
 	TIFF *tif;
 	int scheme;
 {

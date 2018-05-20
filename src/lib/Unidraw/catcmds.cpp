@@ -523,6 +523,18 @@ Command* PrintCmd::Copy () {
     return copy;
 }
 
+// avoid warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+// free the reurn
+char* iv_mytmpnam(char*) {
+  static char name[20];
+  strcpy(name, "/tmp/XXXXXX");
+  int fd = mkstemp(name);
+  if (fd >= 0) {
+    close(fd);
+  }
+  return name;
+}
+
 void PrintCmd::Execute () {
     GraphicComp* comps = GetGraphicComp();
     bool ok;
@@ -544,7 +556,7 @@ void PrintCmd::Execute () {
         char* tmpfilename;
 
         if (_dialog->ToPrinter()) {
-            tmpfilename = tmpnam(nil);
+            tmpfilename = iv_mytmpnam(nil);
             ok = fbuf.open(tmpfilename, IOS_OUT) != 0;
         } else {
             ok = fbuf.open((char*) _dialog->Choice(), IOS_OUT) != 0;

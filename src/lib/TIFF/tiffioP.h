@@ -312,7 +312,7 @@ extern "C" {
 #endif
 extern	TIFFFieldInfo const *TIFFFindFieldInfo(u_short, TIFFDataType);
 extern	TIFFFieldInfo const *TIFFFieldWithTag(u_short);
-extern	int _TIFFgetfield(TIFFDirectory*, int, ...);
+extern	void _TIFFgetfield(TIFFDirectory*, int, ...);
 extern	int TIFFNoRowEncode(TIFF*, u_char*, int, u_int);
 extern	int TIFFNoStripEncode(TIFF*, u_char*, int, u_int);
 extern	int TIFFNoTileEncode(TIFF*, u_char*, int, u_int);
@@ -325,7 +325,7 @@ extern	int TIFFNoTileDecode(TIFF*, u_char*, int, u_int);
 #else
 extern	TIFFFieldInfo const *TIFFFindFieldInfo();
 extern	TIFFFieldInfo const *TIFFFieldWithTag();
-extern	int _TIFFgetfield();
+extern	void _TIFFgetfield();
 extern	int TIFFNoRowEncode();
 extern	int TIFFNoStripEncode();
 extern	int TIFFNoTileEncode();

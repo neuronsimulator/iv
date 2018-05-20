@@ -197,7 +197,7 @@ static	void cl_hash();
 extern	int TIFFFlushData1();
 #endif
 
-TIFFInitLZW(tif)
+int TIFFInitLZW(tif)
 	TIFF *tif;
 {
 	tif->tif_predecode = LZWPreDecode;
@@ -214,7 +214,7 @@ TIFFInitLZW(tif)
 }
 
 static
-DECLARE4(LZWCheckPredictor,
+int DECLARE4(LZWCheckPredictor,
 	TIFF*, tif,
 	LZWState*, sp,
 	predictorFunc, pred8bit,
@@ -369,7 +369,7 @@ DECLARE3(horizontalAccumulate16,
  * Setup state for decoding a strip.
  */
 static
-LZWPreDecode(tif)
+int LZWPreDecode(tif)
 	TIFF *tif;
 {
 	register LZWDecodeState *sp = (LZWDecodeState *)tif->tif_data;
@@ -472,9 +472,10 @@ LZWPreDecode(tif)
 }
 
 static
-LZWDecode(tif, op0, occ0, s)
+int LZWDecode(tif, op0, occ0, s)
 	TIFF *tif;
 	u_char *op0;
+	int occ0;
 	u_int s;
 {
 	LZWDecodeState *sp = (LZWDecodeState *)tif->tif_data;
@@ -643,9 +644,10 @@ LZWDecode(tif, op0, occ0, s)
 }
 
 static
-LZWDecodeCompat(tif, op0, occ0, s)
+int LZWDecodeCompat(tif, op0, occ0, s)
 	TIFF *tif;
 	u_char *op0;
+	int occ0;
 	u_int s;
 {
 	LZWDecodeState *sp = (LZWDecodeState *)tif->tif_data;
@@ -795,9 +797,10 @@ LZWDecodeCompat(tif, op0, occ0, s)
  * Decode a scanline and apply the predictor routine.
  */
 static
-LZWDecodePredRow(tif, op0, occ0, s)
+int LZWDecodePredRow(tif, op0, occ0, s)
 	TIFF *tif;
 	u_char *op0;
+	int occ0;
 	u_int s;
 {
 	LZWDecodeState *sp = (LZWDecodeState *)tif->tif_data;
@@ -819,9 +822,10 @@ LZWDecodePredRow(tif, op0, occ0, s)
  * strip/tile dimensions.
  */
 static
-LZWDecodePredTile(tif, op0, occ0, s)
+int LZWDecodePredTile(tif, op0, occ0, s)
 	TIFF *tif;
 	u_char *op0;
+	int occ0;
 	u_int s;
 {
 	LZWDecodeState *sp = (LZWDecodeState *)tif->tif_data;
@@ -914,7 +918,7 @@ DECLARE3(horizontalDifference16,
  * Reset encoding state at the start of a strip.
  */
 static
-LZWPreEncode(tif)
+int LZWPreEncode(tif)
 	TIFF *tif;
 {
 	register LZWEncodeState *sp = (LZWEncodeState *)tif->tif_data;
@@ -989,7 +993,7 @@ LZWPreEncode(tif)
  * for the decoder. 
  */
 static
-LZWEncode(tif, bp, cc, s)
+int LZWEncode(tif, bp, cc, s)
 	TIFF *tif;
 	u_char *bp;
 	int cc;
@@ -1139,7 +1143,7 @@ LZWEncode(tif, bp, cc, s)
 }
 
 static
-LZWEncodePredRow(tif, bp, cc, s)
+int LZWEncodePredRow(tif, bp, cc, s)
 	TIFF *tif;
 	u_char *bp;
 	int cc;
@@ -1155,7 +1159,7 @@ LZWEncodePredRow(tif, bp, cc, s)
 }
 
 static
-LZWEncodePredTile(tif, bp0, cc0, s)
+int LZWEncodePredTile(tif, bp0, cc0, s)
 	TIFF *tif;
 	u_char *bp0;
 	int cc0;
@@ -1182,7 +1186,7 @@ LZWEncodePredTile(tif, bp0, cc0, s)
  * string and tacking on an End Of Information code.
  */
 static
-LZWPostEncode(tif)
+int LZWPostEncode(tif)
 	TIFF *tif;
 {
 	register LZWEncodeState *sp = (LZWEncodeState *)tif->tif_data;
@@ -1235,7 +1239,7 @@ cl_hash(sp)
 }
 
 static
-LZWCleanup(tif)
+int LZWCleanup(tif)
 	TIFF *tif;
 {
 	if (tif->tif_data) {

@@ -38,7 +38,9 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_ccittrle.c,v 1.2 19
 #include "tiffioP.h"
 #include "tif_fax3.h"
 
-TIFFInitCCITTRLE(tif)
+extern	int TIFFInitCCITTFax3(TIFF*);
+
+int TIFFInitCCITTRLE(tif)
 	TIFF *tif;
 {
 	TIFFInitCCITTFax3(tif);		/* reuse G3 compression */
@@ -58,7 +60,7 @@ TIFFInitCCITTRLE(tif)
 	return (1);
 }
 
-TIFFInitCCITTRLEW(tif)
+int TIFFInitCCITTRLEW(tif)
 	TIFF *tif;
 {
 	TIFFInitCCITTFax3(tif);		/* reuse G3 compression */

@@ -56,15 +56,15 @@ typedef struct {
 } Fax3EncodeState;
 
 #if USE_PROTOTYPES
-static	Fax3PreDecode(TIFF *);
-static	Fax3Decode(TIFF*, u_char *, int, u_int);
+static	int Fax3PreDecode(TIFF *);
+static	int Fax3Decode(TIFF*, u_char *, int, u_int);
 static	int Fax3Decode1DRow(TIFF*, u_char *, int);
-static	Fax3PreEncode(TIFF *);
-static	Fax3PostEncode(TIFF *);
-static	Fax3Encode(TIFF*, u_char *, int, u_int);
+static	int Fax3PreEncode(TIFF *);
+static	int Fax3PostEncode(TIFF *);
+static	int Fax3Encode(TIFF*, u_char *, int, u_int);
 static	int Fax3Encode1DRow(TIFF *, u_char *, int);
-static	Fax3Close(TIFF *);
-static	Fax3Cleanup(TIFF *);
+static	int Fax3Close(TIFF *);
+static	int Fax3Cleanup(TIFF *);
 static	void *Fax3SetupState(TIFF *, int);
 static	void fillspan(char *, int, int);
 static	int findspan(u_char **, int, int, u_char const *);
@@ -91,7 +91,7 @@ static	void putspan();
 extern	int TIFFFlushData1();
 #endif
 
-TIFFInitCCITTFax3(tif)
+int TIFFInitCCITTFax3(tif)
 	TIFF *tif;
 {
 	tif->tif_predecode = Fax3PreDecode;
@@ -110,7 +110,7 @@ TIFFInitCCITTFax3(tif)
 	return (1);
 }
 
-TIFFModeCCITTFax3(tif, isClassF)
+void TIFFModeCCITTFax3(tif, isClassF)
 	TIFF *tif;
 	int isClassF;
 {
@@ -288,7 +288,7 @@ Fax3SetupState(tif, space)
  * Setup state for decoding a strip.
  */
 static
-Fax3PreDecode(tif)
+int Fax3PreDecode(tif)
 	TIFF *tif;
 {
 	Fax3DecodeState *sp = (Fax3DecodeState *)tif->tif_data;
@@ -352,7 +352,7 @@ fillspan(cp, x, count)
  * Decode the requested amount of data.
  */
 static
-Fax3Decode(tif, buf, occ, s)
+int Fax3Decode(tif, buf, occ, s)
 	TIFF *tif;
 	u_char *buf;
 	int occ;
@@ -869,7 +869,7 @@ static const u_char oneruns[256] = {
  * Reset encoding state at the start of a strip.
  */
 static
-Fax3PreEncode(tif)
+int Fax3PreEncode(tif)
 	TIFF *tif;
 {
 	Fax3EncodeState *sp = (Fax3EncodeState *)tif->tif_data;
@@ -1061,7 +1061,7 @@ Fax3PostEncode(tif)
 }
 
 static
-Fax3Close(tif)
+int Fax3Close(tif)
 	TIFF *tif;
 {
 	if ((tif->tif_options & FAX3_CLASSF) == 0) {	/* append RTC */
@@ -1073,7 +1073,7 @@ Fax3Close(tif)
 }
 
 static
-Fax3Cleanup(tif)
+int Fax3Cleanup(tif)
 	TIFF *tif;
 {
 	if (tif->tif_data) {

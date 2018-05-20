@@ -32,6 +32,8 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_open.c,v 1.2 1997/0
 /*
  * TIFF Library.
  */
+#include <sys/types.h>
+#include <unistd.h>
 #include "tiffioP.h"
 #include "prototypes.h"
 
@@ -94,7 +96,7 @@ static const int litTypeshift[13] = {
  * contents and the machine architecture.
  */
 static
-DECLARE3(TIFFInitOrder, register TIFF*, tif, int, magic, int, bigendian)
+int DECLARE3(TIFFInitOrder, register TIFF*, tif, int, magic, int, bigendian)
 {
 	/* XXX how can we deduce this dynamically? */
 	tif->tif_fillorder = FILLORDER_MSB2LSB;
@@ -295,7 +297,7 @@ bad2:
 	return ((TIFF *)0);
 }
 
-TIFFScanlineSize(tif)
+int TIFFScanlineSize(tif)
 	TIFF *tif;
 {
 	TIFFDirectory *td = &tif->tif_dir;

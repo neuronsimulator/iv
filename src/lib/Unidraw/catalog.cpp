@@ -667,6 +667,8 @@ void Catalog::ReadExtraData (
     }
 }
 
+extern char* iv_mytmpnam(char*);
+
 void* Catalog::CopyObject (void* obj, ClassId base_id) {
     void* copy = nil;
 
@@ -681,7 +683,8 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
     static int stackLvl;
 
     if (_tmpfile == nil || ++stackLvl > 1) {
-        _tmpfile = tempnam("/tmp", ".udcp");
+//        _tmpfile = tempnam("/tmp", ".udcp");
+        _tmpfile = iv_mytmpnam(NULL);
     }
     bool ok = obuf.open(_tmpfile, IOS_OUT) != 0;
 

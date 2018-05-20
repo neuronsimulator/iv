@@ -40,7 +40,7 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_print.c,v 1.3 1997/
 
 #ifdef JPEG_SUPPORT
 static
-JPEGPrintQTable(fd, tab)
+void JPEGPrintQTable(fd, tab)
 	FILE *fd;
 	u_char tab[64];
 {
@@ -59,7 +59,7 @@ JPEGPrintQTable(fd, tab)
 }
 
 static
-JPEGPrintCTable(fd, tab)
+void JPEGPrintCTable(fd, tab)
 	FILE *fd;
 	u_char *tab;
 {

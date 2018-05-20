@@ -32,6 +32,7 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_close.c,v 1.2 1997/
 /*
  * TIFF Library.
  */
+#include <unistd.h>
 #include "tiffioP.h"
 
 #if USE_PROTOTYPES

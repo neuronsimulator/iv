@@ -38,6 +38,8 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_packbits.c,v 1.2 19
 #include <stdio.h>
 #include <assert.h>
 
+extern	int TIFFFlushData1(TIFF *);
+
 #if USE_PROTOTYPES
 static	int PackBitsPreEncode(TIFF *);
 static	int PackBitsEncode(TIFF *, u_char *, int, u_int);
@@ -49,7 +51,7 @@ static	int PackBitsEncode(), PackBitsEncodeChunk();
 static	int PackBitsDecode();
 #endif
 
-TIFFInitPackBits(tif)
+int TIFFInitPackBits(tif)
 	TIFF *tif;
 {
 	tif->tif_decoderow = PackBitsDecode;

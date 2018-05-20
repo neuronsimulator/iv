@@ -38,6 +38,8 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_dumpmode.c,v 1.2 19
 #include <stdio.h>
 #include <assert.h>
 
+extern	int TIFFFlushData1(TIFF *);
+
 #if USE_PROTOTYPES
 static	int DumpModeEncode(TIFF *, u_char *, int, u_int);
 static	int DumpModeDecode(TIFF *, u_char *, int, u_int);
@@ -49,7 +51,7 @@ static	int DumpModeEncode(), DumpModeDecode(), DumpModeSeek();
 /*
  * Initialize dump mode.
  */
-TIFFInitDumpMode(tif)
+int TIFFInitDumpMode(tif)
 	register TIFF *tif;
 {
 	tif->tif_decoderow = DumpModeDecode;

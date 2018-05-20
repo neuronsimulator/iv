@@ -113,19 +113,19 @@ public:
     ArrowCmd(Editor* = nil, bool head = false, bool tail = false);
 
     virtual void Execute();
-    bool Head();
-    bool Tail();
+    int Head();
+    int Tail();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 protected:
-    bool _head : 16;
-    bool _tail : 16;
+    int _head : 16;
+    int _tail : 16;
 };
     
-inline bool ArrowCmd::Head () { return _head; }
-inline bool ArrowCmd::Tail () { return _tail; }
+inline int ArrowCmd::Head () { return _head; }
+inline int ArrowCmd::Tail () { return _tail; }
 
 class AboutCmd : public Command {
 public:
