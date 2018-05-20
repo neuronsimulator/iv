@@ -380,7 +380,7 @@ int TextBuffer::EndOfPreviousLine (int index) const
 bool TextBuffer::IsBeginningOfWord (int index) const
 {
     const char* t = Text(index);
-    return t <= text || !isalnum(*(t-1)) && isalnum(*t);
+    return t <= text || (!isalnum(*(t-1)) && isalnum(*t));
 }
 
 int TextBuffer::BeginningOfWord (int index) const
@@ -404,7 +404,7 @@ int TextBuffer::BeginningOfNextWord (int index) const
 bool TextBuffer::IsEndOfWord (int index) const
 {
     const char* t = Text(index);
-    return t >= text+length || isalnum(*(t-1)) && !isalnum(*t);
+    return t >= text+length || (isalnum(*(t-1)) && !isalnum(*t));
 }
 
 int TextBuffer::EndOfWord (int index) const

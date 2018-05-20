@@ -452,7 +452,7 @@ int LZWPreDecode(tif)
 	sp->dec_bitsleft = tif->tif_rawdatasize << 3;
 #endif
 	sp->dec_free_entp = sp->dec_codetab + CODE_FIRST;
-	sp->dec_oldcodep = &sp->dec_codetab[-1];
+	sp->dec_oldcodep = sp->dec_codetab - 1;
 	sp->dec_maxcodep = &sp->dec_codetab[sp->dec_nbitsmask-1];
 	return (1);
 }
@@ -769,7 +769,7 @@ int LZWDecodeCompat(tif, op0, occ0, s)
 			tp = op;
 			do {
 				*--tp = codep->value;
-			} while (codep = codep->next);
+			} while ((codep = codep->next));
 		} else
 			*op++ = code, occ--;
 	}
@@ -1246,6 +1246,7 @@ int LZWCleanup(tif)
 		free(tif->tif_data);
 		tif->tif_data = NULL;
 	}
+	return 1;
 }
 
 /*

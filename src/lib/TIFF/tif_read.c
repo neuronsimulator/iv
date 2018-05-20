@@ -67,7 +67,7 @@ int TIFFReadScanline(tif, buf, row, sample)
 
 	if (!TIFFCheckRead(tif, 0))
 		return (-1);
-	if (e = TIFFSeek(tif, row, sample)) {
+	if ((e = TIFFSeek(tif, row, sample))) {
 		/*
 		 * Decompress desired row into user buffer.
 		 */

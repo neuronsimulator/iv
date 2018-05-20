@@ -1070,6 +1070,7 @@ int Fax3Close(tif)
 			Fax3PutEOL(tif);
 		(void) Fax3PostEncode(tif);
 	}
+	return 1;
 }
 
 static
@@ -1080,6 +1081,7 @@ int Fax3Cleanup(tif)
 		free(tif->tif_data);
 		tif->tif_data = NULL;
 	}
+	return 1;
 }
 
 /*

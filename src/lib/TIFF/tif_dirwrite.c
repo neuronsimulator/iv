@@ -449,6 +449,9 @@ int DECLARE3(TIFFWriteNormalTag,
 			return (0);
 		break;
 	}
+	default: {
+		break;
+	}
 	}
 	return (1);
 }

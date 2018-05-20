@@ -1345,8 +1345,8 @@ void CSolver::Wrote (Connector* c, CNet* nw, CCnxn_HashTable* written) {
             Connector* rtConn = cnxn->_rtConn;
 
             if (
-                lbConn == c && written->Find(rtConn) == nil || 
-                rtConn == c && written->Find(lbConn) == nil
+                (lbConn == c && written->Find(rtConn) == nil) || 
+                (rtConn == c && written->Find(lbConn) == nil)
             ) {
                 CCnxn_HashElem* elem = new CCnxn_HashElem;
                 elem->SetCnxn(cnxn);
@@ -1647,8 +1647,8 @@ void CSolver::SubstSeriesEquiv (
     CCnxn* cb = nwb->Cnxn();
     Connector* shared = Shared(ca, cb);
 
-    if (rva = (shared == ca->_lbConn)) ca->Reverse();
-    if (rvb = (shared == cb->_rtConn)) cb->Reverse();
+    if ((rva = (shared == ca->_lbConn))) ca->Reverse();
+    if ((rvb = (shared == cb->_rtConn))) cb->Reverse();
 
     equiv = net->CreateNetwork(
         net->CreateCnxn(
@@ -1696,9 +1696,9 @@ void CSolver::SubstYEquiv (
     CCnxn* cc = nwc->Cnxn();
     Connector* shared = Shared(ca, cb);
 
-    if (rva = (shared == ca->_lbConn)) ca->Reverse();
-    if (rvb = (shared == cb->_rtConn)) cb->Reverse();
-    if (rvc = (shared == cc->_rtConn)) cc->Reverse();
+    if ((rva = (shared == ca->_lbConn))) ca->Reverse();
+    if ((rvb = (shared == cb->_rtConn))) cb->Reverse();
+    if ((rvc = (shared == cc->_rtConn))) cc->Reverse();
 
     nweqa = net->CreateNetwork(
         net->CreateCnxn(

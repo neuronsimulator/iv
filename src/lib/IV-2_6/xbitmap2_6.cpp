@@ -85,7 +85,7 @@ static void DrawSourceTransformedImage(
             } else {
                 pixel = source;
             }
-            if (mask != lastmask || lastmask && pixel != lastpixel) {
+            if (mask != lastmask || (lastmask && pixel != lastpixel)) {
                 int iilx = Math::round(lx), iily = Math::round(ly);
                 int iirx = Math::round(rx), iiry = Math::round(ry);
                 if (lastmask) {
@@ -179,7 +179,7 @@ static void DrawDestinationTransformedImage(
             } else {
                 pixel = source;
             }
-            if (mask != lastmask || lastmask && pixel != lastpixel) {
+            if (mask != lastmask || (lastmask && pixel != lastpixel)) {
                 if (lastmask) {
                     if (lastpixel != lastdrawnpixel) {
                         XSetForeground(dpy, gc, lastpixel);

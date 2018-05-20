@@ -229,8 +229,7 @@ static bool grabbing;
 
 void Interactor::pick(Canvas*, const Allocation& a, int depth, Hit& h) {
     const Event* ep = h.event();
-    if (ep != nil &&
-	parent != nil || (
+    if ((ep != nil && parent != nil) || (
 	    h.left() < a.right() && h.right() >= a.left() &&
 	    h.bottom() < a.top() && h.top() >= a.bottom()
 	)

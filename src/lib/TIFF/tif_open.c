@@ -111,6 +111,7 @@ int DECLARE3(TIFFInitOrder, register TIFF*, tif, int, magic, int, bigendian)
 		if (bigendian)
 			tif->tif_flags |= TIFF_SWAB;
 	}
+	return 1;
 }
 
 static int

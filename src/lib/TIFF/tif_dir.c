@@ -48,13 +48,13 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_dir.c,v 1.2 1997/03
 extern	int TIFFSetCompressionScheme(TIFF *, int);
 
 static
-int DECLARE2(setString, char**, cpp, char*, cp)
+void DECLARE2(setString, char**, cpp, char*, cp)
 {
 	if (*cpp)
 		free(*cpp), *cpp = 0;
 	if (cp) {
 		int len = strlen(cp)+1;
-		if (*cpp = malloc(len))
+		if ((*cpp = malloc(len)))
 			bcopy(cp, *cpp, len);
 	}
 }
@@ -201,7 +201,7 @@ int TIFFSetField1(tif, tag, ap)
 		/*
 		 * Setup new compression routine state.
 		 */
-		if (status = TIFFSetCompressionScheme(tif, v))
+		if ((status = TIFFSetCompressionScheme(tif, v)))
 			td->td_compression = v;
 		break;
 	case TIFFTAG_PHOTOMETRIC:

@@ -132,15 +132,15 @@ void ArrowLine::getExtent (
 bool ArrowLine::contains (PointObj& po, Graphic* gs) {
     return 
         Line::contains(po, gs) || 
-        Head() && ArrowheadContains(_head, po, gs) ||
-        Tail() && ArrowheadContains(_tail, po, gs);
+        (Head() && ArrowheadContains(_head, po, gs)) ||
+        (Tail() && ArrowheadContains(_tail, po, gs));
 }
 
 bool ArrowLine::intersects (BoxObj& bo, Graphic* gs) {
     return 
         Line::intersects(bo, gs) || 
-        Head() && ArrowheadIntersects(_head, bo, gs) ||
-        Tail() && ArrowheadIntersects(_tail, bo, gs);
+        (Head() && ArrowheadIntersects(_head, bo, gs)) ||
+        (Tail() && ArrowheadIntersects(_tail, bo, gs));
 }
 
 void ArrowLine::draw (Canvas* c, Graphic* gs) {
@@ -299,15 +299,15 @@ void ArrowMultiLine::getExtent (
 bool ArrowMultiLine::contains (PointObj& po, Graphic* gs) {
     return 
         SF_MultiLine::contains(po, gs) || 
-        Head() && ArrowheadContains(_head, po, gs) ||
-        Tail() && ArrowheadContains(_tail, po, gs);
+        (Head() && ArrowheadContains(_head, po, gs)) ||
+        (Tail() && ArrowheadContains(_tail, po, gs));
 }
 
 bool ArrowMultiLine::intersects (BoxObj& bo, Graphic* gs) {
     return 
         SF_MultiLine::intersects(bo, gs) || 
-        Head() && ArrowheadIntersects(_head, bo, gs) ||
-        Tail() && ArrowheadIntersects(_tail, bo, gs);
+        (Head() && ArrowheadIntersects(_head, bo, gs)) ||
+        (Tail() && ArrowheadIntersects(_tail, bo, gs));
 }
 
 void ArrowMultiLine::draw (Canvas* c, Graphic* gs) {
@@ -485,15 +485,15 @@ void ArrowOpenBSpline::getExtent (
 bool ArrowOpenBSpline::contains (PointObj& po, Graphic* gs) {
     return 
         SFH_OpenBSpline::contains(po, gs) || 
-        Head() && ArrowheadContains(_head, po, gs) ||
-        Tail() && ArrowheadContains(_tail, po, gs);
+        (Head() && ArrowheadContains(_head, po, gs)) ||
+        (Tail() && ArrowheadContains(_tail, po, gs));
 }
 
 bool ArrowOpenBSpline::intersects (BoxObj& bo, Graphic* gs) {
     return 
         SFH_OpenBSpline::intersects(bo, gs) || 
-        Head() && ArrowheadIntersects(_head, bo, gs) ||
-        Tail() && ArrowheadIntersects(_tail, bo, gs);
+        (Head() && ArrowheadIntersects(_head, bo, gs)) ||
+        (Tail() && ArrowheadIntersects(_tail, bo, gs));
 }
 
 void ArrowOpenBSpline::draw (Canvas* c, Graphic* gs) {

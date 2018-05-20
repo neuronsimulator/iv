@@ -1430,7 +1430,7 @@ static const int* ExpandToFullSize (const int* orig_data, int size) {
 	}
 
     } else if (size == patternHeight) {
-	const unsigned int patternWidthMask = ~(~0 << patternWidth);
+	const unsigned int patternWidthMask = ~(~(0u) << patternWidth);
 
 	for (int i = 0; i < patternHeight; i++) {
 	    data[i] &= patternWidthMask;
