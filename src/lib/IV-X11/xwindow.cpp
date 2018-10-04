@@ -1973,6 +1973,18 @@ bool Display::get(Event& event) {
     XNextEvent(dpy, &xe);
     e.clear();
     e.window_ = WindowRep::find(xe.xany.window, d->wtable_);
+#if defined(__APPLE__) // command left mouse button converted to middle mouse button
+    if (xe.type == ButtonPress || xe.type == ButtonRelease) {
+      if ((xe.xbutton.button == 1 && xe.xbutton.state & 0x10)) {
+        xe.xbutton.button = 2;
+        xe.xbutton.state -= 0x10;
+        if (xe.xbutton.state & 0x100) {
+           xe.xbutton.state -= 0x100;
+           xe.xbutton.state += 0x200;
+        }
+      }
+    }
+#endif
     if (e.window_ != nil) {
 	e.window_->receive(event);
     }

@@ -129,6 +129,9 @@ void Event::GetButtonInfo(EventType t) {
     button = b.button - 1;
     len = 0;
     GetKeyState(b.state | (Button1Mask << button));
+#if defined(__APPLE__)  // treat command + left as middle
+    button = middlemouse ? 1 : button;
+#endif
 }
 
 void Event::GetKeyInfo() {
@@ -166,6 +169,12 @@ void Event::GetKeyState(unsigned state) {
     leftmouse = (state & Button1Mask) != 0;
     middlemouse = (state & Button2Mask) != 0;
     rightmouse = (state & Button3Mask) != 0;
+#if defined(__APPLE__) // treat command + left as middle
+    if ((state & 0x110) == 0x110) {
+        middlemouse = true;
+        leftmouse = false;
+    }
+#endif
 }
 
 void Event::GetCrossingInfo(EventType t) {
