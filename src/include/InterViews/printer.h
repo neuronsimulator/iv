@@ -30,12 +30,7 @@
 #define iv_printer_h
 
 #include <InterViews/canvas.h>
-
-#if 1 || defined(CYGWIN)
 #include <ivstream.h>
-#else
-#include <ivstrm.h>
-#endif
 
 class PrinterRep;
 

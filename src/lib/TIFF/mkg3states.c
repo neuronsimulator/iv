@@ -266,36 +266,54 @@ void	write_tables();
 int	verbose = FALSE;
 char	*storage_class = "";
 
+#define OUT_FILENAME_MAX_LEN 64
+int fileout = FALSE;
+char out_filename[OUT_FILENAME_MAX_LEN] = {0};
+
 int
 DECLARE2(main, int, argc, char**, argv)
 {
-    while (argc > 1 && argv[1][0] == '-') {
-	if (strcmp(argv[1], "-v") == 0) {
-	    verbose = TRUE;
-	    argc--, argv++;
-	} else if (strcmp(argv[1], "-c") == 0) {
-	    storage_class = "const ";
-	    argc--, argv++;
-	}
+  while (argc > 1 && argv[1][0] == '-') {
+    if (strcmp(argv[1], "-v") == 0) {
+      verbose = TRUE;
+      argc--, argv++;
+    } else if (strcmp(argv[1], "-c") == 0) {
+      storage_class = "const ";
+      argc--, argv++;
+    } else if (strncmp(argv[1], "-o=", 3) == 0) {
+      fileout = TRUE;
+      strncpy(out_filename, &(argv[1][3]), OUT_FILENAME_MAX_LEN-1);
+      argc--, argv++;
+    } else {
+      fprintf(stderr, "Error: I don't understand %s\n",argv[1]);
+      exit(1);
     }
-    build_null_mode_tables();		/* null mode decoding tables */
-    if (verbose) {
-	fprintf(stderr, "%d null mode prefixes defined\n",
-	    (int) null_mode_prefix_count);
-	fprintf(stderr, "building uncompressed mode scripts...\n");
-    }
-    build_uncomp_mode_tables();		/* uncompressed mode decoding tables */
-    if (verbose) {
-	fprintf(stderr, "%d uncompressed mode prefixes defined\n",
-	    (int) uncomp_mode_prefix_count);
-	fprintf(stderr, "building 1D scripts...\n");
-    }
-    build_horiz_mode_tables();		/* 1D decoding tables */
-    if (verbose)
-	fprintf(stderr, "%d incomplete prefixes defined\n",
-	    (int) horiz_mode_prefix_count);
+  }
+  build_null_mode_tables();		/* null mode decoding tables */
+  if (verbose) {
+    fprintf(stderr, "%d null mode prefixes defined\n",
+        (int) null_mode_prefix_count);
+    fprintf(stderr, "building uncompressed mode scripts...\n");
+  }
+  build_uncomp_mode_tables();		/* uncompressed mode decoding tables */
+  if (verbose) {
+    fprintf(stderr, "%d uncompressed mode prefixes defined\n",
+        (int) uncomp_mode_prefix_count);
+    fprintf(stderr, "building 1D scripts...\n");
+  }
+  build_horiz_mode_tables();		/* 1D decoding tables */
+  if (verbose)
+    fprintf(stderr, "%d incomplete prefixes defined\n",
+        (int) horiz_mode_prefix_count);
+
+  if (fileout) {
+    FILE* f = fopen(out_filename, "w");
+    write_tables(f);
+    fclose(f);
+  } else {
     write_tables(stdout);
-    return 0;
+  }
+  return 0;
 }
 
 void
