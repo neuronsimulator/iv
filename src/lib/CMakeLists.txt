@@ -145,7 +145,7 @@ set (IVX11_SOURCE_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/xselection.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/xwindow.cpp)
 
-set (OS_SOURCE_FILES
+set(OS_SOURCE_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/OS/directory.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/OS/file.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/OS/host.cpp
@@ -185,7 +185,8 @@ set(TIFF_SOURCE_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/TIFF/tif_tile.c
 	${CMAKE_CURRENT_SOURCE_DIR}/TIFF/tif_version.c
 	${CMAKE_CURRENT_SOURCE_DIR}/TIFF/tif_warning.c
-	${CMAKE_CURRENT_SOURCE_DIR}/TIFF/tif_write.c)
+	${CMAKE_CURRENT_SOURCE_DIR}/TIFF/tif_write.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h)
 
 set(IVWIN_SOURCE_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/IV-Win/bitmap.cpp
@@ -221,8 +222,122 @@ set(IVMAC_SOURCE_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/IV-Mac/window.cpp)
 
 
+set(UNIDRAW_SOURCE_FILES
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/align.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/brushcmd.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/catalog.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/catcmds.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/cglue.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/clipboard.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/colorcmd.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/command.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/component.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/compview.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/connect.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/connector.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/creator.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/csolver.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/ctrlinfo.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/damage.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/data.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/datas.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/dialogs.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/edit.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/editor.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/editorinfo.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/ellipse.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/ellipses.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/externview.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/font.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/geomobjs.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/globals.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/graphic.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/grblock.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/grcomp.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/grcomptool.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/grid.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/grview.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/gvupdater.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/import.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/iterator.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/keymap.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/kybd.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/line.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/lines.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/link.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/macro.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/magnify.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/manip.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/manips.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/move.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/nop.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/pad.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/patcmd.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/path.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/picture.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/pin.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/polygon.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/polygons.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/pspaint.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/psview.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/rastercomp.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/rasterrect.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/rect.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/reshape.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/rotate.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/scale.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/select.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/selection.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/slot.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/spline.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/splines.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/statevar.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/statevars.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/stateview.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/stateviews.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/stencilcomp.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/stretch.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/text.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/struct.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/tool.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/transfn.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/transfns.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/transforms.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/uarray.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/uctrl.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/uctrls.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/uhash.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/ulabel.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/ulist.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/umap.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/unidraw.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/upage.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/ustencil.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/vertices.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/verts.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/viewcmds.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/viewer.cpp)
+
 # =============================================================================
-# IV  library
+# mkg3states
+# =============================================================================
+  
+add_executable(mkg3states ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c)
+target_include_directories(mkg3states PUBLIC 
+  ${PROJECT_SOURCE_DIR}/src/include/TIFF)
+
+set(TIFF_DEFINES "-DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DHAVE_IEEEFP=1 -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DUSE_CONST=1")
+
+set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c 
+  PROPERTIES COMPILE_FLAGS ${TIFF_DEFINES})
+
+add_custom_target(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h
+  COMMAND ${CMAKE_BINARY_DIR}/bin/mkg3states > g3states.h
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/TIFF VERBATIM
+  DEPENDS ${CMAKE_BINARY_DIR}/bin/mkg3states)
+
+# =============================================================================
+# IV library
 # =============================================================================
 
 set(INTERVIEWS_LINUX_SOURCES 
@@ -253,8 +368,32 @@ else()
 endif()
 
 set(KIT_DEFINES "-Dmotif_kit -Dsgi_motif_kit -Dopenlook_kit -Dbw_kit -Ddefault_kit=SMFKit")
+set(DIV_DEFINES "-DIV_LIBALL='\"${CMAKE_INSTALL_PREFIX}/share\"' -DX_LIBDIR='\"${X11_LIBRARY_DIR}\"'")
+
+
+set_source_files_properties(${TIFF_SOURCE_FILES} 
+  PROPERTIES COMPILE_FLAGS ${TIFF_DEFINES})
+
 set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/InterViews/dialogs.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/InterViews/kit.cpp
   PROPERTIES COMPILE_FLAGS ${KIT_DEFINES})
+set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/session.cpp
+  PROPERTIES COMPILE_FLAGS ${DIV_DEFINES})
 
-target_include_directories(interviews PUBLIC ${X11_INCLUDE_DIR})
+target_include_directories(interviews PUBLIC ${X11_INCLUDE_DIR} ${PROJECT_SOURCE_DIR}/src/include/TIFF)
+
+
+# =============================================================================
+# Unidraw library
+# =============================================================================
+
+if (NOT WIN32)
+  if (${IV_BUILD_SHARED})
+    add_library(unidraw SHARED ${UNIDRAW_SOURCE_FILES})
+  else()
+    add_library(unidraw STATIC ${UNIDRAW_SOURCE_FILES})
+  endif()
+
+  target_include_directories(unidraw PUBLIC ${X11_INCLUDE_DIR})
+
+endif()

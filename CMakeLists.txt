@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.3.0 FATAL_ERROR)
-project(iv CXX)
+project(iv C CXX)
 
 # =============================================================================
 # CMake common project settings
@@ -24,7 +24,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 # =============================================================================
 # Find required packages
 # =============================================================================
-message(STATUS "CHECKING FOR FLEX/BISON")
+message(STATUS "CHECKING FOR X11")
 find_package(X11)
 
 if(NOT ${X11_FOUND})
@@ -57,6 +57,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
    ${CMAKE_CURRENT_SOURCE_DIR}/config.hh)
 
 
-#add_subdirectory(src/bin/)
+add_subdirectory(src/bin/)
 add_subdirectory(src/lib)
 #add_subdirectory(src/include)
