@@ -13,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
 
-set(IV_BUILD_SHARED OFF CACHE BOOL "Build libraries shared or static" FORCE)
+option(IV_BUILD_SHARED "Build libraries shared or static" OFF)
 
 
 # =============================================================================

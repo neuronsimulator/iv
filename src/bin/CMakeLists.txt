@@ -27,7 +27,7 @@ set(ICLASS_SOURCE_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/iclass/iclass.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/iclass/main.cpp)
 
-if (NOT WIN32)
+if (NOT WIN32 AND NOT MINGW)
   add_executable(iclass ${ICLASS_SOURCE_FILES})
   
   target_include_directories(iclass BEFORE PUBLIC 
@@ -59,7 +59,7 @@ set(IDRAW_SOURCE_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/idraw/idvars.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/idraw/main.cpp)
 
-if (NOT WIN32)
+if (NOT WIN32 AND NOT MINGW)
   add_executable(idraw ${IDRAW_SOURCE_FILES})
   
   target_include_directories(idraw BEFORE PUBLIC 

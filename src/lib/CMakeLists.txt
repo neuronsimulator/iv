@@ -123,7 +123,7 @@ set(INTERVIEWS_SOURCE_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/InterViews/xymarker.cpp)
 
 
-if (NOT WIN32)
+if (NOT WIN32 AND NOT MINGW)
   list(APPEND INTERVIEWS_SOURCE_FILES 
     ${CMAKE_CURRENT_SOURCE_DIR}/InterViews/ol_kit.cpp 
     ${CMAKE_CURRENT_SOURCE_DIR}/InterViews/tiff.cpp)
@@ -364,12 +364,11 @@ set(INTERVIEWS_LINUX_SOURCES
 
 set(INTERVIEWS_WIN_SOURCES 
   ${INTERVIEWS_SOURCE_FILES}
-  ${TIFF_SOURCE_FILES}
   ${OS_SOURCE_FILES}
   ${IVWIN_SOURCE_FILES}
   )
   
-if (WIN32)
+if (WIN32 OR MINGW)
   set(SOURCES ${INTERVIEWS_WIN_SOURCES})
 else()
   set(SOURCES ${INTERVIEWS_LINUX_SOURCES})
@@ -381,9 +380,17 @@ else()
   add_library(interviews STATIC ${SOURCES})
 endif()
 
-set(KIT_DEFINES "-Dmotif_kit -Dsgi_motif_kit -Dopenlook_kit -Dbw_kit -Ddefault_kit=SMFKit")
-set(DIV_DEFINES "-DIV_LIBALL='\"${CMAKE_INSTALL_PREFIX}/share\"' -DX_LIBDIR='\"${X11_LIBRARY_DIR}\"'")
+if (WIN32 OR MINGW)
+  target_link_libraries(interviews gdi32 comdlg32)
+endif()
 
+
+if (NOT WIN32 AND NOT MINGW)
+set(KIT_DEFINES "-Dmotif_kit -Dsgi_motif_kit -Dopenlook_kit -Dbw_kit -Ddefault_kit=SMFKit")
+else()
+set(KIT_DEFINES "-Dmotif_kit -Dsgi_motif_kit")
+endif()
+set(DIV_DEFINES "-DIV_LIBALL='\"${CMAKE_INSTALL_PREFIX}/share\"' -DX_LIBDIR='\"${X11_LIBRARY_DIR}\"'")
 
 set_source_files_properties(${TIFF_SOURCE_FILES} 
   PROPERTIES COMPILE_FLAGS ${TIFF_DEFINES})
@@ -396,14 +403,17 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/session.cpp
 
 target_include_directories(interviews PUBLIC ${X11_INCLUDE_DIR} ${PROJECT_SOURCE_DIR}/src/include/TIFF)
   
+if (NOT WIN32 AND NOT MINGW)
 install(TARGETS interviews DESTINATION lib)
-
+else()
+install(TARGETS interviews DESTINATION bin)
+endif()
 
 # =============================================================================
 # Unidraw library
 # =============================================================================
 
-if (NOT WIN32)
+if (NOT WIN32 AND NOT MINGW)
   if (${IV_BUILD_SHARED})
     add_library(unidraw SHARED ${UNIDRAW_SOURCE_FILES})
   else()
