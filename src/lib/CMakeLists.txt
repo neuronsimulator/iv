@@ -419,6 +419,6 @@ endif()
 # copy app-defaults
 # =============================================================================
 
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/app-defaults
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/app-defaults/
   DESTINATION share/app-defaults)
 

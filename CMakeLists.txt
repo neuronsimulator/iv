@@ -56,7 +56,7 @@ check_include_files(math.h HAVE_MATH_H)
 #configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
 #   ${CMAKE_CURRENT_SOURCE_DIR}/config.hh)
 
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/
   DESTINATION include)
 
 add_subdirectory(src/bin/)
