@@ -9,6 +9,8 @@ set(IDEMO_SOURCE_FILES
 add_executable(idemo ${IDEMO_SOURCE_FILES})
   
 target_link_libraries(idemo interviews ${X11_LIBRARIES})
+  
+install(TARGETS idemo DESTINATION bin)
 
 
 # =============================================================================
@@ -35,7 +37,8 @@ if (NOT WIN32)
     PROPERTIES COMPILE_FLAGS "-Div2_6_compatible")
   
   target_link_libraries(iclass unidraw interviews ${X11_LIBRARIES})
-
+  
+  install(TARGETS iclass DESTINATION bin)
 endif()
 
 # =============================================================================
@@ -67,4 +70,5 @@ if (NOT WIN32)
   
   target_link_libraries(idraw unidraw interviews ${X11_LIBRARIES})
 
+  install(TARGETS idraw DESTINATION bin)
 endif()
