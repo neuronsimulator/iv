@@ -50,6 +50,7 @@ set(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR})
 add_definitions(-DHAVE_CONFIG_H)
 
 include(CheckIncludeFiles)
+include(CheckFunctionExists)
 
 macro(have_dir HEADER VARIABLE)
   set(CONFTEST_DIR_TPL "
