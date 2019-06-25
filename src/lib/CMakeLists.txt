@@ -332,7 +332,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c
   PROPERTIES COMPILE_FLAGS ${TIFF_DEFINES})
 
 add_custom_target(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h
-  COMMAND ${CMAKE_BINARY_DIR}/bin/mkg3states > g3states.h
+  COMMAND ${CMAKE_BINARY_DIR}/bin/mkg3states -o=g3states.h
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/TIFF VERBATIM
   DEPENDS ${CMAKE_BINARY_DIR}/bin/mkg3states)
 
