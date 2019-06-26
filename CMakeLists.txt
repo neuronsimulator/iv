@@ -97,7 +97,6 @@ macro(have_type HEADER TYPE DEFAULT_TYPE VARIABLE)
 endmacro()
 
 
-check_function_exists(sigsetmask HAVE_BSD_SIGNALS)
 have_dir(dirent.h HAVE_DIRENT_H)
 have_dir(ndir.h HAVE_NDIR_H)
 have_dir(sys/dir.h HAVE_SYS_DIR_H)
@@ -133,6 +132,17 @@ check_include_files(sys/time.h HAVE_SYS_TIME_H)
 check_function_exists(uname HAVE_UNAME)
 check_include_files(unistd.h HAVE_UNISTD_H)
 
+#check_function_exists(sigsetmask HAVE_BSD_SIGNALS)
+#made obsolete by sigprocmask(2). sigsetmask exists but the usage generates
+#a variety of errors such as '... sv has incomplete type and cannot be defined'
+#on linux.
+#if needed in the future, see the old autoconf acinclude.m4 AC_DEFUN([BASH_SIGNAL_CHECK]
+#For now, use only if don't have posix signals
+if (NOT ${HAVE_POSIX_SIGNALS})
+  set (HAVE_BSD_SIGNALS 1)
+else()
+  set(HAVE_BSD_SIGNALS 0)
+endif()
 
 set(CONFTEST_RETSIGTYPE "
 /* end confdefs.h.  */
