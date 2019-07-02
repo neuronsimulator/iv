@@ -179,8 +179,14 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
    ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/
-  DESTINATION include)
+ DESTINATION include)
 
 add_subdirectory(src/bin/)
 add_subdirectory(src/lib)
-#add_subdirectory(src/include)
+
+
+install(EXPORT iv NAMESPACE iv_ DESTINATION share/cmake/iv)
+
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iv-config.cmake
+  DESTINATION share/cmake/iv/
+)
