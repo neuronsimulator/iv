@@ -19,7 +19,9 @@ option(IV_BUILD_SHARED "Build libraries shared or static" OFF)
 # =============================================================================
 # Compile static libraries with hidden visibility
 # =============================================================================
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+if(NOT ${IV_BUILD_SHARED})
+  set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+endif()
 
 # =============================================================================
 # Find required packages
@@ -179,7 +181,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
    ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/
- DESTINATION include)
+  DESTINATION include)
 
 add_subdirectory(src/bin/)
 add_subdirectory(src/lib)
