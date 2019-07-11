@@ -403,6 +403,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/session.cpp
 
 target_include_directories(interviews PRIVATE ${X11_INCLUDE_DIR}
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/include/TIFF> $<INSTALL_INTERFACE:include/TIFF>)
+set_property(TARGET interviews PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if (NOT WIN32 AND NOT MINGW)
   install(TARGETS interviews

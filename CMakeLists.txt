@@ -32,6 +32,8 @@ find_package(X11)
 if(NOT ${X11_FOUND})
   if (APPLE)
     message(FATAL_ERROR "You must install XQuartz from https://www.xquartz.org/ to build iv")
+  else()
+    message(FATAL_ERROR "You must install X11 to build iv (e.g. 'apt install libx11-dev libxcomposite-dev' on Ubuntu")
   endif()
 endif()
 
