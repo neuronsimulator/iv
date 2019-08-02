@@ -389,6 +389,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/session.cpp
                             ${DIV_DEFINES})
 
 add_library(interviews ${IV_LIB_TYPE} ${INTERVIEWS_SOURCES})
+target_link_libraries(interviews ${X11_LIBRARIES})
 target_include_directories(interviews
                            PRIVATE ${X11_INCLUDE_DIR}
                                    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/include/TIFF>
@@ -409,6 +410,7 @@ if(NOT IV_WINDOWS_BUILD)
     add_library(unidraw STATIC ${UNIDRAW_SOURCE_FILES})
   endif()
   target_include_directories(unidraw PUBLIC ${X11_INCLUDE_DIR})
+  target_link_libraries(unidraw interviews)
 endif()
 
 # =============================================================================
