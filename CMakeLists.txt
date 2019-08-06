@@ -21,7 +21,7 @@ option(IV_BUILD_SHARED "Build libraries shared or static" OFF)
 # =============================================================================
 # CMake build settings
 # =============================================================================
-set(CMAKE_BUILD_TYPE RelWithDebInfo)
+set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
 if(NOT ${IV_BUILD_SHARED})
@@ -37,19 +37,6 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "CYGWIN")
 endif()
 
 # =============================================================================
-# Find dependencies
-# =============================================================================
-find_package(X11)
-
-if(NOT ${X11_FOUND})
-  if(APPLE)
-    message(FATAL_ERROR "Install XQuartz from https://www.xquartz.org/ to build iv")
-  else()
-    message(FATAL_ERROR "Install X11 to build iv (e.g. 'apt install libx11-dev libxcomposite-dev' on Ubuntu")
-  endif()
-endif()
-
-# =============================================================================
 # Include cmake modules
 # =============================================================================
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -58,6 +45,19 @@ include(PlatformHelper)
 include(RpathHelper)
 include(CheckIncludeFiles)
 include(CheckFunctionExists)
+
+# =============================================================================
+# Find dependencies
+# =============================================================================
+find_package(X11)
+
+if(NOT X11_FOUND AND NOT IV_WINDOWS_BUILD)
+  if(APPLE)
+    message(FATAL_ERROR "Install XQuartz from https://www.xquartz.org/ to build iv")
+  else()
+    message(FATAL_ERROR "Install X11 to build iv (e.g. 'apt install libx11-dev libxcomposite-dev' on Ubuntu")
+  endif()
+endif()
 
 # =============================================================================
 # Check existance of various headers, functions and directories
