@@ -19,7 +19,7 @@ set(ICLASS_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/iclass/iclass.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/iclass/main.cpp)
 
-if(NOT BUILD_UNDER_WINDOWS)
+if(NOT IV_WINDOWS_BUILD)
   add_executable(iclass ${ICLASS_SOURCE_FILES})
   target_include_directories(iclass BEFORE PUBLIC ${PROJECT_SOURCE_DIR}/src/include/IV-2_6)
   set_source_files_properties(${ICLASS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-Div2_6_compatible")
@@ -43,7 +43,7 @@ set(IDRAW_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/idraw/idvars.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/idraw/main.cpp)
 
-if(NOT BUILD_UNDER_WINDOWS)
+if(NOT IV_WINDOWS_BUILD)
   add_executable(idraw ${IDRAW_SOURCE_FILES})
   target_include_directories(idraw BEFORE PUBLIC ${PROJECT_SOURCE_DIR}/src/include/IV-2_6)
   set_source_files_properties(${IDRAW_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-Div2_6_compatible")
@@ -53,7 +53,7 @@ endif()
 # =============================================================================
 # Install various targets
 # =============================================================================
-if(NOT BUILD_UNDER_WINDOWS)
+if(NOT IV_WINDOWS_BUILD)
   install(TARGETS iclass DESTINATION bin)
   install(TARGETS idraw DESTINATION bin)
 endif()

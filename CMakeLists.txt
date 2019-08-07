@@ -21,7 +21,7 @@ option(IV_BUILD_SHARED "Build libraries shared or static" OFF)
 # =============================================================================
 # CMake build settings
 # =============================================================================
-set(CMAKE_BUILD_TYPE RelWithDebInfo)
+set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
 if(NOT ${IV_BUILD_SHARED})
@@ -41,7 +41,7 @@ endif()
 # =============================================================================
 find_package(X11)
 
-if(NOT ${X11_FOUND})
+if(NOT ${X11_FOUND} AND NOT ${IV_WINDOWS_BUILD})
   if(APPLE)
     message(FATAL_ERROR "Install XQuartz from https://www.xquartz.org/ to build iv")
   else()
