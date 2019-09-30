@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.3.0 FATAL_ERROR)
-project(iv C CXX)
+project(INTERVIEWS C CXX)
 
 # =============================================================================
 # CMake common project settings
@@ -140,3 +140,29 @@ add_subdirectory(src/lib)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iv-config.cmake DESTINATION share/cmake/iv/)
 install(EXPORT iv NAMESPACE iv_ DESTINATION share/cmake/iv)
+
+# =============================================================================
+# Print build status
+# =============================================================================
+message(STATUS "")
+message(STATUS "Configured INTERVIEWS ${PROJECT_VERSION}")
+message(STATUS "")
+string(TOLOWER "${CMAKE_GENERATOR}" cmake_generator_tolower)
+if(cmake_generator_tolower MATCHES "makefile")
+  message(STATUS "Some things you can do now:")
+  message(STATUS "--------------+--------------------------------------------------------------")
+  message(STATUS "Command       |   Description")
+  message(STATUS "--------------+--------------------------------------------------------------")
+  message(STATUS "make install  | Will install INTERVIEWS to: ${CMAKE_INSTALL_PREFIX}")
+  message(STATUS "              | Change the install location of NEURON using:")
+  message(STATUS "              |     cmake <src_path> -DCMAKE_INSTALL_PREFIX=<install_path>")
+  message(STATUS "make uninstall| Removes files installed by make install")
+  message(STATUS "--------------+--------------------------------------------------------------")
+  message(STATUS "Build option  | Status")
+  message(STATUS "--------------+--------------------------------------------------------------")
+  message(STATUS "SHARED        | ${IV_BUILD_SHARED}")
+  message(STATUS "--------------+--------------------------------------------------------------")
+  message(STATUS " See more : https://github.com/neuronsimulator/iv")
+  message(STATUS "--------------+--------------------------------------------------------------")
+endif()
+message(STATUS "")
