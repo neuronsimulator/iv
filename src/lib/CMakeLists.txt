@@ -326,10 +326,10 @@ set(
 
 # command to generate g3states.h
 add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h
-                   COMMAND ${CMAKE_BINARY_DIR}/bin/mkg3states -o=g3states.h
+                   COMMAND mkg3states -o=g3states.h
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/TIFF
                    VERBATIM
-                   DEPENDS ${CMAKE_BINARY_DIR}/bin/mkg3states)
+                   DEPENDS mkg3states)
 
 set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h
 							PROPERTIES
@@ -347,7 +347,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c
                             ${TIFF_DEFINES})
 
 add_executable(mkg3states ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c)
-target_include_directories(mkg3states PUBLIC ${PROJECT_SOURCE_DIR}/src/include/TIFF)
+target_include_directories(mkg3states PUBLIC ${IV_PROJECT_SOURCE_DIR}/src/include/TIFF)
 
 # =============================================================================
 # IV library
@@ -392,7 +392,7 @@ add_library(interviews ${IV_LIB_TYPE} ${INTERVIEWS_SOURCES})
 target_link_libraries(interviews ${X11_LIBRARIES})
 target_include_directories(interviews
                            PRIVATE ${X11_INCLUDE_DIR}
-                                   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/include/TIFF>
+                                   $<BUILD_INTERFACE:${IV_PROJECT_SOURCE_DIR}/src/include/TIFF>
                                    $<INSTALL_INTERFACE:include/TIFF>)
 set_property(TARGET interviews PROPERTY POSITION_INDEPENDENT_CODE ON)
 

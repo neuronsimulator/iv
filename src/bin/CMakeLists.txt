@@ -21,7 +21,7 @@ set(ICLASS_SOURCE_FILES
 
 if(NOT IV_WINDOWS_BUILD)
   add_executable(iclass ${ICLASS_SOURCE_FILES})
-  target_include_directories(iclass BEFORE PUBLIC ${PROJECT_SOURCE_DIR}/src/include/IV-2_6)
+  target_include_directories(iclass BEFORE PUBLIC ${IV_PROJECT_SOURCE_DIR}/src/include/IV-2_6)
   set_source_files_properties(${ICLASS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-Div2_6_compatible")
   target_link_libraries(iclass unidraw interviews ${X11_LIBRARIES})
 endif()
@@ -45,7 +45,7 @@ set(IDRAW_SOURCE_FILES
 
 if(NOT IV_WINDOWS_BUILD)
   add_executable(idraw ${IDRAW_SOURCE_FILES})
-  target_include_directories(idraw BEFORE PUBLIC ${PROJECT_SOURCE_DIR}/src/include/IV-2_6)
+  target_include_directories(idraw BEFORE PUBLIC ${IV_PROJECT_SOURCE_DIR}/src/include/IV-2_6)
   set_source_files_properties(${IDRAW_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-Div2_6_compatible")
   target_link_libraries(idraw unidraw interviews ${X11_LIBRARIES})
 endif()
