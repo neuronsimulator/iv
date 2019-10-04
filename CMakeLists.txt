@@ -13,6 +13,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR})
 
+
+# =============================================================================
+# To be able to use project as submodule, avoid using PROJECT_SOURCE_DIR
+# =============================================================================
+set(IV_PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+# For future target customization
+set(IV_AS_SUBPROJECT OFF)
+if (NOT CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  set(IV_AS_SUBPROJECT ON)
+endif()
+
 # =============================================================================
 # Project build options
 # =============================================================================
@@ -39,7 +50,7 @@ endif()
 # =============================================================================
 # Include cmake modules
 # =============================================================================
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${IV_PROJECT_SOURCE_DIR}/cmake)
 include(HelperFunctions)
 include(PlatformHelper)
 include(RpathHelper)
@@ -130,7 +141,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_SOURCE_DI
 # =============================================================================
 # Include source directories
 # =============================================================================
-include_directories(${PROJECT_SOURCE_DIR}/src/include)
+include_directories(${IV_PROJECT_SOURCE_DIR}/src/include)
 add_subdirectory(src/bin)
 add_subdirectory(src/lib)
 
@@ -139,7 +150,7 @@ add_subdirectory(src/lib)
 # =============================================================================
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iv-config.cmake DESTINATION share/cmake/iv/)
-install(EXPORT iv NAMESPACE iv_ DESTINATION share/cmake/iv)
+install(EXPORT iv DESTINATION share/cmake/iv)
 
 # =============================================================================
 # Print build status
