@@ -149,8 +149,10 @@ add_subdirectory(src/lib)
 # Install binaries and headers
 # =============================================================================
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/iv-config.cmake DESTINATION share/cmake/iv/)
-install(EXPORT iv DESTINATION share/cmake/iv)
+if(NOT IV_AS_SUBPROJECT)
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake DESTINATION share/cmake)
+  install(EXPORT iv DESTINATION share/cmake)
+endif()
 
 # =============================================================================
 # Print build status
