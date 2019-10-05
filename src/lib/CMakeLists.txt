@@ -432,7 +432,7 @@ if(NOT IV_WINDOWS_BUILD)
 else()
   install(TARGETS interviews
           EXPORT iv
-          DESTINATION bin
+          DESTINATION lib
           INCLUDES
           DESTINATION $<INSTALL_INTERFACE:include>)
 endif()
