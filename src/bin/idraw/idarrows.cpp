@@ -511,7 +511,7 @@ void ArrowOpenBSpline::draw (Canvas* c, Graphic* gs) {
         if (Tail()) _tail->CorrectedTip(tx1, ty1, br, gs->GetTransformer());
 
         _x[0] = _x[1] = _x[2] = tx0; _y[0] = _y[1] = _y[2] = ty0;
-        _x[l] = _x[k] = _x[j] = tx1; _y[l] = _y[k] = _y[k] = ty1;
+        _x[l] = _x[k] = _x[j] = tx1; _y[l] = _y[k] = _y[j] = ty1;
 
         update(gs);
         _p->BSpline(c, _x, _y, _count);
