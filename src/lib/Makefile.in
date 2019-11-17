@@ -74,7 +74,7 @@ libIV_la_LDFLAGS = -version-info 3:3:0 $(X_LDFLAGS)
 libIV_la_LIBADD = $(X_LIBS)
 
 libUnidraw_la_LDFLAGS = -version-info 3:3:0 $(X_LDFLAGS)
-libUnidraw_la_LIBADD = $(X_LIBS)
+libUnidraw_la_LIBADD = $(libIV) $(X_LIBS) 
 
 #
 # Lists of objects that go into the libraries:
@@ -472,7 +472,7 @@ uninstall:
 $(libIV): $(libIV_la_OBJECTS) $(libIV_la_DEPENDENCIES)
 	$(CXXLINK) -rpath $(libdir) $(libIV_la_LDFLAGS) $(libIV_la_OBJECTS) $(libIV_la_LIBADD) $(MINGW_LIBS) $(LIBS)
 
-$(libUnidraw): $(libUnidraw_la_OBJECTS) $(libUnidraw_la_DEPENDENCIES)
+$(libUnidraw): $(libUnidraw_la_OBJECTS) $(libUnidraw_la_DEPENDENCIES) $(libIV)
 	$(CXXLINK) -rpath $(libdir) $(libUnidraw_la_LDFLAGS) $(libUnidraw_la_OBJECTS) $(libUnidraw_la_LIBADD) $(LIBS)
 
 
