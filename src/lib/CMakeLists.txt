@@ -404,7 +404,7 @@ endif()
 # Unidraw library
 # =============================================================================
 if(NOT IV_WINDOWS_BUILD)
-  if(${IV_BUILD_SHARED})
+  if(IV_ENABLE_SHARED)
     add_library(unidraw SHARED ${UNIDRAW_SOURCE_FILES})
   else()
     add_library(unidraw STATIC ${UNIDRAW_SOURCE_FILES})

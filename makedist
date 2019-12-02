@@ -47,7 +47,6 @@ INSTALL \
 README \
 acinclude.m4 \
 build.sh \
-chkstream.m4 \
 config.guess \
 config.sub \
 install-sh \
