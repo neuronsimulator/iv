@@ -27,7 +27,7 @@ endif()
 # =============================================================================
 # Project build options
 # =============================================================================
-option(IV_BUILD_SHARED "Build libraries shared or static" OFF)
+option(IV_ENABLE_SHARED "Build libraries shared or static" OFF)
 
 # =============================================================================
 # CMake build settings
@@ -35,7 +35,7 @@ option(IV_BUILD_SHARED "Build libraries shared or static" OFF)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
-if(NOT ${IV_BUILD_SHARED})
+if(NOT IV_ENABLE_SHARED)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
   set(IV_LIB_TYPE "STATIC")
 else()
@@ -177,7 +177,7 @@ if(cmake_generator_tolower MATCHES "makefile")
   message(STATUS "--------------+--------------------------------------------------------------")
   message(STATUS "Build option  | Status")
   message(STATUS "--------------+--------------------------------------------------------------")
-  message(STATUS "SHARED        | ${IV_BUILD_SHARED}")
+  message(STATUS "SHARED        | ${IV_ENABLE_SHARED}")
   message(STATUS "--------------+--------------------------------------------------------------")
   message(STATUS " See more : https://github.com/neuronsimulator/iv")
   message(STATUS "--------------+--------------------------------------------------------------")
