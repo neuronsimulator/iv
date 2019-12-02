@@ -1,0 +1,52 @@
+#=============================================================================
+# Travis IV settings
+#=============================================================================
+
+#=============================================================================
+# Environment
+#=============================================================================
+language: cpp
+dist: bionic
+osx_image: xcode10.2
+
+#=============================================================================
+# Common Packages
+#=============================================================================
+addons:
+    apt:
+        packages:
+        - libx11-dev
+        - libxcomposite-dev
+    homebrew:
+        packages:
+        - xz
+
+#=============================================================================
+# Configure build matrix and corresponding environment
+#=============================================================================
+env:
+  global:
+    - INSTALL_DIR="$HOME/install"
+  jobs:
+    - BUILD_CMD="bash build.sh && ./configure --prefix=$INSTALL_DIR"
+    - BUILD_CMD="cmake . -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR -DIV_ENABLE_SHARED=OFF"
+    - BUILD_CMD="cmake . -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR -DIV_ENABLE_SHARED=ON"
+os:
+  - linux
+  - osx
+
+#=============================================================================
+# Setup environment and Install dependencies (nothing for now)
+#=============================================================================
+before_install:
+  - echo $LANG
+  - echo $LC_ALL
+  - $CXX -v
+
+#=============================================================================
+# Build and install
+#=============================================================================
+script:
+  - eval ${BUILD_CMD}
+  - make -j 2
+  - make install

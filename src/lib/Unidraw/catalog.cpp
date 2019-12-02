@@ -69,9 +69,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#if !defined(HAVE_SSTREAM)
-#include <strstream.h>
-#endif
 #if HAVE_UNISTD_H
 #include <unistd.h>
 #endif
@@ -1620,12 +1617,8 @@ PSPattern* Catalog::ReadPattern (const char* n, int index) {
 	    }
 
 	} else {
-#if defined(HAVE_SSTREAM)
 	    istringstream in(definition);
-#else
-	    istrstream in(definition, strlen(definition) + 1);
-#endif
-            int data[patternHeight];
+      int data[patternHeight];
 
 	    int i;
 	    for (i = 0; in >> buf && i < patternHeight; i++) {

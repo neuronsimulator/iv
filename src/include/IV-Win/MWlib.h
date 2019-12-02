@@ -55,7 +55,9 @@ void MWcleanup();
 // ---- error handling support ----
 void mwAssertion(const char* msg, const char* file, unsigned int line);
 #ifdef NDEBUG
-#define MWassert(test) ((void) 0)
+// cannot be completely turned off becasue 52 cases with side effects
+//#define MWassert(test) ((void) 0)
+#define MWassert(test) ((void)(test))
 #else
 #define MWassert(test) ((void)((test) || (mwAssertion(#test,__FILE__,__LINE__),1)))
 #endif

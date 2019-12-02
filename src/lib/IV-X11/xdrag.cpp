@@ -43,9 +43,6 @@
 #include <OS/host.h>
 #include <OS/types.h>
 #include <string.h>
-#if !defined(HAVE_SSTREAM)
-#include <strstream.h>
-#endif
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -135,17 +132,10 @@ static void setDragProperty(
     Atom property = None;
     if (length != 0) {
 	char buffer[256];
-#if defined(HAVE_SSTREAM)
 	ostringstream name(buffer);
 	name << dragName << "_" << Host::name() << "_" << getpid() << "_"  <<
 	    dropUid++;
 	property = XInternAtom(display, name.str().c_str(), False);
-#else
-	ostrstream name(buffer, 256);
-	name << dragName << "_" << Host::name() << "_" << getpid() << "_"  <<
-	    dropUid++ << ends;
-	property = XInternAtom(display, name.str(), False);
-#endif
 
 	XChangeProperty(
 	    display, destination, property, XA_STRING, 8,
