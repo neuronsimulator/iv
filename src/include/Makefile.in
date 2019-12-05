@@ -70,7 +70,6 @@ install:
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(includedir)/$$file; \
 	done
 	$(INSTALL_DATA) ivstream.h $(DESTDIR)$(includedir)/ivstream.h
-	$(INSTALL_DATA) ivstrm.h $(DESTDIR)$(includedir)/ivstrm.h
 	$(INSTALL_DATA) ivversion.h $(DESTDIR)$(includedir)/ivversion.h
 
 uninstall:
@@ -81,7 +80,7 @@ uninstall:
 	  done; \
 	  cd ..; \
 	done
-	for file in ivstream.h ivstrm.h ivversion.h do \
+	for file in ivstream.h ivversion.h do \
 	  rm -f $(DESTDIR}$(includedir)/$$file; \
 	done
 .PHONY: all install clean mostlyclean distclean uninstall
