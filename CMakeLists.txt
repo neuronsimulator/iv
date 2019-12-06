@@ -28,6 +28,8 @@ endif()
 # Project build options
 # =============================================================================
 option(IV_ENABLE_SHARED "Build libraries shared or static" OFF)
+# useful for MAC if XQuartz not installed on user machine
+option(IV_ENABLE_X11_DYNAMIC "dlopen X11 after launch" OFF)
 
 # =============================================================================
 # CMake build settings
@@ -157,6 +159,9 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
 if(NOT IV_AS_SUBPROJECT)
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake DESTINATION share/cmake)
   install(EXPORT iv DESTINATION share/cmake)
+  if(IV_X11_DYNAMIC_FILES)
+    install(FILES ${IV_X11_DYNAMIC_INCLUDE_FILES} DESTINATION include)
+  endif()
 endif()
 
 # =============================================================================
@@ -178,6 +183,9 @@ if(cmake_generator_tolower MATCHES "makefile")
   message(STATUS "Build option  | Status")
   message(STATUS "--------------+--------------------------------------------------------------")
   message(STATUS "SHARED        | ${IV_ENABLE_SHARED}")
+  if (X11_FOUND)
+    message(STATUS "X11_DYNAMIC   | ${IV_ENABLE_X11_DYNAMIC}")
+  endif()
   message(STATUS "--------------+--------------------------------------------------------------")
   message(STATUS " See more : https://github.com/neuronsimulator/iv")
   message(STATUS "--------------+--------------------------------------------------------------")

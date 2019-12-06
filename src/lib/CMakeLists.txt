@@ -315,6 +315,9 @@ set(UNIDRAW_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/viewcmds.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/viewer.cpp)
 
+set(IVX11DYNAM_SOURCE_FILES
+    $CMAKE_CURRENT_SOURCE_DIR}/x11_dynam/ivx11_dynam.cpp)
+
 # =============================================================================
 # mkg3states utility
 # =============================================================================
@@ -349,6 +352,29 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c
 add_executable(mkg3states ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c)
 target_include_directories(mkg3states PUBLIC ${IV_PROJECT_SOURCE_DIR}/src/include/TIFF)
 
+
+# =============================================================================
+# mkdynam creates four .h files when IV_ENABLE_X11_DYNAM=ON
+# =============================================================================
+message(STATUS "IV_ENABLE_X11_DYNAMIC ${IV_ENABLE_X11_DYNAMIC}")
+message(STATUS "X11_FOUND ${X11_FOUND}")
+if (IV_ENABLE_X11_DYNAMIC AND X11_FOUND)
+    set(x11dynam_srcdir ${CMAKE_CURRENT_SOURCE_DIR}/x11_dynam)
+    set(x11dynam_incdir ${IV_PROJECT_SOURCE_DIR}/src/include/IV-X11)
+    set(x11dynam_files
+        ${x11dynam_incdir}/ivx11_declare.h
+        ${x11dynam_incdir}/ivx11_redef.h
+        ${x11dynam_incdir}/ivx11_define.h
+        ${x11dynam_incdir}/ivx11_assign.h)
+    set(IV_X11_DYNAMIC_INCLUDE_FILES ${x11dynam_files} PARENT_SCOPE)
+
+    add_custom_command(OUTPUT ${x11dynam_files}
+        COMMAND ${PYTHON_EXE} '${x11dynam_srcdir}/mkdynam.py' '${x11dynam_incdir}' '${X11_INCLUDE_DIR}'
+        DEPENDS ${x11dynam_srcdir}/mkdynam.py
+        WORKING_DIRECTORY ${x11dynam_srcdir})
+
+endif()
+
 # =============================================================================
 # IV library
 # =============================================================================
@@ -366,6 +392,23 @@ else()
 		${INTERVIEWS_SOURCE_FILES}
 		${OS_SOURCE_FILES}
 		${IVWIN_SOURCE_FILES})
+endif()
+
+if (IV_ENABLE_X11_DYNAMIC AND X11_FOUND)
+    list(APPEND INTERVIEWS_SOURCES ${x11dynam_srcdir}/ivx11_dynam.cpp)
+    set_source_files_properties(${INTERVIEWS_SOURCES}
+        PROPERTIES
+        COMPILE_DEFINITIONS "IVX11_DYNAM")
+    add_library(ivx11dynam SHARED ${x11dynam_srcdir}/ivx11_dynamlib.cpp)
+    target_link_libraries(ivx11dynam ${X11_LIBRARIES})
+    target_include_directories(ivx11dynam
+        PRIVATE ${X11_INCLUDE_DIR})
+    set_property(TARGET ivx11dynam PROPERTY POSITION_INDEPENDENT_CODE ON)
+    install(TARGETS ivx11dynam
+        EXPORT iv
+        DESTINATION lib
+        INCLUDES
+        DESTINATION $<INSTALL_INTERFACE:include>)
 endif()
 
 if(NOT IV_WINDOWS_BUILD)
@@ -389,7 +432,11 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/session.cpp
                             ${DIV_DEFINES})
 
 add_library(interviews ${IV_LIB_TYPE} ${INTERVIEWS_SOURCES})
-target_link_libraries(interviews ${X11_LIBRARIES})
+if (IV_ENABLE_X11_DYNAMIC AND X11_FOUND)
+    target_link_libraries(interviews dl)
+else()
+    target_link_libraries(interviews ${X11_LIBRARIES})
+endif()
 target_include_directories(interviews
                            PRIVATE ${X11_INCLUDE_DIR}
                                    $<BUILD_INTERFACE:${IV_PROJECT_SOURCE_DIR}/src/include/TIFF>

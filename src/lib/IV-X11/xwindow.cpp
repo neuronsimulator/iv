@@ -1747,7 +1747,18 @@ Display* Display::open() {
     return open(nil);
 }
 
+#if defined(IVX11_DYNAM)
+extern "C" {
+extern int ivx11_dyload(); // return 0 on success
+}
+#endif
+
 Display* Display::open(const char* device) {
+#if defined(IVX11_DYNAM)
+    if (ivx11_dyload()) {
+        return nil;
+    }
+#endif
     XDisplay* dpy = XOpenDisplay(device);
     if (dpy == nil) {
 	return nil;
