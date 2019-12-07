@@ -11,7 +11,7 @@
 
 ivinc = '../../include/IV-X11'
 xlibs = ["Xlib.h", "Xutil.h"]
-xlibdir = '/usr/include/X11'
+xlibdir = '/usr/X11/include/X11'
 
 exceptions_ = ['XSupportsLocale', 'XDefaultString', 'XKeycodeToKeysym']
 

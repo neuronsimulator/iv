@@ -401,6 +401,10 @@ if (IV_ENABLE_X11_DYNAMIC AND X11_FOUND)
         COMPILE_DEFINITIONS "IVX11_DYNAM")
     add_library(ivx11dynam SHARED ${x11dynam_srcdir}/ivx11_dynamlib.cpp)
     target_link_libraries(ivx11dynam ${X11_LIBRARIES})
+    if (APPLE)
+        set_target_properties(ivx11dynam PROPERTIES
+            LINK_FLAGS "-undefined dynamic_lookup")
+    endif()
     target_include_directories(ivx11dynam
         PRIVATE ${X11_INCLUDE_DIR})
     set_property(TARGET ivx11dynam PROPERTY POSITION_INDEPENDENT_CODE ON)

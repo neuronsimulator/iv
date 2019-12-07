@@ -3,6 +3,7 @@
 # =============================================================================
 if (IV_ENABLE_X11_DYNAMIC AND NOT IV_ENABLE_SHARED AND X11_FOUND)
     set(_ivx11 ${CMAKE_CURRENT_SOURCE_DIR}/../lib/x11_dynam/ivx11_dynamlib.cpp)
+    include_directories("${X11_INCLUDE_DIR}")
 else()
     set(_ivx11 "")
 endif()
