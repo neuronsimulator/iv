@@ -144,6 +144,7 @@ iv_check_signal_return_type(RETSIGTYPE)
 # =============================================================================
 add_definitions(-DHAVE_CONFIG_H)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake.in ${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake)
 
 # =============================================================================
 # Include source directories

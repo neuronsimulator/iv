@@ -19,6 +19,7 @@ extern int ivx11_dyload();
 static void (*p_ivx11_assign)();
 
 int ivx11_dyload() { // return 0 on success
+  //printf("ivx11_dyload\n");
   /* only load once */
   if (p_ivx11_assign) {
     return 0;
@@ -39,16 +40,33 @@ int ivx11_dyload() { // return 0 on success
   int rval = dladdr((void*)ivx11_dyload, &info);
   std::string name;
   if (rval) {
+    //printf("ivx11_dyload in %s\n", info.dli_fname);
     if (info.dli_fname) {
       name = info.dli_fname;
       if (info.dli_fname[0] == '/') { // likely full path
-        size_t n = name.find("libinterviews");
-        if (n != std::string::npos) {
-          name.replace(n, 13, "libivx11dynam"); // keeps the .so or .dylib
-        }else{
-          printf("No \"libinterviews\" in \"%s\"\n", name.c_str());
+        // dlopen this with RTLD_GLOBAL to make sure the dlopen of libivx11dynam
+        // will get its externs resolved (needed when launch python).
+        if (!dlopen(name.c_str(), RTLD_NOW | RTLD_NOLOAD | RTLD_GLOBAL)) {
+          printf("%s: RTLD_GLOBAL for %s\n", dlerror(), name.c_str());
           return -1;
         }
+
+        size_t n1 = name.rfind("libinterviews.");
+        size_t n2 = 0;
+        if (n1 != std::string::npos) {
+          n2 = 13;
+        }else{
+          // rfind not entirely safe. Should use regex.
+          // really looking to replace s,.*/lib\([a-z]*\)[^/]*,\1,
+          n1 = name.rfind("libnrniv.");
+          if (n1 != std::string::npos) {
+            n2 = 8;
+          }else{
+            printf("No \"libinterviews.\" or \"libnrniv.\"in \"%s\"\n", name.c_str());
+            return -1;
+          }
+        }
+        name.replace(n1, n2, "libivx11dynam"); // keeps the .so or .dylib
       }else{
         printf("Not a full path \"%s\"\n", name.c_str());
         return -1;
@@ -64,7 +82,10 @@ int ivx11_dyload() { // return 0 on success
 
   int flag = RTLD_NOW | RTLD_GLOBAL;
   void* handle = dlopen(name.c_str(), flag);
-  if (!handle) { return -1; }
+  if (!handle) {
+    printf("%s: for %s\n", dlerror(), name.c_str());
+    return -1;
+  }
   p_ivx11_assign = (void(*)())dlsym(handle, "ivx11_assign");
   if (p_ivx11_assign) {
     (*p_ivx11_assign)();
