@@ -369,10 +369,12 @@ if (IV_ENABLE_X11_DYNAMIC AND X11_FOUND)
     set(IV_X11_DYNAMIC_INCLUDE_FILES ${x11dynam_files} PARENT_SCOPE)
 
     add_custom_command(OUTPUT ${x11dynam_files}
-        COMMAND ${PYTHON_EXE} '${x11dynam_srcdir}/mkdynam.py' '${x11dynam_incdir}' '${X11_INCLUDE_DIR}'
+        COMMAND python '${x11dynam_srcdir}/mkdynam.py' '${x11dynam_incdir}' '${X11_INCLUDE_DIR}'
         DEPENDS ${x11dynam_srcdir}/mkdynam.py
         WORKING_DIRECTORY ${x11dynam_srcdir})
 
+    add_custom_target(x11dynamheaders
+        DEPENDS ${x11dynam_files})
 endif()
 
 # =============================================================================
@@ -401,6 +403,7 @@ if (IV_ENABLE_X11_DYNAMIC AND X11_FOUND)
         COMPILE_DEFINITIONS "IVX11_DYNAM")
     add_library(ivx11dynam SHARED ${x11dynam_srcdir}/ivx11_dynamlib.cpp)
     target_link_libraries(ivx11dynam ${X11_LIBRARIES})
+    add_dependencies(ivx11dynam x11dynamheaders)
     if (APPLE)
         set_target_properties(ivx11dynam PROPERTIES
             LINK_FLAGS "-undefined dynamic_lookup")
@@ -437,6 +440,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/session.cpp
 
 add_library(interviews ${IV_LIB_TYPE} ${INTERVIEWS_SOURCES})
 if (IV_ENABLE_X11_DYNAMIC AND X11_FOUND)
+    add_dependencies(interviews x11dynamheaders)
     target_link_libraries(interviews dl)
 else()
     target_link_libraries(interviews ${X11_LIBRARIES})

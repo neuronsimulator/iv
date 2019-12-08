@@ -11,7 +11,15 @@
 
 ivinc = '../../include/IV-X11'
 xlibs = ["Xlib.h", "Xutil.h"]
-xlibdir = '/usr/X11/include/X11'
+xincdir = '/usr/X11/include/X11' # my Mac, but see below.
+
+import sys
+if len(sys.argv) > 2: # see args of custom command in ../CMakeLists.txt
+  ivinc = sys.argv[1]
+  xincdir = sys.argv[2]+'/X11'
+
+print ("ivinc " + ivinc)
+print ("xincdir " + xincdir)
 
 exceptions_ = ['XSupportsLocale', 'XDefaultString', 'XKeycodeToKeysym']
 
@@ -201,7 +209,7 @@ def mk():
     declare_f = f_begin("ivx11_declare")
     n = len(x11_used_funs)
     for lib in xlibs:
-        z=x11_externs_(xlibdir+'/'+lib)
+        z=x11_externs_(xincdir+'/'+lib)
     print (n)
     print (len(x11_used_funs))
     f_end(redef_f)
