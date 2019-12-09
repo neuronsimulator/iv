@@ -369,7 +369,7 @@ if (IV_ENABLE_X11_DYNAMIC AND X11_FOUND)
     set(IV_X11_DYNAMIC_INCLUDE_FILES ${x11dynam_files} PARENT_SCOPE)
 
     add_custom_command(OUTPUT ${x11dynam_files}
-        COMMAND python '${x11dynam_srcdir}/mkdynam.py' '${x11dynam_incdir}' '${X11_INCLUDE_DIR}'
+        COMMAND ${PYTHON_EXECUTABLE} '${x11dynam_srcdir}/mkdynam.py' '${x11dynam_incdir}' '${X11_INCLUDE_DIR}'
         DEPENDS ${x11dynam_srcdir}/mkdynam.py
         WORKING_DIRECTORY ${x11dynam_srcdir})
 

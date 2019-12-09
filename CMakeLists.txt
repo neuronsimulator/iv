@@ -72,6 +72,11 @@ if(NOT X11_FOUND AND NOT IV_WINDOWS_BUILD)
   endif()
 endif()
 
+if(IV_ENABLE_X11_DYNAMIC)
+  # need any Python to run mkdynam.py to generate some .h files
+  find_package(PythonInterp REQUIRED)
+endif()
+
 # =============================================================================
 # Check existance of various headers, functions and directories
 # =============================================================================
