@@ -36,6 +36,7 @@ int ivx11_dyload() { // return 0 on success
 
   /* figure out path of libivx11dynam.so*/
   /* Assumes libinterviews is a shared library (that defined ivx11_dyload)*/
+  /* If not, try libnrniv */
   Dl_info info;
   int rval = dladdr((void*)ivx11_dyload, &info);
   std::string name;
@@ -51,14 +52,17 @@ int ivx11_dyload() { // return 0 on success
           return -1;
         }
 
-        size_t n1 = name.rfind("libinterviews.");
+        /* working after the last / is robust way to replace libinterviews */
+        /* or libnrniv with libivx11dynam */
+        size_t last_slash = name.rfind("/");
+        size_t n1 = name.find("libinterviews.", last_slash);
         size_t n2 = 0;
         if (n1 != std::string::npos) {
           n2 = 13;
         }else{
           // rfind not entirely safe. Should use regex.
           // really looking to replace s,.*/lib\([a-z]*\)[^/]*,\1,
-          n1 = name.rfind("libnrniv.");
+          n1 = name.find("libnrniv.", last_slash);
           if (n1 != std::string::npos) {
             n2 = 8;
           }else{
