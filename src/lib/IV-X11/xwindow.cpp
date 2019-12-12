@@ -1750,13 +1750,13 @@ Display* Display::open() {
 
 #if defined(IVX11_DYNAM)
 extern "C" {
-extern int ivx11_dyload(const char* alt_libname); // return 0 on success
+extern int ivx11_dyload(); // return 0 on success
 }
 #endif
 
 Display* Display::open(const char* device) {
 #if defined(IVX11_DYNAM)
-    if (ivx11_dyload(NULL)) {
+    if (ivx11_dyload()) {
 #if defined(MAC)
         const char* mac = "XQuartz";
 #else

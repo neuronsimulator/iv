@@ -4,17 +4,18 @@ extern "C" {
 /* Do not know if this is needed here. */
 #define XUTIL_DEFINE_FUNCTIONS
 
-/* X11 structures, #define, and pointer definitions corresponding to all extern X globals. */
+/* X11 structures, #define, and pointer definitions corresponding
+ * to all extern X globals.
+*/
 #include <IV-X11/ivx11_declare.h>
 #define IVX11EXTERN /**/
 #include <IV-X11/ivx11_define.h>
 
-extern int ivx11_dyload(const char* alt_libname);
+extern int ivx11_dyload();
 
 }
 
 #include <stdio.h>
-#include <string.h>
 #include <dlfcn.h>
 #include <string>
 
@@ -22,11 +23,9 @@ static void (*p_ivx11_assign)();
 
 /** @brief dlopen libivx11dynam.so and call its ivx11_assign.
  *  The library must be in the same directory as the shared library
- *  that contains the address of ivx11_dyload. I.e, the last basename
- *  is either libinterviews or alt_libname and that gets subsituted by
- *  libivx11dynam
+ *  that contains the address of ivx11_dyload.
  */
-int ivx11_dyload(const char* alt_libname) { // return 0 on success
+int ivx11_dyload() { // return 0 on success
   /* only load once */
   if (p_ivx11_assign) {
     return 0;
@@ -41,9 +40,10 @@ int ivx11_dyload(const char* alt_libname) { // return 0 on success
 
   /* dynamically load libivx11dynam.so and call its ivx11_assign() */
 
-  /* figure out path of libivx11dynam.so*/
-  /* Assumes libinterviews is a shared library (that defined ivx11_dyload)*/
-  /* If not, try alt_libname if not NULL */
+  /* figure out path of libivx11dynam.so
+   * Assumes that library is in the same location as the library containing
+   * this function.
+   */
   Dl_info info;
   int rval = dladdr((void*)ivx11_dyload, &info);
   std::string name;
@@ -58,26 +58,15 @@ int ivx11_dyload(const char* alt_libname) { // return 0 on success
           return -1;
         }
 
-        /* working after the last / is robust way to replace libinterviews */
-        /* or alt_libname with libivx11dynam */
+        /* From the last '/' to the next '.' gets replaced by libivx11dynam */
         size_t last_slash = name.rfind("/");
-        size_t n1 = name.find("libinterviews.", last_slash);
-        size_t n2 = 0;
-        if (n1 != std::string::npos) {
-          n2 = 13;
-        }else if (alt_libname) {
-          n1 = name.find(alt_libname, last_slash);
-          if (n1 != std::string::npos) {
-            n2 = strlen(alt_libname);
-          }else{
-            printf("No \"libinterviews.\" or \"%s\"in \"%s\"\n", alt_libname, name.c_str());
-            return -1;
-          }
-        }else{
-            printf("No \"libinterviews.\" in \"%s\"\n", name.c_str());
+        size_t dot = name.find(".", last_slash);
+        if (dot == std::string::npos) {
+            printf("Can't determine the basename (last '/' to next '.') in \"%s\"\n", name.c_str());
             return -1;
         }
-        name.replace(n1, n2, "libivx11dynam"); // keeps the .so or .dylib
+        size_t len = dot - (last_slash + 1);
+        name.replace(last_slash+1, len, "libivx11dynam"); // keeps the .so or .dylib
       }else{
         printf("Not a full path \"%s\"\n", name.c_str());
         return -1;
