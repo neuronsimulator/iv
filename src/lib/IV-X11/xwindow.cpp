@@ -63,6 +63,9 @@
 #include <OS/table.h>
 #include <X11/Xatom.h>
 #include <sys/ioctl.h>
+#if defined(IVX11_DYNAM)
+#include <IV-X11/ivx11_dynam.h>
+#endif
 #ifdef HAVE_STROPTS_H
 #include <stropts.h>
 #endif
@@ -1747,12 +1750,6 @@ Display* Display::open(const String& s) {
 Display* Display::open() {
     return open(nil);
 }
-
-#if defined(IVX11_DYNAM)
-extern "C" {
-extern int ivx11_dyload(); // return 0 on success
-}
-#endif
 
 Display* Display::open(const char* device) {
 #if defined(IVX11_DYNAM)

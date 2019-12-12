@@ -11,13 +11,12 @@ extern "C" {
 #define IVX11EXTERN /**/
 #include <IV-X11/ivx11_define.h>
 
-extern int ivx11_dyload();
-
 }
 
 #include <stdio.h>
 #include <dlfcn.h>
 #include <string>
+#include <IV-X11/ivx11_dynam.h>
 
 static void (*p_ivx11_assign)();
 
