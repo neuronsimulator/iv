@@ -36,7 +36,9 @@ option(IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS "Remake the X11 dynamic .h files." OFF
 # =============================================================================
 # CMake build settings
 # =============================================================================
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE
+        RelWithDebInfo
+        CACHE STRING "Empty or one of Debug, Release, RelWithDebInfo")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
 if(NOT IV_ENABLE_SHARED)
