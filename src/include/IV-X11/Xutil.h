@@ -30,7 +30,11 @@
 extern "C" {
 
 #include <IV-X11/Xdefs.h>
+#if defined(IVX11_DYNAM)
+  /* all XUtil relevant declarations already in the ivx11_*.h */
+#else
 #include <X11/Xutil.h>
+#endif
 #include <IV-X11/Xundefs.h>
 
 }
