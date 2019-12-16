@@ -1,7 +1,17 @@
 # =============================================================================
+# Even when IV_ENABLE_X11_DYNAMIC, explicitly link to X11 if static build.
+# =============================================================================
+if (IV_ENABLE_X11_DYNAMIC AND NOT IV_ENABLE_SHARED)
+    set(_ivx11 ${CMAKE_CURRENT_SOURCE_DIR}/../lib/x11_dynam/ivx11_dynamlib.cpp)
+    include_directories("${X11_INCLUDE_DIR}")
+else()
+    set(_ivx11 "")
+endif()
+
+# =============================================================================
 # idemo
 # =============================================================================
-set(IDEMO_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/idemo/main.cpp)
+set(IDEMO_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/idemo/main.cpp ${_ivx11})
 add_executable(idemo ${IDEMO_SOURCE_FILES})
 target_link_libraries(idemo interviews ${X11_LIBRARIES})
 install(TARGETS idemo DESTINATION bin)
@@ -17,7 +27,8 @@ set(ICLASS_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/iclass/direct.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/iclass/globals.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/iclass/iclass.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/iclass/main.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/iclass/main.cpp
+    ${_ivx11})
 
 if(NOT IV_WINDOWS_BUILD)
   add_executable(iclass ${ICLASS_SOURCE_FILES})
@@ -41,7 +52,8 @@ set(IDRAW_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/idraw/ided.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/idraw/idkybd.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/idraw/idvars.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/idraw/main.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/idraw/main.cpp
+    ${_ivx11})
 
 if(NOT IV_WINDOWS_BUILD)
   add_executable(idraw ${IDRAW_SOURCE_FILES})

@@ -50,7 +50,12 @@ struct _XrmHashBucketRec;
 #endif
 
 #include <IV-X11/Xdefs.h>
+#if defined(IVX11_DYNAM)
+#include <IV-X11/ivx11_declare.h>
+#include <IV-X11/ivx11_redef.h>
+#else
 #include <X11/Xlib.h>
+#endif
 #include <IV-X11/Xundefs.h>
 
 }

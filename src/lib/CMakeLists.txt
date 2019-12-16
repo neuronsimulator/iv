@@ -315,6 +315,9 @@ set(UNIDRAW_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/viewcmds.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Unidraw/viewer.cpp)
 
+set(IVX11DYNAM_SOURCE_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/x11_dynam/ivx11_dynam.cpp)
+
 # =============================================================================
 # mkg3states utility
 # =============================================================================
@@ -350,7 +353,7 @@ add_executable(mkg3states ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c)
 target_include_directories(mkg3states PUBLIC ${IV_PROJECT_SOURCE_DIR}/src/include/TIFF)
 
 # =============================================================================
-# IV library
+# interviews IV library
 # =============================================================================
 
 if(NOT IV_WINDOWS_BUILD)
@@ -366,6 +369,13 @@ else()
 		${INTERVIEWS_SOURCE_FILES}
 		${OS_SOURCE_FILES}
 		${IVWIN_SOURCE_FILES})
+endif()
+
+if(IV_ENABLE_X11_DYNAMIC)
+    list(APPEND INTERVIEWS_SOURCES ${IVX11DYNAM_SOURCE_FILES})
+    set_source_files_properties(${INTERVIEWS_SOURCES}
+        PROPERTIES
+        COMPILE_DEFINITIONS "IVX11_DYNAM")
 endif()
 
 if(NOT IV_WINDOWS_BUILD)
@@ -389,7 +399,11 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/IV-X11/session.cpp
                             ${DIV_DEFINES})
 
 add_library(interviews ${IV_LIB_TYPE} ${INTERVIEWS_SOURCES})
-target_link_libraries(interviews ${X11_LIBRARIES})
+if (IV_ENABLE_X11_DYNAMIC)
+    target_link_libraries(interviews dl)
+else()
+    target_link_libraries(interviews ${X11_LIBRARIES})
+endif()
 target_include_directories(interviews
                            PRIVATE ${X11_INCLUDE_DIR}
                                    $<BUILD_INTERFACE:${IV_PROJECT_SOURCE_DIR}/src/include/TIFF>
@@ -398,6 +412,63 @@ set_property(TARGET interviews PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if(IV_WINDOWS_BUILD)
   target_link_libraries(interviews gdi32 comdlg32)
+endif()
+
+# =============================================================================
+# ivx11dynam
+# =============================================================================
+
+# ivx11dynam is built before interviews
+set(x11dynam_srcdir ${CMAKE_CURRENT_SOURCE_DIR}/x11_dynam)
+
+if (IV_ENABLE_X11_DYNAMIC)
+    list(APPEND INTERVIEWS_SOURCES ${x11dynam_srcdir}/ivx11_dynam.cpp)
+    add_library(ivx11dynam SHARED ${x11dynam_srcdir}/ivx11_dynamlib.cpp)
+    target_link_libraries(ivx11dynam ${X11_LIBRARIES})
+    add_dependencies(interviews ivx11dynam)
+    if (APPLE)
+        set_target_properties(ivx11dynam PROPERTIES
+            LINK_FLAGS "-undefined dynamic_lookup")
+    endif()
+    target_include_directories(ivx11dynam
+        PRIVATE ${X11_INCLUDE_DIR})
+    set_property(TARGET ivx11dynam PROPERTY POSITION_INDEPENDENT_CODE ON)
+    install(TARGETS ivx11dynam
+        EXPORT iv
+        DESTINATION lib
+        INCLUDES
+        DESTINATION $<INSTALL_INTERFACE:include>)
+endif()
+
+# =============================================================================
+# mkdynam creates four .h files when IV_ENABLE_X11_DYNAM=ON
+# =============================================================================
+if (IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS)
+    set(x11dynam_incdir ${IV_PROJECT_SOURCE_DIR}/src/include/IV-X11)
+    set(x11dynam_files
+        ${x11dynam_incdir}/ivx11_declare.h
+        ${x11dynam_incdir}/ivx11_redef.h
+        ${x11dynam_incdir}/ivx11_define.h
+        ${x11dynam_incdir}/ivx11_assign.h)
+    set(IV_X11_DYNAMIC_INCLUDE_FILES ${x11dynam_files} PARENT_SCOPE)
+
+    # if the x11dynam_files exist and have a date later than mkdynam.py,
+    # the custom command will not execute mkdynam.py . Delete the
+    # x11dynam_files manually, or touch mkdynam.py if you wish to
+    # regenerate the headers. Given the stability of the X11 API, it is
+    # unlikely that IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS will ever need to be ON.
+    add_custom_command(OUTPUT ${x11dynam_files}
+        COMMAND ${PYTHON_EXECUTABLE} '${x11dynam_srcdir}/mkdynam.py' '${x11dynam_incdir}' '${X11_INCLUDE_DIR}'
+        DEPENDS ${x11dynam_srcdir}/mkdynam.py
+        WORKING_DIRECTORY ${x11dynam_srcdir})
+
+    add_custom_target(x11dynamheaders
+        DEPENDS ${x11dynam_files})
+
+    add_dependencies(interviews x11dynamheaders)
+    if (IV_ENABLE_X11_DYNAMIC)
+      add_dependencies(ivx11dynam x11dynamheaders)
+    endif()
 endif()
 
 # =============================================================================

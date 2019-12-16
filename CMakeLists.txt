@@ -28,6 +28,10 @@ endif()
 # Project build options
 # =============================================================================
 option(IV_ENABLE_SHARED "Build libraries shared or static" OFF)
+# Useful for MAC if XQuartz not installed on user machine.
+option(IV_ENABLE_X11_DYNAMIC "dlopen X11 after launch" OFF)
+# Use only if X11 API changes (Uses very brittle script).
+option(IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS "Remake the X11 dynamic .h files." OFF)
 
 # =============================================================================
 # CMake build settings
@@ -75,6 +79,18 @@ if(NOT X11_FOUND AND NOT IV_WINDOWS_BUILD)
     message(FATAL_ERROR "Install XQuartz from https://www.xquartz.org/ to build iv")
   else()
     message(FATAL_ERROR "Install X11 to build iv (e.g. 'apt install libx11-dev libxcomposite-dev' on Ubuntu")
+  endif()
+endif()
+
+if(IV_ENABLE_X11_DYNAMIC AND NOT X11_FOUND)
+    message(FATAL_ERROR "Cannot IV_ENABLE_X11_DYNAMIC without X11 installed")
+endif()
+
+if (IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS)
+  # need any Python to run mkdynam.py to generate some .h files
+  find_package(PythonInterp REQUIRED)
+  if (NOT X11_FOUND)
+    message(FATAL_ERROR "Cannot IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS without X11 installed")
   endif()
 endif()
 
@@ -150,6 +166,7 @@ iv_check_signal_return_type(RETSIGTYPE)
 # =============================================================================
 add_definitions(-DHAVE_CONFIG_H)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake.in ${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake @ONLY)
 
 # =============================================================================
 # Include source directories
@@ -187,6 +204,12 @@ if(cmake_generator_tolower MATCHES "makefile")
   message(STATUS "--------------+--------------------------------------------------------------")
   message(STATUS "BUILD_TYPE    | ${CMAKE_BUILD_TYPE} (allowed: ${allowableBuildTypes})")
   message(STATUS "SHARED        | ${IV_ENABLE_SHARED}")
+  if (X11_FOUND)
+    message(STATUS "X11_DYNAMIC   | ${IV_ENABLE_X11_DYNAMIC}")
+    if (IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS)
+    message(STATUS "              |   ...MAKE_HEADERS=${IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS}")
+    endif()
+  endif()
   message(STATUS "--------------+--------------------------------------------------------------")
   message(STATUS " See more : https://github.com/neuronsimulator/iv")
   message(STATUS "--------------+--------------------------------------------------------------")
