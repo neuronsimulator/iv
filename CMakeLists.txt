@@ -36,9 +36,15 @@ option(IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS "Remake the X11 dynamic .h files." OFF
 # =============================================================================
 # CMake build settings
 # =============================================================================
-set(CMAKE_BUILD_TYPE
-        RelWithDebInfo
-        CACHE STRING "Empty or one of Debug, Release, RelWithDebInfo")
+set(allowableBuildTypes Debug Release RelWithDebInfo)
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE
+      RelWithDebInfo
+      CACHE STRING "Empty or one of ${allowableBuildTypes}" FORCE)
+elseif(NOT CMAKE_BUILD_TYPE IN_LIST allowableBuildTypes)
+  message(FATAL_ERROR "Invalid build type: ${CMAKE_BUILD_TYPE} : Must be one of ${allowableBuildTypes}")
+endif()
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
 if(NOT IV_ENABLE_SHARED)
@@ -196,6 +202,7 @@ if(cmake_generator_tolower MATCHES "makefile")
   message(STATUS "--------------+--------------------------------------------------------------")
   message(STATUS "Build option  | Status")
   message(STATUS "--------------+--------------------------------------------------------------")
+  message(STATUS "BUILD_TYPE    | ${CMAKE_BUILD_TYPE} (allowed: ${allowableBuildTypes})")
   message(STATUS "SHARED        | ${IV_ENABLE_SHARED}")
   if (X11_FOUND)
     message(STATUS "X11_DYNAMIC   | ${IV_ENABLE_X11_DYNAMIC}")
