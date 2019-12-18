@@ -16,7 +16,7 @@ addons:
     apt:
         packages:
         - libx11-dev
-        - libxcomposite-dev
+        - libxext-dev
     homebrew:
         packages:
         - xz
