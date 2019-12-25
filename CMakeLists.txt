@@ -82,6 +82,10 @@ if(NOT X11_FOUND AND NOT IV_WINDOWS_BUILD)
   endif()
 endif()
 
+if(NOT X11_Xcomposite_FOUND AND NOT IV_WINDOWS_BUILD)
+  message(FATAL_ERROR "libXcomposite is required for X11 support (e.g. 'apt install libxcomposite-dev' on Ubuntu)")
+endif()
+
 if(IV_ENABLE_X11_DYNAMIC AND NOT X11_FOUND)
     message(FATAL_ERROR "Cannot IV_ENABLE_X11_DYNAMIC without X11 installed")
 endif()
