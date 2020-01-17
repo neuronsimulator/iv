@@ -62,7 +62,7 @@ endif()
 # =============================================================================
 # Include cmake modules
 # =============================================================================
-list(APPEND CMAKE_MODULE_PATH ${IV_PROJECT_SOURCE_DIR}/cmake)
+list(PREPEND CMAKE_MODULE_PATH ${IV_PROJECT_SOURCE_DIR}/cmake)
 include(HelperFunctions)
 include(PlatformHelper)
 include(RpathHelper)
