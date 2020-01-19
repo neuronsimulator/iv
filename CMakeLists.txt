@@ -62,6 +62,9 @@ endif()
 # =============================================================================
 # Include cmake modules
 # =============================================================================
+# Prepend to CMAKE_MODULE_PATH since iv/cmake/PlatformHelper.cmake
+# sets IV_WINDOWS_BUILD. Otherwise, as a submodule for nrn,
+# nrn/cmake/PlatformHelper.cmake would take precedence.
 list(INSERT CMAKE_MODULE_PATH 0 ${IV_PROJECT_SOURCE_DIR}/cmake)
 include(HelperFunctions)
 include(PlatformHelper)
