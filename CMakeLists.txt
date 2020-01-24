@@ -64,7 +64,7 @@ endif()
 # =============================================================================
 list(APPEND CMAKE_MODULE_PATH ${IV_PROJECT_SOURCE_DIR}/cmake)
 include(HelperFunctions)
-include(PlatformHelper)
+include(IVPlatformHelper)
 include(RpathHelper)
 include(CheckIncludeFiles)
 include(CheckFunctionExists)
