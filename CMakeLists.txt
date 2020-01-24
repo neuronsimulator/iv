@@ -64,7 +64,8 @@ endif()
 # =============================================================================
 list(APPEND CMAKE_MODULE_PATH ${IV_PROJECT_SOURCE_DIR}/cmake)
 include(HelperFunctions)
-include(PlatformHelper)
+# do not conflict with nrn PlatformHelper.cmake when submodule.
+include(${IV_PROJECT_SOURCE_DIR}/cmake/PlatformHelper.cmake)
 include(RpathHelper)
 include(CheckIncludeFiles)
 include(CheckFunctionExists)
