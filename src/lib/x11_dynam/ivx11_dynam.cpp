@@ -36,7 +36,6 @@ int ivx11_dyload() { // return 0 on success
     (*p_ivx11_assign)();
     return 0;
   }
-
   /* dynamically load libivx11dynam.so and call its ivx11_assign() */
 
   /* figure out path of libivx11dynam.so
@@ -82,7 +81,8 @@ int ivx11_dyload() { // return 0 on success
   int flag = RTLD_NOW | RTLD_GLOBAL;
   void* handle = dlopen(name.c_str(), flag);
   if (!handle) {
-    printf("%s: for %s\n", dlerror(), name.c_str());
+    //be quiet
+    //printf("%s: for %s\n", dlerror(), name.c_str());
     return -1;
   }
   p_ivx11_assign = (void(*)())dlsym(handle, "ivx11_assign");
