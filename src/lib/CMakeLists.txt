@@ -328,13 +328,13 @@ set(
   )
 
 # command to generate g3states.h
-add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h
-                   COMMAND mkg3states -o=g3states.h
-                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/TIFF
+add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/g3states.h
+                   COMMAND ${IV_PROJECT_BINARY_DIR}/bin/mkg3states -o=g3states.h
+                   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                    VERBATIM
                    DEPENDS mkg3states)
 
-set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h
+set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/g3states.h
 							PROPERTIES
 							GENERATED
 							TRUE)
@@ -343,7 +343,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h
 set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/tif_fax3.c
                             PROPERTIES
                             OBJECT_DEPENDS
-                            ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/g3states.h)
+                            ${CMAKE_CURRENT_BINARY_DIR}/g3states.h)
 set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c
                             PROPERTIES
                             COMPILE_FLAGS
