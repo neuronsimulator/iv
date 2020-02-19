@@ -18,6 +18,7 @@ set(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR})
 # To be able to use project as submodule, avoid using PROJECT_SOURCE_DIR
 # =============================================================================
 set(IV_PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(IV_PROJECT_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 # For future target customization
 set(IV_AS_SUBPROJECT OFF)
 if (NOT CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
@@ -170,22 +171,22 @@ iv_check_signal_return_type(RETSIGTYPE)
 # Generate config.h after all checks
 # =============================================================================
 add_definitions(-DHAVE_CONFIG_H)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake.in ${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/cmake/iv-config.cmake @ONLY)
 
 # =============================================================================
 # Include source directories
 # =============================================================================
-include_directories(${IV_PROJECT_SOURCE_DIR}/src/include)
-add_subdirectory(src/bin)
+include_directories(${IV_PROJECT_SOURCE_DIR}/src/include ${IV_PROJECT_BINARY_DIR}/src/lib)
 add_subdirectory(src/lib)
+add_subdirectory(src/bin)
 
 # =============================================================================
 # Install binaries and headers
 # =============================================================================
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
 if(NOT IV_AS_SUBPROJECT)
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cmake/iv-config.cmake DESTINATION share/cmake)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/iv-config.cmake DESTINATION share/cmake)
   install(EXPORT iv DESTINATION share/cmake)
 endif()
 
