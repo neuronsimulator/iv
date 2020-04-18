@@ -2227,14 +2227,6 @@ IVX11EXTERN int (*ivdynam__Xwctomb) (
     char *			/* str */,
     wchar_t			/* wc */
 );
-IVX11EXTERN Bool (*ivdynam_XGetEventData) (
-    Display*			/* dpy */,
-    XGenericEventCookie*	/* cookie*/
-);
-IVX11EXTERN void (*ivdynam_XFreeEventData) (
-    Display*			/* dpy */,
-    XGenericEventCookie*	/* cookie*/
-);
 IVX11EXTERN int (*ivdynam_XDestroyImage) (
         XImage *ximage);
 IVX11EXTERN unsigned long (*ivdynam_XGetPixel) (
