@@ -37,6 +37,7 @@ in this Software without prior written authorization from The Open Group.
  */
 #ifndef _X11_XLIB_H_
 #define _X11_XLIB_H_
+#define _XLIB_H_
 
 #define XlibSpecificationRelease 6
 
@@ -4050,6 +4051,7 @@ SOFTWARE.
 
 #ifndef _X11_XUTIL_H_
 #define _X11_XUTIL_H_
+#define _XUTIL_H_
 
 /* You must include <X11/Xlib.h> before including this file */
 #include <X11/Xlib.h>
