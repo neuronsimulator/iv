@@ -496,12 +496,12 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/app-defaults/ DESTINATION share/ap
 if(NOT IV_WINDOWS_BUILD)
   install(TARGETS interviews
           EXPORT iv
-          DESTINATION lib
+          DESTINATION ${LIB_INSTALL_DIR}
           INCLUDES
           DESTINATION $<INSTALL_INTERFACE:include>)
   install(TARGETS unidraw
           EXPORT iv
-          DESTINATION lib
+          DESTINATION ${LIB_INSTALL_DIR}
           INCLUDES
           DESTINATION $<INSTALL_INTERFACE:include>)
 else()
