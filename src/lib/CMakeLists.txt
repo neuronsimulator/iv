@@ -413,6 +413,9 @@ set_property(TARGET interviews PROPERTY POSITION_INDEPENDENT_CODE ON)
 if(IV_WINDOWS_BUILD)
   target_link_libraries(interviews gdi32 comdlg32)
 endif()
+if(NOT IV_WINDOWS_BUILD)
+    set_target_properties(interviews PROPERTIES SOVERSION 0.0.0)
+endif()
 
 # =============================================================================
 # ivx11dynam
@@ -477,6 +480,7 @@ endif()
 if(NOT IV_WINDOWS_BUILD)
   if(IV_ENABLE_SHARED)
     add_library(unidraw SHARED ${UNIDRAW_SOURCE_FILES})
+    set_target_properties(unidraw PROPERTIES SOVERSION 0.0.0)
   else()
     add_library(unidraw STATIC ${UNIDRAW_SOURCE_FILES})
   endif()
@@ -492,12 +496,12 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/app-defaults/ DESTINATION share/ap
 if(NOT IV_WINDOWS_BUILD)
   install(TARGETS interviews
           EXPORT iv
-          DESTINATION lib
+          DESTINATION ${LIB_INSTALL_DIR}
           INCLUDES
           DESTINATION $<INSTALL_INTERFACE:include>)
   install(TARGETS unidraw
           EXPORT iv
-          DESTINATION lib
+          DESTINATION ${LIB_INSTALL_DIR}
           INCLUDES
           DESTINATION $<INSTALL_INTERFACE:include>)
 else()

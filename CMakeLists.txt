@@ -60,6 +60,11 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "CYGWIN")
   set(CYGWIN 1)
 endif()
 
+# set up libdir
+if(NOT DEFINED LIB_INSTALL_DIR)
+    set(LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+endif()
+
 # =============================================================================
 # Include cmake modules
 # =============================================================================
@@ -186,8 +191,8 @@ add_subdirectory(src/bin)
 # =============================================================================
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
 if(NOT IV_AS_SUBPROJECT)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/iv-config.cmake DESTINATION share/cmake)
-  install(EXPORT iv DESTINATION share/cmake)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/iv-config.cmake DESTINATION ${LIB_INSTALL_DIR}/cmake/iv)
+    install(EXPORT iv DESTINATION ${LIB_INSTALL_DIR}/cmake/iv)
 endif()
 
 # =============================================================================
