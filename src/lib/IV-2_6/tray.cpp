@@ -37,8 +37,6 @@
 
 #include <IV-2_6/_enter.h>
 
-inline float abs (float f) { return (f < 0) ? -f : f; }
-
 /*************************************************************************/
 
 class TElement {
