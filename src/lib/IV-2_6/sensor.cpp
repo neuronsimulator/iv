@@ -37,7 +37,7 @@ extern unsigned long
 
 Sensor::Sensor() {
     mask = initmask;
-    for (register int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
 	down[i] = 0;
 	up[i] = 0;
     }
@@ -56,9 +56,9 @@ Sensor::Sensor(const Sensor* s) {
 
 Sensor::~Sensor() { }
 
-Sensor& Sensor::operator =(register const Sensor& s) {
+Sensor& Sensor::operator =(const Sensor& s) {
     mask = s.mask;
-    for (register int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
 	down[i] = s.down[i];
 	up[i] = s.up[i];
     }
@@ -88,7 +88,7 @@ void Sensor::init() {
 }
 
 void Sensor::Catch(EventType t) {
-    register int i;
+    int i;
 
     switch (t) {
 	case MotionEvent:
@@ -143,7 +143,7 @@ void Sensor::CatchButton(EventType t, int b) {
 }
 
 void Sensor::Ignore(EventType t) {
-    register int i;
+    int i;
 
     switch (t) {
 	case MotionEvent:
@@ -182,7 +182,7 @@ void Sensor::Ignore(EventType t) {
 }
 
 void Sensor::IgnoreButton(EventType t, int b) {
-    register int i;
+    int i;
 
     switch (t) {
 	case DownEvent:

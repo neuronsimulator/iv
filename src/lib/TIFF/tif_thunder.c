@@ -70,11 +70,11 @@ static const int threebitdeltas[8] = { 0, 1, 2, 3, 0, -3, -2, -1 };
 static int
 ThunderDecode(tif, op, maxpixels)
 	TIFF *tif;
-	register u_char *op;
+	u_char *op;
 	int maxpixels;
 {
-	register u_char *bp;
-	register int n, cc, lastpixel, npixels, delta;
+	u_char *bp;
+	int n, cc, lastpixel, npixels, delta;
 
 	bp = (u_char *)tif->tif_rawcp;
 	cc = tif->tif_rawcc;

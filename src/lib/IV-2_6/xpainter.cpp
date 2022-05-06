@@ -344,8 +344,8 @@ void Painter::MapList(
 void Painter::MapList(
     Canvas* c, float x[], float y[], int n, IntCoord mx[], IntCoord my[]
 ) {
-    register float* xp, * yp;
-    register IntCoord* mxp, * myp;
+    float* xp, * yp;
+    IntCoord* mxp, * myp;
     float tmpx, tmpy, * lim;
 
     xp = x; yp = y;
@@ -916,8 +916,8 @@ void Painter::MultiPoint(Canvas* c, IntCoord x[], IntCoord y[], int n) {
     if (cr->xdrawable_ == CanvasRep::unbound) {
 	return;
     }
-    register XPoint* v = AllocPts(n);
-    for (register int i = 0; i < n; i++) {
+    XPoint* v = AllocPts(n);
+    for (int i = 0; i < n; i++) {
 	Map(c, x[i], y[i], v[i].x, v[i].y);
     }
     XDrawPoints(cr->dpy(), cr->xdrawable_, rep->fillgc, v, n, CoordModeOrigin);
@@ -1094,8 +1094,8 @@ void Painter::MultiLine(Canvas* c, IntCoord x[], IntCoord y[], int n) {
     if (cr->xdrawable_ == CanvasRep::unbound) {
 	return;
     }
-    register XPoint* v = AllocPts(n);
-    for (register int i = 0; i < n; i++) {
+    XPoint* v = AllocPts(n);
+    for (int i = 0; i < n; i++) {
 	Map(c, x[i], y[i], v[i].x, v[i].y);
     }
     XDrawLines(cr->dpy(), cr->xdrawable_, rep->dashgc, v, n, CoordModeOrigin);
@@ -1110,8 +1110,8 @@ void Painter::MultiLineNoMap(Canvas* c, IntCoord x[], IntCoord y[], int n) {
     if (cr->xdrawable_ == CanvasRep::unbound) {
 	return;
     }
-    register XPoint* v = AllocPts(n);
-    for (register int i = 0; i < n; i++) {
+    XPoint* v = AllocPts(n);
+    for (int i = 0; i < n; i++) {
 	v[i].x = x[i];
 	v[i].y = y[i];
     }
@@ -1127,8 +1127,8 @@ void Painter::Polygon(Canvas* c, IntCoord x[], IntCoord y[], int n) {
     if (cr->xdrawable_ == CanvasRep::unbound) {
 	return;
     }
-    register XPoint* v = AllocPts(n+1);
-    register int i;
+    XPoint* v = AllocPts(n+1);
+    int i;
     for (i = 0; i < n; i++) {
 	Map(c, x[i], y[i], v[i].x, v[i].y);
     }
@@ -1148,8 +1148,8 @@ void Painter::FillPolygonNoMap(Canvas* c, IntCoord x[], IntCoord y[], int n) {
     if (cr->xdrawable_ == CanvasRep::unbound) {
 	return;
     }
-    register XPoint* v = AllocPts(n);
-    for (register int i = 0; i < n; i++) {
+    XPoint* v = AllocPts(n);
+    for (int i = 0; i < n; i++) {
 	v[i].x = x[i];
 	v[i].y = y[i];
     }
@@ -1167,8 +1167,8 @@ void Painter::FillPolygon(Canvas* c, IntCoord x[], IntCoord y[], int n) {
     if (cr->xdrawable_ == CanvasRep::unbound) {
 	return;
     }
-    register XPoint* v = AllocPts(n+1);
-    for (register int i = 0; i < n; i++) {
+    XPoint* v = AllocPts(n+1);
+    for (int i = 0; i < n; i++) {
 	Map(c, x[i], y[i], v[i].x, v[i].y);
     }
     XFillPolygon(

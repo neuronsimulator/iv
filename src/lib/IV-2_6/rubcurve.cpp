@@ -244,7 +244,7 @@ RubberHandles::RubberHandles(
 }
 
 void RubberHandles::Draw() {
-    register int i;
+    int i;
 
     if (x == nil || y == nil) {
         return;
@@ -296,7 +296,7 @@ RubberSpline::RubberSpline(
 }
 
 void RubberSpline::Draw() {
-    register int i, j;
+    int i, j;
     IntCoord sx[7], sy[7];
 
     if (x == nil || y == nil) {
@@ -331,7 +331,7 @@ RubberClosedSpline::RubberClosedSpline(
 }
 
 void RubberClosedSpline::Draw() {
-    register int i, j;
+    int i, j;
     IntCoord sx[7], sy[7];
     
     if (x == nil || y == nil) {
@@ -376,9 +376,9 @@ SlidingPointList::SlidingPointList(
 }
 
 void SlidingPointList::GetOriginal(IntCoord*& px, IntCoord*& py, int& n) {
-    register int i;
-    register IntCoord dx = trackx - refx;
-    register IntCoord dy = tracky - refy;
+    int i;
+    IntCoord dx = trackx - refx;
+    IntCoord dy = tracky - refy;
 
     px = new IntCoord[count];
     py = new IntCoord[count];
@@ -402,9 +402,9 @@ void SlidingPointList::Draw() {
 	if (offx == 0 && offy == 0) {
 	    output->MultiPoint(canvas, x, y, count);
 	} else {
-	    register IntCoord* ox = new IntCoord[count];
-	    register IntCoord* oy = new IntCoord[count];
-	    for (register int i = 0; i < count; i++) {
+	    IntCoord* ox = new IntCoord[count];
+	    IntCoord* oy = new IntCoord[count];
+	    for (int i = 0; i < count; i++) {
 		ox[i] = x[i] + offx;
 		oy[i] = y[i] + offy;
 	    }
@@ -417,8 +417,8 @@ void SlidingPointList::Draw() {
 }
 
 void SlidingPointList::Track(IntCoord x0, IntCoord y0) {
-    register int i;
-    register IntCoord dx, dy;
+    int i;
+    IntCoord dx, dy;
 
     if (x0 != trackx || y0 != tracky) {
         Erase();
@@ -450,9 +450,9 @@ void SlidingLineList::Draw() {
 	if (offx == 0 && offy == 0) {
 	    output->MultiLine(canvas, x, y, count);
 	} else {
-	    register IntCoord* ox = new IntCoord[count];
-	    register IntCoord* oy = new IntCoord[count];
-	    for (register int i = 0; i < count; i++) {
+	    IntCoord* ox = new IntCoord[count];
+	    IntCoord* oy = new IntCoord[count];
+	    for (int i = 0; i < count; i++) {
 		ox[i] = x[i] + offx;
 		oy[i] = y[i] + offy;
 	    }

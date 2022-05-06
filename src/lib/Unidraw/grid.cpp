@@ -163,8 +163,8 @@ void GridGraphic::drawClipped (
 
 	++r; ++t;
 
-        for (register float x = x0; x <= r; x += xincr) {
-            for (register float y = y0; y <= t; y += yincr) {
+        for (float x = x0; x <= r; x += xincr) {
+            for (float y = y0; y <= t; y += yincr) {
                 _p->Point(c, iv26_round(x), iv26_round(y));
             }
         }

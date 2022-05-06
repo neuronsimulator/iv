@@ -850,7 +850,7 @@ void DECLARE2V(_TIFFgetfield, TIFFDirectory*, td, int, tag)
 void TIFFFreeDirectory(tif)
 	TIFF *tif;
 {
-	register TIFFDirectory *td = &tif->tif_dir;
+	TIFFDirectory *td = &tif->tif_dir;
 
 	CleanupField(td_colormap[0]);
 	CleanupField(td_colormap[1]);
@@ -896,7 +896,7 @@ void TIFFFreeDirectory(tif)
 int TIFFDefaultDirectory(tif)
 	TIFF *tif;
 {
-	register TIFFDirectory *td = &tif->tif_dir;
+	TIFFDirectory *td = &tif->tif_dir;
 
 	bzero((char *)td, sizeof (*td));
 	td->td_fillorder = FILLORDER_MSB2LSB;
@@ -938,7 +938,7 @@ int TIFFDefaultDirectory(tif)
  * NB: Directories are numbered starting at 0.
  */
 int TIFFSetDirectory(tif, dirn)
-	register TIFF *tif;
+	TIFF *tif;
 	int dirn;
 {
 	static char module[] = "TIFFSetDirectory";
