@@ -274,7 +274,7 @@ TIFFFieldInfo const *
 DECLARE2(TIFFFindFieldInfo, u_short, tag, TIFFDataType, dt)
 {
 	static TIFFFieldInfo const *last = NULL;
-	register TIFFFieldInfo const *fip;
+	TIFFFieldInfo const *fip;
 
 	if (last && last->field_tag == tag &&
 	    (dt == TIFF_ANY || dt == last->field_type))

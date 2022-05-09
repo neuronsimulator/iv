@@ -135,7 +135,7 @@ void Scene::Orphan() {
 
     GetComponents(children, sizeof(children) / sizeof(Interactor*), a, n);
     if (n > 0) {
-	for (register int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 	    a[i]->Orphan();
 	}
 	if (a != children) {
@@ -193,7 +193,7 @@ void Scene::Highlight(bool b) {
 
     GetComponents(children, sizeof(children) / sizeof(Interactor*), a, n);
     if (n > 0) {
-	for (register int index = 0; index < n; index++) {
+	for (int index = 0; index < n; index++) {
 	    a[index]->Highlight(b);
 	}
 	if (a != children) {

@@ -2081,7 +2081,7 @@ without express or implied warranty.
 
 static int ReadInteger(char* string, char** NextString)
 {
-    register int Result = 0;
+    int Result = 0;
     int Sign = 1;
     
     if (*string == '+')
@@ -2110,7 +2110,7 @@ int XParseGeometry (
 	unsigned int *height)    /* RETURN */
 {
 	int mask = NoValue;
-	register char *strind;
+	char *strind;
 	unsigned int tempWidth, tempHeight;
 	int tempX, tempY;
 	char *nextCharacter;

@@ -178,7 +178,7 @@ static int BufFind (
 
 void StringBrowser::Insert (const char* s, int index) {
     display->Draw(output, canvas);
-    register Perspective* p = perspective;
+    Perspective* p = perspective;
 
     char* copy = new char[strlen(s)+1];
     strcpy(copy, s);
@@ -200,7 +200,7 @@ void StringBrowser::Insert (const char* s, int index) {
 void StringBrowser::Replace (const char* s, int index) {
     if (index < strcount) {
 	display->Draw(output, canvas);
-	register Perspective* p = perspective;
+	Perspective* p = perspective;
 
 	char* old_string = String(index);
 	delete [] old_string;
@@ -220,7 +220,7 @@ void StringBrowser::Replace (const char* s, int index) {
 void StringBrowser::Remove (int index) {
     if (0 <= index && index < strcount) {
         display->Draw(output, canvas);
-        register Perspective* p = perspective;
+        Perspective* p = perspective;
 	char* string = String(index);
 
 	if (
@@ -421,7 +421,7 @@ bool StringBrowser::HandleChar (char c) {
 }
 
 void StringBrowser::Adjust (Perspective& np) {
-    register Perspective* p = perspective;
+    Perspective* p = perspective;
     float scale = (np.height == 0) ? 1 : float(p->height) / float(np.height);
     int x = p->x0 + int((np.curx - np.x0) * scale);
     int y = p->y0 + int((np.cury - np.y0) * scale);
@@ -485,7 +485,7 @@ void StringBrowser::UpdateWidth () {
 }
 
 void StringBrowser::InitPerspective (bool scroll_to_top) {
-    register Perspective* p = perspective;
+    Perspective* p = perspective;
     int old_top = p->height - p->cury - p->curheight;
 
     p->lx = p->curwidth = xmax+1;
@@ -549,7 +549,7 @@ void StringBrowser::UnselectAll () {
 }
 
 void StringBrowser::ScrollBy (int dx, int dy) {
-    register Perspective* p = perspective;
+    Perspective* p = perspective;
     ScrollTo(p->curx + dx, p->cury + dy);
 }
 
@@ -558,7 +558,7 @@ void StringBrowser::ScrollBy (int lines) {
 }
 
 void StringBrowser::ScrollTo (int x, int y) {
-    register Perspective* p = perspective;
+    Perspective* p = perspective;
     int minx = 0;
     int maxx = Math::max(minx, p->width - p->curwidth/2);
     int maxy = p->height - p->curheight;
@@ -576,7 +576,7 @@ void StringBrowser::ScrollTo (int x, int y) {
 }
 
 void StringBrowser::ScrollTo (int index) {
-    register Perspective* p = perspective;
+    Perspective* p = perspective;
     IntCoord y0 = p->y0 + p->cury;
     IntCoord y = p->height - (index+1)*lineheight - y0;
 
@@ -597,7 +597,7 @@ void StringBrowser::ScrollToView (IntCoord x, IntCoord y) {
 }
 
 int StringBrowser::Locate (IntCoord, IntCoord y) {
-    register Perspective* p = perspective;
+    Perspective* p = perspective;
 
     y = Math::max(p->curheight % lineheight, Math::min(y, p->curheight-1));
     return display->LineNumber(y);

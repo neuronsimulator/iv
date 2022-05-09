@@ -56,12 +56,12 @@ static	int TIFFAppendToStrip();
 
 /*VARARGS3*/
 int TIFFWriteScanline(tif, buf, row, sample)
-	register TIFF *tif;
+	TIFF *tif;
 	u_char *buf;
 	u_int row, sample;
 {
 	static char module[] = "TIFFWriteScanline";
-	register TIFFDirectory *td;
+	TIFFDirectory *td;
 	int strip, status, imagegrew = 0;
 
 	if (!TIFFWriteCheck(tif, 0, module))
@@ -380,7 +380,7 @@ int TIFFSetupStrips(tif)
 {
 #define	isUnspecified(td, v) \
     (td->v == 0xffffffff || (td)->td_imagelength == 0)
-	register TIFFDirectory *td = &tif->tif_dir;
+	TIFFDirectory *td = &tif->tif_dir;
 
 	if (!isTiled(tif))
 		td->td_stripsperimage = isUnspecified(td, td_rowsperstrip) ?
@@ -417,7 +417,7 @@ int TIFFSetupStrips(tif)
  */
 static
 int TIFFWriteCheck(tif, tiles, module)
-	register TIFF *tif;
+	TIFF *tif;
 	int tiles;
 	char module[];
 {
@@ -472,7 +472,7 @@ int TIFFWriteCheck(tif, tiles, module)
  */
 static
 int TIFFBufferSetup(tif, module)
-	register TIFF *tif;
+	TIFF *tif;
 	char module[];
 {
 	int size;
@@ -574,7 +574,7 @@ int TIFFAppendToStrip(tif, strip, data, cc)
  * for infinite recursion.
  */
 int TIFFFlushData1(tif)
-	register TIFF *tif;
+	TIFF *tif;
 {
 	if (tif->tif_rawcc > 0) {
 		if (tif->tif_dir.td_fillorder != tif->tif_fillorder &&

@@ -83,7 +83,7 @@ void Transformer::InvTransform(float tx, float ty, float& x, float& y) const {
 }
 
 void Transformer::TransformList(IntCoord x[], IntCoord y[], int n) const {
-    register IntCoord* ox, * oy;
+    IntCoord* ox, * oy;
     IntCoord* lim;
 
     lim = &x[n];
@@ -95,7 +95,7 @@ void Transformer::TransformList(IntCoord x[], IntCoord y[], int n) const {
 void Transformer::TransformList(
     IntCoord x[], IntCoord y[], int n, IntCoord tx[], IntCoord ty[]
 ) const {
-    register IntCoord* ox, * oy, * nx, * ny;
+    IntCoord* ox, * oy, * nx, * ny;
     IntCoord* lim;
 
     lim = &x[n];
@@ -105,7 +105,7 @@ void Transformer::TransformList(
 }
 
 void Transformer::InvTransformList(IntCoord tx[], IntCoord ty[], int n) const {
-    register IntCoord* ox, * oy;
+    IntCoord* ox, * oy;
     IntCoord* lim;
     float a, b, d = det();
 
@@ -122,7 +122,7 @@ void Transformer::InvTransformList(IntCoord tx[], IntCoord ty[], int n) const {
 void Transformer::InvTransformList(
     IntCoord tx[], IntCoord ty[], int n, IntCoord x[], IntCoord y[]
 ) const {
-    register IntCoord* ox, * oy, * nx, * ny;
+    IntCoord* ox, * oy, * nx, * ny;
     IntCoord* lim;
     float a, b, d = det();
 

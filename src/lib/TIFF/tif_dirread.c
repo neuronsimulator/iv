@@ -112,9 +112,9 @@ CheckMalloc(tif, n, what)
 int TIFFReadDirectory(tif)
 	TIFF *tif;
 {
-	register TIFFDirEntry *dp;
-	register int n;
-	register TIFFDirectory *td;
+	TIFFDirEntry *dp;
+	int n;
+	TIFFDirectory *td;
 	TIFFDirEntry *dir;
 	long v;
 	const TIFFFieldInfo *fip;
@@ -541,9 +541,9 @@ void EstimateStripByteCounts(tif, dir, dircount)
 	TIFFDirEntry *dir;
 	u_int dircount;
 {
-	register TIFFDirEntry *dp;
-	register TIFFDirectory *td = &tif->tif_dir;
-	register int n;
+	TIFFDirEntry *dp;
+	TIFFDirectory *td = &tif->tif_dir;
+	int n;
 
 	td->td_stripbytecount = (u_long *)
 	    CheckMalloc(tif, sizeof (u_long), "for \"StripByteCounts\" array");
@@ -996,7 +996,7 @@ int TIFFFetchStripThing(tif, dir, nstrips, lpp)
 	long nstrips;
 	u_long **lpp;
 {
-	register u_long *lp;
+	u_long *lp;
 	int status;
 
 	if (!CheckDirCount(tif, dir, nstrips))
@@ -1018,7 +1018,7 @@ int TIFFFetchStripThing(tif, dir, nstrips, lpp)
 		if (dp == NULL)
 			return (0);
 		if ((status = TIFFFetchShortArray(tif, dir, dp))) {
-			register u_short *wp = dp;
+			u_short *wp = dp;
 			while (nstrips-- > 0)
 				*lp++ = *wp++;
 		}

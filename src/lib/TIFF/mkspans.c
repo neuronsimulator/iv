@@ -16,8 +16,8 @@ dumparray(name, runs)
 	char *name;
 	unsigned char runs[256];
 {
-	register int i;
-	register char *sep;
+	int i;
+	char *sep;
 	printf("static u_char %s[256] = {\n", name);
 	sep = "    ";
 	for (i = 0; i < 256; i++) {
@@ -37,7 +37,7 @@ main()
 
 	bzero(runs[0], 256*sizeof (char));
 	bzero(runs[1], 256*sizeof (char));
-	{ register int run, runlen, i;
+	{ int run, runlen, i;
 	  runlen = 1;
 	  for (run = 0x80; run != 0xff; run = (run>>1)|0x80) {
 		for (i = run-1; i >= 0; i--) {

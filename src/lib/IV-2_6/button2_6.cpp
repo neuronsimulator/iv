@@ -107,8 +107,8 @@ public:
 };
 
 static void Remove(ButtonList*& blist, Button* b) {
-    register ButtonList* bl;
-    register ButtonList* prev;
+    ButtonList* bl;
+    ButtonList* prev;
 
     prev = nil;
     for (bl = blist; bl != nil; bl = bl->next) {
@@ -126,8 +126,8 @@ static void Remove(ButtonList*& blist, Button* b) {
 }
 
 static void DeleteList(ButtonList* blist) {
-    register ButtonList* bl;
-    register ButtonList* next;
+    ButtonList* bl;
+    ButtonList* next;
 
     for (bl = blist; bl != nil; bl = next) {
 	next = bl->next;
@@ -208,7 +208,7 @@ void Button::Disable() {
 }
 
 void Button::Choose() {
-    register ButtonList* bl;
+    ButtonList* bl;
 
     if (!chosen) {
 	chosen = true;
@@ -224,7 +224,7 @@ void Button::Choose() {
 }
 
 void Button::UnChoose() {
-    register ButtonList* bl;
+    ButtonList* bl;
 
     if (chosen) {
 	chosen = false;
@@ -241,7 +241,7 @@ void Button::UnChoose() {
 
 void Button::Refresh() { }
 
-void Button::Handle(register Event& e) {
+void Button::Handle(Event& e) {
     if (e.eventType == DownEvent && e.target == this) {
 	bool inside = true;
 	do {
@@ -405,7 +405,7 @@ void PushButton::Redraw(IntCoord x1, IntCoord y1, IntCoord x2, IntCoord y2) {
 }
 
 void PushButton::Refresh() {
-    register int r;
+    int r;
     IntCoord x[16], y[16];
     IntCoord tx, ty;
 

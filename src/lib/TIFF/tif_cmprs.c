@@ -115,7 +115,7 @@ static struct cscheme const *
 findScheme(scheme)
 	int scheme;
 {
-	register struct cscheme const *c;
+	struct cscheme const *c;
 
 	for (c = CompressionSchemes; c < &CompressionSchemes[NSCHEMES]; c++)
 		if (c->scheme == scheme)
