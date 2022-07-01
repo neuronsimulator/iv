@@ -85,12 +85,12 @@ void GraphicCompTool::Init (GraphicComp* prototype) {
     _protoview->Update();
 }
 
-void GraphicCompTool::Read (istream& in) {
+void GraphicCompTool::Read (std::istream& in) {
     Tool::Read(in);
     Init((GraphicComp*) unidraw->GetCatalog()->ReadComponent(in));
 }
 
-void GraphicCompTool::Write (ostream& out) {
+void GraphicCompTool::Write (std::ostream& out) {
     Tool::Write(out);
     unidraw->GetCatalog()->WriteComponent(GetPrototype(), out);
 }

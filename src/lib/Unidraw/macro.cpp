@@ -182,7 +182,7 @@ MacroCmd::~MacroCmd () {
     delete _cmds;
 }
 
-void MacroCmd::Read (istream& in) {
+void MacroCmd::Read (std::istream& in) {
     Command::Read(in);
     
     int count;
@@ -193,7 +193,7 @@ void MacroCmd::Read (istream& in) {
     }
 }
 
-void MacroCmd::Write (ostream& out) {
+void MacroCmd::Write (std::ostream& out) {
     Command::Write(out);
     Iterator i;
     int count = 0;

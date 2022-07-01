@@ -107,7 +107,7 @@ void RpcWriter::open(const char* path, bool fatal, bool binary) {
     }
 
     if (!server() && fatal) {
-	cerr << "RpcWriter::open: service " << path << " not found" << "\n";
+	std::cerr << "RpcWriter::open: service " << path << " not found" << "\n";
 	cerr.flush();
 	abort();
     }

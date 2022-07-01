@@ -205,7 +205,7 @@ void Selection::Sort (GraphicView* views) {
         views->Next(i);
     }
     if (!_ulist->IsEmpty()) {
-        cerr << "warning: selection contained spurious element(s)\n";
+        std::cerr << "warning: selection contained spurious element(s)\n";
     }
     delete _ulist;
     _ulist = newList;

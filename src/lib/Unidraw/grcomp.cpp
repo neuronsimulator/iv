@@ -305,91 +305,91 @@ void GraphicComp::Uninterpret (Command* cmd) {
     }
 }
 
-void GraphicComp::Skip (istream& in) { unidraw->GetCatalog()->Skip(in); }
-void GraphicComp::Mark (ostream& out) { unidraw->GetCatalog()->Mark(out); }
+void GraphicComp::Skip (std::istream& in) { unidraw->GetCatalog()->Skip(in); }
+void GraphicComp::Mark (std::ostream& out) { unidraw->GetCatalog()->Mark(out); }
 
-int GraphicComp::ReadBgFilled (istream& in) {
+int GraphicComp::ReadBgFilled (std::istream& in) {
     return unidraw->GetCatalog()->ReadBgFilled(in);
 }
 
-Transformer* GraphicComp::ReadTransformer (istream& in) {
+Transformer* GraphicComp::ReadTransformer (std::istream& in) {
     return unidraw->GetCatalog()->ReadTransformer(in);
 }
 
-PSBrush* GraphicComp::ReadBrush (istream& in) {
+PSBrush* GraphicComp::ReadBrush (std::istream& in) {
     return unidraw->GetCatalog()->ReadBrush(in);
 }
 
-PSColor* GraphicComp::ReadColor (istream& in) { 
+PSColor* GraphicComp::ReadColor (std::istream& in) {
     return unidraw->GetCatalog()->ReadColor(in);
 }
 
-PSFont* GraphicComp::ReadFont (istream& in) {
+PSFont* GraphicComp::ReadFont (std::istream& in) {
     return unidraw->GetCatalog()->ReadFont(in);
 }
 
-PSPattern* GraphicComp::ReadPattern (istream& in) {
+PSPattern* GraphicComp::ReadPattern (std::istream& in) {
     return unidraw->GetCatalog()->ReadPattern(in);
 }
 
-void GraphicComp::WriteBgFilled (bool bgFilled, ostream& out) {
+void GraphicComp::WriteBgFilled (bool bgFilled, std::ostream& out) {
     unidraw->GetCatalog()->WriteBgFilled(bgFilled, out);
 }
 
-void GraphicComp::WriteTransformer (Transformer* t, ostream& out) {
+void GraphicComp::WriteTransformer (Transformer* t, std::ostream& out) {
     unidraw->GetCatalog()->WriteTransformer(t, out);
 }
 
-void GraphicComp::WriteBrush (PSBrush* br, ostream& out) {
+void GraphicComp::WriteBrush (PSBrush* br, std::ostream& out) {
     unidraw->GetCatalog()->WriteBrush(br, out);
 }
 
-void GraphicComp::WriteColor (PSColor* color, ostream& out) {
+void GraphicComp::WriteColor (PSColor* color, std::ostream& out) {
     unidraw->GetCatalog()->WriteColor(color, out);
 }
 
-void GraphicComp::WriteFont (PSFont* font, ostream& out) {
+void GraphicComp::WriteFont (PSFont* font, std::ostream& out) {
     unidraw->GetCatalog()->WriteFont(font, out);
 }
 
-void GraphicComp::WritePattern (PSPattern* pat, ostream& out) {
+void GraphicComp::WritePattern (PSPattern* pat, std::ostream& out) {
     unidraw->GetCatalog()->WritePattern(pat, out);
 }
 
-char* GraphicComp::ReadString (istream& in) {
+char* GraphicComp::ReadString (std::istream& in) {
     return unidraw->GetCatalog()->ReadString(in);
 }
 
-Bitmap* GraphicComp::ReadBitmap (istream& in) {
+Bitmap* GraphicComp::ReadBitmap (std::istream& in) {
     return unidraw->GetCatalog()->ReadBitmap(in);
 }
 
-Raster* GraphicComp::ReadGraymap (istream& in) {
+Raster* GraphicComp::ReadGraymap (std::istream& in) {
     return unidraw->GetCatalog()->ReadGraymap(in);
 }
 
-Raster* GraphicComp::ReadRaster(istream& in) {
+Raster* GraphicComp::ReadRaster(std::istream& in) {
     return unidraw->GetCatalog()->ReadRaster(in);
 }
 
-void GraphicComp::WriteString (const char* string, ostream& out) {
+void GraphicComp::WriteString (const char* string, std::ostream& out) {
     unidraw->GetCatalog()->WriteString(string, out);
 }
 
-void GraphicComp::WriteBitmap (Bitmap* bm, ostream& out) {
+void GraphicComp::WriteBitmap (Bitmap* bm, std::ostream& out) {
     unidraw->GetCatalog()->WriteBitmap(bm, out);
 }
 
-void GraphicComp::WriteGraymap (Raster* gm, ostream& out) {
+void GraphicComp::WriteGraymap (Raster* gm, std::ostream& out) {
     unidraw->GetCatalog()->WriteGraymap(gm, out);
 }
 
-void GraphicComp::WriteRaster (Raster* raster, ostream& out) {
+void GraphicComp::WriteRaster (Raster* raster, std::ostream& out) {
     unidraw->GetCatalog()->WriteRaster(raster, out);
 }
 
 void GraphicComp::ReadVertices (
-    istream& in, Coord*& x, Coord*& y, int& count
+    std::istream& in, Coord*& x, Coord*& y, int& count
 ) {
     in >> count;
     x = new Coord[count];
@@ -409,7 +409,7 @@ void GraphicComp::ReadVertices (
 }
 
 void GraphicComp::WriteVertices (
-    const Coord* x, const Coord* y, int count, ostream& out
+    const Coord* x, const Coord* y, int count, std::ostream& out
 ) {
     out << count;
     
@@ -931,7 +931,7 @@ void GraphicComps::SetMobility (Mobility m) {
     }
 }
 
-void GraphicComps::Read (istream& in) {
+void GraphicComps::Read (std::istream& in) {
     GraphicComp::Read(in);
     Graphic* g = GetGraphic();
 
@@ -955,7 +955,7 @@ void GraphicComps::Read (istream& in) {
     Unref(t);
 }
 
-void GraphicComps::Write (ostream& out) {
+void GraphicComps::Write (std::ostream& out) {
     GraphicComp::Write(out);
     Iterator i;
     int count = 0;

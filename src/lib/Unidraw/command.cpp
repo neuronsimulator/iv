@@ -172,11 +172,11 @@ Command* Command::Copy () {
     return copy;
 }
 
-void Command::Read (istream& in) {
+void Command::Read (std::istream& in) {
     SetControlInfo(unidraw->GetCatalog()->ReadControlInfo(in));
 }
 
-void Command::Write (ostream& out) {
+void Command::Write (std::ostream& out) {
     unidraw->GetCatalog()->WriteControlInfo(GetControlInfo(), out);
 }
 

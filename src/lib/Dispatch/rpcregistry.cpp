@@ -44,7 +44,7 @@
 // Print a short error message describing the last error encountered
 // during a call to a system function.
 
-static ostream& perror(ostream& s) {
+static ostream& perror(std::ostream& s) {
 #if defined(sun) && defined(SVR4)
     s << ": " << strerror(errno);
 #else
@@ -70,13 +70,13 @@ bool RpcRegistry::record(const char* path, int port) {
 
     ofstream registry(path);
     if (!registry) {
-	cerr << "RpcRegistry::record: open(" << path << ")" << perror;
+	std::cerr << "RpcRegistry::record: open(" << path << ")" << perror;
 	return false;
     }
 
     registry << Host::name() << ends << port;
     if (!registry) {
-	cerr << "RpcRegistry::record: write" << perror;
+	std::cerr << "RpcRegistry::record: write" << perror;
 	return false;
     }
 
@@ -93,7 +93,7 @@ bool RpcRegistry::erase(const char* path) {
     }
 
     if (unlink(path) < 0) {
-	cerr << "RpcRegistry::erase: unlink(" << path << ")" << perror;
+	std::cerr << "RpcRegistry::erase: unlink(" << path << ")" << perror;
 	return false;
     }
 
@@ -124,7 +124,7 @@ bool RpcRegistry::find(const char* path, char*& hostname, int& port) {
     registry.getline(hostname, MAXHOSTNAMELEN, '\0');
     registry >> port;
     if (!registry) {
-	cerr << "RpcRegistry::find: error reading " << path << '\n';
+	std::cerr << "RpcRegistry::find: error reading " << path << '\n';
 	return false;
     }
 

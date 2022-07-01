@@ -90,7 +90,7 @@ StateVar* ArrowVar::Copy () { return new ArrowVar(_head, _tail); }
 ClassId ArrowVar::GetClassId () { return ARROW_VAR; }
 bool ArrowVar::IsA (ClassId id) {return ARROW_VAR==id || StateVar::IsA(id);}
 
-void ArrowVar::Read (istream& in) {
+void ArrowVar::Read (std::istream& in) {
     StateVar::Read(in);
     char h, t;
     in >> h >> t;
@@ -98,7 +98,7 @@ void ArrowVar::Read (istream& in) {
     _tail = (bool) t;
 }
 
-void ArrowVar::Write (ostream& out) {
+void ArrowVar::Write (std::ostream& out) {
     StateVar::Write(out);
     out << _head << " " << _tail << " ";
 }

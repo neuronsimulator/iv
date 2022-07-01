@@ -74,10 +74,10 @@ bool StateVar::IsA (ClassId id) { return STATE_VAR == id; }
 void StateVar::SetBinding (Connector* conn) { _conn = conn; Notify(); }
 Connector* StateVar::GetBinding () { return _conn; }
 
-void StateVar::Read (istream& in) {
+void StateVar::Read (std::istream& in) {
     _conn = (Connector*) unidraw->GetCatalog()->ReadComponent(in);
 }
 
-void StateVar::Write (ostream& out) {
+void StateVar::Write (std::ostream& out) {
     unidraw->GetCatalog()->WriteComponent((Component*) _conn, out);
 }

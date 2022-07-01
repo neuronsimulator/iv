@@ -72,7 +72,7 @@ Component* RectComp::Copy () {
 RectComp::RectComp (SF_Rect* graphic) : GraphicComp(graphic) { }
 SF_Rect* RectComp::GetRect () { return (SF_Rect*) GetGraphic(); }
 
-void RectComp::Read (istream& in) {
+void RectComp::Read (std::istream& in) {
     GraphicComp::Read(in);
     Coord x0, y0, x1, y1;
 
@@ -93,7 +93,7 @@ void RectComp::Read (istream& in) {
     SetGraphic(rect);
 }
 
-void RectComp::Write (ostream& out) {
+void RectComp::Write (std::ostream& out) {
     GraphicComp::Write(out);
     SF_Rect* rect = GetRect();
     Coord x0, y0, x1, y1;
@@ -354,7 +354,7 @@ bool PSRect::IsA (ClassId id) {
     return PS_RECT == id || PostScriptView::IsA(id);
 }
 
-bool PSRect::Definition (ostream& out) {
+bool PSRect::Definition (std::ostream& out) {
     Coord l, b, r, t;
 
     RectComp* comp = (RectComp*) GetSubject();

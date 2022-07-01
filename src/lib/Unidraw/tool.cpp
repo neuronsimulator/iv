@@ -51,11 +51,11 @@ Tool::~Tool () {
 
 Tool* Tool::Copy () { return new Tool(CopyControlInfo()); }
 
-void Tool::Read (istream& in) {
+void Tool::Read (std::istream& in) {
     SetControlInfo(unidraw->GetCatalog()->ReadControlInfo(in));
 }
 
-void Tool::Write (ostream& out) {
+void Tool::Write (std::ostream& out) {
     unidraw->GetCatalog()->WriteControlInfo(GetControlInfo(), out);
 }
 

@@ -57,16 +57,16 @@ class PSIdraw : public PostScriptViews {
 public:
     PSIdraw(IdrawComp* = nil);
 protected:
-    virtual void Creator(ostream&);
+    virtual void Creator(std::ostream&);
 
-    virtual void ArrowHeader(ostream&);
-    virtual void ConstProcs(ostream&);
-    virtual void GridSpacing(ostream&);
-    virtual void LineProc(ostream&);
-    virtual void MultiLineProc(ostream&);
-    virtual void BSplineProc(ostream&);
-    virtual void Prologue(ostream&);
-    virtual void SetBrushProc(ostream&);
+    virtual void ArrowHeader(std::ostream&);
+    virtual void ConstProcs(std::ostream&);
+    virtual void GridSpacing(std::ostream&);
+    virtual void LineProc(std::ostream&);
+    virtual void MultiLineProc(std::ostream&);
+    virtual void BSplineProc(std::ostream&);
+    virtual void Prologue(std::ostream&);
+    virtual void SetBrushProc(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);

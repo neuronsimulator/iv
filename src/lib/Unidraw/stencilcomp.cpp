@@ -69,7 +69,7 @@ StencilComp::~StencilComp () { delete [] _filename; }
 UStencil* StencilComp::GetStencil () { return (UStencil*) GetGraphic(); }
 const char* StencilComp::GetFileName () { return _filename; }
 
-void StencilComp::Read (istream& in) {
+void StencilComp::Read (std::istream& in) {
     GraphicComp::Read(in);
     Bitmap* image = ReadBitmap(in);
     Bitmap* mask = nil;
@@ -98,7 +98,7 @@ void StencilComp::Read (istream& in) {
     _filename = ReadString(in);
 }
 
-void StencilComp::Write (ostream& out) {
+void StencilComp::Write (std::ostream& out) {
     GraphicComp::Write(out);
     UStencil* stencil = GetStencil();
     Bitmap* image, *mask;
@@ -168,7 +168,7 @@ bool PSStencil::IsA (ClassId id) {
     return PS_STENCIL == id || PostScriptView::IsA(id);
 }
 
-bool PSStencil::Definition (ostream& out) {
+bool PSStencil::Definition (std::ostream& out) {
     StencilComp* comp = (StencilComp*) GetSubject();
     Bitmap* image, *mask;
     comp->GetStencil()->GetOriginal(image, mask);

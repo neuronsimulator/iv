@@ -60,12 +60,12 @@ void FontCmd::Execute () {
     Command::Execute();
 }
 
-void FontCmd::Read (istream& in) {
+void FontCmd::Read (std::istream& in) {
     Command::Read(in);
     _font = unidraw->GetCatalog()->ReadFont(in);
 }
 
-void FontCmd::Write (ostream& out) {
+void FontCmd::Write (std::ostream& out) {
     Command::Write(out);
     unidraw->GetCatalog()->WriteFont(GetFont(), out);
 }

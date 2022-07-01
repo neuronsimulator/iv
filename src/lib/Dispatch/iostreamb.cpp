@@ -244,7 +244,7 @@ istreamb& istreamb::operator>>(unsigned char* up) {
 // Redefine the rest of the overloaded operator>> functions that we
 // want to keep in the derived class.
 
-istreamb& istreamb::operator>>(istream& (*f)(istream&)) {
+istreamb& istreamb::operator>>(std::istream& (*f)(std::istream&)) {
     istream::operator>>(f);
     return *this;
 }
@@ -424,7 +424,7 @@ ostreamb& ostreamb::operator<<(const unsigned char* up) {
 // Redefine the rest of the overloaded operator<< functions that we
 // want to keep in the derived class.
 
-ostreamb& ostreamb::operator<<(ostream& (*f)(ostream&)) {
+ostreamb& ostreamb::operator<<(std::ostream& (*f)(std::ostream&)) {
     ostream::operator<<(f);
     return *this;
 }

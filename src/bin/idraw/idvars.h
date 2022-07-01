@@ -41,8 +41,8 @@ public:
     virtual StateVar& operator = (StateVar&);
 
     virtual StateVar* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 private:

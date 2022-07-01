@@ -36,7 +36,7 @@ class PrinterRep;
 
 class Printer : public Canvas {
 public:
-    Printer(ostream*);
+    Printer(std::ostream*);
 	 virtual ~Printer();
 
 	 virtual PixelCoord to_pixels(Coord, DimensionName) const;

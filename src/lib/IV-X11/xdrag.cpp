@@ -42,9 +42,12 @@
 #include <X11/Xatom.h>
 #include <OS/host.h>
 #include <OS/types.h>
+
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+#include <sstream>
 
 // how is this done portably? it is used to generate a name unique to
 // this process.
@@ -132,7 +135,7 @@ static void setDragProperty(
     Atom property = None;
     if (length != 0) {
 	char buffer[256];
-	ostringstream name(buffer);
+	std::ostringstream name(buffer);
 	name << dragName << "_" << Host::name() << "_" << getpid() << "_"  <<
 	    dropUid++;
 	property = XInternAtom(display, name.str().c_str(), False);
@@ -707,7 +710,7 @@ bool DragRep::event(Event& event) {
     do {
 	dragEvent.read();
 	if (dragEvent.type() == Event::motion) {
-//          cout << "d: " << dragEvent.rep()->xevent_.xmotion.serial << endl;
+//          std::cout << "d: " << dragEvent.rep()->xevent_.xmotion.serial << endl;
 // there seems to be a bug in 3.1 where this is not always done! -denis
 // the effect is that the motion event coordinates are out of order and
 // the window jumps around the screen to old locations. -dens

@@ -147,7 +147,7 @@ void PinComp::SetMobility (Mobility m) { _mobility = m; }
 Mobility PinComp::GetMobility () { return _mobility; }
 PinGraphic* PinComp::GetPin () { return (PinGraphic*) GetGraphic(); }
 
-void PinComp::Read (istream& in) {
+void PinComp::Read (std::istream& in) {
     Connector::Read(in);
     Coord x0, y0;
     int mobility;
@@ -169,7 +169,7 @@ void PinComp::Read (istream& in) {
     SetGraphic(pin);
 }
 
-void PinComp::Write (ostream& out) {
+void PinComp::Write (std::ostream& out) {
     Connector::Write(out);
     PinGraphic* pin = GetPin();
     Coord x0, y0;
@@ -412,7 +412,7 @@ bool PSPin::IsA (ClassId id) {return PS_PIN==id || PostScriptView::IsA(id);}
 
 PSPin::PSPin (PinComp* subj) : PostScriptView(subj) { }
 
-bool PSPin::Definition (ostream&) {
+bool PSPin::Definition (std::ostream&) {
     // unimplemented
 
     return true;

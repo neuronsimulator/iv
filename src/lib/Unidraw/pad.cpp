@@ -147,7 +147,7 @@ void PadComp::SetMobility (Mobility m) { _mobility = m; }
 Mobility PadComp::GetMobility () { return _mobility; }
 PadGraphic* PadComp::GetPad () { return (PadGraphic*) GetGraphic(); }
 
-void PadComp::Read (istream& in) {
+void PadComp::Read (std::istream& in) {
     Connector::Read(in);
     Coord l, b, r, t;
     int mobility;
@@ -169,7 +169,7 @@ void PadComp::Read (istream& in) {
     SetGraphic(pad);
 }
 
-void PadComp::Write (ostream& out) {
+void PadComp::Write (std::ostream& out) {
     Connector::Write(out);
     PadGraphic* pad = GetPad();
     Coord l, b, r, t;
@@ -409,7 +409,7 @@ bool PSPad::IsA (ClassId id) {return PS_PAD==id || PostScriptView::IsA(id);}
 
 PSPad::PSPad (PadComp* subj) : PostScriptView(subj) { }
 
-bool PSPad::Definition (ostream&) {
+bool PSPad::Definition (std::ostream&) {
     // unimplemented
 
     return true;

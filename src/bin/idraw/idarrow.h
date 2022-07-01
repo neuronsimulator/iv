@@ -44,8 +44,8 @@ public:
     virtual void Uninterpret(Command*);
 
     virtual Component* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*&);
     virtual bool IsA(ClassId);
@@ -68,8 +68,8 @@ class PSArrowLine : public PSLine {
 public:
     PSArrowLine(ArrowLineComp* = nil);
 
-    virtual bool Definition(ostream&);
-    virtual void Brush(ostream&);
+    virtual bool Definition(std::ostream&);
+    virtual void Brush(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
@@ -84,8 +84,8 @@ public:
     virtual void Uninterpret(Command*);
 
     virtual Component* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*&);
     virtual bool IsA(ClassId);
@@ -108,8 +108,8 @@ class PSArrowMultiLine : public PSMultiLine {
 public:
     PSArrowMultiLine(ArrowMultiLineComp* = nil);
 
-    virtual bool Definition(ostream&);
-    virtual void Brush(ostream&);
+    virtual bool Definition(std::ostream&);
+    virtual void Brush(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
@@ -124,8 +124,8 @@ public:
     virtual void Uninterpret(Command*);
 
     virtual Component* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*&);
     virtual bool IsA(ClassId);
@@ -148,8 +148,8 @@ class PSArrowSpline : public PSSpline {
 public:
     PSArrowSpline(ArrowSplineComp* = nil);
 
-    virtual bool Definition(ostream&);
-    virtual void Brush(ostream&);
+    virtual bool Definition(std::ostream&);
+    virtual void Brush(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);

@@ -52,8 +52,8 @@ public:
     PinGraphic* GetPin();
 
     virtual Component* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 protected:
@@ -108,7 +108,7 @@ class PSPin : public PostScriptView {
 public:
     PSPin(PinComp* = nil);
 
-    virtual bool Definition(ostream&);
+    virtual bool Definition(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);

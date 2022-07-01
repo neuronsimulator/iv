@@ -128,7 +128,7 @@ void ArrowLineComp::Uninterpret (Command* cmd) {
     }
 }
 
-void ArrowLineComp::Read (istream& in) {
+void ArrowLineComp::Read (std::istream& in) {
     LineComp::Read(in);
     Line* line = GetLine();
     Coord x0, y0, x1, y1;
@@ -146,7 +146,7 @@ void ArrowLineComp::Read (istream& in) {
     delete line;
 }
 
-void ArrowLineComp::Write (ostream& out) {
+void ArrowLineComp::Write (std::ostream& out) {
     LineComp::Write(out);
     ArrowLine* arrow = GetArrowLine();
     
@@ -260,7 +260,7 @@ bool PSArrowLine::IsA (ClassId id) {
     return PS_ARROWLINE == id || PSLine::IsA(id);
 }
 
-bool PSArrowLine::Definition (ostream& out) {
+bool PSArrowLine::Definition (std::ostream& out) {
     ArrowLineComp* comp = (ArrowLineComp*) GetSubject();
     ArrowLine* aline = comp->GetArrowLine();
 
@@ -280,7 +280,7 @@ bool PSArrowLine::Definition (ostream& out) {
 
 // this code is entirely for compatibility with older versions of idraw
 
-void PSArrowLine::Brush (ostream& out) {
+void PSArrowLine::Brush (std::ostream& out) {
     ArrowLineComp* comp = (ArrowLineComp*) GetSubject();
     PSBrush* brush = (PSBrush*) GetGraphicComp()->GetGraphic()->GetBrush();
     bool head, tail;
@@ -380,7 +380,7 @@ void ArrowMultiLineComp::Uninterpret (Command* cmd) {
     }
 }
 
-void ArrowMultiLineComp::Read (istream& in) {
+void ArrowMultiLineComp::Read (std::istream& in) {
     MultiLineComp::Read(in);
     SF_MultiLine* ml = GetMultiLine();
     Coord* x, *y;
@@ -399,7 +399,7 @@ void ArrowMultiLineComp::Read (istream& in) {
     delete ml;
 }
 
-void ArrowMultiLineComp::Write (ostream& out) {
+void ArrowMultiLineComp::Write (std::ostream& out) {
     MultiLineComp::Write(out);
     ArrowMultiLine* aml = GetArrowMultiLine();
 
@@ -511,7 +511,7 @@ bool PSArrowMultiLine::IsA (ClassId id) {
     return PS_ARROWMULTILINE == id || PSMultiLine::IsA(id);
 }
 
-bool PSArrowMultiLine::Definition (ostream& out) {
+bool PSArrowMultiLine::Definition (std::ostream& out) {
     ArrowMultiLineComp* comp = (ArrowMultiLineComp*) GetSubject();
     ArrowMultiLine* aml = comp->GetArrowMultiLine();
 
@@ -534,7 +534,7 @@ bool PSArrowMultiLine::Definition (ostream& out) {
 
 // this code is entirely for compatibility with older versions of idraw
 
-void PSArrowMultiLine::Brush (ostream& out) {
+void PSArrowMultiLine::Brush (std::ostream& out) {
     ArrowMultiLineComp* comp = (ArrowMultiLineComp*) GetSubject();
     PSBrush* brush = (PSBrush*) GetGraphicComp()->GetGraphic()->GetBrush();
     bool head, tail;
@@ -633,7 +633,7 @@ void ArrowSplineComp::Uninterpret (Command* cmd) {
     }
 }
 
-void ArrowSplineComp::Read (istream& in) {
+void ArrowSplineComp::Read (std::istream& in) {
     SplineComp::Read(in);
     SFH_OpenBSpline* spl = GetSpline();
     Coord* x, *y;
@@ -652,7 +652,7 @@ void ArrowSplineComp::Read (istream& in) {
     delete spl;
 }
 
-void ArrowSplineComp::Write (ostream& out) {
+void ArrowSplineComp::Write (std::ostream& out) {
     SplineComp::Write(out);
     ArrowOpenBSpline* as = GetArrowOpenBSpline();
 
@@ -761,7 +761,7 @@ bool PSArrowSpline::IsA (ClassId id) {
     return PS_ARROWSPLINE == id || PSSpline::IsA(id);
 }
 
-bool PSArrowSpline::Definition (ostream& out) {
+bool PSArrowSpline::Definition (std::ostream& out) {
     ArrowSplineComp* comp = (ArrowSplineComp*) GetSubject();
     ArrowOpenBSpline* aml = comp->GetArrowOpenBSpline();
 
@@ -784,7 +784,7 @@ bool PSArrowSpline::Definition (ostream& out) {
 
 // this code is entirely for compatibility with older versions of idraw
 
-void PSArrowSpline::Brush (ostream& out) {
+void PSArrowSpline::Brush (std::ostream& out) {
     ArrowSplineComp* comp = (ArrowSplineComp*) GetSubject();
     PSBrush* brush = (PSBrush*) GetGraphicComp()->GetGraphic()->GetBrush();
     bool head, tail;

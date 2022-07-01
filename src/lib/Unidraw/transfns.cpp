@@ -118,7 +118,7 @@ TransferFunct* TF_Direct::Copy () {
     return new TF_Direct(_input->Copy(), _output->Copy());
 }
 
-void TF_Direct::Read (istream& in) {
+void TF_Direct::Read (std::istream& in) {
     TF_2Port::Read(in);
     Catalog* catalog = unidraw->GetCatalog();
 
@@ -130,7 +130,7 @@ void TF_Direct::Read (istream& in) {
     _changed = changed;
 }
 
-void TF_Direct::Write (ostream& out) {
+void TF_Direct::Write (std::ostream& out) {
     TF_2Port::Write(out);
     Catalog* catalog = unidraw->GetCatalog();
 

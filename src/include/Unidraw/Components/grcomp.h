@@ -78,32 +78,32 @@ protected:
     virtual GraphicComp* GetGraphicComp(Graphic*);
     virtual void SetGraphic(Graphic*);
 
-    void Skip(istream&);
-    void Mark(ostream&);
+    void Skip(std::istream&);
+    void Mark(std::ostream&);
 
-    int ReadBgFilled(istream&);
-    PSBrush* ReadBrush(istream&);
-    PSColor* ReadColor(istream&);
-    PSFont* ReadFont(istream&);
-    PSPattern* ReadPattern(istream&);
-    Transformer* ReadTransformer(istream&);
-    char* ReadString(istream&);
-    Bitmap* ReadBitmap(istream&);
-    Raster* ReadGraymap(istream&);
-    Raster* ReadRaster(istream&);
-    void ReadVertices(istream&, Coord*&, Coord*&, int&);
+    int ReadBgFilled(std::istream&);
+    PSBrush* ReadBrush(std::istream&);
+    PSColor* ReadColor(std::istream&);
+    PSFont* ReadFont(std::istream&);
+    PSPattern* ReadPattern(std::istream&);
+    Transformer* ReadTransformer(std::istream&);
+    char* ReadString(std::istream&);
+    Bitmap* ReadBitmap(std::istream&);
+    Raster* ReadGraymap(std::istream&);
+    Raster* ReadRaster(std::istream&);
+    void ReadVertices(std::istream&, Coord*&, Coord*&, int&);
 
-    void WriteBgFilled(bool, ostream&);
-    void WriteBrush(PSBrush*, ostream&);
-    void WriteColor(PSColor*, ostream&);
-    void WriteFont(PSFont*, ostream&);
-    void WritePattern(PSPattern*, ostream&);
-    void WriteTransformer(Transformer*, ostream&);
-    void WriteString(const char*, ostream&);
-    void WriteBitmap(Bitmap*, ostream&);
-    void WriteGraymap(Raster*, ostream&);
-    void WriteRaster(Raster*, ostream&);
-    void WriteVertices(const Coord*, const Coord*, int, ostream&);
+    void WriteBgFilled(bool, std::ostream&);
+    void WriteBrush(PSBrush*, std::ostream&);
+    void WriteColor(PSColor*, std::ostream&);
+    void WriteFont(PSFont*, std::ostream&);
+    void WritePattern(PSPattern*, std::ostream&);
+    void WriteTransformer(Transformer*, std::ostream&);
+    void WriteString(const char*, std::ostream&);
+    void WriteBitmap(Bitmap*, std::ostream&);
+    void WriteGraymap(Raster*, std::ostream&);
+    void WriteRaster(Raster*, std::ostream&);
+    void WriteVertices(const Coord*, const Coord*, int, std::ostream&);
 protected:
     Graphic* _gr;
     static UList* _brushes;
@@ -141,8 +141,8 @@ public:
     virtual void SetMobility(Mobility);
 
     virtual Component* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 protected:

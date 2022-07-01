@@ -69,7 +69,7 @@ Component* EllipseComp::Copy () {
 EllipseComp::EllipseComp (SF_Ellipse* graphic) : GraphicComp(graphic) { }
 SF_Ellipse* EllipseComp::GetEllipse () { return (SF_Ellipse*) GetGraphic(); }
 
-void EllipseComp::Read (istream& in) {
+void EllipseComp::Read (std::istream& in) {
     GraphicComp::Read(in);
     Coord x0, y0;
     int r1, r2;
@@ -91,7 +91,7 @@ void EllipseComp::Read (istream& in) {
     SetGraphic(ellipse);
 }
 
-void EllipseComp::Write (ostream& out) {
+void EllipseComp::Write (std::ostream& out) {
     GraphicComp::Write(out);
     SF_Ellipse* ellipse = GetEllipse();
     Coord x0, y0;
@@ -224,7 +224,7 @@ bool PSEllipse::IsA (ClassId id) {
     return PS_ELLIPSE == id || PostScriptView::IsA(id);
 }
 
-bool PSEllipse::Definition (ostream& out) {
+bool PSEllipse::Definition (std::ostream& out) {
     Coord x0, y0;
     int rx, ry;
 

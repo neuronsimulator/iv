@@ -45,7 +45,7 @@ public:
     Creator();
 
     virtual void* Create(                       // for subjects
-        ClassId, istream&, ObjectMap* = nil, int = 0
+        ClassId, std::istream&, ObjectMap* = nil, int = 0
     );
     virtual void* Create(ClassId);              // for views
 };

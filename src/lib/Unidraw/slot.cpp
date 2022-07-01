@@ -101,7 +101,7 @@ void SlotComp::SetMobility (Mobility m) { _mobility = m; }
 Mobility SlotComp::GetMobility () { return _mobility; }
 SlotGraphic* SlotComp::GetSlot () { return (SlotGraphic*) GetGraphic(); }
 
-void SlotComp::Read (istream& in) {
+void SlotComp::Read (std::istream& in) {
     Connector::Read(in);
     Coord x0, y0, length;
     int mobility;
@@ -123,7 +123,7 @@ void SlotComp::Read (istream& in) {
     SetGraphic(pin);
 }
 
-void SlotComp::Write (ostream& out) {
+void SlotComp::Write (std::ostream& out) {
     Connector::Write(out);
     SlotGraphic* pin = GetSlot();
     Coord x0, y0, length;
@@ -592,7 +592,7 @@ ClassId PSSlot::GetClassId () { return PS_SLOT; }
 bool PSSlot::IsA (ClassId id) {return PS_SLOT==id||PostScriptView::IsA(id);}
 PSSlot::PSSlot (SlotComp* subj) : PostScriptView(subj) { }
 
-bool PSSlot::Definition (ostream&) {
+bool PSSlot::Definition (std::ostream&) {
     // unimplemented
 
     return true;

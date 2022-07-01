@@ -40,8 +40,8 @@ bool ExternView::IsA (ClassId id) {
 }
 
 ExternView::ExternView (Component* subj) : ComponentView(subj) { }
-bool ExternView::Emit (ostream& out) { return Definition(out); }
-bool ExternView::Definition (ostream&) { return true; }
+bool ExternView::Emit (std::ostream& out) { return Definition(out); }
+bool ExternView::Definition (std::ostream&) { return true; }
 ExternView* ExternView::GetView (Iterator) { return nil; }
 void ExternView::SetView (ExternView*, Iterator&) { }
 
@@ -55,7 +55,7 @@ bool PreorderView::IsA (ClassId id) {
 
 PreorderView::PreorderView (Component* subj) : ExternView(subj) { }
 
-bool PreorderView::Definition (ostream& out) {
+bool PreorderView::Definition (std::ostream& out) {
     Iterator i;
     bool ok = true;
 
@@ -75,7 +75,7 @@ bool InorderView::IsA (ClassId id) {
 
 InorderView::InorderView (Component* subj) : ExternView(subj) { }
 
-bool InorderView::Definition (ostream&) {
+bool InorderView::Definition (std::ostream&) {
     bool ok = true;
 
     // unimplemented
@@ -93,7 +93,7 @@ bool PostorderView::IsA (ClassId id) {
 
 PostorderView::PostorderView (Component* subj) : ExternView(subj) { }
 
-bool PostorderView::Definition (ostream& out) {
+bool PostorderView::Definition (std::ostream& out) {
     Iterator i;
     bool ok = true;
 

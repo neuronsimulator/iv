@@ -378,11 +378,11 @@ Catalog::~Catalog () {
 }
 
 bool Catalog::Save (EditorInfo* edInfo, const char* name) {
-    filebuf fbuf;
+    std::filebuf fbuf;
     bool ok = fbuf.open((char*) name, IOS_OUT) != 0;
 
     if (ok) {
-        ostream out(&fbuf);
+        std::ostream out(&fbuf);
         WriteEditorInfo(edInfo, out);
         ok = out.good();
 
@@ -441,11 +441,11 @@ bool Catalog::Retrieve (const char* name, EditorInfo*& edInfo) {
     edInfo = (EditorInfo*) _edInfoMap->GetObject(name);
 
     if (edInfo == nil) {
-        filebuf fbuf;
+        std::filebuf fbuf;
         ok = fbuf.open((char*) name, IOS_IN) != 0;
 
         if (ok) {
-            istream in(&fbuf);
+            std::istream in(&fbuf);
             edInfo = ReadEditorInfo(in);
             ok = !in.bad();
 
@@ -583,7 +583,7 @@ const char* Catalog::GetName (Component* comp) {
 const char* Catalog::GetName (Command* cmd) { return _cmdMap->GetName(cmd); }
 const char* Catalog::GetName (Tool* tool) { return _toolMap->GetName(tool); }
 
-void* Catalog::ReadObject (istream& in) {
+void* Catalog::ReadObject (std::istream& in) {
     void* obj = nil;
     int inst_id;
     ClassId subst_id;
@@ -620,7 +620,7 @@ void* Catalog::ReadObject (istream& in) {
 }
 
 void* Catalog::ReadSubstObject (
-    istream& in, int inst_id, ClassId orig_id,
+    std::istream& in, int inst_id, ClassId orig_id,
     ClassId subst_id, const char* delim
 ) {
     void* obj = _creator->Create(subst_id, in, _curMap, inst_id);
@@ -655,7 +655,7 @@ static bool FoundDelim (const char* delim, UArray& data) {
 }
 
 void Catalog::ReadExtraData (
-    istream& in, const char* delim, UArray* extra_data
+    std::istream& in, const char* delim, UArray* extra_data
 ) {
     for (int i = 0; !in.eof() && !FoundDelim(delim, *extra_data); ++i) {
         char c;
@@ -674,7 +674,7 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
     _substMap = &empty_subst_map;
 
 #if defined(__xlC__) || defined(__GNUG__) || defined(__PGIC__)
-    filebuf obuf, ibuf;
+    std::filebuf obuf, ibuf;
     ObjectMap* prevMap = _curMap;
     char* prevTmp = _tmpfile;
     static int stackLvl;
@@ -687,7 +687,7 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
 
     if (ok) {
 	ObjectMap omap(obj, base_id);
-        ostream out(&obuf);
+        std::ostream out(&obuf);
 
 	_curMap = &omap;
 	ok = SaveObject(obj, base_id, out);
@@ -696,13 +696,13 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
     }
     if (ok) {
 	ObjectMap imap(copy, base_id);
-        istream in(&ibuf);
+        std::istream in(&ibuf);
 
         _curMap = &imap;
 	ok = ibuf.open(_tmpfile, IOS_IN) != 0 && RetrieveObject(in, copy);
     }
     if (!ok) {
-        cerr << "Unidraw error: couldn't copy object (/tmp unwritable?)\n";
+        std::cerr << "Unidraw error: couldn't copy object (/tmp unwritable?)\n";
     }
     if (--stackLvl > 0 || !ok) {
         prevTmp = (_tmpfile == prevTmp) ? nil : prevTmp;
@@ -724,7 +724,7 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
         ok = RetrieveObject(inout, copy);
     }
     if (!ok) {
-        cerr << "Unidraw error: couldn't copy object\n";
+        std::cerr << "Unidraw error: couldn't copy object\n";
     }
     _curMap = prevMap;
 #endif
@@ -733,43 +733,43 @@ void* Catalog::CopyObject (void* obj, ClassId base_id) {
     return copy;
 }
 
-Component* Catalog::ReadComponent (istream& in) {
+Component* Catalog::ReadComponent (std::istream& in) {
     return (Component*) ReadObject(in);
 }
 
-Command* Catalog::ReadCommand (istream& in) {
+Command* Catalog::ReadCommand (std::istream& in) {
     return (Command*) ReadObject(in);
 }
 
-Tool* Catalog::ReadTool (istream& in) {
+Tool* Catalog::ReadTool (std::istream& in) {
     return (Tool*) ReadObject(in);
 }
 
-StateVar* Catalog::ReadStateVar (istream& in) {
+StateVar* Catalog::ReadStateVar (std::istream& in) {
     return (StateVar*) ReadObject(in);
 }
 
-TransferFunct* Catalog::ReadTransferFunct (istream& in) {
+TransferFunct* Catalog::ReadTransferFunct (std::istream& in) {
     return (TransferFunct*) ReadObject(in);
 }
 
-void Catalog::WriteComponent (Component* comp, ostream& out){
+void Catalog::WriteComponent (Component* comp, std::ostream& out){
     WriteObject(comp, COMPONENT, out);
 }
 
-void Catalog::WriteCommand (Command* cmd, ostream& out) {
+void Catalog::WriteCommand (Command* cmd, std::ostream& out) {
     WriteObject(cmd, COMMAND, out);
 }
 
-void Catalog::WriteTool (Tool* tool, ostream& out) {
+void Catalog::WriteTool (Tool* tool, std::ostream& out) {
     WriteObject(tool, TOOL, out);
 }    
 
-void Catalog::WriteStateVar (StateVar* stateVar, ostream& out) {
+void Catalog::WriteStateVar (StateVar* stateVar, std::ostream& out) {
     WriteObject(stateVar, STATE_VAR, out);
 }
 
-void Catalog::WriteTransferFunct (TransferFunct* transfn, ostream& out) {
+void Catalog::WriteTransferFunct (TransferFunct* transfn, std::ostream& out) {
     WriteObject(transfn, TRANSFER_FUNCT, out);
 }    
 
@@ -797,7 +797,7 @@ static ClassId NarrowSubst (void* obj, ClassId base_id, const char*& delim) {
      }
 }
 
-void Catalog::WriteIt (void* obj, ClassId base_id, ostream& out) {
+void Catalog::WriteIt (void* obj, ClassId base_id, std::ostream& out) {
     switch (base_id) {
         case COMPONENT:      ((Component*) obj)->Write(out); break;
         case COMMAND:        ((Command*) obj)->Write(out); break;
@@ -823,7 +823,7 @@ void Catalog::WriteIt (void* obj, ClassId base_id, ostream& out) {
     }
 }
 
-void Catalog::WriteObject (void* obj, ClassId base_id, ostream& out) {
+void Catalog::WriteObject (void* obj, ClassId base_id, std::ostream& out) {
     if (obj == nil) {
         WriteClassId(UNDEFINED_CLASS, out);
 
@@ -846,14 +846,14 @@ void Catalog::WriteObject (void* obj, ClassId base_id, ostream& out) {
     }
 }    
 
-bool Catalog::SaveObject (void* obj, ClassId base_id, ostream& out) {
+bool Catalog::SaveObject (void* obj, ClassId base_id, std::ostream& out) {
     WriteVersion(_version, out);
     WriteObject(obj, base_id, out);
     csolver->Write(out);
     return out.good();
 }    
 
-bool Catalog::RetrieveObject (istream& in, void*& obj) {
+bool Catalog::RetrieveObject (std::istream& in, void*& obj) {
     _fileVersion = ReadVersion(in);
     obj = ReadObject(in);
     csolver->Read(in);
@@ -861,22 +861,22 @@ bool Catalog::RetrieveObject (istream& in, void*& obj) {
 }
 
 bool Catalog::FileSave (void* obj, ClassId base_id, const char* name) {
-    filebuf fbuf;
+    std::filebuf fbuf;
     bool ok = fbuf.open((char*) name, IOS_OUT) != 0;
 
     if (ok) {
-        ostream out(&fbuf);
+        std::ostream out(&fbuf);
         ok = SaveObject(obj, base_id, out);
     }
     return ok;
 }    
 
 bool Catalog::FileRetrieve (const char* name, void*& obj) {
-    filebuf fbuf;
+    std::filebuf fbuf;
     bool ok = fbuf.open((char*) name, IOS_IN) != 0;
 
     if (ok) {
-        istream in(&fbuf);
+        std::istream in(&fbuf);
         ok = RetrieveObject(in, obj);
     }
     return ok;
@@ -901,7 +901,7 @@ const char* Catalog::Name (const char* name, int index) {
     return buf;
 }
 
-int Catalog::GetToken (istream& in, char* buf, int size) {
+int Catalog::GetToken (std::istream& in, char* buf, int size) {
     int count = 0;
 
     for (int i = 0; i < size && !in.eof(); ++i) {
@@ -915,7 +915,7 @@ int Catalog::GetToken (istream& in, char* buf, int size) {
     return count;
 }
 
-void Catalog::Skip (istream& in) {
+void Catalog::Skip (std::istream& in) {
     int len = strlen(MARK);
 
     while (GetToken(in, buf, CHARBUFSIZE) != 0) {
@@ -925,11 +925,11 @@ void Catalog::Skip (istream& in) {
     }
 }
 
-void Catalog::Mark (ostream& out) {
+void Catalog::Mark (std::ostream& out) {
     out << "\n" << MARK << " ";
 }
 
-float Catalog::ReadVersion (istream& in) {
+float Catalog::ReadVersion (std::istream& in) {
     float version;
 
     Skip(in);
@@ -937,12 +937,12 @@ float Catalog::ReadVersion (istream& in) {
     return version;
 }
 
-void Catalog::WriteVersion (float version, ostream& out) {
+void Catalog::WriteVersion (float version, std::ostream& out) {
     out << MARK << " Unidraw " << version << " ";
 }
 
 ClassId Catalog::ReadClassId (
-    istream& in, int& id, ClassId& subst_id, const char*& delim
+    std::istream& in, int& id, ClassId& subst_id, const char*& delim
 ) {
     long classId;
 
@@ -967,7 +967,7 @@ ClassId Catalog::ReadClassId (
 }
 
 void Catalog::WriteClassId (
-    ClassId classId, ostream& out, int inst_id, ClassId subst_id,
+    ClassId classId, std::ostream& out, int inst_id, ClassId subst_id,
     const char* delim
 ) {
     Mark(out);
@@ -979,7 +979,7 @@ void Catalog::WriteClassId (
 }
 
 void Catalog::WriteClassId (
-    void* obj, ClassId base_id, ostream& out, int inst_id
+    void* obj, ClassId base_id, std::ostream& out, int inst_id
 ) {
     ClassId orig_id = _substMap->GetOrigClassId(obj);
     const char* delim;
@@ -997,7 +997,7 @@ void Catalog::WriteClassId (
     WriteClassId(orig_id, out, inst_id, subst_id, delim);
 }
 
-int Catalog::ReadBgFilled (istream& in) {
+int Catalog::ReadBgFilled (std::istream& in) {
     int bgFilled;
 
     Skip(in);
@@ -1005,12 +1005,12 @@ int Catalog::ReadBgFilled (istream& in) {
     return bgFilled;
 }
 
-void Catalog::WriteBgFilled (bool bgFilled, ostream& out) {
+void Catalog::WriteBgFilled (bool bgFilled, std::ostream& out) {
     Mark(out);
     out << (bgFilled ? 1 : 0) << " ";
 }
 
-Transformer* Catalog::ReadTransformer (istream& in) {
+Transformer* Catalog::ReadTransformer (std::istream& in) {
     Transformer* t = nil;
     char lookahead;
 
@@ -1030,7 +1030,7 @@ Transformer* Catalog::ReadTransformer (istream& in) {
     return t;
 }
 
-void Catalog::WriteTransformer (Transformer* t, ostream& out) {
+void Catalog::WriteTransformer (Transformer* t, std::ostream& out) {
     Mark(out);
     out << "t ";
 
@@ -1045,7 +1045,7 @@ void Catalog::WriteTransformer (Transformer* t, ostream& out) {
     }
 }
 
-void Catalog::WriteBrush (PSBrush* brush, ostream& out) {
+void Catalog::WriteBrush (PSBrush* brush, std::ostream& out) {
     Mark(out);
     out << "b ";
 
@@ -1062,7 +1062,7 @@ void Catalog::WriteBrush (PSBrush* brush, ostream& out) {
     }
 }
 
-PSBrush* Catalog::ReadBrush (istream& in) {
+PSBrush* Catalog::ReadBrush (std::istream& in) {
     PSBrush* brush = nil;
 
     Skip(in);
@@ -1160,7 +1160,7 @@ PSBrush* Catalog::ReadBrush (const char* n, int index) {
     return br;
 }
 
-void Catalog::WriteColor (PSColor* color, ostream& out) {
+void Catalog::WriteColor (PSColor* color, std::ostream& out) {
     Mark(out);
     out << "c ";
 
@@ -1182,7 +1182,7 @@ void Catalog::WriteColor (PSColor* color, ostream& out) {
     }
 }
 
-PSColor* Catalog::ReadColor (istream& in) {
+PSColor* Catalog::ReadColor (std::istream& in) {
     PSColor* color = nil;
 
     Skip(in);
@@ -1259,7 +1259,7 @@ PSColor* Catalog::ReadColor (const char* n, int index) {
     return color;
 }
 
-void Catalog::WriteFont (PSFont* font, ostream& out) {
+void Catalog::WriteFont (PSFont* font, std::ostream& out) {
     Mark(out);
     out << "f ";
 
@@ -1274,7 +1274,7 @@ void Catalog::WriteFont (PSFont* font, ostream& out) {
     }
 }
 
-static void ReadName (istream& in, char* buf) {
+static void ReadName (std::istream& in, char* buf) {
     for (int i = 0; in.good(); ++i) {
         in >> buf[i];
 
@@ -1286,7 +1286,7 @@ static void ReadName (istream& in, char* buf) {
     }
 }
 
-PSFont* Catalog::ReadFont (istream& in) {
+PSFont* Catalog::ReadFont (std::istream& in) {
     PSFont* font = nil;
 
     Skip(in);
@@ -1439,7 +1439,7 @@ static const int* ExpandToFullSize (const int* orig_data, int size) {
     return data;
 }
 
-void Catalog::WritePattern (PSPattern* pattern, ostream& out) {
+void Catalog::WritePattern (PSPattern* pattern, std::ostream& out) {
     Mark(out);
     out << "p ";
 
@@ -1475,7 +1475,7 @@ void Catalog::WritePattern (PSPattern* pattern, ostream& out) {
     }
 }
 
-PSPattern* Catalog::ReadPattern (istream& in) {
+PSPattern* Catalog::ReadPattern (std::istream& in) {
     PSPattern* pattern = nil;
 
     Skip(in);
@@ -1617,7 +1617,7 @@ PSPattern* Catalog::ReadPattern (const char* n, int index) {
 	    }
 
 	} else {
-	    istringstream in(definition);
+	    std::istringstream in(definition);
       int data[patternHeight];
 
 	    int i;
@@ -1636,11 +1636,11 @@ PSPattern* Catalog::ReadPattern (const char* n, int index) {
     return pat;
 }
 
-inline void GetString (char* string, int count, istream& in) {
+inline void GetString (char* string, int count, std::istream& in) {
     for (char* p = string; p < &string[count]; in.get(*p++));
 }
 
-char* Catalog::ReadString (istream& in) {
+char* Catalog::ReadString (std::istream& in) {
     int count;
     char quotes;
     char* string = nil;
@@ -1658,7 +1658,7 @@ char* Catalog::ReadString (istream& in) {
     return string;
 }
 
-void Catalog::WriteString (const char* string, ostream& out) {
+void Catalog::WriteString (const char* string, std::ostream& out) {
     Mark(out);
 
     if (string == nil) {
@@ -1668,7 +1668,7 @@ void Catalog::WriteString (const char* string, ostream& out) {
     }
 }
 
-Bitmap* Catalog::ReadBitmap (istream& in) {
+Bitmap* Catalog::ReadBitmap (std::istream& in) {
     Skip(in);
     Coord w, h;
     in >> w >> h;
@@ -1679,7 +1679,7 @@ Bitmap* Catalog::ReadBitmap (istream& in) {
     return bitmap;
 }
 
-void Catalog::ReadBitmapData (Bitmap* bitmap, istream& in) {
+void Catalog::ReadBitmapData (Bitmap* bitmap, std::istream& in) {
     Coord w = bitmap->Width();
     Coord h = bitmap->Height();
     
@@ -1701,7 +1701,7 @@ void Catalog::ReadBitmapData (Bitmap* bitmap, istream& in) {
     bitmap->flush();
 }
 
-void Catalog::WriteBitmap (Bitmap* bitmap, ostream& out) {
+void Catalog::WriteBitmap (Bitmap* bitmap, std::ostream& out) {
     Mark(out);
 
     Coord w = bitmap->Width();
@@ -1711,7 +1711,7 @@ void Catalog::WriteBitmap (Bitmap* bitmap, ostream& out) {
     WriteBitmapData(bitmap, out);
 }
 
-void Catalog::WriteBitmapData (Bitmap* bitmap, ostream& out) {
+void Catalog::WriteBitmapData (Bitmap* bitmap, std::ostream& out) {
     Coord w = bitmap->Width();
     Coord h = bitmap->Height();
 
@@ -1736,7 +1736,7 @@ void Catalog::WriteBitmapData (Bitmap* bitmap, ostream& out) {
     }
 }
 
-Raster* Catalog::ReadGraymap (istream& in) {
+Raster* Catalog::ReadGraymap (std::istream& in) {
     Skip(in);
     Coord w, h;
     in >> w >> h;
@@ -1747,7 +1747,7 @@ Raster* Catalog::ReadGraymap (istream& in) {
     return raster;
 }
 
-void Catalog::ReadGraymapData (Raster* raster, istream& in) {
+void Catalog::ReadGraymapData (Raster* raster, std::istream& in) {
     Coord w = raster->Width();
     Coord h = raster->Height();
     ColorIntensity g;
@@ -1767,7 +1767,7 @@ void Catalog::ReadGraymapData (Raster* raster, istream& in) {
     raster->flush();
 }
 
-void Catalog::WriteGraymap (Raster* raster, ostream& out) {
+void Catalog::WriteGraymap (Raster* raster, std::ostream& out) {
     Mark(out);
 
     Coord w = raster->Width();
@@ -1777,7 +1777,7 @@ void Catalog::WriteGraymap (Raster* raster, ostream& out) {
     WriteGraymapData(raster, out);
 }
 
-void Catalog::WriteGraymapData (Raster* raster, ostream& out) {
+void Catalog::WriteGraymapData (Raster* raster, std::ostream& out) {
     Coord w = raster->Width();
     Coord h = raster->Height();
     ColorIntensity r, g, b;
@@ -1793,7 +1793,7 @@ void Catalog::WriteGraymapData (Raster* raster, ostream& out) {
     }
 }
 
-Raster* Catalog::ReadRaster (istream& in) {
+Raster* Catalog::ReadRaster (std::istream& in) {
     Skip(in);
     Coord w, h;
     in >> w >> h;
@@ -1804,7 +1804,7 @@ Raster* Catalog::ReadRaster (istream& in) {
     return raster;
 }
 
-void Catalog::ReadRasterData (Raster* raster, istream& in) {
+void Catalog::ReadRasterData (Raster* raster, std::istream& in) {
     Coord w = raster->Width();
     Coord h = raster->Height();
     ColorIntensity r, g, b;
@@ -1824,7 +1824,7 @@ void Catalog::ReadRasterData (Raster* raster, istream& in) {
     raster->flush();
 }
 
-void Catalog::WriteRaster (Raster* raster, ostream& out) {
+void Catalog::WriteRaster (Raster* raster, std::ostream& out) {
     Mark(out);
 
     Coord w = raster->Width();
@@ -1834,7 +1834,7 @@ void Catalog::WriteRaster (Raster* raster, ostream& out) {
     WriteRasterData(raster, out);
 }
 
-void Catalog::WriteRasterData (Raster* raster, ostream& out) {
+void Catalog::WriteRasterData (Raster* raster, std::ostream& out) {
     Coord w = raster->Width();
     Coord h = raster->Height();
     ColorIntensity r, g, b;
@@ -1850,7 +1850,7 @@ void Catalog::WriteRasterData (Raster* raster, ostream& out) {
     }
 }
 
-ControlInfo* Catalog::ReadControlInfo (istream& in) {
+ControlInfo* Catalog::ReadControlInfo (std::istream& in) {
     ControlInfo* ctrlInfo = nil;
 
     Skip(in);
@@ -1874,7 +1874,7 @@ ControlInfo* Catalog::ReadControlInfo (istream& in) {
     return ctrlInfo;
 }
 
-void Catalog::WriteControlInfo (ControlInfo* ctrlInfo, ostream& out) {
+void Catalog::WriteControlInfo (ControlInfo* ctrlInfo, std::ostream& out) {
     Mark(out);
     out << "i ";
 
@@ -1888,7 +1888,7 @@ void Catalog::WriteControlInfo (ControlInfo* ctrlInfo, ostream& out) {
     }
 }
 
-EditorInfo* Catalog::ReadEditorInfo (istream& in) {
+EditorInfo* Catalog::ReadEditorInfo (std::istream& in) {
     EditorInfo* edInfo = new EditorInfo;
 
     char string[CHARBUFSIZE];
@@ -1916,7 +1916,7 @@ EditorInfo* Catalog::ReadEditorInfo (istream& in) {
     return edInfo;
 }
 
-void Catalog::WriteEditorInfo (EditorInfo* edInfo, ostream& out) {
+void Catalog::WriteEditorInfo (EditorInfo* edInfo, std::ostream& out) {
     for (int i = 0; i < edInfo->Count(); ++i) {
         out << edInfo->GetName(i) << " " << edInfo->GetInfo(i) << "\n";
     }

@@ -147,7 +147,7 @@ bool PSVertices::IsA (ClassId id) {
 PSVertices::PSVertices (VerticesComp* subj) : PostScriptView(subj) { }
 const char* PSVertices::Name () { return ""; }
 
-bool PSVertices::Definition (ostream& out) {
+bool PSVertices::Definition (std::ostream& out) {
     const Coord* x;
     const Coord* y;
     int n;
