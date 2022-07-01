@@ -67,7 +67,7 @@ PixelCoord MacPrinterCanvas::pheight() const {
 PixelCoord MacPrinterCanvas::to_pixels(Coord x, DimensionName)const { return int(x); }
 Coord MacPrinterCanvas::to_coord(PixelCoord x, DimensionName)const {return Coord(x); }
 
-MacPrinter::MacPrinter(ostream*) : Printer(nil){
+MacPrinter::MacPrinter(std::ostream*) : Printer(nil){
 	c = new MacPrinterCanvas();
 }
 MacPrinter::~MacPrinter() {

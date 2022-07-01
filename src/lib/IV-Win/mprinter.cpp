@@ -96,7 +96,7 @@ Coord MacPrinterCanvas::to_coord(PixelCoord x, DimensionName)const {
 	return Coord(x)*float(lpx_)/72.;
 }
 
-MacPrinter::MacPrinter(ostream*) : Printer(nil){
+MacPrinter::MacPrinter(std::ostream*) : Printer(nil){
 	c = new MacPrinterCanvas();
 }
 MacPrinter::~MacPrinter() {
