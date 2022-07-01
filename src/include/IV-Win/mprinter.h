@@ -33,7 +33,7 @@ class MacPrinterCanvas;
 
 class MacPrinter : public Printer {
 public:
-	 MacPrinter(ostream* o = nil);
+	 MacPrinter(std::ostream* o = nil);
 	 virtual ~MacPrinter();
 	virtual Window* window() const;
 	 virtual Coord width() const;
