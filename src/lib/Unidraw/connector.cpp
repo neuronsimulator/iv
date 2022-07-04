@@ -107,7 +107,7 @@ void Connector::Uninterpret (Command* cmd) {
     GraphicComp::Uninterpret(cmd);
 }    
 
-void Connector::Read (istream& in) {
+void Connector::Read (std::istream& in) {
     GraphicComp::Read(in);
     Catalog* catalog = unidraw->GetCatalog();
     int transMethod;
@@ -117,7 +117,7 @@ void Connector::Read (istream& in) {
     _stateVar = catalog->ReadStateVar(in);
 }
 
-void Connector::Write (ostream& out) {
+void Connector::Write (std::ostream& out) {
     GraphicComp::Write(out);
     int transMethod = _transMethod;
 

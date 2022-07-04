@@ -597,7 +597,7 @@ bool rpcbuf::expand_p() {
 
 void rpcbuf::error(const char* msg) {
     if (_verbose) {
-	cerr << msg << "\n";
+	std::cerr << msg << "\n";
 	cerr.flush();
     }
 }

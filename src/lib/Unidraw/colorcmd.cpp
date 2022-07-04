@@ -69,7 +69,7 @@ void ColorCmd::Execute () {
     Command::Execute();
 }
 
-void ColorCmd::Read (istream& in) {
+void ColorCmd::Read (std::istream& in) {
     Command::Read(in);
     Catalog* catalog = unidraw->GetCatalog();
 
@@ -77,7 +77,7 @@ void ColorCmd::Read (istream& in) {
     _bg = catalog->ReadColor(in);
 }
 
-void ColorCmd::Write (ostream& out) {
+void ColorCmd::Write (std::ostream& out) {
     Command::Write(out);
     Catalog* catalog = unidraw->GetCatalog();
 

@@ -65,12 +65,12 @@ void BrushCmd::Execute () {
     Command::Execute();
 }
 
-void BrushCmd::Read (istream& in) {
+void BrushCmd::Read (std::istream& in) {
     Command::Read(in);
     _br = unidraw->GetCatalog()->ReadBrush(in);
 }
 
-void BrushCmd::Write (ostream& out) {
+void BrushCmd::Write (std::ostream& out) {
     Command::Write(out); 
     unidraw->GetCatalog()->WriteBrush(GetBrush(), out);
 }

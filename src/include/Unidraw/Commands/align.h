@@ -42,8 +42,8 @@ public:
     GraphicComp* GetReference(GraphicComp*);
 
     virtual Command* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 protected:

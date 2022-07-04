@@ -131,12 +131,12 @@ bool GroupCmd::Reversible () {
     return cb == nil || !cb->IsEmpty();
 }
 
-void GroupCmd::Read (istream& in) {
+void GroupCmd::Read (std::istream& in) {
     Command::Read(in);
     _group = (GraphicComp*) unidraw->GetCatalog()->ReadComponent(in);
 }
 
-void GroupCmd::Write (ostream& out) {
+void GroupCmd::Write (std::ostream& out) {
     Command::Write(out);
     unidraw->GetCatalog()->WriteComponent(_group, out);
 }

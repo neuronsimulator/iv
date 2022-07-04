@@ -63,12 +63,12 @@ void PatternCmd::Execute () {
     Command::Execute();
 }
 
-void PatternCmd::Read (istream& in) {
+void PatternCmd::Read (std::istream& in) {
     Command::Read(in);
     _pat = unidraw->GetCatalog()->ReadPattern(in);
 }
 
-void PatternCmd::Write (ostream& out) {
+void PatternCmd::Write (std::ostream& out) {
     Command::Write(out); 
     unidraw->GetCatalog()->WritePattern(GetPattern(), out);
 }

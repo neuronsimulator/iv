@@ -68,7 +68,7 @@ protected:
 
 class PSVertices : public PostScriptView {
 public:
-    virtual bool Definition(ostream&);
+    virtual bool Definition(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);

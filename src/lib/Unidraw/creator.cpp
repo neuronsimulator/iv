@@ -78,7 +78,7 @@
 
 Creator::Creator () { }
 
-void* Creator::Create (ClassId id, istream& in, ObjectMap* objmap, int objid) {
+void* Creator::Create (ClassId id, std::istream& in, ObjectMap* objmap, int objid) {
     switch (id) {
         case ALIGN_CMD:  	CREATE(AlignCmd, in, objmap, objid);
         case ALIGNTOGRID_CMD:  	CREATE(AlignToGridCmd, in, objmap, objid);

@@ -44,10 +44,10 @@ protected:
     bool _swapped;		// does my peer have a swapped endian?
 };
 
-// Modify istream to extract unformatted data where possible for
+// Modify std::istream to extract unformatted data where possible for
 // faster I/O throughput and to discard delimiters automatically.
 
-class istreamb : public virtual iosb, public istream {
+class istreamb : public virtual iosb, public std::istream {
 protected:
     istreamb();
 public:
@@ -67,7 +67,7 @@ public:
     istreamb& operator>>(char*);
     istreamb& operator>>(unsigned char*);
 
-    istreamb& operator>>(istream& (*)(istream&));
+    istreamb& operator>>(std::istream& (*)(std::istream&));
     istreamb& operator>>(ios& (*)(ios&));
 };
 
@@ -94,7 +94,7 @@ public:
     ostreamb& operator<<(const char*);
     ostreamb& operator<<(const unsigned char*);
 
-    ostreamb& operator<<(ostream& (*)(ostream&));
+    ostreamb& operator<<(std::ostream& (*)(std::ostream&));
     ostreamb& operator<<(ios& (*)(ios&));
 protected:
     void fixwidth();

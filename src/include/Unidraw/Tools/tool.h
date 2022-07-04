@@ -48,8 +48,8 @@ public:
 
     virtual ~Tool();
     virtual Tool* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*& delim);
     virtual bool IsA(ClassId);

@@ -73,12 +73,12 @@ StateVar* NameVar::Copy () { return new NameVar(GetName()); }
 ClassId NameVar::GetClassId () { return NAME_VAR; }
 bool NameVar::IsA (ClassId id) {return NAME_VAR == id || StateVar::IsA(id);}
 
-void NameVar::Read (istream& in) {
+void NameVar::Read (std::istream& in) {
     StateVar::Read(in);
     _name = unidraw->GetCatalog()->ReadString(in);
 }
 
-void NameVar::Write (ostream& out) {
+void NameVar::Write (std::ostream& out) {
     StateVar::Write(out); 
     unidraw->GetCatalog()->WriteString(GetName(), out);
 }
@@ -137,12 +137,12 @@ bool CompNameVar::IsA (ClassId id) {
     return COMPNAME_VAR == id || NameVar::IsA(id);
 }
 
-void CompNameVar::Read (istream& in) {
+void CompNameVar::Read (std::istream& in) {
     NameVar::Read(in);
     _comp = unidraw->GetCatalog()->ReadComponent(in);
 }
 
-void CompNameVar::Write (ostream& out) {
+void CompNameVar::Write (std::ostream& out) {
     NameVar::Write(out); 
     unidraw->GetCatalog()->WriteComponent(GetComponent(), out);
 }
@@ -215,12 +215,12 @@ bool ModifStatusVar::IsA (ClassId id) {
     return MODIFSTATUS_VAR == id || StateVar::IsA(id);
 }
 
-void ModifStatusVar::Read (istream& in) {
+void ModifStatusVar::Read (std::istream& in) {
     StateVar::Read(in);
     in >> _modified;
 }
 
-void ModifStatusVar::Write (ostream& out) {
+void ModifStatusVar::Write (std::ostream& out) {
     StateVar::Write(out); 
     out << _modified << " ";
 }
@@ -253,12 +253,12 @@ bool MagnifVar::IsA (ClassId id) {
     return MAGNIF_VAR == id || StateVar::IsA(id);
 }
 
-void MagnifVar::Read (istream& in) {
+void MagnifVar::Read (std::istream& in) {
     StateVar::Read(in);
     in >> _magnif;
 }
 
-void MagnifVar::Write (ostream& out) {
+void MagnifVar::Write (std::ostream& out) {
     StateVar::Write(out); 
     out << _magnif << " ";
 }
@@ -291,12 +291,12 @@ bool GravityVar::IsA (ClassId id) {
     return GRAVITY_VAR == id || StateVar::IsA(id);
 }
 
-void GravityVar::Read (istream& in) {
+void GravityVar::Read (std::istream& in) {
     StateVar::Read(in);
     in >> _active;
 }
 
-void GravityVar::Write (ostream& out) {
+void GravityVar::Write (std::ostream& out) {
     StateVar::Write(out); 
     out << _active << " ";
 }
@@ -332,12 +332,12 @@ bool FontVar::IsA (ClassId id) {
     return FONT_VAR == id || StateVar::IsA(id);
 }
 
-void FontVar::Read (istream& in) {
+void FontVar::Read (std::istream& in) {
     StateVar::Read(in);
     _psfont = unidraw->GetCatalog()->ReadFont(in);
 }
 
-void FontVar::Write (ostream& out) {
+void FontVar::Write (std::ostream& out) {
     StateVar::Write(out); 
     unidraw->GetCatalog()->WriteFont(_psfont, out);
 }
@@ -373,12 +373,12 @@ bool BrushVar::IsA (ClassId id) {
     return BRUSH_VAR == id || StateVar::IsA(id);
 }
 
-void BrushVar::Read (istream& in) {
+void BrushVar::Read (std::istream& in) {
     StateVar::Read(in);
     _psbrush = unidraw->GetCatalog()->ReadBrush(in);
 }
 
-void BrushVar::Write (ostream& out) {
+void BrushVar::Write (std::ostream& out) {
     StateVar::Write(out); 
     unidraw->GetCatalog()->WriteBrush(_psbrush, out);
 }
@@ -414,12 +414,12 @@ bool PatternVar::IsA (ClassId id) {
     return PATTERN_VAR == id || StateVar::IsA(id);
 }
 
-void PatternVar::Read (istream& in) {
+void PatternVar::Read (std::istream& in) {
     StateVar::Read(in);
     _pspattern = unidraw->GetCatalog()->ReadPattern(in);
 }
 
-void PatternVar::Write (ostream& out) {
+void PatternVar::Write (std::ostream& out) {
     StateVar::Write(out); 
     unidraw->GetCatalog()->WritePattern(_pspattern, out);
 }
@@ -465,7 +465,7 @@ StateVar* ColorVar::Copy () { return new ColorVar(_psfgcolor, _psbgcolor); }
 ClassId ColorVar::GetClassId () { return COLOR_VAR; }
 bool ColorVar::IsA (ClassId id) {return COLOR_VAR==id || StateVar::IsA(id);}
 
-void ColorVar::Read (istream& in) {
+void ColorVar::Read (std::istream& in) {
     StateVar::Read(in);
     Catalog* catalog = unidraw->GetCatalog();
 
@@ -473,7 +473,7 @@ void ColorVar::Read (istream& in) {
     _psbgcolor = catalog->ReadColor(in);
 }
 
-void ColorVar::Write (ostream& out) {
+void ColorVar::Write (std::ostream& out) {
     StateVar::Write(out);
     Catalog* catalog = unidraw->GetCatalog();
 

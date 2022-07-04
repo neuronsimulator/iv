@@ -419,7 +419,7 @@ void ConnectCmd::GetConnectors (Connector*& s, Connector*& t) {
     t = _target;
 }
 
-void ConnectCmd::Read (istream& in) {
+void ConnectCmd::Read (std::istream& in) {
     Command::Read(in);
 
     Catalog* catalog = unidraw->GetCatalog();
@@ -427,7 +427,7 @@ void ConnectCmd::Read (istream& in) {
     _target = (Connector*) catalog->ReadComponent(in);
 }
 
-void ConnectCmd::Write (ostream& out) {
+void ConnectCmd::Write (std::ostream& out) {
     Command::Write(out);
 
     Catalog* catalog = unidraw->GetCatalog();
@@ -459,7 +459,7 @@ Command* MobilityCmd::Copy () {
 
 Mobility MobilityCmd::GetMobility () { return _mobility; }
 
-void MobilityCmd::Read (istream& in) {
+void MobilityCmd::Read (std::istream& in) {
     Command::Read(in);
     int mobility;
     
@@ -467,7 +467,7 @@ void MobilityCmd::Read (istream& in) {
     _mobility = Mobility(mobility);
 }
 
-void MobilityCmd::Write (ostream& out) {
+void MobilityCmd::Write (std::ostream& out) {
     Command::Write(out);
     int mobility = _mobility;
     out << mobility << " ";

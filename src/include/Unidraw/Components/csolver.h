@@ -53,8 +53,8 @@ public:
     CSolverState* GetState(Connector*);
     void SetState(CSolverState*);
     
-    void Read(istream&);
-    void Write(ostream&);
+    void Read(std::istream&);
+    void Write(std::ostream&);
 private:
     friend class Connector;
     void Wrote(Connector*);
@@ -79,9 +79,9 @@ private:
     void DeletePeerInfo(Connector*, ConnInfo*, Connector*);
     void InitInfo(Connector*);
 
-    void ReadConnectors(istream&, CNet*);
+    void ReadConnectors(std::istream&, CNet*);
     void InitConnectors(CNet*, CNet*);
-    void WriteConnectors(ostream&, CCnxn_HashTable*);
+    void WriteConnectors(std::ostream&, CCnxn_HashTable*);
     void Wrote(Connector*, CNet* cl, CCnxn_HashTable* written);
 
     bool FoundFixed(CNet*, CNet*&);

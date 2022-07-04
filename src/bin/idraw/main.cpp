@@ -140,7 +140,7 @@ int main (int argc, char** argv) {
     );
 
     if (argc > 2) {
-	cerr << "Usage: idraw [file]" << "\n";
+	std::cerr << "Usage: idraw [file]" << "\n";
 	exit_status = 1;
 
     } else {

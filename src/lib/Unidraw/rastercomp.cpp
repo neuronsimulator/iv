@@ -67,7 +67,7 @@ RasterComp::~RasterComp () { delete [] _filename; }
 RasterRect* RasterComp::GetRasterRect () { return (RasterRect*) GetGraphic(); }
 const char* RasterComp::GetFileName () { return _filename; }
 
-void RasterComp::Read (istream& in) {
+void RasterComp::Read (std::istream& in) {
     GraphicComp::Read(in);
     Raster* raster = ReadRaster(in);
     RasterRect* rr = new RasterRect(raster);
@@ -80,7 +80,7 @@ void RasterComp::Read (istream& in) {
     _filename = ReadString(in);
 }
 
-void RasterComp::Write (ostream& out) {
+void RasterComp::Write (std::ostream& out) {
     GraphicComp::Write(out);
     RasterRect* rr = GetRasterRect();
     Raster* raster = rr->GetOriginal();
@@ -133,7 +133,7 @@ bool PSRaster::IsA (ClassId id) {
     return PS_RASTER == id || PostScriptView::IsA(id);
 }
 
-bool PSRaster::Definition (ostream& out) {
+bool PSRaster::Definition (std::ostream& out) {
     RasterComp* comp = (RasterComp*) GetSubject();
     Raster* raster = comp->GetRasterRect()->GetOriginal();
     Coord w = raster->Width();

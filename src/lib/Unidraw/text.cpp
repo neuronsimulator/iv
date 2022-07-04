@@ -114,7 +114,7 @@ void TextComp::Uninterpret (Command* cmd) {
 
 TextGraphic* TextComp::GetText () { return (TextGraphic*) GetGraphic(); }
 
-void TextComp::Read (istream& in) {
+void TextComp::Read (std::istream& in) {
     GraphicComp::Read(in);
     int lineHt;
 
@@ -136,7 +136,7 @@ void TextComp::Read (istream& in) {
     SetGraphic(text);
 }
 
-void TextComp::Write (ostream& out) {
+void TextComp::Write (std::ostream& out) {
     GraphicComp::Write(out);
     TextGraphic* text = GetText();
 
@@ -505,7 +505,7 @@ bool PSText::IsA (ClassId id) {
 
 PSText::PSText (TextComp* subj) : PostScriptView(subj) { }
 
-bool PSText::Definition (ostream& out) {
+bool PSText::Definition (std::ostream& out) {
     TextComp* comp = (TextComp*) GetSubject();
     TextGraphic* g = comp->GetText();
     const char* text = g->GetOriginal();

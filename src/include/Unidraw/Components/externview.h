@@ -33,8 +33,8 @@
 
 class ExternView : public ComponentView {
 public:
-    virtual bool Emit(ostream&);
-    virtual bool Definition(ostream&);
+    virtual bool Emit(std::ostream&);
+    virtual bool Definition(std::ostream&);
 
     virtual ExternView* GetView(Iterator);
     virtual void SetView(ExternView*, Iterator&);
@@ -47,7 +47,7 @@ protected:
 
 class PreorderView : public ExternView {
 public:
-    virtual bool Definition(ostream&);
+    virtual bool Definition(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
@@ -57,7 +57,7 @@ protected:
 
 class InorderView : public ExternView {
 public:
-    virtual bool Definition(ostream&);
+    virtual bool Definition(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
@@ -67,7 +67,7 @@ protected:
 
 class PostorderView : public ExternView {
 public:
-    virtual bool Definition(ostream&);
+    virtual bool Definition(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);

@@ -91,11 +91,11 @@ CSGlue::CSGlue (CSGlue* glue) {
 }   
 
 void CSGlue::Print () {
-    cout << "CSGlue " << (long) this << ":\n";
-    cout << "nat/shr/str: ";
-    cout << _natural << "/" << _shrink << "/" << _stretch << "\n";
-    cout << "shrlim/strlim: ";
-    cout << _shrlim << "/" << _strlim << "\n";
+    std::cout << "CSGlue " << (long) this << ":\n";
+    std::cout << "nat/shr/str: ";
+    std::cout << _natural << "/" << _shrink << "/" << _stretch << "\n";
+    std::cout << "shrlim/strlim: ";
+    std::cout << _shrlim << "/" << _strlim << "\n";
 }
 
 CSGlue* CSGlue::Series (CSGlue* g) {
@@ -195,8 +195,8 @@ public:
     virtual float GetCenter(Connector*);
 
     virtual CCnxn* Copy();
-    void Read(istream&);
-    void Write(ostream&);
+    void Read(std::istream&);
+    void Write(std::ostream&);
 public:
     Connector* _lbConn, *_rtConn;
     CSGlue* _glue;
@@ -215,9 +215,9 @@ CCnxn* CCnxn::Copy () {
 }
 
 void CCnxn::Print () {
-    cout << "Cnxn " << (long) this << ":\n";
-    cout << "lb/rt: " << (long) _lbConn << "/" << (long) _rtConn << "\n";
-    cout << "pos/deform: " << _pos << "/" << _deform << "\n";
+    std::cout << "Cnxn " << (long) this << ":\n";
+    std::cout << "lb/rt: " << (long) _lbConn << "/" << (long) _rtConn << "\n";
+    std::cout << "pos/deform: " << _pos << "/" << _deform << "\n";
     _glue->Print();
 }
 
@@ -330,7 +330,7 @@ bool CCnxn::IsFixed () {
 bool CCnxn::Contains (Connector* c) { return _lbConn == c || _rtConn == c; }
 float CCnxn::GetCenter (Connector*) { return 0; }
 
-void CCnxn::Read (istream& in) {
+void CCnxn::Read (std::istream& in) {
     Catalog* cat = unidraw->GetCatalog();
 
     cat->Skip(in);
@@ -344,7 +344,7 @@ void CCnxn::Read (istream& in) {
     _rtConn = (Connector*) cat->ReadComponent(in);
 }
 
-void CCnxn::Write (ostream& out) {
+void CCnxn::Write (std::ostream& out) {
     Catalog* cat = unidraw->GetCatalog();
 
     cat->Mark(out);
@@ -451,9 +451,9 @@ inline bool CNet::IsDegenerate () { return First() == Last(); }
 void CNet::Print () {
     for (CNet* nw = First(); nw != End(); nw = nw->Next()) {
         nw->Cnxn()->Print();
-        cout << "\n";
+        std::cout << "\n";
     }
-    cout.flush();
+    std::cout.flush();
 }    
 
 CCnxn* CNet::CreateCnxn (Connector*, Connector*, CSGlue*) { return nil; }
@@ -942,8 +942,8 @@ inline CNet* CSolver::Network (UList* u) { return (CNet*) (*u)(); }
 void CSolver::Print () {
     CNet* hnet = Network(_hnets->Last());
     hnet->Print();
-    cout << "----------------\n\n";
-    cout.flush();
+    std::cout << "----------------\n\n";
+    std::cout.flush();
 }
 
 CSolver::CSolver () {
@@ -1388,7 +1388,7 @@ void CSolver::InitConnectors (CNet* hnw, CNet* vnw) {
     }
 }
 
-void CSolver::ReadConnectors (istream& in, CNet* nw) {
+void CSolver::ReadConnectors (std::istream& in, CNet* nw) {
     unidraw->GetCatalog()->Skip(in);
 
     int count;
@@ -1408,7 +1408,7 @@ void CSolver::ReadConnectors (istream& in, CNet* nw) {
     }
 }
 
-void CSolver::WriteConnectors (ostream& out, CCnxn_HashTable* written) {
+void CSolver::WriteConnectors (std::ostream& out, CCnxn_HashTable* written) {
     unidraw->GetCatalog()->Mark(out);
     Iterator i;
     int count = 0;
@@ -1441,7 +1441,7 @@ void CSolver::WriteConnectors (ostream& out, CCnxn_HashTable* written) {
     }
 }
 
-void CSolver::Read (istream& in) {
+void CSolver::Read (std::istream& in) {
     HNet hnet;
     VNet vnet;
     ReadConnectors(in, &hnet);
@@ -1449,7 +1449,7 @@ void CSolver::Read (istream& in) {
     InitConnectors(&hnet, &vnet);
 }
 
-void CSolver::Write (ostream& out) {
+void CSolver::Write (std::ostream& out) {
     WriteConnectors(out, _hwritten);
     WriteConnectors(out, _vwritten);
     delete _hwritten;

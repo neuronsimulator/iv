@@ -59,12 +59,12 @@ void MoveCmd::GetMovement (float& x, float& y) {
     y = _dy;
 }
 
-void MoveCmd::Read (istream& in) {
+void MoveCmd::Read (std::istream& in) {
     Command::Read(in);
     in >> _dx >> _dy;
 }
 
-void MoveCmd::Write (ostream& out) {
+void MoveCmd::Write (std::ostream& out) {
     Command::Write(out);
     out << _dx << " " << _dy << " ";
 }
@@ -102,14 +102,14 @@ void ScaleCmd::GetScaling (float& x, float& y) {
     y = _sy;
 }
 
-void ScaleCmd::Read (istream& in) {
+void ScaleCmd::Read (std::istream& in) {
     Command::Read(in);
     long a;
     in >> _sx >> _sy >> a;
     _align = (Alignment) a;
 }
 
-void ScaleCmd::Write (ostream& out) {
+void ScaleCmd::Write (std::ostream& out) {
     Command::Write(out);
     out << _sx << " " << _sy << " " << _align << " ";
 }
@@ -134,12 +134,12 @@ Command* RotateCmd::Copy () {
     return copy;
 }
 
-void RotateCmd::Read (istream& in) {
+void RotateCmd::Read (std::istream& in) {
     Command::Read(in);
     in >> _angle;
 }
 
-void RotateCmd::Write (ostream& out) {
+void RotateCmd::Write (std::ostream& out) {
     Command::Write(out);
     out << _angle << " ";
 }

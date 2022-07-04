@@ -94,7 +94,7 @@ class PrinterInfoList;
 
 class PrinterRep {
 public:
-    ostream* out_;
+    std::ostream* out_;
     int page_;
     PrinterInfoList* info_;
 
@@ -113,7 +113,7 @@ public:
 declareList(PrinterInfoList,PrinterInfo)
 implementList(PrinterInfoList,PrinterInfo)
 
-static void do_color(ostream& out, const Color* color) {
+static void do_color(std::ostream& out, const Color* color) {
   // alpha supported added by cd1f 21-may-95
   float r, g, b, a;
   a = color->alpha();
@@ -128,7 +128,7 @@ static void do_color(ostream& out, const Color* color) {
   }
 }
 
-static void do_brush(ostream& out, const Brush* brush) {
+static void do_brush(std::ostream& out, const Brush* brush) {
     Coord linewidth = brush ? brush->width() : 1;
     out << linewidth << " setlinewidth\n";
 #if !defined(WIN32) && !MAC
@@ -148,7 +148,7 @@ static void do_brush(ostream& out, const Brush* brush) {
 #endif
 }
 
-static void do_font(ostream& out, const Font* font) {
+static void do_font(std::ostream& out, const Font* font) {
     out << font->size() << " /";
     const char* p = font->name();
     while (*p != '\0') {
@@ -158,7 +158,7 @@ static void do_font(ostream& out, const Font* font) {
     out << " sf\n";
 }
 
-Printer::Printer(ostream* out) {
+Printer::Printer(std::ostream* out) {
     PrinterRep* p = new PrinterRep;
     rep_ = p;
     p->out_ = out;
@@ -228,7 +228,7 @@ void Printer::repair(){}
 
 void Printer::resize(Coord left, Coord bottom, Coord right, Coord top) {
     PrinterRep* p = rep_;
-    ostream& out = *p->out_;
+    std::ostream& out = *p->out_;
     p->x_ = (float(left + right) - PAGE_WIDTH)/2;
     p->y_ = (float(top + bottom) - PAGE_HEIGHT)/2;
     flush();
@@ -237,7 +237,7 @@ void Printer::resize(Coord left, Coord bottom, Coord right, Coord top) {
 }
 
 void Printer::prolog(const char* creator) {
-    ostream& out = *rep_->out_;
+    std::ostream& out = *rep_->out_;
     out << "%!PS-Adobe-2.0\n";
     out << "%%Creator: " << creator << "\n";
     out << "%%Pages: atend\n";
@@ -248,7 +248,7 @@ void Printer::prolog(const char* creator) {
 
 void Printer::epilog () {
     PrinterRep* p = rep_;
-    ostream& out = *p->out_;
+    std::ostream& out = *p->out_;
     flush();
     out << "showpage\n";
     out << "%%Trailer\n";
@@ -257,7 +257,7 @@ void Printer::epilog () {
 }
 
 void Printer::comment(const char* text) {
-    ostream& out = *rep_->out_;
+    std::ostream& out = *rep_->out_;
     flush();
     out << "%% " << text << "\n";
 }
@@ -350,19 +350,19 @@ void Printer::pop_clipping() {
 }
 
 void Printer::new_path() {
-    ostream& out = *rep_->out_;
+    std::ostream& out = *rep_->out_;
     flush();
     out << "newpath\n";
 }
 
 void Printer::move_to(Coord x, Coord y) {
-    ostream& out = *rep_->out_;
+    std::ostream& out = *rep_->out_;
     flush();
     out << x << " " << y << " moveto\n";
 }
 
 void Printer::line_to(Coord x, Coord y) {
-    ostream& out = *rep_->out_;
+    std::ostream& out = *rep_->out_;
     flush();
     out << x << " " << y << " lineto\n";
 }
@@ -370,21 +370,21 @@ void Printer::line_to(Coord x, Coord y) {
 void Printer::curve_to(
     Coord x, Coord y, Coord x1, Coord y1, Coord x2, Coord y2
 ) {
-    ostream& out = *rep_->out_;
+    std::ostream& out = *rep_->out_;
     flush();
     out << x1 << " " << y1 << " " << x2 << " " << y2 << " ";
     out << x << " " << y << " curveto\n";
 }
 
 void Printer::close_path() {
-    ostream& out = *rep_->out_;
+    std::ostream& out = *rep_->out_;
     flush();
     out << "closepath\n";
 }
 
 void Printer::stroke(const Color* color, const Brush* brush) {
     PrinterRep* p = rep_;
-    ostream& out = *p->out_;
+    std::ostream& out = *p->out_;
     flush();
     PrinterInfo& info = p->info_->item_ref(p->info_->count() - 1);
     if (info.color_ != color) {
@@ -400,7 +400,7 @@ void Printer::stroke(const Color* color, const Brush* brush) {
 
 void Printer::fill(const Color* color) {
     PrinterRep* p = rep_;
-    ostream& out = *p->out_;
+    std::ostream& out = *p->out_;
     flush();
     PrinterInfo& info = p->info_->item_ref(p->info_->count() - 1);
     if (info.color_ != color) {
@@ -411,7 +411,7 @@ void Printer::fill(const Color* color) {
 }
 
 void Printer::clip() {
-    ostream& out = *rep_->out_;
+    std::ostream& out = *rep_->out_;
     flush();
     out << "eoclip\n";
 }
@@ -423,7 +423,7 @@ void Printer::character(
     char g3[40];
 #endif
     PrinterRep* p = rep_;
-    ostream& out = *p->out_;
+    std::ostream& out = *p->out_;
     PrinterInfo& info = p->info_->item_ref(p->info_->count() - 1);
     if (info.color_ != color) {
         flush();
@@ -472,7 +472,7 @@ void Printer::character(
 
 void Printer::flush() {
     PrinterRep* p = rep_;
-    ostream& out = *p->out_;
+    std::ostream& out = *p->out_;
     if (p->text_chars_ > 0) {
         out << ") ";
         if (p->text_spaces_ > 0) {
@@ -492,7 +492,7 @@ void Printer::stencil(
     char g3[24];
 #endif
     PrinterRep* p = rep_;
-    ostream& out = *p->out_;
+    std::ostream& out = *p->out_;
     flush();
     PrinterInfo& info = p->info_->item_ref(p->info_->count() - 1);
     if (info.color_ != color) {
@@ -547,7 +547,7 @@ void Printer::image(const Raster* raster, Coord x, Coord y) {
     char g3[8];
 #endif
     PrinterRep* p = rep_;
-    ostream& out = *p->out_;
+    std::ostream& out = *p->out_;
     flush();
     unsigned long width = raster->pwidth();
     unsigned long height = raster->pheight();

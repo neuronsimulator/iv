@@ -42,8 +42,8 @@ TransferFunct* TransferFunct::Copy () { return nil; }
 ClassId TransferFunct::GetClassId () { return TRANSFER_FUNCT; }
 ClassId TransferFunct::GetSubstId (const char*&) { return UNDEFINED_CLASS; }
 bool TransferFunct::IsA (ClassId id) { return TRANSFER_FUNCT == id; }
-void TransferFunct::Read (istream&) { }
-void TransferFunct::Write (ostream&) { }
+void TransferFunct::Read (std::istream&) { }
+void TransferFunct::Write (std::ostream&) { }
 
 Connector* TransferFunct::GetBinding (StateVar* stateVar) {
     return stateVar->GetBinding();

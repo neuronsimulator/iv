@@ -34,7 +34,7 @@
 
 class PostScriptView : public PreorderView {
 public:
-    virtual bool Emit(ostream&);
+    virtual bool Emit(std::ostream&);
     GraphicComp* GetGraphicComp();
 
     virtual ClassId GetClassId();
@@ -42,28 +42,28 @@ public:
 protected:
     PostScriptView(GraphicComp* = nil);
 
-    virtual void Comments(ostream&);
+    virtual void Comments(std::ostream&);
 
-    virtual void PSVersion(ostream&);
-    virtual void Creator(ostream&);
-    virtual void FontNames(ostream&);
-    virtual void Pages(ostream&);
-    virtual void BoundingBox(ostream&);
+    virtual void PSVersion(std::ostream&);
+    virtual void Creator(std::ostream&);
+    virtual void FontNames(std::ostream&);
+    virtual void Pages(std::ostream&);
+    virtual void BoundingBox(std::ostream&);
 
-    virtual void Prologue(ostream&);
-    virtual void Version(ostream&);
-    virtual void GridSpacing(ostream&);
-    virtual void Trailer(ostream&);
+    virtual void Prologue(std::ostream&);
+    virtual void Version(std::ostream&);
+    virtual void GridSpacing(std::ostream&);
+    virtual void Trailer(std::ostream&);
 
-    virtual void MinGS(ostream&);
-    virtual void FullGS(ostream&);
-    virtual void TextGS(ostream&);
-    virtual void Brush(ostream&);
-    virtual void FgColor(ostream&);
-    virtual void BgColor(ostream&);
-    virtual void Font(ostream&);
-    virtual void Pattern(ostream&);
-    virtual void Transformation(ostream&);
+    virtual void MinGS(std::ostream&);
+    virtual void FullGS(std::ostream&);
+    virtual void TextGS(std::ostream&);
+    virtual void Brush(std::ostream&);
+    virtual void FgColor(std::ostream&);
+    virtual void BgColor(std::ostream&);
+    virtual void Font(std::ostream&);
+    virtual void Pattern(std::ostream&);
+    virtual void Transformation(std::ostream&);
 
     virtual void SetPSFonts(UList* = nil);
     virtual UList* GetPSFonts();
@@ -71,39 +71,39 @@ protected:
     virtual void GetBox(Coord&, Coord&, Coord&, Coord&);
     virtual void GetGridSpacing(float&, float&);
 
-    virtual void ConstProcs(ostream&);
-    virtual void BeginProc(ostream&);
-    virtual void EndProc(ostream&);
+    virtual void ConstProcs(std::ostream&);
+    virtual void BeginProc(std::ostream&);
+    virtual void EndProc(std::ostream&);
 
-    virtual void SetGSProcs(ostream&);
-    virtual void SetBrushProc(ostream&);
-    virtual void SetFgColorProc(ostream&);
-    virtual void SetBgColorProc(ostream&);
-    virtual void SetFontProc(ostream&);
-    virtual void SetPatternProc(ostream&);
+    virtual void SetGSProcs(std::ostream&);
+    virtual void SetBrushProc(std::ostream&);
+    virtual void SetFgColorProc(std::ostream&);
+    virtual void SetBgColorProc(std::ostream&);
+    virtual void SetFontProc(std::ostream&);
+    virtual void SetPatternProc(std::ostream&);
 
-    virtual void ObjectProcs(ostream&);
-    virtual void BSplineProc(ostream&);
-    virtual void CircleProc(ostream&);
-    virtual void ClosedBSplineProc(ostream&);
-    virtual void EllipseProc(ostream&);
-    virtual void LineProc(ostream&);
-    virtual void MultiLineProc(ostream&);
-    virtual void PolygonProc(ostream&);
-    virtual void RectangleProc(ostream&);
-    virtual void TextProc(ostream&);
+    virtual void ObjectProcs(std::ostream&);
+    virtual void BSplineProc(std::ostream&);
+    virtual void CircleProc(std::ostream&);
+    virtual void ClosedBSplineProc(std::ostream&);
+    virtual void EllipseProc(std::ostream&);
+    virtual void LineProc(std::ostream&);
+    virtual void MultiLineProc(std::ostream&);
+    virtual void PolygonProc(std::ostream&);
+    virtual void RectangleProc(std::ostream&);
+    virtual void TextProc(std::ostream&);
 
-    virtual void MiscProcs(ostream&);
-    virtual void DefinitionProc(ostream&);
-    virtual void FillProc(ostream&);
-    virtual void StrokeProc(ostream&);
-    virtual void ShowProc(ostream&);
-    virtual void PatternProc(ostream&);
-    virtual void MinMaxProcs(ostream&);
-    virtual void MidpointProc(ostream&);
-    virtual void ThirdpointProc(ostream&);
-    virtual void SubsplineProc(ostream&);
-    virtual void StoreVerticesProc(ostream&);
+    virtual void MiscProcs(std::ostream&);
+    virtual void DefinitionProc(std::ostream&);
+    virtual void FillProc(std::ostream&);
+    virtual void StrokeProc(std::ostream&);
+    virtual void ShowProc(std::ostream&);
+    virtual void PatternProc(std::ostream&);
+    virtual void MinMaxProcs(std::ostream&);
+    virtual void MidpointProc(std::ostream&);
+    virtual void ThirdpointProc(std::ostream&);
+    virtual void SubsplineProc(std::ostream&);
+    virtual void StoreVerticesProc(std::ostream&);
 
     PSFont* GetFont(UList*);
     PostScriptView* View(UList*);
@@ -117,8 +117,8 @@ public:
     PostScriptViews(GraphicComps* = nil);
     virtual ~PostScriptViews();
 
-    virtual bool Emit(ostream&);
-    virtual bool Definition(ostream&);
+    virtual bool Emit(std::ostream&);
+    virtual bool Definition(std::ostream&);
     virtual void Update();
     GraphicComps* GetGraphicComps();
 

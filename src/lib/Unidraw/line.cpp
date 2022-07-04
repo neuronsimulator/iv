@@ -78,7 +78,7 @@ void LineComp::Interpret (Command* cmd) {
     }
 }
 
-void LineComp::Read (istream& in) {
+void LineComp::Read (std::istream& in) {
     GraphicComp::Read(in);
     Coord x0, y0, x1, y1;
 
@@ -98,7 +98,7 @@ void LineComp::Read (istream& in) {
     SetGraphic(line);
 }
 
-void LineComp::Write (ostream& out) {
+void LineComp::Write (std::ostream& out) {
     GraphicComp::Write(out);
     Line* line = GetLine();
     Coord x0, y0, x1, y1;
@@ -329,7 +329,7 @@ bool PSLine::IsA (ClassId id) {
 
 PSLine::PSLine (LineComp* subj) : PostScriptView(subj) { }
 
-bool PSLine::Definition (ostream& out) {
+bool PSLine::Definition (std::ostream& out) {
     Coord x0, y0, x1, y1;
 
     LineComp* comp = (LineComp*) GetSubject();
@@ -362,7 +362,7 @@ SF_MultiLine* MultiLineComp::GetMultiLine () {
     return (SF_MultiLine*) GetGraphic();
 }
 
-void MultiLineComp::Read (istream& in) {
+void MultiLineComp::Read (std::istream& in) {
     VerticesComp::Read(in);
     Coord* x, *y;
     int count;
@@ -386,7 +386,7 @@ void MultiLineComp::Read (istream& in) {
     SetGraphic(ml);
 }
 
-void MultiLineComp::Write (ostream& out) {
+void MultiLineComp::Write (std::ostream& out) {
     VerticesComp::Write(out);
     SF_MultiLine* ml = GetMultiLine();
     const Coord* x, *y;

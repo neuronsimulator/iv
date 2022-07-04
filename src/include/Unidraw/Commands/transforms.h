@@ -39,8 +39,8 @@ public:
     void GetMovement(float&, float&);
 
     virtual Command* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 protected:
@@ -56,8 +56,8 @@ public:
     Alignment GetAlignment();
 
     virtual Command* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 protected:
@@ -75,8 +75,8 @@ public:
     float GetRotation();
 
     virtual Command* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 protected:

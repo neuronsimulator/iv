@@ -39,6 +39,9 @@ class TransferFunct;
 class UList;
 #include <ivstream.h>
 
+#include <istream>
+#include <ostream>
+
 class Component {
 public:
     virtual void Update();
@@ -63,8 +66,8 @@ public:
 
     virtual ~Component();
     virtual Component* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual ClassId GetSubstId(const char*& delim);
     virtual bool IsA(ClassId);

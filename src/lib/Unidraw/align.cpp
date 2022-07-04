@@ -94,7 +94,7 @@ void AlignCmd::GetAlignment (Alignment& a1, Alignment& a2) {
     a2 = _align2;
 }
 
-void AlignCmd::Read (istream& in) {
+void AlignCmd::Read (std::istream& in) {
     Command::Read(in);
     unsigned int align1, align2;
     in >> align1 >> align2;
@@ -102,7 +102,7 @@ void AlignCmd::Read (istream& in) {
     _align2 = align2;
 }
 
-void AlignCmd::Write (ostream& out) {
+void AlignCmd::Write (std::ostream& out) {
     Command::Write(out);
     out << _align1 << " " << _align2 << " ";
 }

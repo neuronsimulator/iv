@@ -65,7 +65,7 @@ SFH_OpenBSpline* SplineComp::GetSpline () {
     return (SFH_OpenBSpline*) GetGraphic();
 }
 
-void SplineComp::Read (istream& in) {
+void SplineComp::Read (std::istream& in) {
     VerticesComp::Read(in);
     Coord* x, *y;
     int count;
@@ -89,7 +89,7 @@ void SplineComp::Read (istream& in) {
     SetGraphic(spline);
 }
 
-void SplineComp::Write (ostream& out) {
+void SplineComp::Write (std::ostream& out) {
     VerticesComp::Write(out);
     SFH_OpenBSpline* spline = GetSpline();
     const Coord* x, *y;
@@ -256,7 +256,7 @@ SFH_ClosedBSpline* ClosedSplineComp::GetClosedSpline () {
     return (SFH_ClosedBSpline*) GetGraphic();
 }
 
-void ClosedSplineComp::Read (istream& in) {
+void ClosedSplineComp::Read (std::istream& in) {
     VerticesComp::Read(in);
     Coord* x, *y;
     int count;
@@ -280,7 +280,7 @@ void ClosedSplineComp::Read (istream& in) {
     SetGraphic(spline);
 }
 
-void ClosedSplineComp::Write (ostream& out) {
+void ClosedSplineComp::Write (std::ostream& out) {
     VerticesComp::Write(out);
     SFH_ClosedBSpline* spline = GetClosedSpline();
     const Coord* x, *y;

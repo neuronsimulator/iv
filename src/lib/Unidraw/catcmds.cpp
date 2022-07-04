@@ -165,12 +165,12 @@ void NewCompCmd::Execute () {
 
 bool NewCompCmd::Reversible () { return false; }
 
-void NewCompCmd::Read (istream& in) {
+void NewCompCmd::Read (std::istream& in) {
     Command::Read(in);
     prototype_ = unidraw->GetCatalog()->ReadComponent(in);
 }
 
-void NewCompCmd::Write (ostream& out) {
+void NewCompCmd::Write (std::ostream& out) {
     Command::Write(out); 
     unidraw->GetCatalog()->WriteComponent(prototype_, out);
 }
@@ -552,7 +552,7 @@ void PrintCmd::Execute () {
             break;
         }
 
-        filebuf fbuf;
+        std::filebuf fbuf;
         char* tmpfilename;
 
         if (_dialog->ToPrinter()) {
@@ -563,7 +563,7 @@ void PrintCmd::Execute () {
         }
 
         if (ok) {
-            ostream out(&fbuf);
+            std::ostream out(&fbuf);
             ExternView* ev = (ExternView*) comps->Create(POSTSCRIPT_VIEW);
             comps->Attach(ev);
             ev->Update();

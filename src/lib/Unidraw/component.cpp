@@ -45,8 +45,8 @@ ClassId Component::GetSubstId (const char*&) { return UNDEFINED_CLASS; }
 bool Component::IsA (ClassId id) { return COMPONENT == id; }
 Component::Component () { _views = new UList; }
 Component* Component::Copy () { return nil; }
-void Component::Read (istream&) { }
-void Component::Write (ostream&) { }
+void Component::Read (std::istream&) { }
+void Component::Write (std::ostream&) { }
 void Component::Update () { }
 StateVar* Component::GetState (const char*) { return nil; }
 TransferFunct* Component::GetTransferFunct() { return nil; }

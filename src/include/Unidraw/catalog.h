@@ -59,6 +59,9 @@ class World;
 
 #include <ivstream.h>
 
+#include <istream>
+#include <ostream>
+
 class Catalog {
 public:
     Catalog(const char*, Creator*, float version = UV_LATEST);
@@ -108,61 +111,61 @@ public:
     float FileVersion();
     const char* GetAttribute(const char*);
 
-    virtual float ReadVersion(istream&);
-    virtual Component* ReadComponent(istream&);
-    virtual Command* ReadCommand(istream&);
-    virtual Tool* ReadTool(istream&);
-    virtual StateVar* ReadStateVar(istream&);
-    virtual TransferFunct* ReadTransferFunct(istream&);
+    virtual float ReadVersion(std::istream&);
+    virtual Component* ReadComponent(std::istream&);
+    virtual Command* ReadCommand(std::istream&);
+    virtual Tool* ReadTool(std::istream&);
+    virtual StateVar* ReadStateVar(std::istream&);
+    virtual TransferFunct* ReadTransferFunct(std::istream&);
 
-    virtual void WriteVersion(float, ostream&);
-    virtual void WriteComponent(Component*, ostream&);
-    virtual void WriteCommand(Command*, ostream&);
-    virtual void WriteTool(Tool*, ostream&);
-    virtual void WriteStateVar(StateVar*, ostream&);
-    virtual void WriteTransferFunct(TransferFunct*, ostream&);
+    virtual void WriteVersion(float, std::ostream&);
+    virtual void WriteComponent(Component*, std::ostream&);
+    virtual void WriteCommand(Command*, std::ostream&);
+    virtual void WriteTool(Tool*, std::ostream&);
+    virtual void WriteStateVar(StateVar*, std::ostream&);
+    virtual void WriteTransferFunct(TransferFunct*, std::ostream&);
 
     PSBrush* ReadBrush(const char*, int index); // read from Xdefaults
     PSColor* ReadColor(const char*, int index);
     PSFont* ReadFont(const char*, int index);
     PSPattern* ReadPattern(const char*, int index);
 
-    void Skip(istream&);
-    void Mark(ostream&);
+    void Skip(std::istream&);
+    void Mark(std::ostream&);
 
-    int ReadBgFilled(istream&);
-    PSBrush* ReadBrush(istream&);
-    PSColor* ReadColor(istream&);
-    PSFont* ReadFont(istream&);
-    PSPattern* ReadPattern(istream&);
-    Transformer* ReadTransformer(istream&);
-    char* ReadString(istream&);
-    ControlInfo* ReadControlInfo(istream&);
-    EditorInfo* ReadEditorInfo(istream&);
+    int ReadBgFilled(std::istream&);
+    PSBrush* ReadBrush(std::istream&);
+    PSColor* ReadColor(std::istream&);
+    PSFont* ReadFont(std::istream&);
+    PSPattern* ReadPattern(std::istream&);
+    Transformer* ReadTransformer(std::istream&);
+    char* ReadString(std::istream&);
+    ControlInfo* ReadControlInfo(std::istream&);
+    EditorInfo* ReadEditorInfo(std::istream&);
 
-    Bitmap* ReadBitmap(istream&);
-    void ReadBitmapData(Bitmap*, istream&);
-    Raster* ReadGraymap(istream&);
-    void ReadGraymapData(Raster*, istream&);
-    Raster* ReadRaster(istream&);
-    void ReadRasterData(Raster*, istream&);
+    Bitmap* ReadBitmap(std::istream&);
+    void ReadBitmapData(Bitmap*, std::istream&);
+    Raster* ReadGraymap(std::istream&);
+    void ReadGraymapData(Raster*, std::istream&);
+    Raster* ReadRaster(std::istream&);
+    void ReadRasterData(Raster*, std::istream&);
 
-    void WriteBgFilled(bool, ostream&);
-    void WriteBrush(PSBrush*, ostream&);
-    void WriteColor(PSColor*, ostream&);
-    void WriteFont(PSFont*, ostream&);
-    void WritePattern(PSPattern*, ostream&);
-    void WriteTransformer(Transformer*, ostream&);
-    void WriteString(const char*, ostream&);
-    void WriteControlInfo(ControlInfo*, ostream&);
-    void WriteEditorInfo(EditorInfo*, ostream&);
+    void WriteBgFilled(bool, std::ostream&);
+    void WriteBrush(PSBrush*, std::ostream&);
+    void WriteColor(PSColor*, std::ostream&);
+    void WriteFont(PSFont*, std::ostream&);
+    void WritePattern(PSPattern*, std::ostream&);
+    void WriteTransformer(Transformer*, std::ostream&);
+    void WriteString(const char*, std::ostream&);
+    void WriteControlInfo(ControlInfo*, std::ostream&);
+    void WriteEditorInfo(EditorInfo*, std::ostream&);
 
-    void WriteBitmap(Bitmap*, ostream&);
-    void WriteBitmapData(Bitmap*, ostream&);
-    void WriteGraymap(Raster*, ostream&);
-    void WriteGraymapData(Raster*, ostream&);
-    void WriteRaster(Raster*, ostream&);
-    void WriteRasterData(Raster*, ostream&);
+    void WriteBitmap(Bitmap*, std::ostream&);
+    void WriteBitmapData(Bitmap*, std::ostream&);
+    void WriteGraymap(Raster*, std::ostream&);
+    void WriteGraymapData(Raster*, std::ostream&);
+    void WriteRaster(Raster*, std::ostream&);
+    void WriteRasterData(Raster*, std::ostream&);
 
     PSBrush* FindNoneBrush();
     PSBrush* FindBrush(int, int);
@@ -177,33 +180,33 @@ protected:
     void Register(Command*, const char*);
     void Register(Tool*, const char*);
 
-    int GetToken(istream& in, char* buf, int buf_size);
+    int GetToken(std::istream& in, char* buf, int buf_size);
 private:
     friend class Unidraw;
     void Init(World*);
     const char* Name(const char*, int);
 
-    ClassId ReadClassId(istream&, int& inst_id, ClassId&, const char*&);
-    void* ReadObject(istream&);
+    ClassId ReadClassId(std::istream&, int& inst_id, ClassId&, const char*&);
+    void* ReadObject(std::istream&);
     void* ReadSubstObject(
-        istream&, int inst_id, ClassId orig_id, ClassId subst_id,
+        std::istream&, int inst_id, ClassId orig_id, ClassId subst_id,
         const char* delim
     );
-    void ReadExtraData(istream&, const char* delim, UArray*);
+    void ReadExtraData(std::istream&, const char* delim, UArray*);
 
     void WriteClassId(
-        ClassId, ostream&, int inst_id = 0, 
+        ClassId, std::ostream&, int inst_id = 0,
         ClassId subst_id = UNDEFINED_CLASS, const char* delim = ""
     );
-    void WriteClassId(void*, ClassId, ostream&, int id = 0);
-    void WriteObject(void*, ClassId, ostream&);
-    void WriteIt(void*, ClassId, ostream&);
+    void WriteClassId(void*, ClassId, std::ostream&, int id = 0);
+    void WriteObject(void*, ClassId, std::ostream&);
+    void WriteIt(void*, ClassId, std::ostream&);
 
     void* CopyObject(void*, ClassId);
     void Forget(void*, const char* name, NameMap*);
 
-    bool SaveObject(void*, ClassId, ostream&);
-    bool RetrieveObject(istream&, void*&);
+    bool SaveObject(void*, ClassId, std::ostream&);
+    bool RetrieveObject(std::istream&, void*&);
     bool FileSave(void*, ClassId, const char*);
     bool FileRetrieve(const char*, void*&);
 private:

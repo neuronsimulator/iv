@@ -41,7 +41,7 @@
 IdrawCreator::IdrawCreator () { }
 
 void* IdrawCreator::Create (
-    ClassId id, istream& in, ObjectMap* objmap, int objid
+    ClassId id, std::istream& in, ObjectMap* objmap, int objid
 ) {
     switch (id) {
         case ABOUT_CMD:            CREATE(AboutCmd, in, objmap, objid);

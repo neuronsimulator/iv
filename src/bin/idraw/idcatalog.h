@@ -48,35 +48,35 @@ public:
 private:
     bool UnidrawFormat(const char*);
 
-    void PSReadGridSpacing(istream&, float&, float&);
-    void PSReadGS(istream&, Graphic*);
-    void PSReadPictGS(istream&, Graphic*);
-    void PSReadTextGS(istream&, Graphic*);
-    void PSReadBrush(istream&, Graphic*);
-    void PSReadFgColor(istream&, Graphic*);
-    void PSReadBgColor(istream&, Graphic*);
-    void PSReadFont(istream&, Graphic*);
-    void PSReadPattern(istream&, Graphic*);
-    void PSReadTransformer(istream&, Graphic*);
-    void PSReadPoints(istream&, const Coord*&, const Coord*&, int&);
+    void PSReadGridSpacing(std::istream&, float&, float&);
+    void PSReadGS(std::istream&, Graphic*);
+    void PSReadPictGS(std::istream&, Graphic*);
+    void PSReadTextGS(std::istream&, Graphic*);
+    void PSReadBrush(std::istream&, Graphic*);
+    void PSReadFgColor(std::istream&, Graphic*);
+    void PSReadBgColor(std::istream&, Graphic*);
+    void PSReadFont(std::istream&, Graphic*);
+    void PSReadPattern(std::istream&, Graphic*);
+    void PSReadTransformer(std::istream&, Graphic*);
+    void PSReadPoints(std::istream&, const Coord*&, const Coord*&, int&);
 
-    void PSReadChildren(istream&, GraphicComp*);
-    void PSReadTextData(istream&, char*, int);
+    void PSReadChildren(std::istream&, GraphicComp*);
+    void PSReadTextData(std::istream&, char*, int);
 
-    GraphicComp* ReadPostScript(istream&);
-    GraphicComp* ReadPict(istream&);
-    GraphicComp* ReadBSpline(istream&);
-    GraphicComp* ReadCircle(istream&);
-    GraphicComp* ReadClosedBSpline(istream&);
-    GraphicComp* ReadEllipse(istream&);
-    GraphicComp* ReadLine(istream&);
-    GraphicComp* ReadMultiLine(istream&);
-    GraphicComp* ReadPolygon(istream&);
-    GraphicComp* ReadRect(istream&);
-    GraphicComp* ReadText(istream&);
-    GraphicComp* ReadSStencil(istream&);
-    GraphicComp* ReadFStencil(istream&);
-    GraphicComp* ReadRaster(istream&);
+    GraphicComp* ReadPostScript(std::istream&);
+    GraphicComp* ReadPict(std::istream&);
+    GraphicComp* ReadBSpline(std::istream&);
+    GraphicComp* ReadCircle(std::istream&);
+    GraphicComp* ReadClosedBSpline(std::istream&);
+    GraphicComp* ReadEllipse(std::istream&);
+    GraphicComp* ReadLine(std::istream&);
+    GraphicComp* ReadMultiLine(std::istream&);
+    GraphicComp* ReadPolygon(std::istream&);
+    GraphicComp* ReadRect(std::istream&);
+    GraphicComp* ReadText(std::istream&);
+    GraphicComp* ReadSStencil(std::istream&);
+    GraphicComp* ReadFStencil(std::istream&);
+    GraphicComp* ReadRaster(std::istream&);
 
     void ScaleToScreenCoords(Graphic*);
     float CalcGrayLevel(int);

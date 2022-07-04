@@ -84,11 +84,11 @@ bool PSIdraw::IsA (ClassId id) {
     return PS_IDRAW == id || PostScriptViews::IsA(id);
 }
 
-void PSIdraw::Creator (ostream& out) {
+void PSIdraw::Creator (std::ostream& out) {
     out << "%%Creator: idraw\n";
 }
 
-void PSIdraw::Prologue (ostream& out) {
+void PSIdraw::Prologue (std::ostream& out) {
     out << "%%BeginIdrawPrologue\n";
     ArrowHeader(out);
     out << "%%EndIdrawPrologue\n\n";
@@ -96,7 +96,7 @@ void PSIdraw::Prologue (ostream& out) {
     PostScriptView::Prologue(out);
 }
 
-void PSIdraw::GridSpacing (ostream& out) {
+void PSIdraw::GridSpacing (std::ostream& out) {
     float xincr, yincr;
     IdrawComp* comp = (IdrawComp*) GetSubject();
     comp->GetGridSpacing(xincr, yincr);
@@ -104,7 +104,7 @@ void PSIdraw::GridSpacing (ostream& out) {
     out << "Grid " << xincr << " " << yincr << " ";
 }
 
-void PSIdraw::ConstProcs (ostream& out) {
+void PSIdraw::ConstProcs (std::ostream& out) {
     int arrowWidth = iv26_round(ARROWWIDTH*points);
     int arrowHeight = iv26_round(ARROWHEIGHT*points);
 
@@ -114,7 +114,7 @@ void PSIdraw::ConstProcs (ostream& out) {
     PostScriptViews::ConstProcs(out);
 }
 
-void PSIdraw::LineProc (ostream& out) {
+void PSIdraw::LineProc (std::ostream& out) {
     out << "/Line {\n";
     out << "0 begin\n";
     out << "2 storexyn\n";
@@ -128,7 +128,7 @@ void PSIdraw::LineProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PSIdraw::MultiLineProc (ostream& out) {
+void PSIdraw::MultiLineProc (std::ostream& out) {
     out << "/MLine {\n";
     out << "0 begin\n";
     out << "storexyn\n";
@@ -149,7 +149,7 @@ void PSIdraw::MultiLineProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PSIdraw::BSplineProc (ostream& out) {
+void PSIdraw::BSplineProc (std::ostream& out) {
     out << "/BSpl {\n";
     out << "0 begin\n";
     out << "storexyn\n";
@@ -175,7 +175,7 @@ void PSIdraw::BSplineProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PSIdraw::SetBrushProc (ostream& out) {
+void PSIdraw::SetBrushProc (std::ostream& out) {
     out << "/SetB {\n";
     out << "dup type /nulltype eq {\n";
     out << "pop\n";
@@ -193,7 +193,7 @@ void PSIdraw::SetBrushProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PSIdraw::ArrowHeader (ostream& out) {
+void PSIdraw::ArrowHeader (std::ostream& out) {
     out << "/arrowhead {\n";
     out << "0 begin\n";
     out << "transform originalCTM itransform\n";

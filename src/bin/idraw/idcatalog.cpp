@@ -113,11 +113,11 @@ bool IdrawCatalog::Save (Component* comp, const char* name) {
         ExternView* ev = (ExternView*) comp->Create(POSTSCRIPT_VIEW);
 
         if (ev != nil) {
-            filebuf fbuf;
+            std::filebuf fbuf;
             ok = fbuf.open(name, IOS_OUT) != 0;
 
             if (ok) {
-                ostream out(&fbuf);
+                std::ostream out(&fbuf);
                 comp->Attach(ev);
                 ev->Update();
                 ok = ev->Emit(out);
@@ -141,11 +141,11 @@ bool IdrawCatalog::Retrieve (const char* name, Component*& comp) {
         _valid = Catalog::Retrieve(name, comp);
 
     } else {
-        filebuf fbuf;
+        std::filebuf fbuf;
         _valid = fbuf.open(name, IOS_IN) != 0;
 
         if (_valid) {
-            istream in(&fbuf);
+            std::istream in(&fbuf);
             comp = ReadPostScript(in);
 
             if (_valid) {
@@ -158,11 +158,11 @@ bool IdrawCatalog::Retrieve (const char* name, Component*& comp) {
 }
 
 bool IdrawCatalog::UnidrawFormat (const char* name) {
-    filebuf fbuf;
+    std::filebuf fbuf;
     bool unidraw_format = false;
 
     if (fbuf.open(name, IOS_IN) != 0) {
-        istream in(&fbuf);
+        std::istream in(&fbuf);
 
         Skip(in);
         in >> _buf;
@@ -174,7 +174,7 @@ bool IdrawCatalog::UnidrawFormat (const char* name) {
     return unidraw_format;
 }
 
-GraphicComp* IdrawCatalog::ReadPostScript (istream& in) {
+GraphicComp* IdrawCatalog::ReadPostScript (std::istream& in) {
     Skip(in);
     in >> _buf >> _psversion;
 
@@ -229,7 +229,7 @@ void IdrawCatalog::ScaleToScreenCoords (Graphic* g) {
  * reads data to initialize graphic comp and create children
  */
 
-GraphicComp* IdrawCatalog::ReadPict (istream& in) {
+GraphicComp* IdrawCatalog::ReadPict (std::istream& in) {
     FullGraphic gs;
     PSReadPictGS(in, &gs);
     GraphicComp* pict = new GraphicComps;
@@ -245,7 +245,7 @@ GraphicComp* IdrawCatalog::ReadPict (istream& in) {
  * have been created.
 */
 
-void IdrawCatalog::PSReadChildren (istream& in, GraphicComp* comp) {
+void IdrawCatalog::PSReadChildren (std::istream& in, GraphicComp* comp) {
     while (in.good()) {
 	Skip(in);
 	GraphicComp* child = nil;
@@ -289,7 +289,7 @@ void IdrawCatalog::PSReadChildren (istream& in, GraphicComp* comp) {
  * 72.07/inch instead of inch/72.27 (it was a botch in TWO ways).
  */
 
-void IdrawCatalog::PSReadGridSpacing (istream& in, float& xincr, float& yincr){
+void IdrawCatalog::PSReadGridSpacing (std::istream& in, float& xincr, float& yincr){
     if (_psversion < PSV_GRIDSPACING) {
 	const int oldspacing = 8;
 	const double oldpoints = 72.07/inches;
@@ -315,7 +315,7 @@ void IdrawCatalog::PSReadGridSpacing (istream& in, float& xincr, float& yincr){
  * which don't contain any text.
  */
 
-void IdrawCatalog::PSReadGS (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadGS (std::istream& in, Graphic* gs) {
     PSReadBrush(in, gs);
 
     if (_psversion >= PSV_FGANDBGCOLOR) {
@@ -342,7 +342,7 @@ void IdrawCatalog::PSReadGS (istream& in, Graphic* gs) {
  * which may contain some text.
  */
 
-void IdrawCatalog::PSReadPictGS (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadPictGS (std::istream& in, Graphic* gs) {
     PSReadBrush(in, gs);
 
     if (_psversion >= PSV_FGANDBGCOLOR) {
@@ -367,7 +367,7 @@ void IdrawCatalog::PSReadPictGS (istream& in, Graphic* gs) {
  * TextComp which doesn't need a brush or pattern.
  */
 
-void IdrawCatalog::PSReadTextGS (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadTextGS (std::istream& in, Graphic* gs) {
     if (_psversion >= PSV_FGCOLOR) {
 	gs->SetBrush(nil);
 	PSReadFgColor(in, gs);
@@ -435,7 +435,7 @@ void IdrawCatalog::CorrectTextVPos (Graphic* gs, float sep) {
  * PSReadBrush reads data to set the IdrawComp's brush.
  */
 
-void IdrawCatalog::PSReadBrush (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadBrush (std::istream& in, Graphic* gs) {
     Skip(in);
     in >> _buf;
 
@@ -480,7 +480,7 @@ void IdrawCatalog::PSReadBrush (istream& in, Graphic* gs) {
  * PSReadFgColor reads data to set the IdrawComp's foreground color.
  */
 
-void IdrawCatalog::PSReadFgColor (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadFgColor (std::istream& in, Graphic* gs) {
     Skip(in);
     in >> _buf;
 
@@ -524,7 +524,7 @@ void IdrawCatalog::PSReadFgColor (istream& in, Graphic* gs) {
  * PSReadBgColor reads data to set the IdrawComp's background color.
  */
 
-void IdrawCatalog::PSReadBgColor (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadBgColor (std::istream& in, Graphic* gs) {
     Skip(in);
     in >> _buf;
 
@@ -561,7 +561,7 @@ void IdrawCatalog::PSReadBgColor (istream& in, Graphic* gs) {
  * PSReadFont reads data to set the IdrawComp's font.
  */
 
-void IdrawCatalog::PSReadFont (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadFont (std::istream& in, Graphic* gs) {
     Skip(in);
     in >> _buf;
 
@@ -624,7 +624,7 @@ float IdrawCatalog::CalcGrayLevel (int seed) {
  * PSReadPattern reads data to set the IdrawComp's pattern.
  */
 
-void IdrawCatalog::PSReadPattern (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadPattern (std::istream& in, Graphic* gs) {
     Skip(in);
     in >> _buf;
 
@@ -695,7 +695,7 @@ void IdrawCatalog::PSReadPattern (istream& in, Graphic* gs) {
  * matrix.
  */
 
-void IdrawCatalog::PSReadTransformer (istream& in, Graphic* gs) {
+void IdrawCatalog::PSReadTransformer (std::istream& in, Graphic* gs) {
     Skip(in);
     in >> _buf;
 
@@ -728,7 +728,7 @@ void IdrawCatalog::PSReadTransformer (istream& in, Graphic* gs) {
  * using dynamic static buffers instead of mallocing on every call.
  */
 
-void IdrawCatalog::PSReadPoints (istream& in, const Coord*& x, const Coord*& y,
+void IdrawCatalog::PSReadPoints (std::istream& in, const Coord*& x, const Coord*& y,
 int& n) {
     const int INITIALSIZE = 15;
     static int sizepoints = 0;
@@ -762,7 +762,7 @@ int& n) {
  * create its components.
  */
 
-GraphicComp* IdrawCatalog::ReadBSpline (istream& in) {
+GraphicComp* IdrawCatalog::ReadBSpline (std::istream& in) {
     FullGraphic gs;
     PSReadGS(in, &gs);
     Coord* x, *y;
@@ -789,7 +789,7 @@ GraphicComp* IdrawCatalog::ReadBSpline (istream& in) {
  * and create the closed B-spline's filled interior and outline.
  */
 
-GraphicComp* IdrawCatalog::ReadClosedBSpline (istream& in) {
+GraphicComp* IdrawCatalog::ReadClosedBSpline (std::istream& in) {
     FullGraphic gs;
     PSReadGS(in, &gs);
     Coord* x, *y;
@@ -806,7 +806,7 @@ GraphicComp* IdrawCatalog::ReadClosedBSpline (istream& in) {
  * its filled interior and outline.
  */
 
-GraphicComp* IdrawCatalog::ReadRect (istream& in) {
+GraphicComp* IdrawCatalog::ReadRect (std::istream& in) {
     FullGraphic gs;
     PSReadGS(in, &gs);
     Skip(in);
@@ -815,7 +815,7 @@ GraphicComp* IdrawCatalog::ReadRect (istream& in) {
     return new RectComp(new SF_Rect(l, b, r, t, &gs));
 }
 
-GraphicComp* IdrawCatalog::ReadPolygon (istream& in) {
+GraphicComp* IdrawCatalog::ReadPolygon (std::istream& in) {
     FullGraphic gs;
     PSReadGS(in, &gs);
     Coord* x, *y;
@@ -832,7 +832,7 @@ GraphicComp* IdrawCatalog::ReadPolygon (istream& in) {
  * its line.
  */
 
-GraphicComp* IdrawCatalog::ReadLine (istream& in) {
+GraphicComp* IdrawCatalog::ReadLine (std::istream& in) {
     FullGraphic gs;
     PSReadGS(in, &gs);
     Skip(in);
@@ -854,7 +854,7 @@ GraphicComp* IdrawCatalog::ReadLine (istream& in) {
  * create its components.
  */
 
-GraphicComp* IdrawCatalog::ReadMultiLine (istream& in) {
+GraphicComp* IdrawCatalog::ReadMultiLine (std::istream& in) {
     FullGraphic gs;
     PSReadGS(in, &gs);
     Coord* x, *y;
@@ -881,7 +881,7 @@ GraphicComp* IdrawCatalog::ReadMultiLine (istream& in) {
  * create its filled interior and outline.
  */
 
-GraphicComp* IdrawCatalog::ReadEllipse (istream& in) {
+GraphicComp* IdrawCatalog::ReadEllipse (std::istream& in) {
     FullGraphic gs;
     PSReadGS(in, &gs);
     Skip(in);
@@ -896,7 +896,7 @@ GraphicComp* IdrawCatalog::ReadEllipse (istream& in) {
  * create its filled interior and outline.
  */
 
-GraphicComp* IdrawCatalog::ReadCircle (istream& in) {
+GraphicComp* IdrawCatalog::ReadCircle (std::istream& in) {
     FullGraphic gs;
     PSReadGS(in, &gs);
     Skip(in);
@@ -910,7 +910,7 @@ GraphicComp* IdrawCatalog::ReadCircle (istream& in) {
  * ReadText reads its graphic comp and text in a file.
  */
 
-GraphicComp* IdrawCatalog::ReadText (istream& in) {
+GraphicComp* IdrawCatalog::ReadText (std::istream& in) {
     FullGraphic gs;
     PSReadTextGS(in, &gs);
     const int sbuf_size = 10000;
@@ -927,7 +927,7 @@ GraphicComp* IdrawCatalog::ReadText (istream& in) {
     return new TextComp(tg);
 }
 
-GraphicComp* IdrawCatalog::ReadSStencil (istream& in) {
+GraphicComp* IdrawCatalog::ReadSStencil (std::istream& in) {
     FullGraphic gs;
     PSReadFgColor(in, &gs);
     PSReadBgColor(in, &gs);
@@ -942,7 +942,7 @@ GraphicComp* IdrawCatalog::ReadSStencil (istream& in) {
     return new StencilComp(new UStencil(bitmap, bitmap, &gs));
 }
 
-GraphicComp* IdrawCatalog::ReadFStencil (istream& in) {
+GraphicComp* IdrawCatalog::ReadFStencil (std::istream& in) {
     FullGraphic gs;
     PSReadFgColor(in, &gs);
     PSReadBgColor(in, &gs);
@@ -957,7 +957,7 @@ GraphicComp* IdrawCatalog::ReadFStencil (istream& in) {
     return new StencilComp(new UStencil(bitmap, nil, &gs));
 }
 
-GraphicComp* IdrawCatalog::ReadRaster (istream& in) {
+GraphicComp* IdrawCatalog::ReadRaster (std::istream& in) {
     FullGraphic gs;
     PSReadTransformer(in, &gs);
     Skip(in);
@@ -984,7 +984,7 @@ GraphicComp* IdrawCatalog::ReadRaster (istream& in) {
  * representation of the ReadText.
  */
 
-void IdrawCatalog::PSReadTextData (istream& in, char* sbuf, int len) {
+void IdrawCatalog::PSReadTextData (std::istream& in, char* sbuf, int len) {
     TextBuffer stext(sbuf, 0, len);
     char nl = '\n';
     char null = '\0';

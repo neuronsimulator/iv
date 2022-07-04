@@ -48,8 +48,8 @@ public:
     TextGraphic* GetText();
     
     virtual Component* Copy();
-    virtual void Read(istream&);
-    virtual void Write(ostream&);
+    virtual void Read(std::istream&);
+    virtual void Write(std::ostream&);
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);
 };
@@ -103,7 +103,7 @@ class PSText : public PostScriptView {
 public:
     PSText(TextComp* = nil);
 
-    virtual bool Definition(ostream&);
+    virtual bool Definition(std::ostream&);
 
     virtual ClassId GetClassId();
     virtual bool IsA(ClassId);

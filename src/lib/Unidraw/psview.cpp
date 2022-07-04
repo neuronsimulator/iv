@@ -132,7 +132,7 @@ static void ScaleToPostScriptCoords (Graphic* g) {
     }
 }
 
-bool PostScriptView::Emit (ostream& out) {
+bool PostScriptView::Emit (std::ostream& out) {
     SetPSFonts();
 
     Graphic* g = GetGraphicComp()->GetGraphic();
@@ -160,7 +160,7 @@ bool PostScriptView::Emit (ostream& out) {
     return status;
 }
 
-void PostScriptView::Comments (ostream& out) {
+void PostScriptView::Comments (std::ostream& out) {
     PSVersion(out);
     Creator(out);
     FontNames(out);
@@ -170,25 +170,25 @@ void PostScriptView::Comments (ostream& out) {
     out << "%%EndComments\n\n";
 }
 
-void PostScriptView::PSVersion (ostream& out) {
+void PostScriptView::PSVersion (std::ostream& out) {
     out << "%!PS-Adobe-2.0 EPSF-1.2\n";
 }
 
-void PostScriptView::Creator (ostream& out) {
+void PostScriptView::Creator (std::ostream& out) {
     out << "%%Creator: unidraw\n";
 }
 
-void PostScriptView::Pages (ostream& out) {
+void PostScriptView::Pages (std::ostream& out) {
     out << "%%Pages: 1\n";
 }
 
-void PostScriptView::BoundingBox (ostream& out) {
+void PostScriptView::BoundingBox (std::ostream& out) {
     Coord l, b, r, t;
     GetBox(l, b, r, t);
     out << "%%BoundingBox: " << l << " " << b << " " << r << " " << t << "\n";
 }
 
-void PostScriptView::Prologue (ostream& out) {
+void PostScriptView::Prologue (std::ostream& out) {
     ConstProcs(out);
     BeginProc(out);
     EndProc(out);
@@ -208,7 +208,7 @@ static int Count (UList* list) {
     return i;
 }
 
-void PostScriptView::ConstProcs (ostream& out) {
+void PostScriptView::ConstProcs (std::ostream& out) {
     UList* fonts = GetPSFonts();
     int nfonts = Count(fonts);
 
@@ -238,21 +238,21 @@ void PostScriptView::ConstProcs (ostream& out) {
     out << "/stringLimit 65535 def\n\n";
 }
 
-void PostScriptView::BeginProc (ostream& out) {
+void PostScriptView::BeginProc (std::ostream& out) {
     out << "/Begin {\n";
     out << "save\n";
     out << "numGraphicParameters dict begin\n";
     out << "} def\n\n";
 }
 
-void PostScriptView::EndProc (ostream& out) {
+void PostScriptView::EndProc (std::ostream& out) {
     out << "/End {\n";
     out << "end\n";
     out << "restore\n";
     out << "} def\n\n";
 }
 
-void PostScriptView::SetGSProcs (ostream& out) {
+void PostScriptView::SetGSProcs (std::ostream& out) {
     SetBrushProc(out);
     SetFgColorProc(out);
     SetBgColorProc(out);
@@ -260,7 +260,7 @@ void PostScriptView::SetGSProcs (ostream& out) {
     SetPatternProc(out);
 }
 
-void PostScriptView::SetBrushProc (ostream& out) {
+void PostScriptView::SetBrushProc (std::ostream& out) {
     out << "/SetB {\n";
     out << "dup type /nulltype eq {\n";
     out << "pop\n";
@@ -275,7 +275,7 @@ void PostScriptView::SetBrushProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::SetFgColorProc (ostream& out) {
+void PostScriptView::SetFgColorProc (std::ostream& out) {
     out << "/SetCFg {\n";
     out << "/fgblue idef\n";
     out << "/fggreen idef\n";
@@ -283,7 +283,7 @@ void PostScriptView::SetFgColorProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::SetBgColorProc (ostream& out) {
+void PostScriptView::SetBgColorProc (std::ostream& out) {
     out << "/SetCBg {\n";
     out << "/bgblue idef\n";
     out << "/bggreen idef\n";
@@ -291,14 +291,14 @@ void PostScriptView::SetBgColorProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::SetFontProc (ostream& out) {
+void PostScriptView::SetFontProc (std::ostream& out) {
     out << "/SetF {\n";
     out << "/printSize idef\n";
     out << "/printFont idef\n";
     out << "} def\n\n";
 }
 
-void PostScriptView::SetPatternProc (ostream& out) {
+void PostScriptView::SetPatternProc (std::ostream& out) {
     out << "/SetP {\n";
     out << "dup type /nulltype eq {\n";
     out << "pop true /patternNone idef\n";
@@ -314,7 +314,7 @@ void PostScriptView::SetPatternProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::ObjectProcs (ostream& out) {
+void PostScriptView::ObjectProcs (std::ostream& out) {
     BSplineProc(out);
     CircleProc(out);
     ClosedBSplineProc(out);
@@ -326,7 +326,7 @@ void PostScriptView::ObjectProcs (ostream& out) {
     TextProc(out);
 }    
 
-void PostScriptView::BSplineProc (ostream& out) {
+void PostScriptView::BSplineProc (std::ostream& out) {
     out << "/BSpl {\n";
     out << "0 begin\n";
     out << "storexyn\n";
@@ -350,7 +350,7 @@ void PostScriptView::BSplineProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PostScriptView::CircleProc (ostream& out) {
+void PostScriptView::CircleProc (std::ostream& out) {
     out << "/Circ {\n";
     out << "newpath\n";
     out << "0 360 arc\n";
@@ -359,7 +359,7 @@ void PostScriptView::CircleProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::ClosedBSplineProc (ostream& out) {
+void PostScriptView::ClosedBSplineProc (std::ostream& out) {
     out << "/CBSpl {\n";
     out << "0 begin\n";
     out << "dup 2 gt {\n";
@@ -381,7 +381,7 @@ void PostScriptView::ClosedBSplineProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PostScriptView::EllipseProc (ostream& out) {
+void PostScriptView::EllipseProc (std::ostream& out) {
     out << "/Elli {\n";
     out << "0 begin\n";
     out << "newpath\n";
@@ -395,7 +395,7 @@ void PostScriptView::EllipseProc (ostream& out) {
     out << "} dup 0 1 dict put def\n\n";
 }
 
-void PostScriptView::LineProc (ostream& out) {
+void PostScriptView::LineProc (std::ostream& out) {
     out << "/Line {\n";
     out << "0 begin\n";
     out << "2 storexyn\n";
@@ -407,7 +407,7 @@ void PostScriptView::LineProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PostScriptView::MultiLineProc (ostream& out) {
+void PostScriptView::MultiLineProc (std::ostream& out) {
     out << "/MLine {\n";
     out << "0 begin\n";
     out << "storexyn\n";
@@ -426,7 +426,7 @@ void PostScriptView::MultiLineProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PostScriptView::PolygonProc (ostream& out) {
+void PostScriptView::PolygonProc (std::ostream& out) {
     out << "/Poly {\n";
     out << "3 1 roll\n";
     out << "newpath\n";
@@ -439,7 +439,7 @@ void PostScriptView::PolygonProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::RectangleProc (ostream& out) {
+void PostScriptView::RectangleProc (std::ostream& out) {
     out << "/Rect {\n";
     out << "0 begin\n";
     out << "/t exch def\n";
@@ -458,13 +458,13 @@ void PostScriptView::RectangleProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PostScriptView::TextProc (ostream& out) {
+void PostScriptView::TextProc (std::ostream& out) {
     out << "/Text {\n";
     out << "ishow\n";
     out << "} def\n\n";
 }
 
-void PostScriptView::MiscProcs (ostream& out) {
+void PostScriptView::MiscProcs (std::ostream& out) {
     DefinitionProc(out);
     FillProc(out);
     StrokeProc(out);
@@ -513,13 +513,13 @@ void PostScriptView::MiscProcs (ostream& out) {
 */
 }
 
-void PostScriptView::DefinitionProc (ostream& out) {
+void PostScriptView::DefinitionProc (std::ostream& out) {
     out << "/idef {\n";
     out << "dup where { pop pop pop } { exch def } ifelse\n";
     out << "} def\n\n";
 }
 
-void PostScriptView::FillProc (ostream& out) {
+void PostScriptView::FillProc (std::ostream& out) {
     out << "/ifill {\n";
     out << "0 begin\n";
     out << "gsave\n";
@@ -549,7 +549,7 @@ void PostScriptView::FillProc (ostream& out) {
     out << "} dup 0 8 dict put def\n\n";
 }
 
-void PostScriptView::StrokeProc (ostream& out) {
+void PostScriptView::StrokeProc (std::ostream& out) {
     out << "/istroke {\n";
     out << "gsave\n";
     out << "brushDashOffset -1 eq {\n";
@@ -566,7 +566,7 @@ void PostScriptView::StrokeProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::ShowProc (ostream& out) {
+void PostScriptView::ShowProc (std::ostream& out) {
     out << "/ishow {\n";
     out << "0 begin\n";
     out << "gsave\n";
@@ -589,7 +589,7 @@ void PostScriptView::ShowProc (ostream& out) {
     out << "} dup 0 3 dict put def\n";
 }
 
-void PostScriptView::PatternProc (ostream& out) {
+void PostScriptView::PatternProc (std::ostream& out) {
     out << "/patternproc {\n";
     out << "0 begin\n";
     out << "/patternByteLength patternString length def\n";
@@ -620,7 +620,7 @@ void PostScriptView::PatternProc (ostream& out) {
     out << "} dup 0 12 dict put def\n\n";
 }
 
-void PostScriptView::MinMaxProcs (ostream& out) {
+void PostScriptView::MinMaxProcs (std::ostream& out) {
     out << "/min {\n";
     out << "dup 3 2 roll dup 4 3 roll lt { exch } if pop\n";
     out << "} def\n\n";
@@ -629,7 +629,7 @@ void PostScriptView::MinMaxProcs (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::MidpointProc (ostream& out) {
+void PostScriptView::MidpointProc (std::ostream& out) {
     out << "/midpoint {\n";
     out << "0 begin\n";
     out << "/y1 exch def\n";
@@ -642,7 +642,7 @@ void PostScriptView::MidpointProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PostScriptView::ThirdpointProc (ostream& out) {
+void PostScriptView::ThirdpointProc (std::ostream& out) {
     out << "/thirdpoint {\n";
     out << "0 begin\n";
     out << "/y1 exch def\n";
@@ -655,7 +655,7 @@ void PostScriptView::ThirdpointProc (ostream& out) {
     out << "} dup 0 4 dict put def\n\n";
 }
 
-void PostScriptView::SubsplineProc (ostream& out) {
+void PostScriptView::SubsplineProc (std::ostream& out) {
     out << "/subspline {\n";
     out << "0 begin\n";
     out << "/movetoNeeded exch def\n";
@@ -687,7 +687,7 @@ void PostScriptView::SubsplineProc (ostream& out) {
     out << "} dup 0 17 dict put def\n\n";
 }
 
-void PostScriptView::StoreVerticesProc (ostream& out) {
+void PostScriptView::StoreVerticesProc (std::ostream& out) {
     out << "/storexyn {\n";
     out << "/n exch def\n";
     out << "/y n array def\n";
@@ -700,22 +700,22 @@ void PostScriptView::StoreVerticesProc (ostream& out) {
     out << "} def\n\n";
 }
 
-void PostScriptView::Version (ostream& out) {
+void PostScriptView::Version (std::ostream& out) {
     out << MARK << " Idraw " << PSV_LATEST << " ";
 }
 
-void PostScriptView::GridSpacing (ostream& out) {
+void PostScriptView::GridSpacing (std::ostream& out) {
     float xincr, yincr;
     GetGridSpacing(xincr, yincr);
     out << "Grid " << xincr << " " << yincr << " ";
 }
 
-void PostScriptView::Trailer (ostream& out) {
+void PostScriptView::Trailer (std::ostream& out) {
     out << "%%Trailer\n\n";
     out << "end\n";
 }
 
-void PostScriptView::MinGS (ostream& out) {
+void PostScriptView::MinGS (std::ostream& out) {
     Brush(out);
     FgColor(out);
     BgColor(out);
@@ -723,7 +723,7 @@ void PostScriptView::MinGS (ostream& out) {
     Transformation(out);
 }
 
-void PostScriptView::FullGS (ostream& out) {
+void PostScriptView::FullGS (std::ostream& out) {
     Brush(out);
     FgColor(out);
     BgColor(out);
@@ -732,13 +732,13 @@ void PostScriptView::FullGS (ostream& out) {
     Transformation(out);
 }
 
-void PostScriptView::TextGS (ostream& out) {
+void PostScriptView::TextGS (std::ostream& out) {
     FgColor(out);
     Font(out);
     Transformation(out);
 }
 
-void PostScriptView::Brush (ostream& out) {
+void PostScriptView::Brush (std::ostream& out) {
     PSBrush* brush = (PSBrush*) GetGraphicComp()->GetGraphic()->GetBrush();
 
     if (brush == nil) {
@@ -773,7 +773,7 @@ void PostScriptView::Brush (ostream& out) {
     }
 }
 
-void PostScriptView::FgColor (ostream& out) {
+void PostScriptView::FgColor (std::ostream& out) {
     PSColor* fgcolor = (PSColor*) GetGraphicComp()->GetGraphic()->GetFgColor();
 
     if (fgcolor == nil) {
@@ -793,7 +793,7 @@ void PostScriptView::FgColor (ostream& out) {
     }
 }
 
-void PostScriptView::BgColor (ostream& out) {
+void PostScriptView::BgColor (std::ostream& out) {
     PSColor* bgcolor = (PSColor*) GetGraphicComp()->GetGraphic()->GetBgColor();
 
     if (bgcolor == nil) {
@@ -813,7 +813,7 @@ void PostScriptView::BgColor (ostream& out) {
     }
 }
 
-void PostScriptView::Font (ostream& out) {
+void PostScriptView::Font (std::ostream& out) {
     PSFont* font = (PSFont*) GetGraphicComp()->GetGraphic()->GetFont();
 
     if (font == nil) {
@@ -827,7 +827,7 @@ void PostScriptView::Font (ostream& out) {
     }
 }
 
-void PostScriptView::Pattern (ostream& out) {
+void PostScriptView::Pattern (std::ostream& out) {
     PSPattern* pat = (PSPattern*) GetGraphicComp()->GetGraphic()->GetPattern();
 
     if (pat == nil) {
@@ -869,7 +869,7 @@ void PostScriptView::Pattern (ostream& out) {
     }
 }
 
-void PostScriptView::Transformation (ostream& out) {
+void PostScriptView::Transformation (std::ostream& out) {
     Transformer* t = GetGraphicComp()->GetGraphic()->GetTransformer();
     Transformer identity;
 
@@ -926,7 +926,7 @@ UList* PostScriptView::GetPSFonts () {
     return _fonts;
 }
 
-void PostScriptView::FontNames (ostream& out) {
+void PostScriptView::FontNames (std::ostream& out) {
     UList* fonts = GetPSFonts();
     const char* comment = "%%DocumentFonts:";
     int linelen = strlen(comment);
@@ -987,7 +987,7 @@ PostScriptViews::~PostScriptViews () {
     delete _views;
 }
 
-bool PostScriptViews::Emit (ostream& out) {
+bool PostScriptViews::Emit (std::ostream& out) {
     SetPSFonts();
 
     Graphic* g = GetGraphicComp()->GetGraphic();
@@ -1015,7 +1015,7 @@ bool PostScriptViews::Emit (ostream& out) {
     return status;
 }
 
-bool PostScriptViews::Definition (ostream& out) {
+bool PostScriptViews::Definition (std::ostream& out) {
     out << "Begin " << MARK << " Pict\n";
     FullGS(out);
     out << "\n";

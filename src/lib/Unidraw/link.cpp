@@ -135,7 +135,7 @@ void LinkComp::Uninterpret (Command* cmd) {
     }
 }
 
-void LinkComp::Read (istream& in) {
+void LinkComp::Read (std::istream& in) {
     GraphicComp::Read(in);
 
     Line* line = new Line(0, 0, 1, 1);
@@ -162,7 +162,7 @@ void LinkComp::Read (istream& in) {
     SetGraphic(parent);
 }
 
-void LinkComp::Write (ostream& out) {
+void LinkComp::Write (std::ostream& out) {
     GraphicComp::Write(out);
     Line* line = GetLine();
 
@@ -543,7 +543,7 @@ bool PSLink::IsA (ClassId id) {
 
 PSLink::PSLink (LinkComp* subj) : PostScriptView(subj) { }
 
-bool PSLink::Definition (ostream& out) {
+bool PSLink::Definition (std::ostream& out) {
     LinkComp* comp = (LinkComp*) GetSubject();
     Graphic* link = comp->GetGraphic();
     Line* line = comp->GetLine();

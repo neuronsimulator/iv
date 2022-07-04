@@ -65,7 +65,7 @@ SF_Polygon* PolygonComp::GetPolygon () {
     return (SF_Polygon*) GetGraphic();
 }
 
-void PolygonComp::Read (istream& in) {
+void PolygonComp::Read (std::istream& in) {
     VerticesComp::Read(in);
     Coord* x, *y;
     int count;
@@ -89,7 +89,7 @@ void PolygonComp::Read (istream& in) {
     SetGraphic(poly);
 }
 
-void PolygonComp::Write (ostream& out) {
+void PolygonComp::Write (std::ostream& out) {
     VerticesComp::Write(out);
     SF_Polygon* poly = GetPolygon();
     const Coord* x, *y;
