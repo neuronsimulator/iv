@@ -619,7 +619,7 @@ InputHandler* Valuator::focusable() const {
 void Valuator::update(Observable*) {
     Coord v = bvalue_->cur_lower(Dimension_X);
     char buf[20];
-    sprintf(buf, "%.2f", v);
+    snprintf(buf, 20, "%.2f", v);
     editor_->field(buf);
 }
 
