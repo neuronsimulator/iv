@@ -184,7 +184,7 @@ CursorRep::CursorRep(int id)
 
 // OLD CODE
 //	char buff[25];
-//	sprintf(buff, "#%d", id);
+//	snprintf(buff, 25, "#%d", id);
 //	HINSTANCE inst = theApp.hinst;
 //	cursor = LoadCursor(inst, buff);
 }

@@ -52,7 +52,7 @@ DIR* opendir(const char* name)
 	char buff[1024];
 	DIR* retval = (DIR*) malloc(sizeof(DIR));
 
-	sprintf(buff,"%s/*", name);
+	snprintf(buff, 1024, "%s/*", name);
 	if (retval)
 	{
 		retval->offs = 0;

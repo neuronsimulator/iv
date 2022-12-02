@@ -118,7 +118,7 @@ static void set_pixel_twips(HDC hdc) {
 		char buf[512];
       const char* il = Session::installLocation();
       if (!il) il = "";
-		sprintf(buf, "This is a low resolution screen and there \
+		snprintf(buf, 512, "This is a low resolution screen and there \
 is no mswin_scale resource in %s\\app-defa\\intervie.\n\
 Select \"Yes\" to choose\n\
 	*mswin_scale: %g\n\

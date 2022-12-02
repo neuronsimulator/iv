@@ -846,13 +846,13 @@ void PostScriptView::Pattern (std::ostream& out) {
 
 	if (size <= 8) {
 	    for (int i = 0; i < 8; i++) {
-		sprintf(buf, "%02x", data[i] & 0xff);
+		snprintf(buf, CHARBUFSIZE, "%02x", data[i] & 0xff);
 		out << buf << " ";
 	    }
 
 	} else {
 	    for (int i = 0; i < patternHeight; i++) {
-		sprintf(buf, "%0*x", patternWidth/4, data[i]);
+		snprintf(buf, CHARBUFSIZE, "%0*x", patternWidth/4, data[i]);
 		if (i != patternHeight - 2) {
 		    out << buf << " ";
 		} else {

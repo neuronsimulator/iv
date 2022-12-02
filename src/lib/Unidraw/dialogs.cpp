@@ -344,7 +344,7 @@ static const char* DefaultPrintCmd () {
             printer_name = "<printer name>";
         }
 
-        sprintf(buf, "lpr -P%s", printer_name);
+        snprintf(buf, CHARBUFSIZE, "lpr -P%s", printer_name);
         print_cmd = buf;
     }
     return print_cmd;

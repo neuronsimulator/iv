@@ -265,7 +265,7 @@ Directory* Directory::open(const String& name) {
 			s1 = new CopyString(name);
 		}else{
 			char buf[256];
-			sprintf(buf, "%s:", name.string());
+			snprintf(buf, 256, "%s:", name.string());
 			s1 = new CopyString(buf);
 		}
 	}
@@ -305,7 +305,7 @@ Directory* Directory::open(const String& name) {
    if (dir == INVALID_HANDLE_VALUE) {
 //   	printf("couldn't open |%s|\n", s->string());
       	char buf[256];
-      	sprintf(buf, "%s*", s->string());
+      	snprintf(buf, 256, "%s*", s->string());
 		dir = FindFirstFile(buf, &wfd);
          if (dir == INVALID_HANDLE_VALUE) {
 //         	printf("couldn't open |%s|\n", buf);
@@ -414,11 +414,12 @@ void DirectoryEntry::set_is_dir(DirectoryImpl* d) {
 #if MAC
 #else
 	struct stat* s = new (struct stat);
-	char* tmp = new char[d->name_->length() + name_->length() + 2];
+        auto sz = d->name_->length() + name_->length() + 2;
+	char* tmp = new char[sz];
 #ifdef WIN32
-	sprintf(tmp, "%s%s", d->name_->string(), name_->string());
+	snprintf(tmp, sz, "%s%s", d->name_->string(), name_->string());
 #else
-	sprintf(tmp, "%s/%s", d->name_->string(), name_->string());
+	snprintf(tmp, sz, "%s/%s", d->name_->string(), name_->string());
 #endif
 	int i = stat(tmp, s);
 	delete [] tmp;
@@ -463,19 +464,19 @@ String* Directory::canonical(const String& name) {
     s = DirectoryImpl::eliminate_dot_dot(s);
     s = DirectoryImpl::interpret_tilde(s);
     if (s[0] == '\0' || strcmp(s, ".") == 0) {
-	sprintf(newpath, "./");
+	snprintf(newpath, path_buffer_size, "./");
 #ifndef WIN32
     } else if (!DirectoryImpl::dot_slash(s) &&
 	!DirectoryImpl::dot_dot_slash(s) && s[0] != '/'
     ) {
-	sprintf(newpath, "./%s", s);
+	snprintf(newpath, path_buffer_size, "./%s", s);
 #endif
     } else if ((DirectoryImpl::ifdir(s) && s[strlen(s) - 1] != '/')
     					|| s[strlen(s) -1] == ':'
     		) {
-	sprintf(newpath, "%s/", s);
+	snprintf(newpath, path_buffer_size, "%s/", s);
     } else {
-	sprintf(newpath, "%s", s);
+	snprintf(newpath, path_buffer_size, "%s", s);
     }
     return new CopyString(newpath);
 #endif
@@ -672,8 +673,9 @@ void DirectoryImpl::do_fill() {
 void DirectoryImpl::do_fill() {
 	 WIN32_FIND_DATA fd;
     HANDLE h;
-	 char * buf = new char[strlen(name_->string()) + 3];
-	 sprintf(buf, "%s%s", name_->string(), "*");
+         auto sz = strlen(name->string()) + 3;
+	 char * buf = new char[sz];
+	 snprintf(buf, sz, "%s%s", name_->string(), "*");
 	 for (h = FindFirstFile(buf, &fd); FindNextFile(h, &fd);) {
 	if (used_ >= count_) {
 		 ++overflows_;

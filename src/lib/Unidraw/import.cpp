@@ -85,7 +85,7 @@ static FILE* CheckCompression(
 
     } else if (*((unsigned short *)cmd) == COMPRESS_MAGIC_NUM) {
         fclose (file);
-        sprintf (cmd, "uncompress < %s", filename);
+        snprintf (cmd, 256, "uncompress < %s", filename);
         file = popen (cmd, "r");
 
         if (!file) {
