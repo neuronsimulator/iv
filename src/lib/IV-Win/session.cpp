@@ -881,7 +881,7 @@ void SessionRep::load_path(
 {
     String h(head);
     String t(tail);
-    auto z = strlen(head) + strlen(tail) + 1;
+    auto sz = strlen(head) + strlen(tail) + 1;
     char* buff = new char[sz];
     snprintf(buff, sz, "%s%s", head, tail);
     load_file(s, buff, priority);
