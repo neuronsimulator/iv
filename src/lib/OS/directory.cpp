@@ -673,7 +673,7 @@ void DirectoryImpl::do_fill() {
 void DirectoryImpl::do_fill() {
 	 WIN32_FIND_DATA fd;
     HANDLE h;
-         auto sz = strlen(name->string()) + 3;
+         auto sz = strlen(name_->string()) + 3;
 	 char * buf = new char[sz];
 	 snprintf(buf, sz, "%s%s", name_->string(), "*");
 	 for (h = FindFirstFile(buf, &fd); FindNextFile(h, &fd);) {
