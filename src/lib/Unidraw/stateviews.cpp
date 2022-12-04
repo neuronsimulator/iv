@@ -290,7 +290,7 @@ void MagnifVarView::Init() {
     char buf[32];
 
     _prevVal = mag;
-    sprintf(buf, "mag %gx", mag);
+    snprintf(buf, 32, "mag %gx", mag);
     t->SetText(buf);
 }
 

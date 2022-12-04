@@ -114,9 +114,8 @@ char* PSFontImpl::psfile(const char* name) {
     if (dir == nil) {
 	dir = ps_metrics_dir;
     }
-    char* metrics_file = new char[
-	strlen(dir) + strlen("/") + strlen(name) + strlen(".afm") + 1
-    ];
-    sprintf(metrics_file, "%s/%s.afm", dir, name);
+    auto sz = strlen(dir) + strlen("/") + strlen(name) + strlen(".afm") + 1;
+    char* metrics_file = new char[sz];
+    snprintf(metrics_file, sz, "%s/%s.afm", dir, name);
     return metrics_file;
 }

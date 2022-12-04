@@ -712,14 +712,14 @@ void SessionRep::set_style(Display* d)
 {
 #if 0 //!OCSMALL
 	char buf[512];
-	sprintf(buf, "%s\\%s\\%s", Session::installLocation(), APPDEF_DIRECTORY, APPDEF_DEFAULT);
+	snprintf(buf, 512, "%s\\%s\\%s", Session::installLocation(), APPDEF_DIRECTORY, APPDEF_DEFAULT);
 	FILE* f;
 	if ((f = fopen(buf, "r")) == (FILE*)0) {
 		char buf2[512];
-		sprintf(buf2, "%s\\%s\\%s", Session::installLocation(), APPDEF_DIR_ALT, APPDEF_DEFAULT_ALT);
+		snprintf(buf2, 512, "%s\\%s\\%s", Session::installLocation(), APPDEF_DIR_ALT, APPDEF_DEFAULT_ALT);
 		if ((f = fopen(buf2, "r")) == (FILE*)0) {
 			char buf3[1024];
-			sprintf(buf3, "Can't open InterViews resources file in either\n%s or\n%s",
+			snprintf(buf3, 1024, "Can't open InterViews resources file in either\n%s or\n%s",
 				buf, buf2);
 			//MessageBox(NULL, buf3, "Invalid Installation", MB_OK);
 			//abort();
@@ -755,7 +755,7 @@ void SessionRep::load_app_defaults(Style* s, const char* leafName, int priority)
 	if (topDir)
 	{
 		char subPath[80];
-		sprintf(subPath,"/%s/%s", APPDEF_DIRECTORY, leafName);
+		snprintf(subPath, 80, "/%s/%s", APPDEF_DIRECTORY, leafName);
 		load_path(s, topDir, subPath, priority);
 	 }
 #endif
@@ -768,7 +768,7 @@ void SessionRep::missing_colon(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	 sprintf("Missing colon in property: %s", property);
+	 snprintf(buff, 135, "Missing colon in property: %s", property);
 	//WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -777,7 +777,7 @@ void SessionRep::bad_property_name(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	sprintf("Bad property name: %s", property);
+	snprintf(buff, 135, "Bad property name: %s", property);
 	//WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -786,7 +786,7 @@ void SessionRep::bad_property_value(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	sprintf("Bad property value: %s", property);
+	snprintf(buff, 135, "Bad property value: %s", property);
 	//WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -845,7 +845,7 @@ void SessionRep::connect(Display* d)
 void SessionRep::bad_arg(const char* fmt, const String& arg)
 {
 	char buff[135];
-	sprintf(buff, fmt, arg.string());
+	snprintf(buff, 135, fmt, arg.string());
 	//WindowRep::errorMessage(buff);
 	 // NOT REACHED
 }
@@ -1517,8 +1517,9 @@ void SessionRep::load_path(
 {
     String h(head);
     String t(tail);
-    char* buff = new char[strlen(head) + strlen(tail) + 1];
-    sprintf(buff, "%s%s", head, tail);
+    auto sz = strlen(head) + strlen(tail) + 1;
+    char* buff = new char[sz];
+    snprintf(buff, sz, "%s%s", head, tail);
     load_file(s, buff, priority);
     delete buff;
 }

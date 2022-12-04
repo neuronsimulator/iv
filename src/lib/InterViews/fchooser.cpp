@@ -435,8 +435,8 @@ void FileChooserImpl::accept_browser() {
     const String& name = *dir_->name(i);
     int length = path.length() + name.length();
     char* tmp = new char[length + 1];
-    sprintf(
-	tmp, "%.*s%.*s",
+    snprintf(
+	tmp, length + 1, "%.*s%.*s",
 	path.length(), path.string(), name.length(), name.string()
     );
     editor_->field(tmp);

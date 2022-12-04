@@ -117,7 +117,7 @@ printf("nofont: |%s|\n", name);
 	if (!seen) {
 		seen = true;
 		char buf[512];
-		sprintf(buf, "Can't find font:\n%s\nUsing default font. This is the\
+		snprintf(buf, 512, "Can't find font:\n%s\nUsing default font. This is the\
  last time this message will be seen in this session", name);
 		MessageBox(NULL, buf, "Missing Font", MB_OK);
    }
@@ -234,7 +234,7 @@ bool FontRep::AssociateWith(
 			ABC width;
 //			int	nWidth;
 // char mbuf[256];
-// sprintf(mbuf, "%d %s", metrics.tmFirstChar, TypefaceName());
+// snprintf(mbuf, 256, "%d %s", metrics.tmFirstChar, TypefaceName());
 // MessageBox(NULL, mbuf, "idemo", MB_OK);
 			for (int i = 0; i < nchars; i++)
 			{
@@ -764,7 +764,7 @@ bool FontFamilyRep::font(
     scale = 1.0;                    // scale is unused
 
 	// ---- generate font name ----
-	sprintf(buff,"*%s*%s*--%d*", family_name_, style, size);
+	snprintf(buff, 256, "*%s*%s*--%d*", family_name_, style, size);
 
 	// ---- Search for the name in the list ----
 	for (i = 0; i < name_list_.count(); i++)

@@ -229,11 +229,11 @@ Style* s;
 #if !OCSMALL
  if (Session::installLocation()) {
 	char buf[512];
-	sprintf(buf, "%s\\%s\\%s", Session::installLocation(), APPDEF_DIRECTORY, APPDEF_DEFAULT);
+	snprintf(buf, 512, "%s\\%s\\%s", Session::installLocation(), APPDEF_DIRECTORY, APPDEF_DEFAULT);
 	FILE* f;
 	if ((f = fopen(buf, "r")) == (FILE*)0) {
 		char buf2[512];
-		sprintf(buf2, "%s\\%s\\%s", Session::installLocation(), APPDEF_DIR_ALT, APPDEF_DEFAULT_ALT);
+		snprintf(buf2, 512, "%s\\%s\\%s", Session::installLocation(), APPDEF_DIR_ALT, APPDEF_DEFAULT_ALT);
 		if ((f = fopen(buf2, "r")) == (FILE*)0) {
 #ifdef CYGWIN
 		  // if we don't find the app defaults, just don't read them!
@@ -243,7 +243,7 @@ Style* s;
 	s->ref();
 #else
 			char buf3[1024];
-			sprintf(buf3, "Can't open InterViews resources file in either\n%s or\n%s",
+			snprintf(buf3, 1024, "Can't open InterViews resources file in either\n%s or\n%s",
 				buf, buf2);
 			MessageBox(NULL, buf3, "Invalid Installation", MB_OK);
 			abort();
@@ -274,7 +274,7 @@ void SessionRep::load_app_defaults(Style* s, const char* leafName, int priority)
 	if (topDir)
 	{
 		char subPath[80];
-		sprintf(subPath,"/%s/%s", APPDEF_DIRECTORY, leafName);
+		snprintf(subPath, 80, "/%s/%s", APPDEF_DIRECTORY, leafName);
 		load_path(s, topDir, subPath, priority);
 	 }
 }
@@ -286,7 +286,7 @@ void SessionRep::missing_colon(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	 sprintf(buff, "Missing colon in property: %s", property);
+	snprintf(buff, 135, "Missing colon in property: %s", property);
 	WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -295,7 +295,7 @@ void SessionRep::bad_property_name(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	sprintf(buff, "Bad property name: %s", property);
+	snprintf(buff, 135, "Bad property name: %s", property);
 	WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -304,7 +304,7 @@ void SessionRep::bad_property_value(const String& s)
 {
 	char buff[135];
 	const char* property = s.string();
-	sprintf(buff, "Bad property value: %s", property);
+	snprintf(buff, 135, "Bad property value: %s", property);
 	WindowRep::errorMessage(buff);
 	// NOT REACHED
 }
@@ -376,7 +376,7 @@ void SessionRep::connect(Display* d)
 void SessionRep::bad_arg(const char* fmt, const String& arg)
 {
 	char buff[135];
-	sprintf(buff, fmt, arg.string());
+	snprintf(buff, 135, fmt, arg.string());
 	WindowRep::errorMessage(buff);
 	 // NOT REACHED
 }
@@ -410,7 +410,7 @@ const char* Session::installLocation()
 		char* nh = getenv("NEURONHOME");
 		int len = 0;
 		if (nh) {
-			sprintf(buff, "%s\\iv", nh);
+			snprintf(buff, topLen, "%s\\iv", nh);
 			DIR* dirp = opendir(buff);
 			if (dirp) {
 				closedir(dirp);
@@ -429,7 +429,7 @@ const char* Session::installLocation()
 			// case.
 			//
 		if (!bad_install_ok) {
-			sprintf(buff,"win.ini is missing `%s' in section `%s'", LOCATION_KEY,
+			snprintf(buff, topLen, "win.ini is missing `%s' in section `%s'", LOCATION_KEY,
 				SECTION_NAME);
 			MessageBox(0, buff, "Invalid Installation",
 				MB_OK | MB_ICONSTOP | MB_TASKMODAL);
@@ -881,8 +881,9 @@ void SessionRep::load_path(
 {
     String h(head);
     String t(tail);
-    char* buff = new char[strlen(head) + strlen(tail) + 1];
-    sprintf(buff, "%s%s", head, tail);
+    auto z = strlen(head) + strlen(tail) + 1;
+    char* buff = new char[sz];
+    snprintf(buff, sz, "%s%s", head, tail);
     load_file(s, buff, priority);
     delete [] buff;
 }

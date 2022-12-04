@@ -897,7 +897,7 @@ const char* Catalog::GetAttribute (const char* a) {
 }
 
 const char* Catalog::Name (const char* name, int index) {
-    sprintf(buf, "%s%d", name, index);
+    snprintf(buf, CHARBUFSIZE, "%s%d", name, index);
     return buf;
 }
 
@@ -1457,13 +1457,13 @@ void Catalog::WritePattern (PSPattern* pattern, std::ostream& out) {
 
         if (size <= 8) {
             for (int i = 0; i < 8; i++) {
-                sprintf(buf, "%02x", data[i] & 0xff);
+                snprintf(buf, CHARBUFSIZE, "%02x", data[i] & 0xff);
                 out << buf << " ";
             }
 
         } else {
             for (int i = 0; i < patternHeight; i++) {
-                sprintf(buf, "%0*x", patternWidth/4, data[i]);
+                snprintf(buf, CHARBUFSIZE, "%0*x", patternWidth/4, data[i]);
                 out << buf << " ";
             }
         }

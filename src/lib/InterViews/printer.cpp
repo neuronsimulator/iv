@@ -451,7 +451,7 @@ void Printer::character(
     } else if (c > 127) {
 #if defined(__GNUC__)
 //	out.form("\\%03o", c);
-	sprintf(g3, "\\%03lo", c);
+	snprintf(g3, 40, "\\%03lo", c);
 	out << g3;
 #else
 	out << "\\";
@@ -527,7 +527,7 @@ void Printer::stencil(
             }
 #if defined(__GNUC__)
 	    //out.form("%02x", byte);
-	sprintf(g3, "%02x", byte);
+	snprintf(g3, 24, "%02x", byte);
 	out << g3;
 #else
             out << ((byte>>4) & 0x0f) <<  (byte & 0x0f);
@@ -574,7 +574,7 @@ void Printer::image(const Raster* raster, Coord x, Coord y) {
 
 #if defined(__GNUC__)
 //	    out.vform("%02x", byte);
-	sprintf(g3, "%02x", byte);
+	snprintf(g3, 8, "%02x", byte);
 	out << g3;
 #else
             out << ((byte>>4) & 0x0f) <<  (byte & 0x0f);

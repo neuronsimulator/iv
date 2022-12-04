@@ -291,7 +291,7 @@ void ViewCompCmd::Execute () {
 	char buf[CHARBUFSIZE];
 	const char* domain = unidraw->GetCatalog()->GetAttribute("domain");
 	domain = (domain == nil) ? "component" : domain;
-	sprintf(buf, "Select a %s to open:", domain);
+	snprintf(buf, CHARBUFSIZE, "Select a %s to open:", domain);
 	style->attribute("caption", "");
 	style->attribute("subcaption", buf);
     } else {
@@ -373,12 +373,12 @@ void SaveCompCmd::Execute () {
         } else {
             char title[CHARBUFSIZE];
             const char* reason = !Writable(comp) ? "(File not writable.)" : "";
-            sprintf(title, "Couldn't save! %s", reason);
+            snprintf(title, CHARBUFSIZE, "Couldn't save! %s", reason);
 
             char subtitle[CHARBUFSIZE];
             const char* domain = unidraw->GetCatalog()->GetAttribute("domain");
             domain = (domain == nil) ? "component" : domain;
-            sprintf(subtitle, "Save this %s as:", domain);
+            snprintf(subtitle, CHARBUFSIZE, "Save this %s as:", domain);
 
 	    Style* s = new Style(Session::instance()->style());
 	    s->attribute("caption", title);
@@ -427,7 +427,7 @@ void SaveCompAsCmd::Execute () {
     char buf[CHARBUFSIZE];
     const char* domain = unidraw->GetCatalog()->GetAttribute("domain");
     domain = (domain == nil) ? "component" : domain;
-    sprintf(buf, "Save this %s as:", domain);
+    snprintf(buf, CHARBUFSIZE, "Save this %s as:", domain);
 
     bool reset_caption = false;
     Style* style = new Style(Session::instance()->style());
@@ -446,7 +446,7 @@ void SaveCompAsCmd::Execute () {
 
         if (catalog->Exists(name) && catalog->Writable(name)) {
             char buf[CHARBUFSIZE];
-            sprintf(buf, "\"%s\" already exists.", name);
+            snprintf(buf, CHARBUFSIZE, "\"%s\" already exists.", name);
             ConfirmDialog dialog(buf, "Overwrite?");
             ed->InsertDialog(&dialog);
             char confirmation = dialog.Confirm();
@@ -585,7 +585,7 @@ void PrintCmd::Execute () {
 
 int PrintCmd::print (const char* print_cmd, const char* file) {
     char cmd[CHARBUFSIZE];
-    sprintf(cmd, "%s %s", print_cmd, file);
+    snprintf(cmd, CHARBUFSIZE, "%s %s", print_cmd, file);
     return system(cmd);
 }
 

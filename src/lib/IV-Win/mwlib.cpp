@@ -54,7 +54,7 @@ void mwAssertion(
 	unsigned int line)					// line where it happened
 {
 	char buff[135];
-	sprintf(buff,"at line %u, file %s: `%s'", line, file, msg);
+	snprintf(buff, 512, "at line %u, file %s: `%s'", line, file, msg);
 	MessageBeep(0);
 	if (MessageBox(0, buff, "Assertion Failed", 
 		MB_OKCANCEL | MB_ICONSTOP | MB_TASKMODAL) != IDOK)
@@ -116,7 +116,7 @@ void dumpStyle(Style* s, const char* path)
 			const char* adjusted = aname.string();
 			while (*(adjusted) == '*')
 				adjusted++;
-			sprintf(buff,"%s*%s: %s\n", path, adjusted, avalue.string());
+			snprintf(buff, 512, "%s*%s: %s\n", path, adjusted, avalue.string());
 			OutputDebugString(buff);
 		}
 	}
@@ -129,7 +129,7 @@ void dumpStyle(Style* s, const char* path)
 		const NullTerminatedString cnm(*c->name());	// style name
 		if (c)
 		{
-			sprintf(buff,"%s*%s", path, cnm.string());
+			snprintf(buff, 512, "%s*%s", path, cnm.string());
 			dumpStyle(c, buff);
 		}
 	}
