@@ -32,7 +32,7 @@
 
 #include <Dispatch/iohandler.h>
 
-#if defined(__STDC__) || defined(__ANSI_CPP__)
+#if defined(__STDC__) || defined(__ANSI_CPP__) || defined(_MSC_VER)
 #define __IOCallback(T) T##_IOCallback
 #define IOCallback(T) __IOCallback(T)
 #define __IOReady(T) T##_IOReady

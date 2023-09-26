@@ -65,7 +65,7 @@ public:
     virtual void handle(SelectionManager*) = 0;
 };
 
-#if defined(__STDC__) || defined(__ANSI_CPP__)
+#if defined(__STDC__) || defined(__ANSI_CPP__) || defined(_MSC_VER)
 #define __SelectionCallback(T) T##_SelectionCallback
 #define SelectionCallback(T) __SelectionCallback(T)
 #define __SelectionMemberFunction(T) T##_SelectionMemberFunction
