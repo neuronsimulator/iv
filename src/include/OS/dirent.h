@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #else
 #include <io.h>
-#if (defined(WIN32) && defined(__MWERKS__))
+#if defined(_MSC_VER)
 #define ffblk _finddata_t
 #define findfirst(a,b,c) _findfirst(a,b)
 #define findnext _findnext

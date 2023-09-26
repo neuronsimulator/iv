@@ -26,7 +26,9 @@
  */
 
 #include <OS/host.h>
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
 
 char Host::name_[100];
 

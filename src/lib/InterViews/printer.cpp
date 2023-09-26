@@ -457,7 +457,7 @@ void Printer::character(
 	out << "\\";
         int old_width = out.width(3);
         char old_fill = out.fill('0');
-        out << oct << c << dec;
+        out << std::oct << c << std::dec;
         out.width(old_width);
         out.fill(old_fill);
 #endif
@@ -515,7 +515,7 @@ void Printer::stencil(
     out << "{currentfile picstr readhexstring pop} imagemask\n";
 #ifndef __GNUC__
     int old_width = out.width(1);
-    out << hex;
+    out << std::hex;
 #endif
     for (int iy = 0; iy < height; ++iy) {
         for (int ix = 0; ix < bytes; ++ix) {
@@ -536,7 +536,7 @@ void Printer::stencil(
         out << "\n";
     }
 #ifndef __GNUC__
-    out << dec;
+    out << std::dec;
     out.width(old_width);
 #endif
     out << "grestore\n";
@@ -564,7 +564,7 @@ void Printer::image(const Raster* raster, Coord x, Coord y) {
     out << "{currentfile picstr readhexstring pop} image\n";
 #ifndef __GNUC__
     int old_width = out.width(1);
-    out << hex;
+    out << std::hex;
 #endif
     for (int iy = 0; iy < height; ++iy) {
         for (int ix = 0; ix < width; ++ix) {
@@ -583,7 +583,7 @@ void Printer::image(const Raster* raster, Coord x, Coord y) {
         out << "\n";
     }
 #ifndef __GNUC__
-    out << dec;
+    out << std::dec;
     out.width(old_width);
 #endif
     out << "grestore\n";
