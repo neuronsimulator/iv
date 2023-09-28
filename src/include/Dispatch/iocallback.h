@@ -69,7 +69,7 @@ private: \
     T* _obj; \
     IOReady(T) _input; \
     IOReady(T) _output; \
-    IOReady(T) _except; \
+    IOReady(T) _Except; \
     IOTimer(T) _timer; \
 };
 
@@ -78,19 +78,19 @@ IOCallback(T)::IOCallback(T)( \
     T* obj, IOReady(T) in, IOReady(T) out, IOReady(T) ex \
 ) { \
     _obj = obj; _timer = nil; \
-    _input = in; _output = out; _except = ex; \
+    _input = in; _output = out; _Except = ex; \
 } \
 \
 IOCallback(T)::IOCallback(T)( \
     T* obj, IOTimer(T) t, IOReady(T) in, IOReady(T) out, IOReady(T) ex \
 ) { \
     _obj = obj; _timer = t; \
-    _input = in; _output = out; _except = ex; \
+    _input = in; _output = out; _Except = ex; \
 } \
 \
 int IOCallback(T)::inputReady(int fd) { return (_obj->*_input)(fd); } \
 int IOCallback(T)::outputReady(int fd) { return (_obj->*_output)(fd); } \
-int IOCallback(T)::exceptionRaised(int fd) { return (_obj->*_except)(fd); } \
+int IOCallback(T)::exceptionRaised(int fd) { return (_obj->*_Except)(fd); } \
 void IOCallback(T)::timerExpired(long s, long u) { (_obj->*_timer)(s, u); }
 
 #endif

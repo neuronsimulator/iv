@@ -258,8 +258,7 @@ long MWwindow::WndProc(UINT message, WPARAM wParam, LPARAM lParam)
 
 // mingw + launch python needs all windows to be bound from a specific
 // thread.
-#if defined(MINGW)
-extern "C" {
+#if defined(WIN32)
 int (*iv_bind_enqueue_)(void(*)(void*), void*);
 
 static void wmap1(void* v) {
@@ -281,7 +280,6 @@ static void mwmap1(void* v) {
 	UpdateWindow(hwnd);
 }
 
-}
 #endif
 
 void MWwindow::bind()

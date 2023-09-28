@@ -90,7 +90,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 Session* SessionRep::instance_;
 
-extern "C" { int bad_install_ok = 0; }
+int bad_install_ok = 0;
 
 const char* SECTION_NAME = "InterViews";
 	// This is the name of the section in the WIN.INI file where the
