@@ -1090,7 +1090,7 @@ void SMFKitCheckmark::draw(Canvas* c, const Allocation& a) const {
 #if MAC
 	info().checkmark()->draw(c, a);
 #else
-#if !defined(CYGWIN) && !defined(MINGW)
+#if !defined(CYGWIN) && !defined(_WIN32)
 //printf("SMFKitCheckmark::draw %g %g %g %g %g %g\n", a.x(), a.y(),
 //a.left(), a.right(), a.bottom(), a.top());
 	Allocation a1;

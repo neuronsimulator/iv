@@ -413,9 +413,8 @@ set_property(TARGET interviews PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if(IV_WINDOWS_BUILD)
   target_link_libraries(interviews gdi32 comdlg32)
-endif()
-if(NOT IV_WINDOWS_BUILD)
-    set_target_properties(interviews PROPERTIES SOVERSION 0.0.0)
+else()
+  set_target_properties(interviews PROPERTIES SOVERSION 0.0.0)
 endif()
 
 # =============================================================================

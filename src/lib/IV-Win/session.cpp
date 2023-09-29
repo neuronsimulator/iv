@@ -193,7 +193,7 @@ int SessionIOHandler::inputReady(int) {
 
 SessionRep::SessionRep()
 {
-#ifdef WIN32
+#ifdef _WIN32
 	// The nice thing about NT is that you don't have to have the WinMain()
 	// style of program entry... so under NT we enter under main so we get
 	// a normal main(int,char**) and our source can go unchanged.  Also, this
@@ -340,7 +340,7 @@ String* SessionRep::find_name()
 // -----------------------------------------------------------------------
 void SessionRep::init_display()
 {
-#if defined(CYGWIN) || defined(MINGW)
+#if defined(CYGWIN) || defined(_WIN32)
   bad_install_ok = true;	// we're going to be ok with this!
 #endif
 	set_style(nil);

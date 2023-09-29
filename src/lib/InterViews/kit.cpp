@@ -708,7 +708,7 @@ void WidgetKitImpl::update_style_info() {
 	const Font* f = Font::lookup(v);
 	if (f == nil) {
 	    if (font_ == nil) {
-#if defined(CYGWIN) || defined(MINGW)
+#if defined(CYGWIN) || defined(_WIN32)
 		const char* default_font = "*Arial*bold*--12*";
 #else
 		const char* default_font = "fixed";
@@ -725,7 +725,7 @@ void WidgetKitImpl::update_style_info() {
     }
     if (font_ == nil)
     {
-#if defined(CYGWIN) || defined(MINGW)
+#if defined(CYGWIN) || defined(_WIN32)
  	font_ = Font::lookup("*Arial*bold*--12*");
 #else
  	font_ = Font::lookup("fixed");
