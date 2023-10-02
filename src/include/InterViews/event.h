@@ -29,7 +29,7 @@
 #ifndef iv_event_h
 #define iv_event_h
 
-#if !(defined(WIN32) && !defined(_MSC_VER)) && !MAC
+#if !defined(_WIN32) && !MAC
 #define UNIX 1
 #endif
 

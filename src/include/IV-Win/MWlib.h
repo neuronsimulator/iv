@@ -37,7 +37,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 // since cpp will still read the file even if ifdef'd out, and the windows
 // file is quite large, a check for previous inclusion is done outside the
 // include directive!
-#ifdef WIN32
+#ifdef _WIN32
 #ifndef _WINDOWS_
 #include <windows.h>
 #endif

@@ -56,7 +56,7 @@ protected:
     void calc_dashes(int pat, int* dash, int& count);
 private:
     void init(const int*, int, Coord);
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 	BrushRep* rep_;
 #else
     BrushImpl* impl_;

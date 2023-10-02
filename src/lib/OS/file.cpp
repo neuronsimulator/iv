@@ -85,11 +85,11 @@ extern "C" {
 #define WIN32
 #endif
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <io.h>
 #endif
 
-#if !defined(__GNUC__) || !defined (WIN32) && !defined (MAC)
+#if !defined(__GNUC__) || !defined (_WIN32) && !defined (MAC)
 
 /* no standard place for these */
 // Yes there is.  Posix says read and close are in unistd.h.
@@ -189,7 +189,7 @@ void File::close() {
 	}
 #if defined(CYGWIN)
 	myclose(i->fd_);
-#elif defined(WIN32)
+#elif defined(_WIN32)
 	_close(i->fd_);
 #else
 	::close(i->fd_);
@@ -222,7 +222,7 @@ InputFile* InputFile::open(const String& name) {
 	 CopyString* s = new CopyString(name);
 #ifndef MAC
 
-#if defined(WIN32) && !defined(__MWERKS__) && !defined(CYGWIN)
+#if defined(_WIN32) && !defined(__MWERKS__) && !defined(CYGWIN)
 	 int fd = _open((char*)s->string(), O_RDONLY);
 #else
     /* cast to workaround DEC C++ prototype bug */
@@ -267,7 +267,7 @@ int InputFile::read(const char*& start) {
     start = i->buf_;
 #if defined(CYGWIN)
     len = myread(i->fd_, i->buf_, len);
-#elif defined(WIN32)
+#elif defined(_WIN32)
     len = _read(i->fd_, i->buf_, len);
 #else
     len = ::read(i->fd_, i->buf_, len);
@@ -302,7 +302,7 @@ int StdInput::read(const char*& start) {
 
 #if defined(CYGWIN)
     int nbytes = myread(i->fd_, (char*)i->buf_, i->limit_);
-#elif defined(WIN32)
+#elif defined(_WIN32)
     int nbytes = _read(i->fd_, (char*)i->buf_, i->limit_);
 #else
     int nbytes = ::read(i->fd_, (char*)i->buf_, i->limit_);

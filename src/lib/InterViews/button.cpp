@@ -103,6 +103,7 @@ void Button::press(const Event&) {
 }
 
 void Button::release(const Event& e) {
+	printf("SOMETHING IN BOUTON!\n");
     TelltaleState* s = state();
     if (s->test(TelltaleState::is_enabled)) {
 	NEEDMOTION(false)
@@ -111,9 +112,11 @@ void Button::release(const Event& e) {
 	    bool chosen = s->test(TelltaleState::is_chosen);
 	    bool act = !chosen;
 	    if (s->test(TelltaleState::is_toggle)) {
+		printf("SOMETHING IN TOGGLE BOUTON!\n");
 		s->set(TelltaleState::is_chosen, act);
 		act = true;
 	    } else if (s->test(TelltaleState::is_choosable)) {
+		printf("SOMETHING IN ELSE TOGGLE BOUTON!\n");
 		s->set(TelltaleState::is_chosen, true);
 	    }
 	    if (act) {

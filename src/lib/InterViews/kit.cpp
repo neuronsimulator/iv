@@ -56,7 +56,7 @@
 //
 // =======================================================================
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <IV-Win/MWlib.h>
 #endif
 
@@ -787,7 +787,7 @@ void WidgetKitImpl::update_style_info() {
 void WidgetKitImpl::report_error(
     Session* s, const char* op, const String& name, const char* value
 ) {
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 	printf(
 #else
     fprintf(stderr,

@@ -97,7 +97,7 @@ struct dirent* readdir(DIR* dirp)
 			// The first entry was already fetched when an attempt was
 			// made to open the directory.  In this case we simply return
 			// it, otherwise we need to try and fetch the next entry.
-#if defined(WIN32)
+#if defined(_WIN32)
 			if (findnext(dirp->srchHandle, &(dirp->data)) == -1)
 #else
 			if (findnext(&(dirp->data)) == -1)

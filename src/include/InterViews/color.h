@@ -22,7 +22,7 @@
  * OF THIS SOFTWARE.
  */
 
-#if defined(WIN32)
+#if defined(_WIN32)
 // =========================================================================
 //
 //  MS-Windows version.  The InterViews distribution contains some
@@ -32,7 +32,7 @@
 // =========================================================================
 #endif
 
-#if !defined(WIN32) && !defined(MAC)
+#if !defined(_WIN32) && !defined(MAC)
 #define UNIX 1
 #endif
 

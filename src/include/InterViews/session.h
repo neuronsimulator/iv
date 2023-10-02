@@ -26,7 +26,7 @@
  * Session -- coordinate control flow and display management
  */
 
-#ifdef WIN32
+#ifdef _WIN32
 // =======================================================================
 //
 // Extensions 
@@ -135,7 +135,7 @@ public:
     virtual bool read(long sec, long usec, Event&);
     virtual void unread(Event&);
     virtual void poll(Event&);
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 	static const char* installLocation();
 		// This function is an extension of the InterViews distribution.
 		// A pathname of location of the installation directory tree is

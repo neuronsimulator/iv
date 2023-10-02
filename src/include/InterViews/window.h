@@ -107,7 +107,7 @@ protected:
     virtual void set_attributes();
     virtual void set_props();
     virtual void do_map();
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 protected:
     WindowRep* rep_;
 
@@ -130,7 +130,7 @@ private:
 };
 
 inline WindowRep* Window::rep() const { return rep_; }
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 inline Glyph* Window::glyph() const   
     { return glyph_; }                
 inline Canvas* Window::canvas() const 
@@ -143,12 +143,12 @@ protected:
 public:
     virtual ~ManagedWindow();
 
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
     virtual Coord width() const;                // width of window 
     virtual Coord height() const;               // height of window
 #endif
 
-#if defined(WIN32)
+#if defined(_WIN32)
     virtual bool receive(const Event&);
 #endif
     virtual void icon(ManagedWindow*);
@@ -217,7 +217,7 @@ public:
     ~PopupWindow();
 protected:
     virtual void set_attributes();
-#if defined(WIN32)
+#if defined(_WIN32)
     virtual bool receive(const Event&);
 #endif
 };

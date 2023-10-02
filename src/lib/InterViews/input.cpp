@@ -84,7 +84,7 @@ InputHandler::InputHandler(Glyph* g, Style* s) : MonoGlyph(g) {
 }
 
 InputHandler::~InputHandler() {
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
        //
        // The 3.1 distribution tried to ensure that the handler was removed fr$
        // the handler list before destruction... but it was dereferencing a
@@ -223,7 +223,7 @@ void InputHandler::pick(Canvas* c, const Allocation& a, int depth, Hit& h) {
     EventType t = (e == nil) ? Event::undefined : e->type();
     switch (t) {
     case Event::key:
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 	if (e && impl_->inside(*e, info, false)) {
 #else
 	if (e && impl_->inside(*e, info)) {
@@ -435,7 +435,7 @@ void InputHandlerImpl::down(Event& e) {
 	pressed_ = true;
 	button_ = e.pointer_button();
 	e.grab(this);
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 	e.window()->grab_pointer();
 #endif
 	if (parent_ != nil) {
@@ -473,7 +473,7 @@ void InputHandlerImpl::up(Event& e) {
     if (pressed_ && e.pointer_button() == button_) {
 	pressed_ = false;
 	e.ungrab(this);
-#if defined(WIN32) || (MAC && !carbon)
+#if defined(_WIN32) || (MAC && !carbon)
 	e.window()->ungrab_pointer();
 #endif
 	input_->release(e);

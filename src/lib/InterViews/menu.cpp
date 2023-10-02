@@ -40,7 +40,7 @@
 #include <InterViews/window.h>
 #include <OS/list.h>
 
-#if !defined(WIN32) && !MAC
+#if !defined(_WIN32) && !MAC
 #include <X11/cursorfont.h>
 #endif
 
@@ -252,7 +252,7 @@ void Menu::open() {
 		const Allocation& a = mi->patch_->allocation();
 		Window& w = *mi->window();
 		w.display(rel.display());
-#if defined(WIN32) || defined(MAC)
+#if defined(_WIN32) || defined(MAC)
 		if (!w.bound()) { // got to get it sized before align
 			w.place(-10000, 10000); // will work
 			w.map();
@@ -264,7 +264,7 @@ void Menu::open() {
 			rel.bottom() + (1 - i.y1_) * a.bottom() + i.y1_ * a.top()
 		);
 		w.align(i.x2_, i.y2_);
-#ifdef WIN32
+#ifdef _WIN32
 // force onto screen. Well, almost, there is a problem if menu items overlay
 // previous menus. so only check if bottom is negative.
 		if (w.bottom() < 0) {
@@ -338,7 +338,7 @@ void Menu::press(const Event& e) {
     }
 }
 
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 extern void iv_window_coords(const Event&, Window*, Coord&, Coord&);
 #endif
 
@@ -349,7 +349,7 @@ void Menu::drag(const Event& e) {
 	return;
     }
 	 Window* w = c->window();
-#if defined(WIN32)
+#if defined(_WIN32)
 	 Coord x, y;
 	iv_window_coords(e, w, x, y);
 	 Hit hit(x, y);
@@ -444,7 +444,7 @@ void Menu::release(const Event& e) {
 		m = m->item(hit.index(0))->menu();
 		if (m != nil) {
 		    m->select(0);
-#if 0 && defined(WIN32)
+#if 0 && defined(_WIN32)
 //twice clicking on a menu that opens a submenu gets it into a state
 //where it is hard to close except by clicking on a submenu item and
 //dragging the mouse off the subment and releasing.
@@ -516,7 +516,7 @@ void MenuImpl::ungrab(Menu* m, const Event& e) {
 
 Cursor* MenuImpl::menu_cursor() {
     if (menu_cursor_ == nil) {
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 	menu_cursor_ = arrow;
 #else
 	 menu_cursor_ = new Cursor(XC_arrow);

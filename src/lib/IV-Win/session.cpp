@@ -57,6 +57,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE 
  * OF THIS SOFTWARE.
  */
+#include <filesystem>
+
 #include <IV-Win/MWlib.h>
 #ifdef CYGWIN
 #include <Dispatch/iohandler.h>
@@ -88,9 +90,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <OS/dirent.h>
 #endif
 
+namespace fs = std::filesystem;
+
 Session* SessionRep::instance_;
 
-int bad_install_ok = 0;
+int bad_install_ok = 1;
 
 const char* SECTION_NAME = "InterViews";
 	// This is the name of the section in the WIN.INI file where the
@@ -113,10 +117,6 @@ const char* APPDEF_DIRECTORY = "app-defaults";
 	// is expected to have a file in this directory to establish reasonable
 	// default behavior.
 const char* APPDEF_DIR_ALT = "app-defa"; // win3.1 install and using NT
-
-static char* INSTALL_LOCATION = NULL;
-	// pathname of the installation location.... determined by reading the
-	// win.ini file and querying the location key.
 
 // -----------------------------------------------------------------------
 // Predefined command-line options.
@@ -398,52 +398,49 @@ void SessionRep::bad_arg(const char* fmt, const String& arg)
 // -----------------------------------------------------------------------
 const char* Session::installLocation()
 {
-	static int first = 1;
-	if (first && INSTALL_LOCATION == NULL)
-	{
-   	first = 0;
-		// ---- get the location of the configuration directory ----
-		const int topLen = 256;
-		char buff[topLen];
-		// maybe it hasn't been installed. So try NEURONHOME first
-		// in case, say, we are running from a cd-rom.
-		char* nh = getenv("NEURONHOME");
-		int len = 0;
-		if (nh) {
-			snprintf(buff, topLen, "%s\\iv", nh);
-			DIR* dirp = opendir(buff);
-			if (dirp) {
-				closedir(dirp);
-				len = strlen(buff);
+	static std::string location = "";
+	static bool first = true;
+	if (first && location.empty()) {
+		first = false;
+		const char* home = getenv("NEURONHOME");
+		// This magic "iv" directory is currently not being installed
+		// FIXME should this whole if be considered moot?
+		if (home && fs::is_directory(fs::path(home) / "iv")) {
+			location = std::string(home);
+		} 
+		if (location.empty()) {
+			std::vector<char> buffer(256);
+			// Per API docs, either one or two null-characters at
+			// the end of string, return value then 1 or 2 less the
+			// buffer size
+			int len = 0;
+			while ((len = GetProfileString(SECTION_NAME, LOCATION_KEY, "", buffer.data(), buffer.size())) >= buffer.size() - 2) {
+				buffer.resize(buffer.size() * 2);
+			}
+			if (len > 0) {
+				location = std::string(buffer.begin(), buffer.end());
 			}
 		}
-		if (len == 0) {
-			len = GetProfileString(SECTION_NAME, LOCATION_KEY, "",
-				buff, topLen);
-		}
-		if (len == 0)
-		{
-			//
+		if (location.empty() && !bad_install_ok) {
 			// The installation directory can't be found... so we bail out
 			// here because all sorts of things won't work when this is the
 			// case.
-			//
-		if (!bad_install_ok) {
-			snprintf(buff, topLen, "win.ini is missing `%s' in section `%s'", LOCATION_KEY,
-				SECTION_NAME);
-			MessageBox(0, buff, "Invalid Installation",
-				MB_OK | MB_ICONSTOP | MB_TASKMODAL);
-			abort();
-		}
-		}
-		else
-		{
-			INSTALL_LOCATION = new char[len + 1];
-			strncpy(INSTALL_LOCATION, buff, len);
-			INSTALL_LOCATION [len] = 0;
+			if (!bad_install_ok && 0) {
+				std::stringstream ss;
+				ss << "win.ini is missing `" << LOCATION_KEY
+				   << "' in section`" << SECTION_NAME
+				   << "'";
+				MessageBox(0, ss.str().c_str(), "Invalid Installation",
+					MB_OK | MB_ICONSTOP | MB_TASKMODAL);
+				abort();
+			}
 		}
 	}
-	return INSTALL_LOCATION;
+	if (location.empty()) {
+		return nullptr;
+	} else {
+		return location.c_str();
+	}
 }
 
 // -----------------------------------------------------------------------

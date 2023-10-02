@@ -160,7 +160,7 @@ bool DialogHandler::event(Event&) {
 Dialog::Dialog(Glyph* g, Style* s) : InputHandler(g, s) { }
 Dialog::~Dialog() { }
 
-#if defined(WIN32)
+#if defined(_WIN32)
 extern int (*iv_bind_enqueue_)(void(*)(void*), void*);
 static bool rval_;
 
@@ -175,7 +175,7 @@ static bool run_mingw(Dialog* d) {
     }
     return d->run();
 }
-#endif // WIN32
+#endif // _WIN32
 
 bool Dialog::post_for_aligned(Window* w, float x_align, float y_align) {
     TransientWindow* t = new TransientWindow(this);
@@ -185,7 +185,7 @@ bool Dialog::post_for_aligned(Window* w, float x_align, float y_align) {
     t->place(w->left() + 0.5 * w->width(), w->bottom() + 0.5 * w->height());
     t->align(x_align, y_align);
     t->map();
-#if defined(WIN32)
+#if defined(_WIN32)
     bool b = run_mingw(this);
 #else
     bool b = run();
@@ -205,7 +205,7 @@ bool Dialog::post_at_aligned(
     t->place(x, y);
     t->align(x_align, y_align);
     t->map();
-#if defined(WIN32)
+#if defined(_WIN32)
     bool b = run_mingw(this);
 #else
     bool b = run();
@@ -257,7 +257,7 @@ bool Dialog::run() {
 	s->screen_update();
 	iv_carbon_dialog_handle(thiswin);
 #else
-#if defined(WIN32)
+#if defined(_WIN32)
 	s->read(e);
 	e.handle();
 #else

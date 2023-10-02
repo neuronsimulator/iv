@@ -36,7 +36,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <OS/string.h>
 #include <InterViews/style.h>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <MMgAlloc.h>
 #endif
 
@@ -63,7 +63,7 @@ void mwAssertion(
 	}
 }
 
-#ifndef WIN32
+#ifndef _WIN32
 // ----------------------------------------------------------------------
 // global new and delete operators
 // ----------------------------------------------------------------------
@@ -91,7 +91,7 @@ void operator delete(void* ptr)
 	}
 }
 
-#endif /* WIN32 */
+#endif /* _WIN32 */
 
 // --------------------------------------------------------------------
 // style debug stuff.  

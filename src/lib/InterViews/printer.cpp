@@ -30,7 +30,7 @@
  */
  
 #ifdef MAC
-	#define WIN32
+	#define _WIN32
 #endif
 #include <ivstream.h>
 #include <stdio.h>
@@ -78,7 +78,7 @@ static const char* ps_epilog = "\
 end restore\n\
 ";
 
-#ifdef WIN32
+#ifdef _WIN32
 declareList(PRtransformerList,Transformer)
 implementList(PRtransformerList,Transformer)
 #endif
@@ -104,7 +104,7 @@ public:
     Coord text_cury_;
     int text_chars_;
 	 int text_spaces_;
-#ifdef WIN32
+#ifdef _WIN32
 	 Transformer tr_;
 	 PRtransformerList trl_;
 #endif
@@ -131,7 +131,7 @@ static void do_color(std::ostream& out, const Color* color) {
 static void do_brush(std::ostream& out, const Brush* brush) {
     Coord linewidth = brush ? brush->width() : 1;
     out << linewidth << " setlinewidth\n";
-#if !defined(WIN32) && !MAC
+#if !defined(_WIN32) && !MAC
  // Should do something about patterned brushes.
  // Maybe something like this:
   
@@ -189,7 +189,7 @@ PixelCoord Printer::to_pixels(Coord p, DimensionName) const { return (PixelCoord
 Coord Printer::to_coord(PixelCoord p, DimensionName) const { return p; }
 Coord Printer::to_pixels_coord(Coord p, DimensionName) const { return p; }
 
-#ifdef WIN32
+#ifdef _WIN32
 void Printer::size(Coord width, Coord height){}
 void Printer::psize(PixelCoord width, PixelCoord height){}
 
@@ -279,7 +279,7 @@ void Printer::page(const char* label) {
 
 void Printer::push_transform() {
 	PrinterRep* p = rep_;
-#ifdef WIN32
+#ifdef _WIN32
 	p->trl_.append(p->tr_);
 #else
 	 Canvas::push_transform();
@@ -297,7 +297,7 @@ void Printer::pop_transform() {
     long depth = p->info_->count();
     p->info_->remove(depth - 1);
 	 *p->out_ << "grestore\n";
-#ifdef WIN32
+#ifdef _WIN32
 	long tcnt = p->trl_.count();
 	if (tcnt) {
 		p->tr_ = p->trl_.item(tcnt - 1);
@@ -310,7 +310,7 @@ void Printer::pop_transform() {
 
 void Printer::transform(const Transformer& t) {
 	PrinterRep* p = rep_;
-#ifdef WIN32
+#ifdef _WIN32
 	p->tr_.premultiply(t);
 #else
 	 Canvas::transform(t);
@@ -328,7 +328,7 @@ void Printer::transform(const Transformer& t) {
  * so we can use it for clipping as well.
  */
 
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 void Printer::push_clipping(bool) {
 #else
 void Printer::push_clipping() {

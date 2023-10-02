@@ -29,7 +29,7 @@
  * If a device does not support a mask the background pixels are not drawn.
  */
 
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 // ======================================================================
 // 
 // This file contains a super-set of the InterViews 3.1 distribution.
@@ -72,7 +72,7 @@ public:
     Cursor(int, const Color* fg = nil, const Color* bg = nil);
     ~Cursor();
 
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
     Cursor(const char*);
         // This constructor takes a resource name and constructs a 
 	// cursor from that.  Although this functionality isn't native

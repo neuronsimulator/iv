@@ -25,7 +25,7 @@
 #ifndef os_math_h
 #define os_math_h
 
-#ifdef WIN32
+#ifdef _WIN32
 #ifdef max
 #undef max
 #endif

@@ -33,7 +33,7 @@
 #include <OS/math.h>
 #include <math.h>
 
-#if (defined (WIN32) || defined (MAC) ) && !defined(M_PI)
+#if (defined (_WIN32) || defined (MAC) ) && !defined(M_PI)
 #define M_PI        3.14159265358979323846
 #endif
 

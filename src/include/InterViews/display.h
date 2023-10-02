@@ -45,7 +45,7 @@ class Display {
 protected:
     Display(DisplayRep*);
 public:
-#ifdef WIN32
+#ifdef _WIN32
 	 virtual void rescale();
 #endif
     static Display* open(const String&);

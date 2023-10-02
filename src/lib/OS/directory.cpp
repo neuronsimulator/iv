@@ -64,7 +64,7 @@ readdir returns only files (not subdirectories or ..)
 This is contrary to the borland documentation. Work around
 is to use WIN32_FIND_DATA
 */
-#ifdef WIN32
+#ifdef _WIN32
 #include <IV-Win/MWlib.h>
 // cygwin needs ctype to be included!
 #ifdef CYGWIN
@@ -116,7 +116,7 @@ is to use WIN32_FIND_DATA
 # endif
 #endif
 
-#if defined(WIN32)
+#if defined(_WIN32)
 // cygwin has a real dirent -- no need to hack it!
 #ifdef CYGWIN
 #include <dirent.h>
@@ -133,7 +133,7 @@ is to use WIN32_FIND_DATA
 
 #endif /* WIN32 */
 
-#if !defined (WIN32) && !defined(MAC)
+#if !defined (_WIN32) && !defined(MAC)
 #include <pwd.h>
 #endif
 
@@ -145,7 +145,7 @@ is to use WIN32_FIND_DATA
 	#include <sys/stat.h>
 #endif
 
-#if !defined (WIN32) && !defined (MAC)
+#if !defined (_WIN32) && !defined (MAC)
 /*
  * These hide in mysterious places on various systems.
  * For now, it seems safest just to declare them explicitly.

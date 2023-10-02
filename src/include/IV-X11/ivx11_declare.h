@@ -1386,7 +1386,7 @@ typedef struct {
 
 _XFUNCPROTOBEGIN
 
-#if defined(WIN32) && !defined(_XLIBINT_)
+#if defined(_WIN32) && !defined(_XLIBINT_)
 #define _Xdebug (*_Xdebug_p)
 #endif
 

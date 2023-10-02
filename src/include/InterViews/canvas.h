@@ -67,7 +67,7 @@ class Raster;
 class Transformer;
 class Window;
 
-#if !defined(WIN32) && !MAC
+#if !defined(_WIN32) && !MAC
 /* anachronism */
 typedef unsigned int CanvasLocation;
 

@@ -64,7 +64,7 @@
 #include <OS/math.h>
 #include <OS/memory.h>
 #include <ctype.h>
-#if !defined(WIN32) && !defined(__MWERKS__)
+#if !defined(_WIN32) && !defined(__MWERKS__)
 #include <memory.h>
 #endif
 #include <stdlib.h>

@@ -26,7 +26,7 @@
  */
 
 #include <OS/memory.h>
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 #define STDC_HEADERS 1
 #else
 #include <unistd.h>

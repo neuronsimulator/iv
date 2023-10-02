@@ -1,7 +1,7 @@
 #ifdef HAVE_CONFIG_H
 #include <../../config.h>
 #endif
-#if !defined(WIN32) && !MAC
+#if !defined(_WIN32) && !MAC
 // the unix version -- see #if defined(WIN32) || MAC below
 /*
  * Copyright (c) 1991 Stanford University
@@ -490,7 +490,7 @@ void FieldEditorAction::cancel(FieldEditor*) { }
 
 #endif
 
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 /*
  * Copyright (c) 1991 Stanford University
  * Copyright (c) 1991 Silicon Graphics, Inc.

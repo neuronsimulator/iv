@@ -64,7 +64,7 @@ static PropertyData kit_props[] = {
     { "*FieldEditor*background", "#b88d8d" },
     { "*FieldEditor*flat", "#b88d8d" },
 
-#if defined(WIN32)
+#if defined(_WIN32)
     { "*MenuBar*font", "*Arial*bold*--14*" },
     { "*MenuItem*font", "*Arial*bold*--14*" },
 #else
@@ -443,7 +443,7 @@ Glyph* SMFKit::pulldown_look() const {
     SMFKitImpl& k = *impl_;
     const LayoutKit& layout = *k.layout_;
     const SMFKitInfo& i = *k.info_;
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 return outset_frame(layout.vbox());
 #else
     return layout.t_margin(
@@ -458,7 +458,7 @@ Glyph* SMFKit::pullright_look() const {
     SMFKitImpl& k = *impl_;
     const LayoutKit& layout = *k.layout_;
     const SMFKitInfo& i = *k.info_;
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
 return outset_frame(layout.vbox());
 #else
     return new Shadow(
@@ -1249,7 +1249,7 @@ void SMFKitRadioFlag::draw(Canvas* c, const Allocation& a) const {
     int* colors = radio_colors[flags(state_)];
     Bevel::diamond(
 	c, i.color(colors[0]), i.color(colors[1]), i.color(colors[2]),
-#if defined(WIN32)
+#if defined(_WIN32)
 	i.thickness()/2, a.left(), a.bottom(), a.right(), a.top()
 #else
 	i.thickness(), a.left(), a.bottom(), a.right(), a.top()

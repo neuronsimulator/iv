@@ -30,10 +30,10 @@
  */
 
 #if MAC
-#define WIN32
+#define _WIN32
 #endif
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <Dispatch/dispatcher.h>
 #include <Dispatch/iocallback.h>
 #endif
@@ -69,7 +69,7 @@ public:
     Coord start_scroll_pointer_;
     Coord cur_scroll_pointer_;
     Coord start_scroll_pos_;
-#ifndef WIN32
+#ifndef _WIN32
     IOHandler* rate_handler_;
     long usec_rate_;
 #endif
@@ -96,7 +96,7 @@ public:
     void half_page_up();
 };
 
-#ifndef WIN32
+#ifndef _WIN32
 declareIOCallback(FileBrowserImpl)
 implementIOCallback(FileBrowserImpl)
 #endif
@@ -144,7 +144,7 @@ FileBrowser::FileBrowser(
     for (FileBrowserKeyInfo* k = &default_key_map[0]; k->key != 0; k++) {
 	fb.key_[k->key] = k->func;
     }
-#ifndef WIN32
+#ifndef _WIN32
     fb.rate_handler_ = new IOCallback(FileBrowserImpl)(
 	impl_, &FileBrowserImpl::rate_scroll_timer
     );
@@ -157,7 +157,7 @@ FileBrowser::FileBrowser(
 }
 
 FileBrowser::~FileBrowser() {
-#ifndef WIN32
+#ifndef _WIN32
     delete impl_->rate_handler_;
 #endif
     delete impl_;
@@ -173,7 +173,7 @@ void FileBrowser::press(const Event& e) {
 	Browser::press(e);
 	break;
 	 case Event::middle:
-#if defined(WIN32)
+#if defined(_WIN32)
 	case Event::right:
 #endif
 	fb.mode_ = FileBrowserImpl::grab_scrolling;
@@ -182,7 +182,7 @@ void FileBrowser::press(const Event& e) {
 	fb.start_scroll_pos_ = fb.box_->cur_lower(Dimension_Y);
 	w->cursor(fb.kit_->hand_cursor());
 	break;
-#if !defined(WIN32)
+#if !defined(_WIN32)
     case Event::right:
 	fb.mode_ = FileBrowserImpl::rate_scrolling;
 	fb.start_scroll_pointer_ = e.pointer_y();
@@ -211,7 +211,7 @@ void FileBrowser::drag(const Event& e) {
 	);
 	break;
     case FileBrowserImpl::rate_scrolling:
-#ifndef WIN32
+#ifndef _WIN32
 	fb.cur_scroll_pointer_ = e.pointer_y();
 	if (fb.cur_scroll_pointer_ > fb.start_scroll_pointer_) {
 	    w->cursor(kit.ufast_cursor());
@@ -241,7 +241,7 @@ void FileBrowser::release(const Event& e) {
 	w->cursor(fb.save_cursor_);
 	break;
     case FileBrowserImpl::rate_scrolling:
-#ifndef WIN32
+#ifndef _WIN32
 	Dispatcher::instance().stopTimer(fb.rate_handler_);
 	w->cursor(fb.save_cursor_);
 #endif
@@ -298,7 +298,7 @@ void FileBrowserImpl::rate_scroll_timer(long, long) {
     box_->scroll_to(
 	Dimension_Y, box_->cur_lower(Dimension_Y) + delta * scale_
     );
-#ifndef WIN32
+#ifndef _WIN32
     Dispatcher::instance().startTimer(0, usec_rate_, rate_handler_);
 #endif
 }

@@ -28,7 +28,7 @@
 /*
  * FileChooser -- select a file
  */
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #endif
 #include <IV-look/choice.h>
@@ -153,7 +153,7 @@ void FileChooserImpl::init(
 	dir_ = Directory::current();
 	/* and what if we can't read the current directory? */
     }
-#ifdef WIN32
+#ifdef _WIN32
 if (dir_ == nil) {
 MessageBox(NULL, "FileChooserImpl::init dir is nil", "Internal error", MB_OK);
 }

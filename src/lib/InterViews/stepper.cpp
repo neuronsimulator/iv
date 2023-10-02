@@ -28,7 +28,7 @@
 /*
  * Stepper -- button with auto-repeat
  */
-#if !defined(WIN32) && !MAC
+#if !defined(_WIN32) && !MAC
 #define UNIX 1
 #endif
 

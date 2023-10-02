@@ -43,7 +43,7 @@ public:
 	 virtual Coord to_coord(PixelCoord, DimensionName) const;
 	 virtual Coord to_pixels_coord(Coord, DimensionName) const;
 
-#if defined(WIN32) || defined(MAC)
+#if defined(_WIN32) || defined(MAC)
 	 virtual void size(Coord width, Coord height);
 	 virtual void psize(PixelCoord width, PixelCoord height);
 
@@ -86,7 +86,7 @@ public:
     virtual void transform(const Transformer&);
     virtual void pop_transform();
 
-#if defined(WIN32) || MAC
+#if defined(_WIN32) || MAC
     virtual void push_clipping(bool all = false);
 #else
     virtual void push_clipping();
