@@ -94,7 +94,7 @@ namespace fs = std::filesystem;
 
 Session* SessionRep::instance_;
 
-int bad_install_ok = 1;
+int bad_install_ok = 0;
 
 const char* SECTION_NAME = "InterViews";
 	// This is the name of the section in the WIN.INI file where the

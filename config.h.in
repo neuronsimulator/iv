@@ -151,7 +151,6 @@
 #if defined(IV_REPLACE_PID_T)
 typedef IV_REPLACE_PID_T pid_t;
 #endif
-typedef @pid_t@ pid_t;
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 #cmakedefine size_t @size_t@
