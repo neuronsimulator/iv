@@ -48,9 +48,7 @@
 #endif
 #undef NULL
 #include <sys/param.h>
-#ifdef HAVE_SYS_SELECT_H //#if defined(AIXV3) || defined(svr4) || defined(AIXV4)
 #include <sys/select.h>
-#endif
 #include <signal.h>
 #include <sys/time.h>
 #include <sys/wait.h>
@@ -59,9 +57,6 @@
 /* no standard place for this */
 
 extern "C" {
-#ifndef HAVE_SYS_SELECT_H // #if !defined(AIXV3) && !defined(SVR4) && !defined(__lucid)
-    extern int select(int, fd_set*, fd_set*, fd_set*, struct timeval*);
-#endif
 #ifdef NEED_GETTIMEOFDAY_PROTOTYPE // #if (defined(__DECCXX) || (defined(__GNUC__) && !defined(SVR4)))
     extern int gettimeofday(struct timeval*, struct timezone*);
 #endif
