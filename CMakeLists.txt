@@ -37,7 +37,7 @@ option(IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS "Remake the X11 dynamic .h files." OFF
 # =============================================================================
 # CMake build settings
 # =============================================================================
-set(allowableBuildTypes Custom Debug Release RelWithDebInfo)
+set(allowableBuildTypes Custom Debug Release RelWithDebInfo Fast FastDebug)
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE
       RelWithDebInfo
