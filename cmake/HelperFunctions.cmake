@@ -57,25 +57,3 @@ function(iv_check_type_exists HEADER TYPE DEFAULT_TYPE VARIABLE)
   endif()
   file(REMOVE "conftest.c")
 endfunction()
-
-# =============================================================================
-# Check return type of signal
-# =============================================================================
-function(iv_check_signal_return_type VARIABLE)
-  # code template to check signal support
-  set(CONFTEST_RETSIGTYPE "
-    #include <sys/types.h>
-    #include <signal.h>
-
-    int main () {
-      return *(signal (0, 0)) (0) == 1;
-    }")
-  file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/conftest.c ${CONFTEST_RETSIGTYPE})
-  try_compile(RESULT_VAR ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/conftest.c)
-  if(${RESULT_VAR})
-    set(${VARIABLE} int PARENT_SCOPE)
-  else()
-    set(${VARIABLE} void PARENT_SCOPE)
-  endif()
-  file(REMOVE "conftest.c")
-endfunction()
