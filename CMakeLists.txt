@@ -75,6 +75,7 @@ include(${IV_PROJECT_SOURCE_DIR}/cmake/PlatformHelper.cmake)
 include(RpathHelper)
 include(CheckIncludeFiles)
 include(CheckFunctionExists)
+include(FetchContent)
 
 # =============================================================================
 # Find dependencies
@@ -104,6 +105,13 @@ if (IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS)
     message(FATAL_ERROR "Cannot IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS without X11 installed")
   endif()
 endif()
+
+FetchContent_Declare(
+  libtiff
+  GIT_REPOSITORY https://gitlab.com/libtiff/libtiff.git
+  GIT_TAG        4ff9b5bd573c1481a26f1f96fd51817c0b719371 # master Jun10 2024
+)
+FetchContent_MakeAvailable(libtiff)
 
 # =============================================================================
 # Check existance of various headers, functions and directories
