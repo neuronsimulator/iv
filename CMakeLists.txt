@@ -106,10 +106,19 @@ if (IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS)
   endif()
 endif()
 
+# Old TIFF folder has compile time bugs. Use external supported version.
+#  But first set some cmake options so it doesn't require extra libraries.
+set(webp OFF CACHE INTERNAL "")
+set(jpeg OFF CACHE INTERNAL "")
+set(lzma OFF CACHE INTERNAL "")
+set(zstd OFF CACHE INTERNAL "")
+set(zlib OFF CACHE INTERNAL "")
+
 FetchContent_Declare(
   libtiff
   GIT_REPOSITORY https://gitlab.com/libtiff/libtiff.git
   GIT_TAG        4ff9b5bd573c1481a26f1f96fd51817c0b719371 # master Jun10 2024
+  GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(libtiff)
 

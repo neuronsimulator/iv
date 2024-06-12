@@ -335,11 +335,11 @@ if (IV_ENABLE_X11_DYNAMIC)
 else()
     set(LIBTIFF ${FETCHCONTENT_BASE_DIR}/libtiff-build/libtiff/libtiff.a)
     set(TIFFLIB_DEPS
-        ${WebP_LIBRARY_RELEASE}
-        ${JPEG_LIBRARY_RELEASE}
-        ${ZSTD_LIBRARY_RELEASE}
-        ${LIBLZMA_LIBRARY_RELEASE}
-        ${ZLIB_LIBRARY_RELEASE}
+#        ${WebP_LIBRARY_RELEASE}
+#        ${JPEG_LIBRARY_RELEASE}
+#        ${ZSTD_LIBRARY_RELEASE}
+#        ${LIBLZMA_LIBRARY_RELEASE}
+#        ${ZLIB_LIBRARY_RELEASE}
        )
     target_link_libraries(interviews ${LIBTIFF} ${TIFFLIB_DEPS} ${X11_LIBRARIES})
 endif()
