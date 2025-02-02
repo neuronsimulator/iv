@@ -58,7 +58,7 @@ static	float *refBlackWhite;
 static	u_long **BWmap;
 static	u_long **PALmap;
 
-static	int gt();
+static	int gt(TIFF*, int, int, u_long*);
 static int makebwmap(RGBvalue *Map);
 static int makecmap(u_short *rmap, ushort *gmap, ushort *bmap);
 
@@ -135,11 +135,11 @@ checkcmap(n, r, g, b)
 	return (8);
 }
 
-static	int gtTileContig();
-static	int gtTileSeparate();
-static	int gtStripContig();
-static	int gtStripSeparate();
-static	void initYCbCrConversion();
+static	int gtTileContig(TIFF*, u_long*, RGBvalue*, u_long, u_long);
+static	int gtTileSeparate(TIFF*, u_long*, RGBvalue*, u_long, u_long);
+static	int gtStripContig(TIFF*, u_long*, RGBvalue*, u_long, u_long);
+static	int gtStripSeparate(TIFF*, u_long*, RGBvalue*, u_long, u_long);
+static	void initYCbCrConversion(void);
 
 static
 int gt(tif, w, h, raster)
@@ -1000,7 +1000,7 @@ static	float D1, D2;
 static	float D3, D4;
 
 static void
-initYCbCrConversion()
+initYCbCrConversion(void)
 {
 	D1 = 2 - 2*LumaRed;
 	D2 = D1*LumaRed / LumaGreen;
