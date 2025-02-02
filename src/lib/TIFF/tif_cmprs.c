@@ -83,11 +83,7 @@ extern	int TIFFInitJPEG();
 struct cscheme {
 	char*	name;
 	int	scheme;
-#if USE_PROTOTYPES
 	int	(*init)(TIFF*);
-#else
-	int	(*init)();
-#endif
 };
 static const struct cscheme CompressionSchemes[] = {
     { "Null",		COMPRESSION_NONE,	TIFFInitDumpMode },

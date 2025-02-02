@@ -58,11 +58,7 @@ static	float *refBlackWhite;
 static	u_long **BWmap;
 static	u_long **PALmap;
 
-#if USE_PROTOTYPES
 static	int gt(TIFF*, int, int, u_long*);
-#else
-static	int gt();
-#endif
 static int makebwmap(RGBvalue *Map);
 static int makecmap(u_short *rmap, ushort *gmap, ushort *bmap);
 
@@ -139,17 +135,10 @@ checkcmap(n, r, g, b)
 	return (8);
 }
 
-#if USE_PROTOTYPES
 static	int gtTileContig(TIFF*, u_long*, RGBvalue*, u_long, u_long);
 static	int gtTileSeparate(TIFF*, u_long*, RGBvalue*, u_long, u_long);
 static	int gtStripContig(TIFF*, u_long*, RGBvalue*, u_long, u_long);
 static	int gtStripSeparate(TIFF*, u_long*, RGBvalue*, u_long, u_long);
-#else
-static	int gtTileContig();
-static	int gtTileSeparate();
-static	int gtStripContig();
-static	int gtStripSeparate();
-#endif
 static	void initYCbCrConversion();
 
 static
