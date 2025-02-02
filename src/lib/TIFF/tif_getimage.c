@@ -139,7 +139,7 @@ static	int gtTileContig(TIFF*, u_long*, RGBvalue*, u_long, u_long);
 static	int gtTileSeparate(TIFF*, u_long*, RGBvalue*, u_long, u_long);
 static	int gtStripContig(TIFF*, u_long*, RGBvalue*, u_long, u_long);
 static	int gtStripSeparate(TIFF*, u_long*, RGBvalue*, u_long, u_long);
-static	void initYCbCrConversion();
+static	void initYCbCrConversion(void);
 
 static
 int gt(tif, w, h, raster)
@@ -1000,7 +1000,7 @@ static	float D1, D2;
 static	float D3, D4;
 
 static void
-initYCbCrConversion()
+initYCbCrConversion(void)
 {
 	D1 = 2 - 2*LumaRed;
 	D2 = D1*LumaRed / LumaGreen;
