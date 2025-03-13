@@ -40,9 +40,10 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_print.c,v 1.3 1997/
 
 #ifdef JPEG_SUPPORT
 static
-void JPEGPrintQTable(fd, tab)
-	FILE *fd;
-	u_char tab[64];
+void JPEGPrintQTable(
+	FILE *fd,
+	u_char tab[64]
+)
 {
 	int i, j;
 	char *sep;
@@ -59,9 +60,10 @@ void JPEGPrintQTable(fd, tab)
 }
 
 static
-void JPEGPrintCTable(fd, tab)
-	FILE *fd;
-	u_char *tab;
+void JPEGPrintCTable(
+	FILE *fd,
+	u_char *tab
+)
 {
 	int i, n, count;
 	char *sep;
@@ -119,10 +121,11 @@ static const char *orientNames[] = {
  * to the specified stdio file stream.
  */
 void
-TIFFPrintDirectory(tif, fd, flags)
-	TIFF *tif;
-	FILE *fd;
-	long flags;
+TIFFPrintDirectory(
+	TIFF *tif,
+	FILE *fd,
+	long flags
+)
 {
 	TIFFDirectory *td;
 	char *sep;

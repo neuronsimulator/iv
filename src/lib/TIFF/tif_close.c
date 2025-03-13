@@ -42,8 +42,9 @@ extern	int TIFFFreeDirectory();
 #endif
 
 void
-TIFFClose(tif)
-	TIFF *tif;
+TIFFClose(
+	TIFF *tif
+)
 {
 	if (tif->tif_mode != O_RDONLY)
 		/*
