@@ -51,8 +51,9 @@ static	int DumpModeEncode(), DumpModeDecode(), DumpModeSeek();
 /*
  * Initialize dump mode.
  */
-int TIFFInitDumpMode(tif)
-	TIFF *tif;
+int TIFFInitDumpMode(
+	TIFF *tif
+)
 {
 	tif->tif_decoderow = DumpModeDecode;
 	tif->tif_decodestrip = DumpModeDecode;
@@ -68,11 +69,12 @@ int TIFFInitDumpMode(tif)
  * Encode a hunk of pixels.
  */
 static int
-DumpModeEncode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+DumpModeEncode(
+	TIFF *tif,
+	u_char *pp,
+	int cc,
+	u_int s
+)
 {
 	/*
 	 * This may be overzealous, but avoids having to
@@ -116,11 +118,12 @@ DumpModeEncode(tif, pp, cc, s)
  * Decode a hunk of pixels.
  */
 static int
-DumpModeDecode(tif, buf, cc, s)
-	TIFF *tif;
-	u_char *buf;
-	int cc;
-	u_int s;
+DumpModeDecode(
+	TIFF *tif,
+	u_char *buf,
+	int cc,
+	u_int s
+)
 {
 	if (tif->tif_rawcc < cc) {
 		TIFFError(tif->tif_name,
@@ -155,9 +158,10 @@ DumpModeDecode(tif, buf, cc, s)
  * Seek forwards nrows in the current strip.
  */
 static int
-DumpModeSeek(tif, nrows)
-	TIFF *tif;
-	int nrows;
+DumpModeSeek(
+	TIFF *tif,
+	int nrows
+)
 {
 	tif->tif_rawcp += nrows * tif->tif_scanlinesize;
 	tif->tif_rawcc -= nrows * tif->tif_scanlinesize;

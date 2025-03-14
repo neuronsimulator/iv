@@ -51,8 +51,9 @@ static	int PackBitsEncode(), PackBitsEncodeChunk();
 static	int PackBitsDecode();
 #endif
 
-int TIFFInitPackBits(tif)
-	TIFF *tif;
+int TIFFInitPackBits(
+	TIFF *tif
+)
 {
 	tif->tif_decoderow = PackBitsDecode;
 	tif->tif_decodestrip = PackBitsDecode;
@@ -65,8 +66,9 @@ int TIFFInitPackBits(tif)
 }
 
 static int
-PackBitsPreEncode(tif)
-	TIFF *tif;
+PackBitsPreEncode(
+	TIFF *tif
+)
 {
 	/*
 	 * Calculate the scanline/tile-width size in bytes.
@@ -86,11 +88,12 @@ PackBitsPreEncode(tif)
  * when it was encoded by strips.
  */
 static int
-PackBitsEncodeChunk(tif, bp, cc, s)
-	TIFF *tif;
-	u_char *bp;
-	int cc;
-	u_int s;
+PackBitsEncodeChunk(
+	TIFF *tif,
+	u_char *bp,
+	int cc,
+	u_int s
+)
 {
 	int rowsize = (int) ((long)tif->tif_data);
 
@@ -108,11 +111,12 @@ PackBitsEncodeChunk(tif, bp, cc, s)
  * Encode a run of pixels.
  */
 static int
-PackBitsEncode(tif, bp, cc, s)
-	TIFF *tif;
-	u_char *bp;
-	int cc;
-	u_int s;
+PackBitsEncode(
+	TIFF *tif,
+	u_char *bp,
+	int cc,
+	u_int s
+)
 {
 	char *op, *lastliteral;
 	int n, b;
@@ -231,11 +235,12 @@ PackBitsEncode(tif, bp, cc, s)
 }
 
 static int
-PackBitsDecode(tif, op, occ, s)
-	TIFF *tif;
-	u_char *op;
-	int occ;
-	u_int s;
+PackBitsDecode(
+	TIFF *tif,
+	u_char *op,
+	int occ,
+	u_int s
+)
 {
 	char *bp;
 	int n, b;

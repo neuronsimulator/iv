@@ -112,8 +112,9 @@ static const struct cscheme CompressionSchemes[] = {
 #define	NSCHEMES (sizeof (CompressionSchemes) / sizeof (CompressionSchemes[0]))
 
 static struct cscheme const *
-findScheme(scheme)
-	int scheme;
+findScheme(
+	int scheme
+)
 {
 	struct cscheme const *c;
 
@@ -124,9 +125,10 @@ findScheme(scheme)
 }
 
 static int
-TIFFNoEncode(tif, method)
-	TIFF *tif;
-	char *method;
+TIFFNoEncode(
+	TIFF *tif,
+	char *method
+)
 {
 	struct cscheme const *c = findScheme(tif->tif_dir.td_compression);
 	TIFFError(tif->tif_name,
@@ -135,39 +137,43 @@ TIFFNoEncode(tif, method)
 }
 
 int
-TIFFNoRowEncode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoRowEncode(
+	TIFF *tif,
+	u_char *pp,
+	int cc,
+	u_int s
+)
 {
 	return (TIFFNoEncode(tif, "scanline"));
 }
 
 int
-TIFFNoStripEncode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoStripEncode(
+	TIFF *tif,
+	u_char *pp,
+	int cc,
+	u_int s
+)
 {
 	return (TIFFNoEncode(tif, "strip"));
 }
 
 int
-TIFFNoTileEncode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoTileEncode(
+	TIFF *tif,
+	u_char *pp,
+	int cc,
+	u_int s
+)
 {
 	return (TIFFNoEncode(tif, "tile"));
 }
 
 int
-TIFFNoDecode(tif, method)
-	TIFF *tif;
-	char *method;
+TIFFNoDecode(
+	TIFF *tif,
+	char *method
+)
 {
 	struct cscheme const *c = findScheme(tif->tif_dir.td_compression);
 	TIFFError(tif->tif_name,
@@ -176,38 +182,42 @@ TIFFNoDecode(tif, method)
 }
 
 int
-TIFFNoRowDecode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoRowDecode(
+	TIFF *tif,
+	u_char *pp,
+	int cc,
+	u_int s
+)
 {
 	return (TIFFNoDecode(tif, "scanline"));
 }
 
 int
-TIFFNoStripDecode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoStripDecode(
+	TIFF *tif,
+	u_char *pp,
+	int cc,
+	u_int s
+)
 {
 	return (TIFFNoDecode(tif, "strip"));
 }
 
 int
-TIFFNoTileDecode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoTileDecode(
+	TIFF *tif,
+	u_char *pp,
+	int cc,
+	u_int s
+)
 {
 	return (TIFFNoDecode(tif, "tile"));
 }
 
-int TIFFSetCompressionScheme(tif, scheme)
-	TIFF *tif;
-	int scheme;
+int TIFFSetCompressionScheme(
+	TIFF *tif,
+	int scheme
+)
 {
 	struct cscheme const *c = findScheme(scheme);
 

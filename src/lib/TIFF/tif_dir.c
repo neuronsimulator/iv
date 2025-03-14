@@ -163,10 +163,11 @@ void DECLARE3(setJPEGCTable, u_char***, cpp, u_char**, cp, int, nc)
 #endif
 
 static
-int TIFFSetField1(tif, tag, ap)
-	TIFF *tif;
-	int tag;
-	va_list ap;
+int TIFFSetField1(
+	TIFF *tif,
+	int tag,
+	va_list ap
+)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	int i, status = 1;
@@ -478,9 +479,10 @@ badvalue:
  * on the format of the data that is written.
  */
 static
-int OkToChangeTag(tif, tag)
-	TIFF *tif;
-	int tag;
+int OkToChangeTag(
+	TIFF *tif,
+	int tag
+)
 {
 	if (tag != TIFFTAG_IMAGELENGTH &&
 	    (tif->tif_flags & TIFF_BEENWRITING)) {
@@ -531,10 +533,11 @@ int DECLARE2V(TIFFSetField, TIFF*, tif, int, tag)
  * for building higher-level interfaces on
  * top of the library.
  */
-int TIFFVSetField(tif, tag, ap)
-	TIFF *tif;
-	int tag;
-	va_list ap;
+int TIFFVSetField(
+	TIFF *tif,
+	int tag,
+	va_list ap
+)
 {
 	int status = 0;
 
@@ -550,10 +553,11 @@ int TIFFVSetField(tif, tag, ap)
 }
 
 static
-void TIFFGetField1(td, tag, ap)
-	TIFFDirectory *td;
-	int tag;
-	va_list ap;
+void TIFFGetField1(
+	TIFFDirectory *td,
+	int tag,
+	va_list ap
+)
 {
 
 	switch (tag) {
@@ -806,10 +810,11 @@ int DECLARE2V(TIFFGetField, TIFF*, tif, int, tag)
  * for building higher-level interfaces on
  * top of the library.
  */
-int TIFFVGetField(tif, tag, ap)
-	TIFF *tif;
-	int tag;
-	va_list ap;
+int TIFFVGetField(
+	TIFF *tif,
+	int tag,
+	va_list ap
+)
 {
 	TIFFFieldInfo const *fip = TIFFFindFieldInfo(tag, TIFF_ANY);
 
@@ -847,8 +852,9 @@ void DECLARE2V(_TIFFgetfield, TIFFDirectory*, td, int, tag)
 /*
  * Release storage associated with a directory.
  */
-void TIFFFreeDirectory(tif)
-	TIFF *tif;
+void TIFFFreeDirectory(
+	TIFF *tif
+)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 
@@ -893,8 +899,9 @@ void TIFFFreeDirectory(tif)
 /*
  * Setup a default directory structure.
  */
-int TIFFDefaultDirectory(tif)
-	TIFF *tif;
+int TIFFDefaultDirectory(
+	TIFF *tif
+)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 
@@ -937,9 +944,10 @@ int TIFFDefaultDirectory(tif)
  * Set the n-th directory as the current directory.
  * NB: Directories are numbered starting at 0.
  */
-int TIFFSetDirectory(tif, dirn)
-	TIFF *tif;
-	int dirn;
+int TIFFSetDirectory(
+	TIFF *tif,
+	int dirn
+)
 {
 	static char module[] = "TIFFSetDirectory";
 	u_short dircount;

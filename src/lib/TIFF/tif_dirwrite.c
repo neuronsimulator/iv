@@ -113,8 +113,9 @@ static	long dataoff;
  * handle overwriting a directory with auxiliary
  * storage that's been changed.
  */
-int TIFFWriteDirectory(tif)
-	TIFF *tif;
+int TIFFWriteDirectory(
+	TIFF *tif
+)
 {
 	short dircount, tag;
 	int nfields, dirsize;
@@ -743,10 +744,11 @@ int DECLARE2(TIFFWriteTransferFunction, TIFF*, tif, TIFFDirEntry*, dir)
  * Write a contiguous directory item.
  */
 static
-int TIFFWriteData(tif, dir, cp)
-	TIFF *tif;
-	TIFFDirEntry *dir;
-	char *cp;
+int TIFFWriteData(
+	TIFF *tif,
+	TIFFDirEntry *dir,
+	char *cp
+)
 {
 	int cc;
 
@@ -767,8 +769,9 @@ int TIFFWriteData(tif, dir, cp)
  * directory chain for the file.
  */
 static
-int TIFFLinkDirectory(tif)
-	TIFF *tif;
+int TIFFLinkDirectory(
+	TIFF *tif
+)
 {
 	static char module[] = "TIFFLinkDirectory";
 	u_short dircount;

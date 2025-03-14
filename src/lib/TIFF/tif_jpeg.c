@@ -36,8 +36,9 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_jpeg.c,v 1.2 1997/0
  */
 #include "tiffioP.h"
 
-int TIFFInitJPEG(tif)
-	TIFF *tif;
+int TIFFInitJPEG(
+	TIFF *tif
+)
 {
 	return (1);
 }

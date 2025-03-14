@@ -142,8 +142,10 @@ DECLARE2(getMode, char*, mode, char*, module)
  * Open a TIFF file for read/writing.
  */
 TIFF *
-TIFFOpen(name, mode)
-	char *name, *mode;
+TIFFOpen(
+	char *name,
+    char *mode
+)
 {
 	static char module[] = "TIFFOpen";
 	int m, fd;
@@ -163,9 +165,11 @@ TIFFOpen(name, mode)
  * Open a TIFF file descriptor for read/writing.
  */
 TIFF *
-TIFFFdOpen(fd, name, mode)
-	int fd;
-	char *name, *mode;
+TIFFFdOpen(
+	int fd,
+	char *name,
+    char *mode
+)
 {
 	static char module[] = "TIFFFdOpen";
 	TIFF *tif;
@@ -298,8 +302,9 @@ bad2:
 	return ((TIFF *)0);
 }
 
-int TIFFScanlineSize(tif)
-	TIFF *tif;
+int TIFFScanlineSize(
+	TIFF *tif
+)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	long scanline;
@@ -318,8 +323,9 @@ int TIFFScanlineSize(tif)
  * Return open file's name.
  */
 char *
-TIFFFileName(tif)
-	TIFF *tif;
+TIFFFileName(
+	TIFF *tif
+)
 {
 	return (tif->tif_name);
 }
@@ -328,8 +334,9 @@ TIFFFileName(tif)
  * Return open file's I/O descriptor.
  */
 int
-TIFFFileno(tif)
-	TIFF *tif;
+TIFFFileno(
+	TIFF *tif
+)
 {
 	return (tif->tif_fd);
 }
@@ -338,8 +345,9 @@ TIFFFileno(tif)
  * Return read/write mode.
  */
 int
-TIFFGetMode(tif)
-	TIFF *tif;
+TIFFGetMode(
+	TIFF *tif
+)
 {
 	return (tif->tif_mode);
 }
@@ -349,8 +357,9 @@ TIFFGetMode(tif)
  * tiles; zero if organized as strips.
  */
 int
-TIFFIsTiled(tif)
-	TIFF *tif;
+TIFFIsTiled(
+	TIFF *tif
+)
 {
 	return (isTiled(tif));
 }
@@ -359,8 +368,9 @@ TIFFIsTiled(tif)
  * Return current row being read/written.
  */
 long
-TIFFCurrentRow(tif)
-	TIFF *tif;
+TIFFCurrentRow(
+	TIFF *tif
+)
 {
 	return (tif->tif_row);
 }
@@ -369,8 +379,9 @@ TIFFCurrentRow(tif)
  * Return index of the current directory.
  */
 int
-TIFFCurrentDirectory(tif)
-	TIFF *tif;
+TIFFCurrentDirectory(
+	TIFF *tif
+)
 {
 	return (tif->tif_curdir);
 }
@@ -379,8 +390,9 @@ TIFFCurrentDirectory(tif)
  * Return current strip.
  */
 int
-TIFFCurrentStrip(tif)
-	TIFF *tif;
+TIFFCurrentStrip(
+	TIFF *tif
+)
 {
 	return (tif->tif_curstrip);
 }
@@ -389,8 +401,9 @@ TIFFCurrentStrip(tif)
  * Return current tile.
  */
 int
-TIFFCurrentTile(tif)
-	TIFF *tif;
+TIFFCurrentTile(
+	TIFF *tif
+)
 {
 	return (tif->tif_curtile);
 }
