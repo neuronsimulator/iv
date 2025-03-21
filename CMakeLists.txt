@@ -60,9 +60,17 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "CYGWIN")
   set(CYGWIN 1)
 endif()
 
-# set up libdir
-if(NOT DEFINED LIB_INSTALL_DIR)
-    set(LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+# set up installation dirs
+if(NOT DEFINED IV_LIB_INSTALL_DIR)
+    set(IV_LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+endif()
+
+if(NOT DEFINED IV_HEADERS_INSTALL_DIR)
+    set(IV_HEADERS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include)
+endif()
+
+if(NOT DEFINED IV_BIN_INSTALL_DIR)
+    set(IV_BIN_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/bin)
 endif()
 
 # =============================================================================
@@ -165,10 +173,10 @@ add_subdirectory(src/bin)
 # =============================================================================
 # Install binaries and headers
 # =============================================================================
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION "${IV_HEADERS_INSTALL_DIR}")
 if(NOT IV_AS_SUBPROJECT)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/iv-config.cmake DESTINATION ${LIB_INSTALL_DIR}/cmake/iv)
-    install(EXPORT iv DESTINATION ${LIB_INSTALL_DIR}/cmake/iv)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/iv-config.cmake DESTINATION ${IV_LIB_INSTALL_DIR}/cmake/iv)
+    install(EXPORT iv DESTINATION ${IV_LIB_INSTALL_DIR}/cmake/iv)
 endif()
 
 # =============================================================================
