@@ -14,7 +14,7 @@ endif()
 set(IDEMO_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/idemo/main.cpp ${_ivx11})
 add_executable(idemo ${IDEMO_SOURCE_FILES})
 target_link_libraries(idemo interviews ${X11_LIBRARIES})
-install(TARGETS idemo DESTINATION bin)
+install(TARGETS idemo DESTINATION ${IV_BIN_INSTALL_DIR}/bin)
 
 # =============================================================================
 # iclass
@@ -66,6 +66,6 @@ endif()
 # Install various targets
 # =============================================================================
 if(NOT IV_WINDOWS_BUILD)
-  install(TARGETS iclass DESTINATION bin)
-  install(TARGETS idraw DESTINATION bin)
+    install(TARGETS iclass DESTINATION ${IV_BIN_INSTALL_DIR}/bin)
+    install(TARGETS idraw DESTINATION ${IV_BIN_INSTALL_DIR}/bin)
 endif()
