@@ -352,6 +352,9 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c
 add_executable(mkg3states ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/mkg3states.c)
 target_include_directories(mkg3states PUBLIC ${IV_PROJECT_SOURCE_DIR}/src/include/TIFF)
 
+# if crosscompiling on APPLE append build arch if needed
+nrn_buildarch_executable(mkg3states)
+
 # =============================================================================
 # interviews IV library
 # =============================================================================
