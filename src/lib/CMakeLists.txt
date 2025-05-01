@@ -438,9 +438,9 @@ if (IV_ENABLE_X11_DYNAMIC)
     set_property(TARGET ivx11dynam PROPERTY POSITION_INDEPENDENT_CODE ON)
     install(TARGETS ivx11dynam
         EXPORT iv
-        DESTINATION lib
+        DESTINATION ${IV_LIB_INSTALL_DIR}
         INCLUDES
-        DESTINATION $<INSTALL_INTERFACE:include>)
+        DESTINATION ${IV_HEADERS_INSTALL_DIR})
 endif()
 
 # =============================================================================
@@ -491,23 +491,23 @@ endif()
 # =============================================================================
 # Install targets
 # =============================================================================
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/app-defaults/ DESTINATION share/app-defaults)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/app-defaults/ DESTINATION ${IV_LIB_INSTALL_DIR}/share/app-defaults)
 
 if(NOT IV_WINDOWS_BUILD)
   install(TARGETS interviews
           EXPORT iv
-          DESTINATION ${LIB_INSTALL_DIR}
+          DESTINATION ${IV_LIB_INSTALL_DIR}
           INCLUDES
-          DESTINATION $<INSTALL_INTERFACE:include>)
+          DESTINATION ${IV_HEADERS_INSTALL_DIR})
   install(TARGETS unidraw
           EXPORT iv
-          DESTINATION ${LIB_INSTALL_DIR}
+          DESTINATION ${IV_LIB_INSTALL_DIR}
           INCLUDES
-          DESTINATION $<INSTALL_INTERFACE:include>)
+          DESTINATION ${IV_HEADERS_INSTALL_DIR})
 else()
   install(TARGETS interviews
           EXPORT iv
-          DESTINATION lib
+          DESTINATION ${IV_LIB_INSTALL_DIR}
           INCLUDES
-          DESTINATION $<INSTALL_INTERFACE:include>)
+          DESTINATION ${IV_HEADERS_INSTALL_DIR})
 endif()
