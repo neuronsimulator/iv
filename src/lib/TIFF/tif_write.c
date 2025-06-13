@@ -55,10 +55,12 @@ static	int TIFFAppendToStrip();
 #endif
 
 /*VARARGS3*/
-int TIFFWriteScanline(tif, buf, row, sample)
-	TIFF *tif;
-	u_char *buf;
-	u_int row, sample;
+int TIFFWriteScanline(
+	TIFF *tif,
+	u_char *buf,
+	u_int row,
+    u_int sample
+)
 {
 	static char module[] = "TIFFWriteScanline";
 	TIFFDirectory *td;
@@ -178,11 +180,12 @@ int TIFFWriteScanline(tif, buf, row, sample)
  *     interface does not support automatically growing
  *     the image on each write (as TIFFWriteScanline does).
  */
-int TIFFWriteEncodedStrip(tif, strip, data, cc)
-	TIFF *tif;
-	u_int strip;
-	u_char *data;
-	u_int cc;
+int TIFFWriteEncodedStrip(
+	TIFF *tif,
+	u_int strip,
+	u_char *data,
+	u_int cc
+)
 {
 	static char module[] = "TIFFWriteEncodedStrip";
 	TIFFDirectory *td = &tif->tif_dir;
@@ -233,11 +236,12 @@ int TIFFWriteEncodedStrip(tif, strip, data, cc)
  *     interface does not support automatically growing
  *     the image on each write (as TIFFWriteScanline does).
  */
-int TIFFWriteRawStrip(tif, strip, data, cc)
-	TIFF *tif;
-	u_int strip;
-	u_char *data;
-	u_int cc;
+int TIFFWriteRawStrip(
+	TIFF *tif,
+	u_int strip,
+	u_char *data,
+	u_int cc
+)
 {
 	static char module[] = "TIFFWriteRawStrip";
 
@@ -255,11 +259,14 @@ int TIFFWriteRawStrip(tif, strip, data, cc)
  * Write and compress a tile of data.  The
  * tile is selected by the (x,y,z,s) coordinates.
  */
-int TIFFWriteTile(tif, buf, x, y, z, s)
-	TIFF *tif;
-	u_char *buf;
-	u_long x, y, z;
-	u_int s;
+int TIFFWriteTile(
+	TIFF *tif,
+	u_char *buf,
+	u_long x,
+    u_long y,
+    u_long z,
+	u_int s
+)
 {
 	if (!TIFFCheckTile(tif, x, y, z, s))
 		return (-1);
@@ -285,11 +292,12 @@ int TIFFWriteTile(tif, buf, x, y, z, s)
  *     interface does not support automatically growing
  *     the image on each write (as TIFFWriteScanline does).
  */
-int TIFFWriteEncodedTile(tif, tile, data, cc)
-	TIFF *tif;
-	u_int tile;
-	u_char *data;
-	u_int cc;
+int TIFFWriteEncodedTile(
+	TIFF *tif,
+	u_int tile,
+	u_char *data,
+	u_int cc
+)
 {
 	static char module[] = "TIFFWriteEncodedTile";
 	TIFFDirectory *td;
@@ -356,11 +364,12 @@ int TIFFWriteEncodedTile(tif, tile, data, cc)
  *     interface does not support automatically growing
  *     the image on each write (as TIFFWriteScanline does).
  */
-int TIFFWriteRawTile(tif, tile, data, cc)
-	TIFF *tif;
-	u_int tile;
-	u_char *data;
-	u_int cc;
+int TIFFWriteRawTile(
+	TIFF *tif,
+	u_int tile,
+	u_char *data,
+	u_int cc
+)
 {
 	static char module[] = "TIFFWriteRawTile";
 
@@ -375,8 +384,9 @@ int TIFFWriteRawTile(tif, tile, data, cc)
 }
 
 static
-int TIFFSetupStrips(tif)
-	TIFF *tif;
+int TIFFSetupStrips(
+	TIFF *tif
+)
 {
 #define	isUnspecified(td, v) \
     (td->v == 0xffffffff || (td)->td_imagelength == 0)
@@ -416,10 +426,11 @@ int TIFFSetupStrips(tif)
  * that important information is not changed.
  */
 static
-int TIFFWriteCheck(tif, tiles, module)
-	TIFF *tif;
-	int tiles;
-	char module[];
+int TIFFWriteCheck(
+	TIFF *tif,
+	int tiles,
+	char module[]
+)
 {
 	if (tif->tif_mode == O_RDONLY) {
 		TIFFError(module, "%s: File not open for writing",
@@ -471,9 +482,10 @@ int TIFFWriteCheck(tif, tiles, module)
  * Setup the raw data buffer used for encoding.
  */
 static
-int TIFFBufferSetup(tif, module)
-	TIFF *tif;
-	char module[];
+int TIFFBufferSetup(
+	TIFF *tif,
+	char module[]
+)
 {
 	int size;
 
@@ -502,10 +514,11 @@ int TIFFBufferSetup(tif, module)
  * Grow the strip data structures by delta strips.
  */
 static
-int TIFFGrowStrips(tif, delta, module)
-	TIFF *tif;
-	int delta;
-	char module[];
+int TIFFGrowStrips(
+	TIFF *tif,
+	int delta,
+	char module[]
+)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 
@@ -533,11 +546,12 @@ int TIFFGrowStrips(tif, delta, module)
  *     file (i.e. that strips do not overlap).
  */
 static
-int TIFFAppendToStrip(tif, strip, data, cc)
-	TIFF *tif;
-	u_int strip;
-	u_char *data;
-	u_int cc;
+int TIFFAppendToStrip(
+	TIFF *tif,
+	u_int strip,
+	u_char *data,
+	u_int cc
+)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	static char module[] = "TIFFAppendToStrip";
@@ -573,8 +587,9 @@ int TIFFAppendToStrip(tif, strip, data, cc)
  * called by ``encodestrip routines'' w/o concern
  * for infinite recursion.
  */
-int TIFFFlushData1(tif)
-	TIFF *tif;
+int TIFFFlushData1(
+	TIFF *tif
+)
 {
 	if (tif->tif_rawcc > 0) {
 		if (tif->tif_dir.td_fillorder != tif->tif_fillorder &&

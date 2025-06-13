@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 project(INTERVIEWS C CXX)
 
 # =============================================================================
@@ -37,7 +37,7 @@ option(IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS "Remake the X11 dynamic .h files." OFF
 # =============================================================================
 # CMake build settings
 # =============================================================================
-set(allowableBuildTypes Custom Debug Release RelWithDebInfo)
+set(allowableBuildTypes Custom Debug Release RelWithDebInfo Fast FastDebug)
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE
       RelWithDebInfo
@@ -60,9 +60,17 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "CYGWIN")
   set(CYGWIN 1)
 endif()
 
-# set up libdir
-if(NOT DEFINED LIB_INSTALL_DIR)
-    set(LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+# set up installation dirs
+if(NOT DEFINED IV_LIB_INSTALL_DIR)
+    set(IV_LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+endif()
+
+if(NOT DEFINED IV_HEADERS_INSTALL_DIR)
+    set(IV_HEADERS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include)
+endif()
+
+if(NOT DEFINED IV_BIN_INSTALL_DIR)
+    set(IV_BIN_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/bin)
 endif()
 
 # =============================================================================
@@ -110,37 +118,18 @@ endif()
 # =============================================================================
 set(CMAKE_REQUIRED_QUIET TRUE)
 message(STATUS "Checking for include files")
-check_include_files(fcntl.h HAVE_FCNTL_H)
-check_include_files(malloc.h HAVE_MALLOC_H)
-check_include_files(memory.h HAVE_MEMORY_H)
 check_include_files(osfcn.h HAVE_OSFCN_H)
-check_include_files(socket.h HAVE_SOCKET_H)
-check_include_files(stdint.h HAVE_STDINT_H)
 check_include_files(stdlib.h HAVE_STDLIB_H)
 check_include_files(string.h HAVE_STRING_H)
 check_include_files(strings.h HAVE_STRINGS_H)
 check_include_files(stropts.h HAVE_STROPTS_H)
-check_include_files(stream.h HAVE_STREAM_H)
 check_include_files(sys/conf.h HAVE_SYS_CONF_H)
-check_include_files(sys/file.h HAVE_SYS_FILE_H)
-check_include_files(sys/ioctl.h HAVE_SYS_IOCTL_H)
 check_include_files(sys/mman.h HAVE_SYS_MMAN_H)
-check_include_files(sys/param.h HAVE_SYS_PARAM_H)
 check_include_files(sys/stat.h HAVE_SYS_STAT_H)
-check_include_files(sys/time.h HAVE_SYS_TIME_H)
 check_include_files(unistd.h HAVE_UNISTD_H)
 
 message(STATUS "Checking for functions")
-check_function_exists(getcwd HAVE_GETCWD)
-check_function_exists(gettimeofday HAVE_GETTIMEOFDAY)
-check_function_exists(mmap HAVE_MMAP)
 check_function_exists(sigprocmask HAVE_POSIX_SIGNALS)
-check_function_exists(socket HAVE_SOCKET)
-check_function_exists(strcspn HAVE_STRCSPN)
-check_function_exists(strerror HAVE_STRERROR)
-check_function_exists(strtod HAVE_STRTOD)
-check_function_exists(strtol HAVE_STRTOL)
-check_function_exists(uname HAVE_UNAME)
 
 message(STATUS "Checking for include directories")
 iv_check_dir_exists(dirent.h HAVE_DIRENT_H)
@@ -168,11 +157,6 @@ else()
 endif()
 
 # =============================================================================
-# Set return type of signal in RETSIGTYPE
-# =============================================================================
-iv_check_signal_return_type(RETSIGTYPE)
-
-# =============================================================================
 # Generate config.h after all checks
 # =============================================================================
 add_definitions(-DHAVE_CONFIG_H)
@@ -189,10 +173,10 @@ add_subdirectory(src/bin)
 # =============================================================================
 # Install binaries and headers
 # =============================================================================
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION "${IV_HEADERS_INSTALL_DIR}")
 if(NOT IV_AS_SUBPROJECT)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/iv-config.cmake DESTINATION ${LIB_INSTALL_DIR}/cmake/iv)
-    install(EXPORT iv DESTINATION ${LIB_INSTALL_DIR}/cmake/iv)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/iv-config.cmake DESTINATION ${IV_LIB_INSTALL_DIR}/cmake/iv)
+    install(EXPORT iv DESTINATION ${IV_LIB_INSTALL_DIR}/cmake/iv)
 endif()
 
 # =============================================================================

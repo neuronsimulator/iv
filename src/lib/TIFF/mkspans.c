@@ -12,9 +12,10 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/mkspans.c,v 1.2 1997/03
  * runs of zeros and ones in Group 3 Fax encoding.
  */
 
-dumparray(name, runs)
-	char *name;
-	unsigned char runs[256];
+dumparray(
+	char *name,
+	unsigned char runs[256]
+)
 {
 	int i;
 	char *sep;

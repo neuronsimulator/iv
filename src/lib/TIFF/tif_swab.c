@@ -38,8 +38,9 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_swab.c,v 1.2 1997/0
 #include "tiffioP.h"
 
 #ifndef TIFFSwabShort
-int TIFFSwabShort(wp)
-	unsigned short *wp;
+int TIFFSwabShort(
+	unsigned short *wp
+)
 {
 	unsigned char *cp = (unsigned char *)wp;
 	int t;
@@ -50,8 +51,9 @@ int TIFFSwabShort(wp)
 #endif
 
 #ifndef TIFFSwabLong
-int TIFFSwabLong(lp)
-	unsigned long *lp;
+int TIFFSwabLong(
+	unsigned long *lp
+)
 {
 	unsigned char *cp = (unsigned char *)lp;
 	int t;
@@ -63,9 +65,10 @@ int TIFFSwabLong(lp)
 #endif
 
 #ifndef TIFFSwabArrayOfShort
-int TIFFSwabArrayOfShort(wp, n)
-	unsigned short *wp;
-	int n;
+int TIFFSwabArrayOfShort(
+	unsigned short *wp,
+	int n
+)
 {
 	unsigned char *cp;
 	int t;
@@ -81,9 +84,10 @@ int TIFFSwabArrayOfShort(wp, n)
 #endif
 
 #ifndef TIFFSwabArrayOfLong
-int TIFFSwabArrayOfLong(lp, n)
-	unsigned long *lp;
-	int n;
+int TIFFSwabArrayOfLong(
+	unsigned long *lp,
+	int n
+)
 {
 	unsigned char *cp;
 	int t;
@@ -185,9 +189,10 @@ unsigned char TIFFNoBitRevTable[256] = {
     0xf8, 0xf9, 0xfa, 0xfb, 0xfc, 0xfd, 0xfe, 0xff, 
 };
 
-int TIFFReverseBits(cp, n)
-	unsigned char *cp;
-	int n;
+int TIFFReverseBits(
+	unsigned char *cp,
+	int n
+)
 {
 	for (; n > 8; n -= 8) {
 		cp[0] = TIFFBitRevTable[cp[0]];

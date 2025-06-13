@@ -36,8 +36,9 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_flush.c,v 1.2 1997/
 
 extern	int TIFFFlushData1(TIFF *);
 
-int TIFFFlush(tif)
-	TIFF *tif;
+int TIFFFlush(
+	TIFF *tif
+)
 {
 
 	if (tif->tif_mode != O_RDONLY) {
@@ -53,8 +54,9 @@ int TIFFFlush(tif)
 /*
  * Flush buffered data to the file.
  */
-int TIFFFlushData(tif)
-	TIFF *tif;
+int TIFFFlushData(
+	TIFF *tif
+)
 {
 	if ((tif->tif_flags & TIFF_BEENWRITING) == 0)
 		return (0);

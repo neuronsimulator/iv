@@ -619,16 +619,6 @@ int Dispatcher::fillInReady(
     return rmaskret.numSet() + wmaskret.numSet() + emaskret.numSet();
 }
 
-//#if defined(sgi)
-//void Dispatcher::sigCLD(...) {
-//#else
-//#if defined(AIXV4)
-//void Dispatcher::sigCLD(int) {
-//#else
-//void Dispatcher::sigCLD() {
-//#endif
-//#endif
-
 //
 // From what I can see from other packages that have been ported to a lot
 // of systems, it looks like you can get away with declaring your signal
@@ -637,12 +627,7 @@ int Dispatcher::fillInReady(
 // The actual type could be guessed by autoconf, I suppose, if it's
 // worth it to devise a test.
 //
-RETSIGTYPE
-#if defined(HAVE_BSD_SIGNALS) || defined(HAVE_POSIX_SIGNALS)
-Dispatcher::sigCLD(int)
-#else // When is this used?
-Dispatcher::sigCLD(...)
-#endif
+void Dispatcher::sigCLD(int)
 {
     pid_t pid;
     int status;

@@ -45,10 +45,11 @@ static char rcsid[] = "/local/src/master/iv/src/lib/TIFF/tif_aux.c,v 1.2 1997/03
  *	explcit values so that defaults exist only one
  *	place in the library -- in TIFFDefaultDirectory.
  */
-int TIFFVGetFieldDefaulted(tif, tag, ap)
-	TIFF *tif;
-	int tag;
-	va_list ap;
+int TIFFVGetFieldDefaulted(
+	TIFF *tif,
+	int tag,
+	va_list ap
+)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	int i;
