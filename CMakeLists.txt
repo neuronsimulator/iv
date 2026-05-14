@@ -49,11 +49,15 @@ endif()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
 if(NOT IV_ENABLE_SHARED)
-  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
   set(IV_LIB_TYPE "STATIC")
 else()
   set(IV_LIB_TYPE "SHARED")
 endif()
+
+# Force PIE for all targets.
+# This fixes idraw on Linux wheels while being a no-op (or beneficial) on macOS
+# and completely ignored on Windows.
+set(CMAKE_POSITION_INDEPENDENT_CODE ON CACHE BOOL "Force PIE for InterViews" FORCE)
 
 # CYGWIN macros is used in the code
 if(${CMAKE_SYSTEM_NAME} MATCHES "CYGWIN")
