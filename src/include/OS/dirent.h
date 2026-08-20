@@ -41,10 +41,12 @@
 #include <stdlib.h>
 #else
 #include <io.h>
+#include <stdint.h>
 #if defined(_MSC_VER)
 #define ffblk _finddata_t
 #define findfirst(a,b,c) _findfirst(a,b)
 #define findnext _findnext
+#define findclose _findclose
 #define ff_name name 
 #else
 #include <dir.h>
@@ -67,7 +69,7 @@ struct dirent
 // you're screwed because it's radically different in implementation here!
 typedef struct
 {
-    long srchHandle;			// handle to use
+    intptr_t srchHandle;			// handle to use
 	struct ffblk data;	// data of current file
 	struct dirent conversion;	// data in dirent format (almost anyway)
 	short offs;					// offset from first 

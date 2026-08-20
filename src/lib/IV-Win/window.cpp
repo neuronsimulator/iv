@@ -256,9 +256,9 @@ long MWwindow::WndProc(UINT message, WPARAM wParam, LPARAM lParam)
 // window and destroys it.
 // -----------------------------------------------------------------------
 
-// mingw + launch python needs all windows to be bound from a specific
-// thread.
-#if defined(MINGW)
+// Python-launched NEURON on Windows needs windows bound from a specific
+// thread (the GUI thread). Historically gated on MINGW; MSVC is the same ABI.
+#if defined(WIN32)
 extern "C" {
 int (*iv_bind_enqueue_)(void(*)(void*), void*);
 
@@ -325,7 +325,7 @@ void MWwindow::unbind()
 //		MessageBox(NULL,"MWwindow::unbind has no binding", "zzz", MB_OK);
 		return;
 	}
-#if defined(MINGW)
+#if defined(WIN32)
 	// if not correct thread enqueue and unmap will be called later
 	if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(unbind1, hwnd)) {
 		//printf("MWwindow::unbind defer hwnd=%p\n", hwnd);
@@ -385,7 +385,7 @@ bool MWwindow::map()
 {
 	if (hwnd)
 	{
-#if defined(MINGW)
+#if defined(WIN32)
 		if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(mwmap1, hwnd)) {
 			return 1;
 		}
@@ -401,7 +401,7 @@ void MWwindow::unmap()
 {
 //printf("enter MWwindow::unmap()\n");
 	if (hwnd)
-#if defined(MINGW)
+#if defined(WIN32)
 	// if not correct thread enqueue and unmap will be called later
 	if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(hide1, hwnd)) {
 		//printf("MWwindow::unmap ShowWindow defer hwnd=%p\n", hwnd);
@@ -1340,7 +1340,7 @@ void Window::map()
 	// ---- check to see if we are bound to an MS-Windows window ----
 	if (!bound())
 	{
-#if defined(MINGW)
+#if defined(WIN32)
 		// if not correct thread enqueue and map will be called later
 		if (iv_bind_enqueue_ && (*iv_bind_enqueue_)(wmap1, this)) {
 			return;

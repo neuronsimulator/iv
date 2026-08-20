@@ -153,6 +153,10 @@ set(OS_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/OS/memory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/OS/string.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/OS/ustring.cpp)
+# POSIX dirent is not on MSVC; MinGW uses the system <dirent.h>.
+if(IV_WINDOWS_BUILD AND NOT MINGW)
+    list(APPEND OS_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/OS/dirent.cpp)
+endif()
 
 set(TIFF_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/TIFF/tif_aux.c
