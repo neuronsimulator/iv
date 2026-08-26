@@ -38,11 +38,15 @@ option(IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS "Remake the X11 dynamic .h files." OFF
 # CMake build settings
 # =============================================================================
 set(allowableBuildTypes Custom Debug Release RelWithDebInfo Fast FastDebug)
-if(NOT CMAKE_BUILD_TYPE)
+# Visual Studio / Xcode / Ninja Multi-Config set CMAKE_CONFIGURATION_TYPES and
+# leave CMAKE_BUILD_TYPE empty. That is valid; only a non-empty unknown type is
+# an error. Default when both are unset (Unix single-config). Same rule as
+# NEURON cmake/ReleaseDebugAutoFlags.cmake.
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE
       RelWithDebInfo
       CACHE STRING "Empty or one of ${allowableBuildTypes}" FORCE)
-elseif(NOT CMAKE_BUILD_TYPE IN_LIST allowableBuildTypes)
+elseif(CMAKE_BUILD_TYPE AND NOT CMAKE_BUILD_TYPE IN_LIST allowableBuildTypes)
   message(FATAL_ERROR "Invalid build type: ${CMAKE_BUILD_TYPE} : Must be one of ${allowableBuildTypes}")
 endif()
 
