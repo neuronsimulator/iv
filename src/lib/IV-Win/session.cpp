@@ -255,7 +255,7 @@ Style* s;
 	fclose(f);
     s = new Style(*style_);
 	 load_app_defaults(s, APPDEF_DEFAULT, -5);
-	 load_props(s, props_, -10);
+	 load_props(s, props_, -5);
 	 load_app_defaults(s, classname_, -5);
  }else
 #endif
@@ -340,7 +340,7 @@ String* SessionRep::find_name()
 // -----------------------------------------------------------------------
 void SessionRep::init_display()
 {
-#if defined(CYGWIN) || defined(MINGW)
+#if defined(WIN32) || defined(CYGWIN)
   bad_install_ok = true;	// we're going to be ok with this!
 #endif
 	set_style(nil);
@@ -392,55 +392,166 @@ void SessionRep::bad_arg(const char* fmt, const String& arg)
 // returned, that can be used to locate various pieces of configuration
 // information (such as application defaults).
 //
-// This location is found under MS-Windows using the win.ini file (Uses
-// the Win16 interface so that Win32s works... which doesn't support the
-// registry at this time).
+// Relocatable search, then win.ini [InterViews] location as a last resort
+// (Win16 profile API so Win32s works without the registry).
 // -----------------------------------------------------------------------
+static int iv_file_readable(const char* path)
+{
+	FILE* f = fopen(path, "r");
+	if (f) {
+		fclose(f);
+		return 1;
+	}
+	return 0;
+}
+
+static int iv_dir_exists(const char* path)
+{
+	DIR* dirp = opendir(path);
+	if (dirp) {
+		closedir(dirp);
+		return 1;
+	}
+	return 0;
+}
+
+// True when top is the directory that contains app-defaults/InterViews
+// (cmake/wheel: prefix/lib/share) or the 8.3 setup.exe names.
+static int iv_is_install_root(const char* top)
+{
+	char buf[MAX_PATH];
+	if (snprintf(buf, MAX_PATH, "%s\\%s\\%s", top, APPDEF_DIRECTORY,
+			APPDEF_DEFAULT) >= MAX_PATH) {
+		return 0;
+	}
+	if (iv_file_readable(buf)) {
+		return 1;
+	}
+	if (snprintf(buf, MAX_PATH, "%s\\%s\\%s", top, APPDEF_DIR_ALT,
+			APPDEF_DEFAULT_ALT) >= MAX_PATH) {
+		return 0;
+	}
+	return iv_file_readable(buf);
+}
+
+static int iv_set_install_location(const char* path)
+{
+	char full[MAX_PATH];
+	DWORD n = GetFullPathNameA(path, MAX_PATH, full, NULL);
+	const char* src = full;
+	if (n == 0 || n >= MAX_PATH) {
+		src = path;
+		n = (DWORD)strlen(path);
+		if (n == 0 || n >= MAX_PATH) {
+			return 0;
+		}
+	}
+	INSTALL_LOCATION = new char[n + 1];
+	memcpy(INSTALL_LOCATION, src, n);
+	INSTALL_LOCATION[n] = 0;
+	return 1;
+}
+
+static int iv_try_install_root(const char* path)
+{
+	return (path && path[0] && iv_is_install_root(path)
+		&& iv_set_install_location(path)) ? 1 : 0;
+}
+
+// Unix loads IV_LIBALL/app-defaults (compile-time prefix). Windows is
+// relocatable: same layout as cmake/wheel (prefix/lib/share/app-defaults)
+// and setup.exe (prefix/iv). Walk from this module the way NEURON walks
+// from nrniv.dll (IV is static-linked into that DLL).
+static void iv_walk_module_for_install_location()
+{
+	HMODULE self = NULL;
+	if (!GetModuleHandleExA(
+			GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+				GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+			(LPCSTR)&INSTALL_LOCATION,
+			&self)) {
+		self = GetModuleHandleA(NULL);
+	}
+	char mod[MAX_PATH];
+	DWORD n = GetModuleFileNameA(self, mod, MAX_PATH);
+	if (n == 0 || n >= MAX_PATH) {
+		return;
+	}
+	char* slash = strrchr(mod, '\\');
+	char* slash2 = strrchr(mod, '/');
+	if (slash2 && (!slash || slash2 > slash)) {
+		slash = slash2;
+	}
+	if (!slash) {
+		return;
+	}
+	*slash = 0;
+	for (int i = 0; i < 6; ++i) {
+		char cand[MAX_PATH];
+		if (snprintf(cand, MAX_PATH, "%s\\lib\\share", mod) < MAX_PATH) {
+			if (iv_try_install_root(cand)) {
+				return;
+			}
+		}
+		if (snprintf(cand, MAX_PATH, "%s\\iv", mod) < MAX_PATH &&
+				iv_dir_exists(cand)) {
+			iv_set_install_location(cand);
+			return;
+		}
+		char* p = strrchr(mod, '\\');
+		char* q = strrchr(mod, '/');
+		if (q && (!p || q > p)) {
+			p = q;
+		}
+		if (!p) {
+			break;
+		}
+		*p = 0;
+		if (!mod[0]) {
+			break;
+		}
+	}
+}
+
 const char* Session::installLocation()
 {
 	static int first = 1;
 	if (first && INSTALL_LOCATION == NULL)
 	{
    	first = 0;
-		// ---- get the location of the configuration directory ----
-		const int topLen = 256;
-		char buff[topLen];
+		const int topLen = MAX_PATH;
+		char buff[MAX_PATH];
 		// maybe it hasn't been installed. So try NEURONHOME first
 		// in case, say, we are running from a cd-rom.
 		char* nh = getenv("NEURONHOME");
-		int len = 0;
 		if (nh) {
 			snprintf(buff, topLen, "%s\\iv", nh);
-			DIR* dirp = opendir(buff);
-			if (dirp) {
-				closedir(dirp);
-				len = strlen(buff);
+			if (iv_dir_exists(buff)) {
+				iv_set_install_location(buff);
+			} else {
+				// cmake/wheel: NEURONHOME is prefix/share/nrn;
+				// app-defaults live at prefix/lib/share/app-defaults.
+				snprintf(buff, topLen, "%s\\..\\..\\lib\\share", nh);
+				iv_try_install_root(buff);
 			}
 		}
-		if (len == 0) {
-			len = GetProfileString(SECTION_NAME, LOCATION_KEY, "",
-				buff, topLen);
+		if (INSTALL_LOCATION == NULL) {
+			iv_walk_module_for_install_location();
 		}
-		if (len == 0)
-		{
-			//
-			// The installation directory can't be found... so we bail out
-			// here because all sorts of things won't work when this is the
-			// case.
-			//
-		if (!bad_install_ok) {
+		if (INSTALL_LOCATION == NULL) {
+			int len = GetProfileString(SECTION_NAME, LOCATION_KEY, "",
+				buff, topLen);
+			if (len > 0) {
+				buff[len < topLen ? len : topLen - 1] = 0;
+				iv_set_install_location(buff);
+			}
+		}
+		if (INSTALL_LOCATION == NULL && !bad_install_ok) {
 			snprintf(buff, topLen, "win.ini is missing `%s' in section `%s'", LOCATION_KEY,
 				SECTION_NAME);
 			MessageBox(0, buff, "Invalid Installation",
 				MB_OK | MB_ICONSTOP | MB_TASKMODAL);
 			abort();
-		}
-		}
-		else
-		{
-			INSTALL_LOCATION = new char[len + 1];
-			strncpy(INSTALL_LOCATION, buff, len);
-			INSTALL_LOCATION [len] = 0;
 		}
 	}
 	return INSTALL_LOCATION;
