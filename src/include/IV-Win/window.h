@@ -89,6 +89,8 @@ public:
 	void parentOf(HWND);
 	void styleOf(DWORD);
 	void styleOfEx(DWORD);
+	DWORD styleBits() const;
+	DWORD styleExBits() const;
 	void idOf(int);
 
 	 // ----- window class parameters ----
