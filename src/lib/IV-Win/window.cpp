@@ -342,6 +342,43 @@ void MWwindow::unbind()
 	hwnd = 0;
 }
 
+DWORD MWwindow::styleBits() const
+{
+	if (hwnd)
+		return (DWORD) GetWindowLongPtr(hwnd, GWL_STYLE);
+	if (params)
+		return params->style;
+	return 0;
+}
+
+DWORD MWwindow::styleExBits() const
+{
+	if (hwnd)
+		return (DWORD) GetWindowLongPtr(hwnd, GWL_EXSTYLE);
+	if (params)
+		return params->styleEx;
+	return 0;
+}
+
+// CreateWindow width/height is the outer frame, not the client (XResizeWindow
+// is the client). AdjustWindowRectEx is the documented conversion from the
+// window style. SM_CYFRAME omits SM_CXPADDEDBORDER on Windows 10+, so a
+// guessed caption+2*frame is short and clips the canvas. PE subsystem 6.0
+// sees the true frame; 5.2 is lied to and matched the guess.
+static void iv_win32_nonclient_delta(DWORD style, DWORD exstyle, int& dx, int& dy)
+{
+	RECT r;
+	r.left = r.top = r.right = r.bottom = 0;
+	if (style != 0 && AdjustWindowRectEx(&r, style, FALSE, exstyle))
+	{
+		dx = r.right - r.left;
+		dy = r.bottom - r.top;
+		return;
+	}
+	dx = 2 * GetSystemMetrics(SM_CXFRAME);
+	dy = GetSystemMetrics(SM_CYCAPTION) + (2 * GetSystemMetrics(SM_CYFRAME));
+}
+
 // -----------------------------------------------------------------------
 // Register the MS-Windows window class with Windows.  This is supposed to
 // only be done once, so we first check to see if it exists.
@@ -1545,6 +1582,10 @@ void Window::resize()
 	// ----- determine desired size ----
 	int width = canvas_->pwidth();
 	int height = canvas_->pheight();
+	int dx, dy;
+	iv_win32_nonclient_delta(rep_->styleBits(), rep_->styleExBits(), dx, dy);
+	width += dx;
+	height += dy;
 
 	// ---- resize the window ----
 	MoveWindow(hwnd, curr_pos.left, curr_pos.top, width, height, TRUE);
@@ -1617,20 +1658,22 @@ ManagedWindow::~ManagedWindow()
 //  The ManagedWindow is a window visible the the window management
 //  facilities of the window system.  In MS-Windows these would be
 //  captioned windows.  The size of these windows is different from the
-//  size of the canvas which represents the client area.  We query the
-//  system metrics to determine the size of the borders and caption to
-//  determine the size of the window relative to the canvas.
+//  size of the canvas which represents the client area.  AdjustWindowRectEx
+//  converts the canvas (client) size to the CreateWindow outer size.
 // -----------------------------------------------------------------------
 Coord ManagedWindow::width() const
 {
-	int xAdjust = 2 * GetSystemMetrics(SM_CXFRAME); 
+	int xAdjust, yAdjust;
+	WindowRep& w = *Window::rep();
+	iv_win32_nonclient_delta(w.styleBits(), w.styleExBits(), xAdjust, yAdjust);
 	return canvas_->width() + canvas_->to_coord(xAdjust, Dimension_X);
 }
 
 Coord ManagedWindow::height() const
 {
-	int yAdjust = GetSystemMetrics(SM_CYCAPTION) + 
-		(2 * GetSystemMetrics(SM_CYFRAME));
+	int xAdjust, yAdjust;
+	WindowRep& w = *Window::rep();
+	iv_win32_nonclient_delta(w.styleBits(), w.styleExBits(), xAdjust, yAdjust);
 	return canvas_->height() + canvas_->to_coord(yAdjust, Dimension_Y);
 }
 
@@ -1816,18 +1859,11 @@ long ManagedWindowRep::WMminmax(WPARAM, LPARAM lParam)
 
 	Requirement& rx = win->shape_.requirement(Dimension_X);
 	Requirement& ry = win->shape_.requirement(Dimension_Y);
-#if 1
-	// the original
-	unsigned int xAdjust = 2 * (GetSystemMetrics(SM_CXBORDER) + 
-		GetSystemMetrics(SM_CXFRAME));
-	unsigned int yAdjust = GetSystemMetrics(SM_CYBORDER) +
-		GetSystemMetrics(SM_CYCAPTION) +
-		(2 * GetSystemMetrics(SM_CYFRAME));
-#else
-	// this suddenly increased the window size when moved
-	unsigned int xAdjust = GetSystemMetrics(SM_CXMINTRACK);
-	unsigned int yAdjust = GetSystemMetrics(SM_CYMINTRACK);
-#endif
+	int xAdj, yAdj;
+	WindowRep& wr = *win->Window::rep();
+	iv_win32_nonclient_delta(wr.styleBits(), wr.styleExBits(), xAdj, yAdj);
+	unsigned int xAdjust = (unsigned int) xAdj;
+	unsigned int yAdjust = (unsigned int) yAdj;
 
 	Display* dpy = win->display();
 	MWassert(dpy);
