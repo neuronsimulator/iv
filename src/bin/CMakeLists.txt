@@ -62,6 +62,18 @@ if(NOT IV_WINDOWS_BUILD)
   target_link_libraries(idraw unidraw interviews ${X11_LIBRARIES})
 endif()
 
+# Static Linux executables compile ivx11_assign into the binary. ivx11_dyload
+# resolves it with dlsym(RTLD_DEFAULT), which only searches .dynsym. Export that
+# one symbol so the lookup succeeds. Otherwise ivx11_dyload dlopens this
+# executable, and glibc rejects an ET_EXEC file with "invalid ELF header".
+if(IV_ENABLE_X11_DYNAMIC AND NOT IV_ENABLE_SHARED AND CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  foreach(_iv_exe idemo iclass idraw)
+    if(TARGET ${_iv_exe})
+      target_link_options(${_iv_exe} PRIVATE "LINKER:--export-dynamic-symbol=ivx11_assign")
+    endif()
+  endforeach()
+endif()
+
 # =============================================================================
 # Install various targets
 # =============================================================================
