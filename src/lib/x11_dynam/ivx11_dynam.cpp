@@ -52,8 +52,13 @@ int ivx11_dyload() { // return 0 on success
         // dlopen this with RTLD_GLOBAL to make sure the dlopen of libivx11dynam
         // will get its externs resolved (needed when launch python).
         if (!dlopen(name.c_str(), RTLD_NOW | RTLD_NOLOAD | RTLD_GLOBAL)) {
-          printf("%s: RTLD_GLOBAL for %s\n", dlerror(), name.c_str());
-          return -1;
+          char* dle = dlerror();
+          if (dle) {
+              printf("%s: for dlopen of %s : (in ivx11_dynam.cpp with RTLD_NOW | RTLD_NOLOAD | RTLD_GLOBAL)\n", dle, name.c_str());
+              return -1;
+          } else {
+              printf("ivx11_dynam.cpp dlopen with RTLD_NOLOAD: %s shared object not resident.\n", name.c_str());
+          }
         }
 
         /* From the last '/' to the next '.' gets replaced by libivx11dynam */
